@@ -1,5 +1,9 @@
 # car-location-agency
 
+## Requirements
+* Eclipse
+* Download [WindowBuilder](https://www.eclipse.org/windowbuilder/download.php)
+## Description
 Une agence de location de véhicules vous engage avec le mandat de développer un logiciel pour la gestion de ses opérations quotidiennes. Le système informatique doit avoir une interface utilisateur intuitive et être facilement portable sur différentes plateformes d’exécution.
 
 L’agence loue différents types de véhicules, à la journée, à la semaine ou au mois. Les clients peuvent réserver à l’avance un type de véhicule particulier. Le coût de location d’un véhicule est constitué d’un prix de base auquel on ajoute différents suppléments représentant les différentes options choisies par les clients. Ces suppléments peuvent également représenter des frais de maintenance ou de réparations négligées par les clients.
