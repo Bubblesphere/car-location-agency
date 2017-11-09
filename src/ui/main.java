@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 
 public class main extends JFrame {
+	private static final long serialVersionUID = 1L;
 	public main() {
 		setBounds(100, 100, 965, 744);
 		JLabel lblHelloWorld = new JLabel("Hello World!");
