@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import Data.DataAccess;
+
 import java.awt.BorderLayout;
 
 public class main extends JFrame {
