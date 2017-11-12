@@ -1,13 +1,10 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import Data.DataAccess;
-
-import java.awt.BorderLayout;
 
 public class main extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +18,7 @@ public class main extends JFrame {
 			public void run() {
 				try {
 					main frame = new main();
-					frame.setVisible(true);
+					frame.setVisible(true);					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

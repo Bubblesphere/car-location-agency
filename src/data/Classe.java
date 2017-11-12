@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 public class Classe {
 	private int Id;
@@ -37,6 +37,12 @@ public class Classe {
 	public Classe(int id, String nom, float prixJournalier) {
 		super();
 		Id = id;
+		Nom = nom;
+		PrixJournalier = prixJournalier;
+	}
+	
+	public Classe(String nom, float prixJournalier) {
+		super();		
 		Nom = nom;
 		PrixJournalier = prixJournalier;
 	}
