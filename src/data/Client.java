@@ -66,6 +66,16 @@ public class Client extends Personne {
 		Courriel = courriel;
 		Note = note;
 	}
+	
+	public Client(String nom, String prenom, String adresse, String numeroPermis, String numeoTelphone,
+			String courriel, String note) {
+		super(nom, prenom);		
+		Adresse = adresse;
+		NumeroPermis = numeroPermis;
+		NumeoTelphone = numeoTelphone;
+		Courriel = courriel;
+		Note = note;
+	}
 
 	@Override
 	public String toString() {

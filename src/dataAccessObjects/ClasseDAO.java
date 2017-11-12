@@ -11,28 +11,37 @@ import java.util.List;
 import data.Classe;
 
 public class ClasseDAO {
-	public boolean create(Classe classe) {
-		DataAccess da = new DataAccess();
-		try (Connection connection = da.getConnection()) {
+	private DataAccess dataAccess;	
+	
+	public ClasseDAO() {
+		super();
+		dataAccess = new DataAccess();
+	}
 
-			String query = "INSERT INTO Classe (nom, prix_journalier) values (?, ?)";
-			PreparedStatement statement = connection.prepareStatement(query);
+	public Classe create(Classe classe) {
+		try (Connection connection = dataAccess.getConnection()) {
+
+			String query = "INSERT INTO Classes (nom, prix_journalier) values (?, ?)";
+			PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, classe.getNom());
 			statement.setFloat(2, classe.getPrixJournalier());
 			statement.execute();
+			
+			ResultSet keys = statement.getGeneratedKeys();
+			keys.next();
+			classe.setId(keys.getInt(1));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
-		return true;
+		return classe;
 	}
 
-	public Classe retrieve(int classeId) {
-		DataAccess da = new DataAccess();
-		try (Connection connection = da.getConnection()) {
+	public Classe retrieve(int classeId) {		
+		try (Connection connection = dataAccess.getConnection()) {
 
-			String query = "SELECT id, nom, prix_journalier FROM Classe WHERE id = ?";
+			String query = "SELECT id, nom, prix_journalier FROM Classes WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, classeId);
 			ResultSet resultSet = statement.executeQuery();
@@ -47,12 +56,11 @@ public class ClasseDAO {
 		return null;
 	}
 
-	public List<Classe> retrieveAll() {
-		DataAccess da = new DataAccess();
+	public List<Classe> retrieveAll() {		
 		List<Classe> result = new ArrayList<Classe>();
-		try (Connection connection = da.getConnection()) {
+		try (Connection connection = dataAccess.getConnection()) {
 
-			String query = "SELECT id, nom, prix_journalier FROM Classe";
+			String query = "SELECT id, nom, prix_journalier FROM Classes";
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
 
@@ -67,11 +75,10 @@ public class ClasseDAO {
 		return result;
 	}
 
-	public boolean update(Classe classe) {
-		DataAccess da = new DataAccess();
-		try (Connection connection = da.getConnection()) {
+	public boolean update(Classe classe) {		
+		try (Connection connection = dataAccess.getConnection()) {
 
-			String query = "UPDATE Classe SET nom = ?, prix_journalier = ? WHERE id = ?";
+			String query = "UPDATE Classes SET nom = ?, prix_journalier = ? WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, classe.getNom());
 			statement.setFloat(2, classe.getPrixJournalier());
@@ -85,11 +92,10 @@ public class ClasseDAO {
 		return true;
 	}
 
-	public boolean delete(int classeId) {
-		DataAccess da = new DataAccess();
-		try (Connection connection = da.getConnection()) {
+	public boolean delete(int classeId) {		
+		try (Connection connection = dataAccess.getConnection()) {
 
-			String query = "DELETE FROM Classe WHERE id = ?";
+			String query = "DELETE FROM Classes WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, classeId);
 			statement.execute();
