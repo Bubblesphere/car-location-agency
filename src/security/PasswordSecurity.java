@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class PasswordSecurity {
-	private static String Salt = "Salting_password";
+	private static String Salt = "AFF1C913F74C77D9475EEA75494C8";
 
 	public static String hashPassword(String password) {
 		String generatedPassword = null;
