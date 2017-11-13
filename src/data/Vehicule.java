@@ -39,6 +39,38 @@ public class Vehicule {
 		Note = note;
 	}
 
+	public Vehicule(int id, int classeId, String fabricant, String marque, int annee, int kilometrage, int etat,
+			String plaque, Boolean desactive, int capaciteEssence, String note) {
+		super();
+		Id = id;
+		ClasseId = classeId;
+		Fabricant = fabricant;
+		Marque = marque;
+		Annee = annee;
+		Kilometrage = kilometrage;
+		Etat = etat;
+		Plaque = plaque;
+		Desactive = desactive;
+		CapaciteEssence = capaciteEssence;
+		Note = note;
+	}
+	
+	public Vehicule(int classeId, String fabricant, String marque, int annee, int kilometrage, int etat,
+			String plaque, Boolean desactive, int capaciteEssence, String note) {
+		super();		
+		ClasseId = classeId;
+		Fabricant = fabricant;
+		Marque = marque;
+		Annee = annee;
+		Kilometrage = kilometrage;
+		Etat = etat;
+		Plaque = plaque;
+		Desactive = desactive;
+		CapaciteEssence = capaciteEssence;
+		Note = note;
+	}
+
+
 	public int getClasseId() {
 		return ClasseId;
 	}
