@@ -1,34 +1,52 @@
 package data;
 
-public class Parametre {
-	private String Id;
-	private String Valeur;
+import java.util.Date;
 
-	public String getId() {
+
+public class Parametre extends TypeParametre{	
+	private int Id;
+	private float Valeur;
+	private Date DateDebut;
+	private Date DateFin;
+	
+	public int getId() {
 		return Id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		Id = id;
 	}
 
-	public String getValeur() {
+	public float getValeur() {
 		return Valeur;
 	}
 
-	public void setValeur(String valeur) {
+	public void setValeur(float valeur) {
 		Valeur = valeur;
 	}
 
-	@Override
-	public String toString() {
-		return "Parametre [Id=" + Id + ", Valeur=" + Valeur + "]";
+	public Date getDateDebut() {
+		return DateDebut;
 	}
 
-	public Parametre(String id, String valeur) {
-		super();
+	public void setDateDebut(Date dateDebut) {
+		DateDebut = dateDebut;
+	}
+
+	public Date getDateFin() {
+		return DateFin;
+	}
+
+	public void setDateFin(Date dateFin) {
+		DateFin = dateFin;
+	}
+
+	public Parametre(int typeId, String description, int id, float valeur, Date dateDebut, Date dateFin) {
+		super(typeId, description);
 		Id = id;
 		Valeur = valeur;
+		DateDebut = dateDebut;
+		DateFin = dateFin;
 	}
-
+	
 }

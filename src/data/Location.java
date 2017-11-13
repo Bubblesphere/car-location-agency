@@ -11,12 +11,66 @@ public class Location {
 	private int ReservationId;
 	private int UtilisateurId;
 	private Date DateDeRetour;
-	private float CoutAssuranceJour;
-	private float CoutUsureKm;
-	private float CoutEssenceLitre;
+	private boolean Assurance;
+	private boolean UsureJournalier;
 	private int EssenceManquant;
+	private int DepartKm;
 	private int RetourKm;
 	private String Note;
+	private float EstimationReparation;
+
+	public Location(int id, int vehiculeId, Vehicule vehiculeLoue, Reservation lReservation, Utilisateur locateur,
+			int reservationId, int utilisateurId, Date dateDeRetour, boolean assurance, boolean usureJournalier,
+			int essenceManquant, int departKm, int retourKm, String note, float estimationReparation) {
+		super();
+		Id = id;
+		VehiculeId = vehiculeId;
+		VehiculeLoue = vehiculeLoue;
+		LReservation = lReservation;
+		Locateur = locateur;
+		ReservationId = reservationId;
+		UtilisateurId = utilisateurId;
+		DateDeRetour = dateDeRetour;
+		Assurance = assurance;
+		UsureJournalier = usureJournalier;
+		EssenceManquant = essenceManquant;
+		DepartKm = departKm;
+		RetourKm = retourKm;
+		Note = note;
+		EstimationReparation = estimationReparation;
+	}
+
+	public boolean isAssurance() {
+		return Assurance;
+	}
+
+	public void setAssurance(boolean assurance) {
+		Assurance = assurance;
+	}
+
+	public boolean isUsureJournalier() {
+		return UsureJournalier;
+	}
+
+	public void setUsureJournalier(boolean usureJournalier) {
+		UsureJournalier = usureJournalier;
+	}
+
+	public int getDepartKm() {
+		return DepartKm;
+	}
+
+	public void setDepartKm(int departKm) {
+		DepartKm = departKm;
+	}
+
+	public float getEstimationReparation() {
+		return EstimationReparation;
+	}
+
+	public void setEstimationReparation(float estimationReparation) {
+		EstimationReparation = estimationReparation;
+	}
 
 	public int getId() {
 		return Id;
@@ -82,30 +136,6 @@ public class Location {
 		DateDeRetour = dateDeRetour;
 	}
 
-	public float getCoutAssuranceJour() {
-		return CoutAssuranceJour;
-	}
-
-	public void setCoutAssuranceJour(float coutAssuranceJour) {
-		CoutAssuranceJour = coutAssuranceJour;
-	}
-
-	public float getCoutUsureKm() {
-		return CoutUsureKm;
-	}
-
-	public void setCoutUsureKm(float coutUsureKm) {
-		CoutUsureKm = coutUsureKm;
-	}
-
-	public float getCoutEssenceLitre() {
-		return CoutEssenceLitre;
-	}
-
-	public void setCoutEssenceLitre(float coutEssenceLitre) {
-		CoutEssenceLitre = coutEssenceLitre;
-	}
-
 	public int getEssenceManquant() {
 		return EssenceManquant;
 	}
@@ -127,35 +157,6 @@ public class Location {
 	}
 
 	public void setNote(String note) {
-		Note = note;
-	}
-
-	@Override
-	public String toString() {
-		return "Location [Id=" + Id + ", VehiculeId=" + VehiculeId + ", VehiculeLoue=" + VehiculeLoue
-				+ ", LReservation=" + LReservation + ", Locateur=" + Locateur + ", ReservationId=" + ReservationId
-				+ ", UtilisateurId=" + UtilisateurId + ", DateDeRetour=" + DateDeRetour + ", CoutAssuranceJour="
-				+ CoutAssuranceJour + ", CoutUsureKm=" + CoutUsureKm + ", CoutEssenceLitre=" + CoutEssenceLitre
-				+ ", EssenceManquant=" + EssenceManquant + ", RetourKm=" + RetourKm + ", Note=" + Note + "]";
-	}
-
-	public Location(int id, int vehiculeId, Vehicule vehiculeLoue, Reservation lReservation, Utilisateur locateur,
-			int reservationId, int utilisateurId, Date dateDeRetour, float coutAssuranceJour, float coutUsureKm,
-			float coutEssenceLitre, int essenceManquant, int retourKm, String note) {
-		super();
-		Id = id;
-		VehiculeId = vehiculeId;
-		VehiculeLoue = vehiculeLoue;
-		LReservation = lReservation;
-		Locateur = locateur;
-		ReservationId = reservationId;
-		UtilisateurId = utilisateurId;
-		DateDeRetour = dateDeRetour;
-		CoutAssuranceJour = coutAssuranceJour;
-		CoutUsureKm = coutUsureKm;
-		CoutEssenceLitre = coutEssenceLitre;
-		EssenceManquant = essenceManquant;
-		RetourKm = retourKm;
 		Note = note;
 	}
 
