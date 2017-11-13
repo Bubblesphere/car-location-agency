@@ -40,9 +40,9 @@ public class Classe {
 		Nom = nom;
 		PrixJournalier = prixJournalier;
 	}
-	
+
 	public Classe(String nom, float prixJournalier) {
-		super();		
+		super();
 		Nom = nom;
 		PrixJournalier = prixJournalier;
 	}

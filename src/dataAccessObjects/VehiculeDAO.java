@@ -12,15 +12,9 @@ import data.Classe;
 import data.Vehicule;
 
 public class VehiculeDAO {
-	private DataAccess dataAccess;
 
-	public VehiculeDAO() {
-		super();
-		dataAccess = new DataAccess();
-	}
-
-	public Vehicule create(Vehicule vehicule) {
-		try (Connection connection = dataAccess.getConnection()) {
+	public static Vehicule create(Vehicule vehicule) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "INSERT INTO Vehicules (classe_id, fabriquant, marque, annee, kilometrage, etat, plaque, desactive, capacite_essence, note) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -46,8 +40,8 @@ public class VehiculeDAO {
 		return vehicule;
 	}
 
-	public Vehicule retrieve(int vehiculeId) {
-		try (Connection connection = dataAccess.getConnection()) {
+	public static Vehicule retrieve(int vehiculeId) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "SELECT V.id, V.classe_id, V.fabriquant, V.marque, V.annee, V.kilometrage, V.etat, "
 					+ "V.plaque, V.desactive, V.capacite_essence, V.note , C.nom AS nom_classe, "
@@ -72,9 +66,9 @@ public class VehiculeDAO {
 		return null;
 	}
 
-	public List<Vehicule> retrieveAll() {
+	public static List<Vehicule> retrieveAll() {
 		List<Vehicule> result = new ArrayList<Vehicule>();
-		try (Connection connection = dataAccess.getConnection()) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "SELECT V.id, V.classe_id, V.fabriquant, V.marque, V.annee, V.kilometrage, V.etat, "
 					+ "V.plaque, V.desactive, V.capacite_essence, V.note , C.nom AS nom_classe, "
@@ -100,8 +94,8 @@ public class VehiculeDAO {
 		return result;
 	}
 
-	public boolean update(Vehicule vehicule) {
-		try (Connection connection = dataAccess.getConnection()) {
+	public static boolean update(Vehicule vehicule) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "UPDATE Vehicules SET classe_id = ?, fabriquant = ?, marque = ?, annee = ?, kilometrage = ?, etat = ?, plaque = ?, desactive = ?, capacite_essence = ?, note = ? WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -125,8 +119,8 @@ public class VehiculeDAO {
 		return true;
 	}
 
-	public boolean delete(int vehiculeId) {
-		try (Connection connection = dataAccess.getConnection()) {
+	public static boolean delete(int vehiculeId) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "DELETE FROM Vehicules WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);

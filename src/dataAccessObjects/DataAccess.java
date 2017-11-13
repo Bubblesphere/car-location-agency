@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public final class DataAccess {
 
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		Connection connection = null;
 		try {
 			Class.forName("org.sqlite.JDBC");

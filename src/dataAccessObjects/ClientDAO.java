@@ -11,15 +11,9 @@ import java.util.List;
 import data.Client;
 
 public class ClientDAO {
-	private DataAccess dataAccess;
 
-	public ClientDAO() {
-		super();
-		dataAccess = new DataAccess();
-	}
-
-	public Client create(Client client) {
-		try (Connection connection = dataAccess.getConnection()) {
+	public static Client create(Client client) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "INSERT INTO Clients (prenom, nom, adresse, numero_permis, telephone, courriel, note) values (?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -30,8 +24,8 @@ public class ClientDAO {
 			statement.setString(5, client.getNumeoTelphone());
 			statement.setString(6, client.getCourriel());
 			statement.setString(7, client.getNote());
-			statement.execute();	
-			
+			statement.execute();
+
 			ResultSet keys = statement.getGeneratedKeys();
 			keys.next();
 			client.setId(keys.getInt(1));
@@ -43,8 +37,8 @@ public class ClientDAO {
 		return client;
 	}
 
-	public Client retrieve(int clientId) {
-		try (Connection connection = dataAccess.getConnection()) {
+	public static Client retrieve(int clientId) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "SELECT id, prenom, nom, adresse, numero_permis, telephone, courriel, note FROM Clients WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -63,13 +57,13 @@ public class ClientDAO {
 		return null;
 	}
 
-	public List<Client> retrieveAll() {
+	public static List<Client> retrieveAll() {
 		List<Client> result = new ArrayList<Client>();
-		try (Connection connection = dataAccess.getConnection()) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "SELECT id, prenom, nom, adresse, numero_permis, telephone, courriel, note FROM Clients";
-			Statement statement = connection.createStatement();			
-			
+			Statement statement = connection.createStatement();
+
 			ResultSet resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {
@@ -85,8 +79,8 @@ public class ClientDAO {
 		return result;
 	}
 
-	public boolean update(Client client) {
-		try (Connection connection = dataAccess.getConnection()) {
+	public static boolean update(Client client) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "UPDATE Clients SET prenom = ?, nom = ?, adresse = ?, numero_permis = ?, telephone = ?, courriel = ?, note = ? WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -107,8 +101,8 @@ public class ClientDAO {
 		return true;
 	}
 
-	public boolean delete(int clientId) {
-		try (Connection connection = dataAccess.getConnection()) {
+	public static boolean delete(int clientId) {
+		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "DELETE FROM Clients WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);

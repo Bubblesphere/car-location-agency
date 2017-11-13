@@ -54,10 +54,10 @@ public class Vehicule {
 		CapaciteEssence = capaciteEssence;
 		Note = note;
 	}
-	
-	public Vehicule(int classeId, String fabricant, String marque, int annee, int kilometrage, int etat,
-			String plaque, Boolean desactive, int capaciteEssence, String note) {
-		super();		
+
+	public Vehicule(int classeId, String fabricant, String marque, int annee, int kilometrage, int etat, String plaque,
+			Boolean desactive, int capaciteEssence, String note) {
+		super();
 		ClasseId = classeId;
 		Fabricant = fabricant;
 		Marque = marque;
@@ -69,7 +69,6 @@ public class Vehicule {
 		CapaciteEssence = capaciteEssence;
 		Note = note;
 	}
-
 
 	public int getClasseId() {
 		return ClasseId;

@@ -1,5 +1,7 @@
 package data;
 
+import security.PasswordSecurity;
+
 public class Utilisateur extends Personne {
 	private int Id;
 	private String Login;
@@ -42,7 +44,7 @@ public class Utilisateur extends Personne {
 	}
 
 	public void setMotDePasse(String motDePasse) {
-		MotDePasse = motDePasse;
+		MotDePasse = PasswordSecurity.hashPassword(motDePasse);
 	}
 
 	public String getCourriel() {
