@@ -1,6 +1,6 @@
 package data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Reservation {
 	private int Id;
@@ -8,8 +8,8 @@ public class Reservation {
 	private Client Locataire;
 	private int ClasseId;
 	private Classe ClasseDesire;
-	private Date StartDate;
-	private Date FinDate;
+	private LocalDate StartDate;
+	private LocalDate FinDate;
 	private String Note;
 	private int UtilisateurId;
 	private Utilisateur Employe;
@@ -46,19 +46,19 @@ public class Reservation {
 		ClasseDesire = classeDesire;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return StartDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		StartDate = startDate;
 	}
 
-	public Date getFinDate() {
+	public LocalDate getFinDate() {
 		return FinDate;
 	}
 
-	public void setFinDate(Date finDate) {
+	public void setFinDate(LocalDate finDate) {
 		FinDate = finDate;
 	}
 
@@ -86,15 +86,8 @@ public class Reservation {
 		Employe = employe;
 	}
 
-	@Override
-	public String toString() {
-		return "Reservation [Id=" + Id + ", ClientId=" + ClientId + ", Locataire=" + Locataire + ", ClasseId="
-				+ ClasseId + ", ClasseDesire=" + ClasseDesire + ", StartDate=" + StartDate + ", FinDate=" + FinDate
-				+ ", Note=" + Note + ", UtilisateurId=" + UtilisateurId + ", Employe=" + Employe + "]";
-	}
-
-	public Reservation(int id, int clientId, Client locataire, int classeId, Classe classeDesire, Date startDate,
-			Date finDate, String note, int utilisateurId, Utilisateur employe) {
+	public Reservation(int id, int clientId, Client locataire, int classeId, Classe classeDesire, LocalDate startDate,
+			LocalDate finDate, String note, int utilisateurId, Utilisateur employe) {
 		super();
 		Id = id;
 		ClientId = clientId;

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class ParametreDAO {
 			PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			statement.setFloat(1, parametre.getValeur());
 			statement.setInt(2, parametre.getTypeId());
-			statement.setDate(3, (Date) parametre.getDateDebut());
-			statement.setDate(4, (Date) parametre.getDateFin());
+			statement.setObject(3, parametre.getDateDebut());
+			statement.setObject(4, parametre.getDateFin());
 			statement.execute();
 
 			ResultSet keys = statement.getGeneratedKeys();
@@ -39,15 +40,16 @@ public class ParametreDAO {
 		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "SELECT P.id, P.valeur, P.type_id, P.date_debut, P.date_fin, T.description "
-					+ "FROM Parametres P LEFT JOIN TypesParametre T ON T.id = P.type_id WHERE id = ?";
+					+ "FROM Parametres P LEFT JOIN TypesParametre T ON T.id = P.type_id WHERE P.id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, parametreId);
 			ResultSet resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
 				return new Parametre(resultSet.getInt("type_id"), resultSet.getString("description"),
-						resultSet.getInt("id"), resultSet.getFloat("valeur"), resultSet.getDate("date_debut"),
-						resultSet.getDate("date_fin"));
+						resultSet.getInt("id"), resultSet.getFloat("valeur"),
+						LocalDate.parse(resultSet.getString("date_debut")),
+						resultSet.getString("date_fin") != null ? LocalDate.parse(resultSet.getString("date_fin")) : null);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -66,8 +68,9 @@ public class ParametreDAO {
 
 			while (resultSet.next()) {
 				result.add(new Parametre(resultSet.getInt("type_id"), resultSet.getString("description"),
-						resultSet.getInt("id"), resultSet.getFloat("valeur"), resultSet.getDate("date_debut"),
-						resultSet.getDate("date_fin")));
+						resultSet.getInt("id"), resultSet.getFloat("valeur"),
+						LocalDate.parse(resultSet.getString("date_debut")),
+						resultSet.getString("date_fin") != null ? LocalDate.parse(resultSet.getString("date_fin")) : null));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,12 +82,12 @@ public class ParametreDAO {
 	public static boolean update(Parametre parametre) {
 		try (Connection connection = DataAccess.getConnection()) {
 
-			String query = "UPDATE TypesParametre SET valeur = ?, type_id = ?, date_debut = ?, date_fin = ? WHERE id = ?";
+			String query = "UPDATE Parametres SET valeur = ?, type_id = ?, date_debut = ?, date_fin = ? WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setFloat(1, parametre.getValeur());
 			statement.setInt(2, parametre.getTypeId());
-			statement.setDate(3, (Date) parametre.getDateDebut());
-			statement.setDate(4, (Date) parametre.getDateFin());
+			statement.setObject(3, parametre.getDateDebut());
+			statement.setObject(4, parametre.getDateFin());
 			statement.setInt(5, parametre.getId());
 			statement.execute();
 

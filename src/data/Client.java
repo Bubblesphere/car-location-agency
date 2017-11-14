@@ -56,6 +56,15 @@ public class Client extends Personne {
 		Id = id;
 	}
 
+	public Client(String nom, String prenom, String numeoTelphone, String note) {
+		super(nom, prenom);		
+		NumeoTelphone = numeoTelphone;
+		Note = note;
+		Adresse = "";
+		NumeroPermis = "";
+		Courriel = "";
+	}
+
 	public Client(String nom, String prenom, int id, String adresse, String numeroPermis, String numeoTelphone,
 			String courriel, String note) {
 		super(nom, prenom);

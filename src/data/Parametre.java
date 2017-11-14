@@ -1,13 +1,13 @@
 package data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 public class Parametre extends TypeParametre{	
 	private int Id;
 	private float Valeur;
-	private Date DateDebut;
-	private Date DateFin;
+	private LocalDate DateDebut;
+	private LocalDate DateFin;
 	
 	public int getId() {
 		return Id;
@@ -25,23 +25,23 @@ public class Parametre extends TypeParametre{
 		Valeur = valeur;
 	}
 
-	public Date getDateDebut() {
+	public LocalDate getDateDebut() {
 		return DateDebut;
 	}
 
-	public void setDateDebut(Date dateDebut) {
+	public void setDateDebut(LocalDate dateDebut) {
 		DateDebut = dateDebut;
 	}
 
-	public Date getDateFin() {
+	public LocalDate getDateFin() {
 		return DateFin;
 	}
 
-	public void setDateFin(Date dateFin) {
+	public void setDateFin(LocalDate dateFin) {
 		DateFin = dateFin;
 	}
 
-	public Parametre(int typeId, String description, int id, float valeur, Date dateDebut, Date dateFin) {
+	public Parametre(int typeId, String description, int id, float valeur, LocalDate dateDebut, LocalDate dateFin) {
 		super(typeId, description);
 		Id = id;
 		Valeur = valeur;
