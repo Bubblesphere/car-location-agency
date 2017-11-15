@@ -9,6 +9,10 @@ public class Personne {
 		Nom = nom;
 		Prenom = prenom;
 	}
+	
+	public Personne() {
+		super();		
+	}
 
 	public String getNom() {
 		return Nom;

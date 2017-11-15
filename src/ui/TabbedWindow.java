@@ -14,6 +14,7 @@ import data.Parametre;
 import data.Utilisateur;
 import dataAccessObjects.ClientDAO;
 import dataAccessObjects.ParametreDAO;
+import dataAccessObjects.UtilisateurDAO;
 
 import javax.swing.JTabbedPane;
 
@@ -34,6 +35,13 @@ public class TabbedWindow extends JFrame {
 					Utilisateur u = new Utilisateur("Dallaire", "Déric", "password", "deric.dallaire@gmail.com", 54165, 0, false);
 					ClientDAO.create(c);
 					UtilisateurDAO.create(u);*/
+					
+					//Utilisateur u = new Utilisateur("Dallaire", "Déric", "password", "deric.dallaire@gmail.com", 54165, 0, false);
+					//UtilisateurDAO.create(u);
+					Utilisateur u = new Utilisateur("password", 54165);
+					u = UtilisateurDAO.checkAndRetrieve(u);
+					System.out.println(u);
+					
 					
 
 					frame.setVisible(true);

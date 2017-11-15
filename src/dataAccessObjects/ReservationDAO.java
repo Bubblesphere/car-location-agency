@@ -64,10 +64,10 @@ public class ReservationDAO {
 						resultSet.getString("utilisateur_prenom"), resultSet.getInt("utilisateur_id"),
 						resultSet.getString("utilisateur_courriel"), resultSet.getInt("num_employe"),
 						resultSet.getInt("role"), resultSet.getBoolean("desactive"));
-				return new Reservation(resultSet.getInt("id"), client.getId(), client,
-						classe.getId(), classe, LocalDate.parse(resultSet.getString("start_date")),
+				return new Reservation(resultSet.getInt("id"), client.getId(), client, classe.getId(), classe,
+						LocalDate.parse(resultSet.getString("start_date")),
 						LocalDate.parse(resultSet.getString("end_date")), resultSet.getString("reservation_note"),
-						utilisateur.getId(), utilisateur);				
+						utilisateur.getId(), utilisateur);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

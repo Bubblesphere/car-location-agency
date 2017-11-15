@@ -1,7 +1,6 @@
 package dataAccessObjects;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,8 +47,8 @@ public class ParametreDAO {
 			if (resultSet.next()) {
 				return new Parametre(resultSet.getInt("type_id"), resultSet.getString("description"),
 						resultSet.getInt("id"), resultSet.getFloat("valeur"),
-						LocalDate.parse(resultSet.getString("date_debut")),
-						resultSet.getString("date_fin") != null ? LocalDate.parse(resultSet.getString("date_fin")) : null);
+						LocalDate.parse(resultSet.getString("date_debut")), resultSet.getString("date_fin") != null
+								? LocalDate.parse(resultSet.getString("date_fin")) : null);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,8 +68,8 @@ public class ParametreDAO {
 			while (resultSet.next()) {
 				result.add(new Parametre(resultSet.getInt("type_id"), resultSet.getString("description"),
 						resultSet.getInt("id"), resultSet.getFloat("valeur"),
-						LocalDate.parse(resultSet.getString("date_debut")),
-						resultSet.getString("date_fin") != null ? LocalDate.parse(resultSet.getString("date_fin")) : null));
+						LocalDate.parse(resultSet.getString("date_debut")), resultSet.getString("date_fin") != null
+								? LocalDate.parse(resultSet.getString("date_fin")) : null));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

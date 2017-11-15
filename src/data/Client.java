@@ -57,7 +57,7 @@ public class Client extends Personne {
 	}
 
 	public Client(String nom, String prenom, String numeoTelphone, String note) {
-		super(nom, prenom);		
+		super(nom, prenom);
 		NumeoTelphone = numeoTelphone;
 		Note = note;
 		Adresse = "";

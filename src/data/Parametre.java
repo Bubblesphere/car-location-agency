@@ -2,13 +2,12 @@ package data;
 
 import java.time.LocalDate;
 
-
-public class Parametre extends TypeParametre{	
+public class Parametre extends TypeParametre {
 	private int Id;
 	private float Valeur;
 	private LocalDate DateDebut;
 	private LocalDate DateFin;
-	
+
 	public int getId() {
 		return Id;
 	}
@@ -48,5 +47,5 @@ public class Parametre extends TypeParametre{
 		DateDebut = dateDebut;
 		DateFin = dateFin;
 	}
-	
+
 }

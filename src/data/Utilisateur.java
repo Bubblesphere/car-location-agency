@@ -3,38 +3,45 @@ package data;
 import security.PasswordSecurity;
 
 public class Utilisateur extends Personne {
-	private int Id;	
+	private int Id;
 	private String MotDePasse;
 	private String Courriel;
 	private int NumEmploye;
 	private int Role;
 	private Boolean Desactive;
 	
+	
+	public Utilisateur(String motDePasse, int numEmploye) {
+		super();
+		setMotDePasse(motDePasse);	
+		NumEmploye = numEmploye;
+	}
+
 	public Utilisateur(String nom, String prenom, int id, String courriel, int numEmploye, int role,
 			Boolean desactive) {
 		super(nom, prenom);
-		Id = id;		
+		Id = id;
 		Courriel = courriel;
 		NumEmploye = numEmploye;
 		Role = role;
 		Desactive = desactive;
 	}
 
-	public Utilisateur(String nom, String prenom, int id, String motDePasse, String courriel,
-			int numEmploye, int role, Boolean desactive) {
+	public Utilisateur(String nom, String prenom, int id, String motDePasse, String courriel, int numEmploye, int role,
+			Boolean desactive) {
 		super(nom, prenom);
-		Id = id;		
-		MotDePasse = PasswordSecurity.hashPassword(motDePasse);;
+		Id = id;
+		setMotDePasse(motDePasse);	
 		Courriel = courriel;
 		NumEmploye = numEmploye;
 		Role = role;
 		Desactive = desactive;
 	}
-	
-	public Utilisateur(String nom, String prenom, String motDePasse, String courriel,
-			int numEmploye, int role, Boolean desactive) {
-		super(nom, prenom);		
-		MotDePasse = PasswordSecurity.hashPassword(motDePasse);;
+
+	public Utilisateur(String nom, String prenom, String motDePasse, String courriel, int numEmploye, int role,
+			Boolean desactive) {
+		super(nom, prenom);
+		setMotDePasse(motDePasse);		
 		Courriel = courriel;
 		NumEmploye = numEmploye;
 		Role = role;
@@ -48,7 +55,6 @@ public class Utilisateur extends Personne {
 	public void setId(int id) {
 		Id = id;
 	}
-	
 
 	public String getMotDePasse() {
 		return MotDePasse;
