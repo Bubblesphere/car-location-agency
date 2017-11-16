@@ -3,49 +3,66 @@ package data;
 import java.time.LocalDate;
 
 public class Parametre extends TypeParametre {
-	private int Id;
-	private float Valeur;
-	private LocalDate DateDebut;
-	private LocalDate DateFin;
+  private int id;
+  private float valeur;
+  private LocalDate dateDebut;
+  private LocalDate dateFin;
 
-	public int getId() {
-		return Id;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public void setId(int id) {
-		Id = id;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public float getValeur() {
-		return Valeur;
-	}
+  public float getValeur() {
+    return valeur;
+  }
 
-	public void setValeur(float valeur) {
-		Valeur = valeur;
-	}
+  public void setValeur(float valeur) {
+    this.valeur = valeur;
+  }
 
-	public LocalDate getDateDebut() {
-		return DateDebut;
-	}
+  public LocalDate getDateDebut() {
+    return dateDebut;
+  }
 
-	public void setDateDebut(LocalDate dateDebut) {
-		DateDebut = dateDebut;
-	}
+  public void setDateDebut(LocalDate dateDebut) {
+    this.dateDebut = dateDebut;
+  }
 
-	public LocalDate getDateFin() {
-		return DateFin;
-	}
+  public LocalDate getDateFin() {
+    return dateFin;
+  }
 
-	public void setDateFin(LocalDate dateFin) {
-		DateFin = dateFin;
-	}
+  public void setDateFin(LocalDate dateFin) {
+    this.dateFin = dateFin;
+  }
 
-	public Parametre(int typeId, String description, int id, float valeur, LocalDate dateDebut, LocalDate dateFin) {
-		super(typeId, description);
-		Id = id;
-		Valeur = valeur;
-		DateDebut = dateDebut;
-		DateFin = dateFin;
-	}
+  /**
+   * Constructeur pour Parametre
+   * 
+   * @param typeId
+   *          id du type de paramètre.
+   * @param description
+   *          description du paramètre.
+   * @param id
+   *           id du paramètre.
+   * @param valeur
+   *           valeur du paramètre.
+   * @param dateDebut
+   *          date d'entré en vigueur de ce paramètre.
+   * @param dateFin
+   *          date de désactivation de ce paramètre.
+   */
+  public Parametre(int typeId, String description, int id, float valeur, LocalDate dateDebut,
+      LocalDate dateFin) {
+    super(typeId, description);
+    this.id = id;
+    this.valeur = valeur;
+    this.dateDebut = dateDebut;
+    this.dateFin = dateFin;
+  }
 
 }

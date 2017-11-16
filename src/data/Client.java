@@ -1,95 +1,138 @@
 package data;
 
 public class Client extends Personne {
-	private int Id;
-	private String Adresse;
-	private String NumeroPermis;
-	private String NumeoTelphone;
-	private String Courriel;
-	private String Note;
+  private int id;
+  private String adresse;
+  private String numeroPermis;
+  private String numeoTelphone;
+  private String courriel;
+  private String note;
 
-	public String getAdresse() {
-		return Adresse;
-	}
+  public String getAdresse() {
+    return this.adresse;
+  }
 
-	public void setAdresse(String adresse) {
-		Adresse = adresse;
-	}
+  public void setAdresse(String adresse) {
+    this.adresse = adresse;
+  }
 
-	public String getNumeroPermis() {
-		return NumeroPermis;
-	}
+  public String getNumeroPermis() {
+    return this.numeroPermis;
+  }
 
-	public void setNumeroPermis(String numeroPermis) {
-		NumeroPermis = numeroPermis;
-	}
+  public void setNumeroPermis(String numeroPermis) {
+    this.numeroPermis = numeroPermis;
+  }
 
-	public String getNumeoTelphone() {
-		return NumeoTelphone;
-	}
+  public String getNumeoTelphone() {
+    return this.numeoTelphone;
+  }
 
-	public void setNumeoTelphone(String numeoTelphone) {
-		NumeoTelphone = numeoTelphone;
-	}
+  public void setNumeoTelphone(String numeoTelphone) {
+    this.numeoTelphone = numeoTelphone;
+  }
 
-	public String getCourriel() {
-		return Courriel;
-	}
+  public String getCourriel() {
+    return this.courriel;
+  }
 
-	public void setCourriel(String courriel) {
-		Courriel = courriel;
-	}
+  public void setCourriel(String courriel) {
+    this.courriel = courriel;
+  }
 
-	public String getNote() {
-		return Note;
-	}
+  public String getNote() {
+    return this.note;
+  }
 
-	public void setNote(String note) {
-		Note = note;
-	}
+  public void setNote(String note) {
+    this.note = note;
+  }
 
-	public int getId() {
-		return Id;
-	}
+  public int getId() {
+    return this.id;
+  }
 
-	public void setId(int id) {
-		Id = id;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public Client(String nom, String prenom, String numeoTelphone, String note) {
-		super(nom, prenom);
-		NumeoTelphone = numeoTelphone;
-		Note = note;
-		Adresse = "";
-		NumeroPermis = "";
-		Courriel = "";
-	}
+  /**
+   * Constructeur pour Client lors de la réservation
+   * 
+   * @param nom
+   *          nom du client.
+   * @param prenom
+   *          prénom du client.  
+   * @param numeoTelphone
+   *          numéro de téléphone du client. 
+   * @param note
+   *          commentaire.
+   */
+  public Client(String nom, String prenom, String numeoTelphone, String note) {
+    super(nom, prenom);
+    this.numeoTelphone = numeoTelphone;
+    this.note = note;
+    this.adresse = "";
+    this.numeroPermis = "";
+    this.courriel = "";
+  }
 
-	public Client(String nom, String prenom, int id, String adresse, String numeroPermis, String numeoTelphone,
-			String courriel, String note) {
-		super(nom, prenom);
-		Id = id;
-		Adresse = adresse;
-		NumeroPermis = numeroPermis;
-		NumeoTelphone = numeoTelphone;
-		Courriel = courriel;
-		Note = note;
-	}
+  /**
+   * Constructeur pour Client
+   * 
+   * @param nom
+   *          nom du client.
+   * @param prenom
+   *          prénom du client.
+   * @param id
+   *           id du client.
+   * @param adresse
+   *          adresse du client.
+   * @param numeroPermis
+   *          numéro de permis du client.
+   * @param numeoTelphone
+   *          numéro de téléphone du client.
+   * @param courriel
+   *          courriel du client.
+   * @param note
+   *          commentaire.
+   */
+  public Client(String nom, String prenom, int id, String adresse, String numeroPermis,
+      String numeoTelphone, String courriel, String note) {
+    super(nom, prenom);
+    this.id = id;
+    this.adresse = adresse;
+    this.numeroPermis = numeroPermis;
+    this.numeoTelphone = numeoTelphone;
+    this.courriel = courriel;
+    this.note = note;
+  }
 
-	public Client(String nom, String prenom, String adresse, String numeroPermis, String numeoTelphone, String courriel,
-			String note) {
-		super(nom, prenom);
-		Adresse = adresse;
-		NumeroPermis = numeroPermis;
-		NumeoTelphone = numeoTelphone;
-		Courriel = courriel;
-		Note = note;
-	}
-
-	@Override
-	public String toString() {
-		return "Client [Id=" + Id + ", Adresse=" + Adresse + ", NumeroPermis=" + NumeroPermis + ", NumeoTelphone="
-				+ NumeoTelphone + ", Courriel=" + Courriel + ", Note=" + Note + "]";
-	}
-
+  /**
+   * Constructeur pour Client à la création
+   * 
+   * @param nom
+   *          nom du client.
+   * @param prenom
+   *          prénom du client.  
+   * @param adresse
+   *          adresse du client.
+   * @param numeroPermis
+   *          numéro de permis du client.
+   * @param numeoTelphone
+   *          numéro de téléphone du client.
+   * @param courriel
+   *          courriel du client.
+   * @param note
+   *          commentaire.
+   */
+  public Client(String nom, String prenom, String adresse, String numeroPermis,
+      String numeoTelphone, String courriel, String note) {
+    super(nom, prenom);
+    this.adresse = adresse;
+    this.numeroPermis = numeroPermis;
+    this.numeoTelphone = numeoTelphone;
+    this.courriel = courriel;
+    this.note = note;
+  }
 }

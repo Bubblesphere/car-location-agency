@@ -3,110 +3,134 @@ package data;
 import java.time.LocalDate;
 
 public class Reservation {
-	private int Id;
-	private int ClientId;
-	private Client Locataire;
-	private int ClasseId;
-	private Classe ClasseDesire;
-	private LocalDate StartDate;
-	private LocalDate FinDate;
-	private String Note;
-	private int UtilisateurId;
-	private Utilisateur Employe;
+  private int id;
+  private int clientId;
+  private Client locataire;
+  private int classeId;
+  private Classe classeDesire;
+  private LocalDate startDate;
+  private LocalDate finDate;
+  private String note;
+  private int utilisateurId;
+  private Utilisateur employe;
 
-	public int getId() {
-		return Id;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public void setId(int id) {
-		Id = id;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public int getClientId() {
-		return ClientId;
-	}
+  public int getClientId() {
+    return clientId;
+  }
 
-	public void setClientId(int clientId) {
-		ClientId = clientId;
-	}
+  public void setClientId(int clientId) {
+    this.clientId = clientId;
+  }
 
-	public int getClasseId() {
-		return ClasseId;
-	}
+  public Client getLocataire() {
+    return locataire;
+  }
 
-	public void setClasseId(int classeId) {
-		ClasseId = classeId;
-	}
+  public void setLocataire(Client locataire) {
+    this.locataire = locataire;
+  }
 
-	public Classe getClasseDesire() {
-		return ClasseDesire;
-	}
+  public int getClasseId() {
+    return classeId;
+  }
 
-	public void setClasseDesire(Classe classeDesire) {
-		ClasseDesire = classeDesire;
-	}
+  public void setClasseId(int classeId) {
+    this.classeId = classeId;
+  }
 
-	public LocalDate getStartDate() {
-		return StartDate;
-	}
+  public Classe getClasseDesire() {
+    return classeDesire;
+  }
 
-	public void setStartDate(LocalDate startDate) {
-		StartDate = startDate;
-	}
+  public void setClasseDesire(Classe classeDesire) {
+    this.classeDesire = classeDesire;
+  }
 
-	public LocalDate getFinDate() {
-		return FinDate;
-	}
+  public LocalDate getStartDate() {
+    return startDate;
+  }
 
-	public void setFinDate(LocalDate finDate) {
-		FinDate = finDate;
-	}
+  public void setStartDate(LocalDate startDate) {
+    this.startDate = startDate;
+  }
 
-	public String getNote() {
-		return Note;
-	}
+  public LocalDate getFinDate() {
+    return finDate;
+  }
 
-	public void setNote(String note) {
-		Note = note;
-	}
+  public void setFinDate(LocalDate finDate) {
+    this.finDate = finDate;
+  }
 
-	public int getUtilisateurId() {
-		return UtilisateurId;
-	}
+  public String getNote() {
+    return note;
+  }
 
-	public void setUtilisateurId(int utilisateurId) {
-		UtilisateurId = utilisateurId;
-	}
+  public void setNote(String note) {
+    this.note = note;
+  }
 
-	public Utilisateur getEmploye() {
-		return Employe;
-	}
+  public int getUtilisateurId() {
+    return utilisateurId;
+  }
 
-	public void setEmploye(Utilisateur employe) {
-		Employe = employe;
-	}
+  public void setUtilisateurId(int utilisateurId) {
+    this.utilisateurId = utilisateurId;
+  }
 
-	public Reservation(int id, int clientId, Client locataire, int classeId, Classe classeDesire, LocalDate startDate,
-			LocalDate finDate, String note, int utilisateurId, Utilisateur employe) {
-		super();
-		Id = id;
-		ClientId = clientId;
-		Locataire = locataire;
-		ClasseId = classeId;
-		ClasseDesire = classeDesire;
-		StartDate = startDate;
-		FinDate = finDate;
-		Note = note;
-		UtilisateurId = utilisateurId;
-		Employe = employe;
-	}
+  public Utilisateur getEmploye() {
+    return employe;
+  }
 
-	public Client getLocataire() {
-		return Locataire;
-	}
+  public void setEmploye(Utilisateur employe) {
+    this.employe = employe;
+  }
 
-	public void setLocataire(Client locataire) {
-		Locataire = locataire;
-	}
+  /**
+   * Constructeur pour Reservation
+   * 
+   * @param id
+   *          id de la réservation.
+   * @param clientId
+   *          id du client de la réservation.
+   * @param locataire
+   *           id du client de la la réservation.
+   * @param classeId
+   *           id de la classe de véhicule désiré.
+   * @param classeDesire
+   *          la classe de véhicule désiré.
+   * @param startDate
+   *          la date de début de la location.
+   * @param finDate
+   *           la date de fin de la location.
+   * @param note
+   *           commentaire.
+   * @param utilisateurId
+   *          date d'entré en vigueur de ce paramètre.
+   * @param employe
+   *          id de l'utilisateur qui a créé la réservation..
+   */
+  public Reservation(int id, int clientId, Client locataire, int classeId, Classe classeDesire,
+      LocalDate startDate, LocalDate finDate, String note, int utilisateurId, Utilisateur employe) {
+    super();
+    this.id = id;
+    this.clientId = clientId;
+    this.locataire = locataire;
+    this.classeId = classeId;
+    this.classeDesire = classeDesire;
+    this.startDate = startDate;
+    this.finDate = finDate;
+    this.note = note;
+    this.utilisateurId = utilisateurId;
+    this.employe = employe;
+  }
 
 }

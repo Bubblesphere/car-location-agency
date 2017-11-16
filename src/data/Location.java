@@ -3,161 +3,196 @@ package data;
 import java.util.Date;
 
 public class Location {
-	private int Id;
-	private int VehiculeId;
-	private Vehicule VehiculeLoue;
-	private Reservation LReservation;
-	private Utilisateur Locateur;
-	private int ReservationId;
-	private int UtilisateurId;
-	private Date DateDeRetour;
-	private boolean Assurance;
-	private boolean UsureJournalier;
-	private int EssenceManquant;
-	private int DepartKm;
-	private int RetourKm;
-	private String Note;
-	private float EstimationReparation;
+  private int id;
+  private int vehiculeId;
+  private Vehicule vehiculeLoue;
+  private Reservation reservation;
+  private Utilisateur locateur;
+  private int reservationId;
+  private int utilisateurId;
+  private Date dateDeRetour;
+  private boolean assurance;
+  private boolean usureJournalier;
+  private int essenceManquant;
+  private int departKm;
+  private int retourKm;
+  private String note;
+  private float estimationReparation;
 
-	public Location(int id, int vehiculeId, Vehicule vehiculeLoue, Reservation lReservation, Utilisateur locateur,
-			int reservationId, int utilisateurId, Date dateDeRetour, boolean assurance, boolean usureJournalier,
-			int essenceManquant, int departKm, int retourKm, String note, float estimationReparation) {
-		super();
-		Id = id;
-		VehiculeId = vehiculeId;
-		VehiculeLoue = vehiculeLoue;
-		LReservation = lReservation;
-		Locateur = locateur;
-		ReservationId = reservationId;
-		UtilisateurId = utilisateurId;
-		DateDeRetour = dateDeRetour;
-		Assurance = assurance;
-		UsureJournalier = usureJournalier;
-		EssenceManquant = essenceManquant;
-		DepartKm = departKm;
-		RetourKm = retourKm;
-		Note = note;
-		EstimationReparation = estimationReparation;
-	}
+  /**
+   * Constructeur pour une Location
+   * 
+   * @param id
+   *          id de la location.
+   * @param vehiculeId
+   *          id du véhicule de la location.
+   * @param vehiculeLoue
+   *          véhicule de la locaiton.
+   * @param reservation
+   *          réservation ayant mené à la location.
+   * @param locateur
+   *          l'utilisateur qui a fait la location.
+   * @param reservationId
+   *          id de la réservation ayant mené à la location.
+   * @param utilisateurId
+   *          id de l'utilisateur qui a fait la location.
+   * @param dateDeRetour
+   *          date de retour du locataire.
+   * @param assurance
+   *          si le locataire a prit l'assurance.
+   * @param usureJournalier
+   *          si le locataire a prit le forfait d'usure journalier.
+   * @param essenceManquant
+   *          essence manquant en litre.
+   * @param departKm
+   *          kilométrage du véhicule au départ.
+   * @param retourKm
+   *          kilométrage du véhicule au retour.
+   * @param note
+   *          commentaire.
+   * @param estimationReparation
+   *          estimation de réparation à faire au véhicule au retour.
+   */
+  public Location(int id, int vehiculeId, Vehicule vehiculeLoue, Reservation reservation,
+      Utilisateur locateur, int reservationId, int utilisateurId, Date dateDeRetour,
+      boolean assurance, boolean usureJournalier, int essenceManquant, int departKm, int retourKm,
+      String note, float estimationReparation) {
+    super();
+    this.id = id;
+    this.vehiculeId = vehiculeId;
+    this.vehiculeLoue = vehiculeLoue;
+    this.reservation = reservation;
+    this.locateur = locateur;
+    this.reservationId = reservationId;
+    this.utilisateurId = utilisateurId;
+    this.dateDeRetour = dateDeRetour;
+    this.assurance = assurance;
+    this.usureJournalier = usureJournalier;
+    this.essenceManquant = essenceManquant;
+    this.departKm = departKm;
+    this.retourKm = retourKm;
+    this.note = note;
+    this.estimationReparation = estimationReparation;
+  }
 
-	public boolean isAssurance() {
-		return Assurance;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public void setAssurance(boolean assurance) {
-		Assurance = assurance;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public boolean isUsureJournalier() {
-		return UsureJournalier;
-	}
+  public int getVehiculeId() {
+    return vehiculeId;
+  }
 
-	public void setUsureJournalier(boolean usureJournalier) {
-		UsureJournalier = usureJournalier;
-	}
+  public void setVehiculeId(int vehiculeId) {
+    this.vehiculeId = vehiculeId;
+  }
 
-	public int getDepartKm() {
-		return DepartKm;
-	}
+  public Vehicule getVehiculeLoue() {
+    return vehiculeLoue;
+  }
 
-	public void setDepartKm(int departKm) {
-		DepartKm = departKm;
-	}
+  public void setVehiculeLoue(Vehicule vehiculeLoue) {
+    this.vehiculeLoue = vehiculeLoue;
+  }
 
-	public float getEstimationReparation() {
-		return EstimationReparation;
-	}
+  public Reservation getReservation() {
+    return reservation;
+  }
 
-	public void setEstimationReparation(float estimationReparation) {
-		EstimationReparation = estimationReparation;
-	}
+  public void setReservation(Reservation reservation) {
+    this.reservation = reservation;
+  }
 
-	public int getId() {
-		return Id;
-	}
+  public Utilisateur getLocateur() {
+    return locateur;
+  }
 
-	public void setId(int id) {
-		Id = id;
-	}
+  public void setLocateur(Utilisateur locateur) {
+    this.locateur = locateur;
+  }
 
-	public int getVehiculeId() {
-		return VehiculeId;
-	}
+  public int getReservationId() {
+    return reservationId;
+  }
 
-	public void setVehiculeId(int vehiculeId) {
-		VehiculeId = vehiculeId;
-	}
+  public void setReservationId(int reservationId) {
+    this.reservationId = reservationId;
+  }
 
-	public Vehicule getVehiculeLoue() {
-		return VehiculeLoue;
-	}
+  public int getUtilisateurId() {
+    return utilisateurId;
+  }
 
-	public void setVehiculeLoue(Vehicule vehiculeLoue) {
-		VehiculeLoue = vehiculeLoue;
-	}
+  public void setUtilisateurId(int utilisateurId) {
+    this.utilisateurId = utilisateurId;
+  }
 
-	public Reservation getLReservation() {
-		return LReservation;
-	}
+  public Date getDateDeRetour() {
+    return dateDeRetour;
+  }
 
-	public void setLReservation(Reservation lReservation) {
-		LReservation = lReservation;
-	}
+  public void setDateDeRetour(Date dateDeRetour) {
+    this.dateDeRetour = dateDeRetour;
+  }
 
-	public Utilisateur getLocateur() {
-		return Locateur;
-	}
+  public boolean isAssurance() {
+    return assurance;
+  }
 
-	public void setLocateur(Utilisateur locateur) {
-		Locateur = locateur;
-	}
+  public void setAssurance(boolean assurance) {
+    this.assurance = assurance;
+  }
 
-	public int getReservationId() {
-		return ReservationId;
-	}
+  public boolean isUsureJournalier() {
+    return usureJournalier;
+  }
 
-	public void setReservationId(int reservationId) {
-		ReservationId = reservationId;
-	}
+  public void setUsureJournalier(boolean usureJournalier) {
+    this.usureJournalier = usureJournalier;
+  }
 
-	public int getUtilisateurId() {
-		return UtilisateurId;
-	}
+  public int getEssenceManquant() {
+    return essenceManquant;
+  }
 
-	public void setUtilisateurId(int utilisateurId) {
-		UtilisateurId = utilisateurId;
-	}
+  public void setEssenceManquant(int essenceManquant) {
+    this.essenceManquant = essenceManquant;
+  }
 
-	public Date getDateDeRetour() {
-		return DateDeRetour;
-	}
+  public int getDepartKm() {
+    return departKm;
+  }
 
-	public void setDateDeRetour(Date dateDeRetour) {
-		DateDeRetour = dateDeRetour;
-	}
+  public void setDepartKm(int departKm) {
+    this.departKm = departKm;
+  }
 
-	public int getEssenceManquant() {
-		return EssenceManquant;
-	}
+  public int getRetourKm() {
+    return retourKm;
+  }
 
-	public void setEssenceManquant(int essenceManquant) {
-		EssenceManquant = essenceManquant;
-	}
+  public void setRetourKm(int retourKm) {
+    this.retourKm = retourKm;
+  }
 
-	public int getRetourKm() {
-		return RetourKm;
-	}
+  public String getNote() {
+    return note;
+  }
 
-	public void setRetourKm(int retourKm) {
-		RetourKm = retourKm;
-	}
+  public void setNote(String note) {
+    this.note = note;
+  }
 
-	public String getNote() {
-		return Note;
-	}
+  public float getEstimationReparation() {
+    return estimationReparation;
+  }
 
-	public void setNote(String note) {
-		Note = note;
-	}
+  public void setEstimationReparation(float estimationReparation) {
+    this.estimationReparation = estimationReparation;
+  }
 
 }

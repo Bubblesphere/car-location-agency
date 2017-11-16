@@ -3,96 +3,160 @@ package data;
 import security.PasswordSecurity;
 
 public class Utilisateur extends Personne {
-	private int Id;
-	private String MotDePasse;
-	private String Courriel;
-	private int NumEmploye;
-	private int Role;
-	private Boolean Desactive;
-	
-	
-	public Utilisateur(String motDePasse, int numEmploye) {
-		super();
-		setMotDePasse(motDePasse);	
-		NumEmploye = numEmploye;
-	}
+  private int id;
+  private String motDePasse;
+  private String courriel;
+  private int numEmploye;
+  private int role;
+  private Boolean desactive;
 
-	public Utilisateur(String nom, String prenom, int id, String courriel, int numEmploye, int role,
-			Boolean desactive) {
-		super(nom, prenom);
-		Id = id;
-		Courriel = courriel;
-		NumEmploye = numEmploye;
-		Role = role;
-		Desactive = desactive;
-	}
+  /**
+   * Constructor for Utilisateur on the login
+   * 
+   * @param motDePasse
+   *          mot de passe de l'utilisateur.
+   * @param numEmploye
+   *          numéro d'employe de l'utilisateur
+   */
+  public Utilisateur(String motDePasse, int numEmploye) {
+    super();
+    setMotDePasse(motDePasse);
+    this.numEmploye = numEmploye;
+  }
 
-	public Utilisateur(String nom, String prenom, int id, String motDePasse, String courriel, int numEmploye, int role,
-			Boolean desactive) {
-		super(nom, prenom);
-		Id = id;
-		setMotDePasse(motDePasse);	
-		Courriel = courriel;
-		NumEmploye = numEmploye;
-		Role = role;
-		Desactive = desactive;
-	}
+  /**
+   * Constructeur pour Utilisateur à la sélection
+   * 
+   * @param nom
+   *          nom de l'utilisateur.
+   * @param prenom
+   *          prénom de l'utilisateur.
+   * @param id
+   *          id de l'utilisateur.  
+   * @param courriel
+   *          courriel de l'utilisateur.
+   * @param numEmploye
+   *          numéro d'employé de l'utilisateur.
+   * @param role
+   *          rôle de l'utilisateur. [Employé, Superviseur]
+   * @param desactive
+   *          si l'utilisateur est désactivé.
+   */
+  public Utilisateur(String nom, String prenom, int id, String courriel, int numEmploye, int role,
+      Boolean desactive) {
+    super(nom, prenom);
+    this.id = id;
+    this.courriel = courriel;
+    this.numEmploye = numEmploye;
+    this.role = role;
+    this.desactive = desactive;
+  }
 
-	public Utilisateur(String nom, String prenom, String motDePasse, String courriel, int numEmploye, int role,
-			Boolean desactive) {
-		super(nom, prenom);
-		setMotDePasse(motDePasse);		
-		Courriel = courriel;
-		NumEmploye = numEmploye;
-		Role = role;
-		Desactive = desactive;
-	}
+  /**
+   * Constructeur pour Utilisateur
+   * 
+   * @param nom
+   *          nom de l'utilisateur.
+   * @param prenom
+   *          prénom de l'utilisateur.
+   * @param id
+   *          id de l'utilisateur.
+   * @param motDePasse
+   *          mot de passe de l'utilisateur.
+   * @param courriel
+   *          courriel de l'utilisateur.
+   * @param numEmploye
+   *          numéro d'employé de l'utilisateur.
+   * @param role
+   *          rôle de l'utilisateur. [Employé, Superviseur]
+   * @param desactive
+   *          si l'utilisateur est désactivé.
+   */
+  public Utilisateur(String nom, String prenom, int id, String motDePasse, String courriel,
+      int numEmploye, int role, Boolean desactive) {
+    super(nom, prenom);
+    this.id = id;
+    setMotDePasse(motDePasse);
+    this.courriel = courriel;
+    this.numEmploye = numEmploye;
+    this.role = role;
+    this.desactive = desactive;
+  }
 
-	public int getId() {
-		return Id;
-	}
+  /**
+   * Constructeur pour Utilisateur à la création
+   * 
+   * @param nom
+   *          nom de l'utilisateur.
+   * @param prenom
+   *          prénom de l'utilisateur.  
+   * @param motDePasse
+   *          mot de passe de l'utilisateur.
+   * @param courriel
+   *          courriel de l'utilisateur.
+   * @param numEmploye
+   *          numéro d'employé de l'utilisateur.
+   * @param role
+   *          rôle de l'utilisateur. [Employé, Superviseur]
+   * @param desactive
+   *          si l'utilisateur est désactivé.
+   */
+  public Utilisateur(String nom, String prenom, String motDePasse, String courriel, int numEmploye,
+      int role, Boolean desactive) {
+    super(nom, prenom);
+    setMotDePasse(motDePasse);
+    this.courriel = courriel;
+    this.numEmploye = numEmploye;
+    this.role = role;
+    this.desactive = desactive;
+  }
 
-	public void setId(int id) {
-		Id = id;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public String getMotDePasse() {
-		return MotDePasse;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public void setMotDePasse(String motDePasse) {
-		MotDePasse = PasswordSecurity.hashPassword(motDePasse);
-	}
+  public String getCourriel() {
+    return courriel;
+  }
 
-	public String getCourriel() {
-		return Courriel;
-	}
+  public void setCourriel(String courriel) {
+    this.courriel = courriel;
+  }
 
-	public void setCourriel(String courriel) {
-		Courriel = courriel;
-	}
+  public int getNumEmploye() {
+    return numEmploye;
+  }
 
-	public int getNumEmploye() {
-		return NumEmploye;
-	}
+  public void setNumEmploye(int numEmploye) {
+    this.numEmploye = numEmploye;
+  }
 
-	public void setNumEmploye(int numEmploye) {
-		NumEmploye = numEmploye;
-	}
+  public int getRole() {
+    return role;
+  }
 
-	public int getRole() {
-		return Role;
-	}
+  public void setRole(int role) {
+    this.role = role;
+  }
 
-	public void setRole(int role) {
-		Role = role;
-	}
+  public Boolean getDesactive() {
+    return desactive;
+  }
 
-	public Boolean getDesactive() {
-		return Desactive;
-	}
+  public void setDesactive(Boolean desactive) {
+    this.desactive = desactive;
+  }
 
-	public void setDesactive(Boolean desactive) {
-		Desactive = desactive;
-	}
+  public String getMotDePasse() {
+    return motDePasse;
+  }
+
+  public void setMotDePasse(String motDePasse) {
+    this.motDePasse = PasswordSecurity.hashPassword(motDePasse);
+  }
+
 }

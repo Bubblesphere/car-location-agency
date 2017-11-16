@@ -2,81 +2,82 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.time.LocalDate;
-import java.time.ZoneId;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import data.Client;
-import data.Parametre;
-import data.Utilisateur;
-import dataAccessObjects.ClientDAO;
-import dataAccessObjects.ParametreDAO;
-import dataAccessObjects.UtilisateurDAO;
-
-import javax.swing.JTabbedPane;
+import dao.VehiculeDao;
+import data.Vehicule;
 
 public class TabbedWindow extends JFrame {
 
-	private JPanel contentPane;
+  private static final long serialVersionUID = 1L;
+  private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TabbedWindow frame = new TabbedWindow();
+  /**
+   * Launch the application.
+   */
+  public static void main(String[] args) {
+    EventQueue.invokeLater(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          TabbedWindow frame = new TabbedWindow();
 
-					/*Client c = new Client("Hamel", "Bruno", "8196641781", "");
-					Utilisateur u = new Utilisateur("Dallaire", "Déric", "password", "deric.dallaire@gmail.com", 54165, 0, false);
-					ClientDAO.create(c);
-					UtilisateurDAO.create(u);*/
-					
-					//Utilisateur u = new Utilisateur("Dallaire", "Déric", "password", "deric.dallaire@gmail.com", 54165, 0, false);
-					//UtilisateurDAO.create(u);
-					Utilisateur u = new Utilisateur("password", 54165);
-					u = UtilisateurDAO.checkAndRetrieve(u);
-					System.out.println(u);
-					
-					
+          /*
+           * Client c = new Client("Hamel", "Bruno", "8196641781", "");
+           * Utilisateur u = new Utilisateur("Dallaire", "Déric", "password",
+           * "deric.dallaire@gmail.com", 54165, 0, false); ClientDao.create(c);
+           * UtilisateurDao.create(u);
+           */
 
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+          // Utilisateur u = new Utilisateur("Dallaire", "Déric",
+          // "password", "deric.dallaire@gmail.com", 54165, 0, false);
+          // UtilisateurDao.create(u);
+          // Utilisateur u = new Utilisateur("password", 54165);
+          // u = UtilisateurDao.checkAndRetrieve(u);
+          // System.out.println(u);
+          
+          //Vehicule v = new Vehicule(1, "test", "test", 2017, 1000, 0, "test", false, 100, "test");
+          Vehicule v = VehiculeDao.retrieve(1);
+          System.out.println(v.getAnnee());
 
-	/**
-	 * Create the frame.
-	 */
-	public TabbedWindow() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 674, 670);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+          frame.setVisible(true);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
+  }
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		contentPane.add(tabbedPane, BorderLayout.CENTER);
+  /**
+   * Create the frame.
+   */
+  public TabbedWindow() {
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setBounds(100, 100, 674, 670);
+    contentPane = new JPanel();
+    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    contentPane.setLayout(new BorderLayout(0, 0));
+    setContentPane(contentPane);
 
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("New tab", null, panel, null);
+    JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
+    contentPane.add(tabbedPane, BorderLayout.CENTER);
 
-		JPanel panel_1 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_1, null);
+    JPanel panel = new JPanel();
+    tabbedPane.addTab("New tab", null, panel, null);
 
-		JPanel panel_2 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_2, null);
+    JPanel panel1 = new JPanel();
+    tabbedPane.addTab("New tab", null, panel1, null);
 
-		JPanel panel_3 = new JPanel();
-		tabbedPane.addTab("New tab", null, panel_3, null);
-	}
+    JPanel panel2 = new JPanel();
+    tabbedPane.addTab("New tab", null, panel2, null);
+
+    JPanel panel3 = new JPanel();
+    tabbedPane.addTab("New tab", null, panel3, null);
+  }
 
 }

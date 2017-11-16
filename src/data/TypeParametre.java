@@ -1,29 +1,37 @@
 package data;
 
 public class TypeParametre {
-	private int TypeId;
-	private String Description;
+  private int typeId;
+  private String description;
 
-	public String getDescription() {
-		return Description;
-	}
+  public String getDescription() {
+    return this.description;
+  }
 
-	public void setDescription(String description) {
-		Description = description;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public int getTypeId() {
-		return TypeId;
-	}
+  public int getTypeId() {
+    return this.typeId;
+  }
 
-	public void setTypeId(int typeId) {
-		TypeId = typeId;
-	}
+  public void setTypeId(int typeId) {
+    this.typeId = typeId;
+  }
 
-	public TypeParametre(int typeId, String description) {
-		super();
-		TypeId = typeId;
-		Description = description;
-	}
+  /**
+   * Constructeur pour TypeParametre
+   * 
+   * @param typeId
+   *          id du type du type de paramètre.
+   * @param description
+   *          description du type de paramètre.
+   */
+  public TypeParametre(int typeId, String description) {
+    super();
+    this.typeId = typeId;
+    this.description = description;
+  }
 
 }

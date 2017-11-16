@@ -1,169 +1,240 @@
 package data;
 
 public class Vehicule {
-	private int Id;
-	private int ClasseId;
-	private Classe VClasse;
-	private String Fabricant;
-	private String Marque;
-	private int Annee;
-	private int Kilometrage;
-	private int Etat;
-	private String Plaque;
-	private Boolean Desactive;
-	private int CapaciteEssence;
-	private String Note;
+  private int id;
+  private int classeId;
+  private Classe classe;
+  private String fabricant;
+  private String marque;
+  private int annee;
+  private int kilometrage;
+  private int etat;
+  private String plaque;
+  private Boolean desactive;
+  private int capaciteEssence;
+  private String note;
 
-	@Override
-	public String toString() {
-		return "Vehicule [Id=" + Id + ", ClasseId=" + ClasseId + ", VClasse=" + VClasse + ", Fabricant=" + Fabricant
-				+ ", Marque=" + Marque + ", Annee=" + Annee + ", Kilometrage=" + Kilometrage + ", Etat=" + Etat
-				+ ", Plaque=" + Plaque + ", Desactive=" + Desactive + ", CapaciteEssence=" + CapaciteEssence + ", Note="
-				+ Note + "]";
-	}
+  /**
+   * Constructeur pour Véhicule
+   * 
+   * @param id
+   *          id du véhicule.
+   * @param classeId
+   *          id de la classe du véhicule.
+   * @param classe
+   *          classe du véhicule.
+   * @param fabricant
+   *          fabricant du véhicule.
+   * @param marque
+   *          marque du véhicule.
+   * @param annee
+   *          année de construction du véhicule.
+   * @param kilometrage
+   *          kilométrage du véhicule.
+   * @param etat
+   *          état du véhicule[Fonctionnel, En réparation, Retraité].
+   * @param plaque
+   *          plaque du véhicule.
+   * @param desactive
+   *          si le véhicule est désactivé.
+   * @param capaciteEssence
+   *          capacité d'essence du véhicule.
+   * @param note
+   *          commentaire.
+   */
+  public Vehicule(int id, int classeId, Classe classe, String fabricant, String marque, int annee,
+      int kilometrage, int etat, String plaque, Boolean desactive, int capaciteEssence,
+      String note) {
+    super();
+    this.id = id;
+    this.classeId = classeId;
+    this.classe = classe;
+    this.fabricant = fabricant;
+    this.marque = marque;
+    this.annee = annee;
+    this.kilometrage = kilometrage;
+    this.etat = etat;
+    this.plaque = plaque;
+    this.desactive = desactive;
+    this.capaciteEssence = capaciteEssence;
+    this.note = note;
+  }
 
-	public Vehicule(int id, int classeId, Classe vClasse, String fabricant, String marque, int annee, int kilometrage,
-			int etat, String plaque, Boolean desactive, int capaciteEssence, String note) {
-		super();
-		Id = id;
-		ClasseId = classeId;
-		VClasse = vClasse;
-		Fabricant = fabricant;
-		Marque = marque;
-		Annee = annee;
-		Kilometrage = kilometrage;
-		Etat = etat;
-		Plaque = plaque;
-		Desactive = desactive;
-		CapaciteEssence = capaciteEssence;
-		Note = note;
-	}
+  /**
+   * Constructeur pour Véhicule sans object de classe
+   * 
+   * @param id
+   *          id du véhicule.
+   * @param classeId
+   *          id de la classe du véhicule.
+   * @param fabricant
+   *          fabricant du véhicule.
+   * @param marque
+   *          marque du véhicule.
+   * @param annee
+   *          année de construction du véhicule.
+   * @param kilometrage
+   *          kilométrage du véhicule.
+   * @param etat
+   *          état du véhicule[Fonctionnel, En réparation, Retraité].
+   * @param plaque
+   *          plaque du véhicule.
+   * @param desactive
+   *          si le véhicule est désactivé.
+   * @param capaciteEssence
+   *          capacité d'essence du véhicule.
+   * @param note
+   *          commentaire.
+   */
+  public Vehicule(int id, int classeId, String fabricant, String marque, int annee, int kilometrage,
+      int etat, String plaque, Boolean desactive, int capaciteEssence, String note) {
+    super();
+    this.id = id;
+    this.classeId = classeId;
+    this.fabricant = fabricant;
+    this.marque = marque;
+    this.annee = annee;
+    this.kilometrage = kilometrage;
+    this.etat = etat;
+    this.plaque = plaque;
+    this.desactive = desactive;
+    this.capaciteEssence = capaciteEssence;
+    this.note = note;
+  }
 
-	public Vehicule(int id, int classeId, String fabricant, String marque, int annee, int kilometrage, int etat,
-			String plaque, Boolean desactive, int capaciteEssence, String note) {
-		super();
-		Id = id;
-		ClasseId = classeId;
-		Fabricant = fabricant;
-		Marque = marque;
-		Annee = annee;
-		Kilometrage = kilometrage;
-		Etat = etat;
-		Plaque = plaque;
-		Desactive = desactive;
-		CapaciteEssence = capaciteEssence;
-		Note = note;
-	}
+  /**
+   * Constructeur pour Véhicule avant insertion
+   * 
+   * @param classeId
+   *          id de la classe du véhicule.
+   * @param fabricant
+   *          fabricant du véhicule.
+   * @param marque
+   *          marque du véhicule.
+   * @param annee
+   *          année de construction du véhicule.
+   * @param kilometrage
+   *          kilométrage du véhicule.
+   * @param etat
+   *          état du véhicule[Fonctionnel, En réparation, Retraité].
+   * @param plaque
+   *          plaque du véhicule.
+   * @param desactive
+   *          si le véhicule est désactivé.
+   * @param capaciteEssence
+   *          capacité d'essence du véhicule.
+   * @param note
+   *          commentaire.
+   */
+  public Vehicule(int classeId, String fabricant, String marque, int annee, int kilometrage,
+      int etat, String plaque, Boolean desactive, int capaciteEssence, String note) {
+    super();
+    this.classeId = classeId;
+    this.fabricant = fabricant;
+    this.marque = marque;
+    this.annee = annee;
+    this.kilometrage = kilometrage;
+    this.etat = etat;
+    this.plaque = plaque;
+    this.desactive = desactive;
+    this.capaciteEssence = capaciteEssence;
+    this.note = note;
+  }
 
-	public Vehicule(int classeId, String fabricant, String marque, int annee, int kilometrage, int etat, String plaque,
-			Boolean desactive, int capaciteEssence, String note) {
-		super();
-		ClasseId = classeId;
-		Fabricant = fabricant;
-		Marque = marque;
-		Annee = annee;
-		Kilometrage = kilometrage;
-		Etat = etat;
-		Plaque = plaque;
-		Desactive = desactive;
-		CapaciteEssence = capaciteEssence;
-		Note = note;
-	}
+  public int getClasseId() {
+    return this.classeId;
+  }
 
-	public int getClasseId() {
-		return ClasseId;
-	}
+  public void setClasseId(int classeId) {
+    this.classeId = classeId;
+  }
 
-	public void setClasseId(int classeId) {
-		ClasseId = classeId;
-	}
+  public Classe getVClasse() {
+    return this.classe;
+  }
 
-	public Classe getVClasse() {
-		return VClasse;
-	}
+  public void setVClasse(Classe classe) {
+    this.classe = classe;
+  }
 
-	public void setVClasse(Classe vClasse) {
-		VClasse = vClasse;
-	}
+  public int getId() {
+    return this.id;
+  }
 
-	public int getId() {
-		return Id;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public void setId(int id) {
-		Id = id;
-	}
+  public String getFabricant() {
+    return this.fabricant;
+  }
 
-	public String getFabricant() {
-		return Fabricant;
-	}
+  public void setFabricant(String fabricant) {
+    this.fabricant = fabricant;
+  }
 
-	public void setFabricant(String fabricant) {
-		Fabricant = fabricant;
-	}
+  public String getMarque() {
+    return this.marque;
+  }
 
-	public String getMarque() {
-		return Marque;
-	}
+  public void setMarque(String marque) {
+    this.marque = marque;
+  }
 
-	public void setMarque(String marque) {
-		Marque = marque;
-	}
+  public int getAnnee() {
+    return this.annee;
+  }
 
-	public int getAnnee() {
-		return Annee;
-	}
+  public void setAnnee(int annee) {
+    this.annee = annee;
+  }
 
-	public void setAnnee(int annee) {
-		Annee = annee;
-	}
+  public int getKilometrage() {
+    return this.kilometrage;
+  }
 
-	public int getKilometrage() {
-		return Kilometrage;
-	}
+  public void setKilometrage(int kilometrage) {
+    this.kilometrage = kilometrage;
+  }
 
-	public void setKilometrage(int kilometrage) {
-		Kilometrage = kilometrage;
-	}
+  public int getEtat() {
+    return this.etat;
+  }
 
-	public int getEtat() {
-		return Etat;
-	}
+  public void setEtat(int etat) {
+    this.etat = etat;
+  }
 
-	public void setEtat(int etat) {
-		Etat = etat;
-	}
+  public String getPlaque() {
+    return this.plaque;
+  }
 
-	public String getPlaque() {
-		return Plaque;
-	}
+  public void setPlaque(String plaque) {
+    this.plaque = plaque;
+  }
 
-	public void setPlaque(String plaque) {
-		Plaque = plaque;
-	}
+  public Boolean getDesactive() {
+    return this.desactive;
+  }
 
-	public Boolean getDesactive() {
-		return Desactive;
-	}
+  public void setDesactive(Boolean desactive) {
+    this.desactive = desactive;
+  }
 
-	public void setDesactive(Boolean desactive) {
-		Desactive = desactive;
-	}
+  public int getCapaciteEssence() {
+    return this.capaciteEssence;
+  }
 
-	public int getCapaciteEssence() {
-		return CapaciteEssence;
-	}
+  public void setCapaciteEssence(int capaciteEssence) {
+    this.capaciteEssence = capaciteEssence;
+  }
 
-	public void setCapaciteEssence(int capaciteEssence) {
-		CapaciteEssence = capaciteEssence;
-	}
+  public String getNote() {
+    return this.note;
+  }
 
-	public String getNote() {
-		return Note;
-	}
-
-	public void setNote(String note) {
-		Note = note;
-	}
+  public void setNote(String note) {
+    this.note = note;
+  }
 
 }
