@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class ClientDao {
     try (Connection connection = DataAccess.getConnection()) {
 
       String query = "INSERT INTO Clients (prenom, nom, adresse, "
-          + "numero_permis, telephone, courriel, note) values (?, ?, ?, ?, ?, ?, ?)";
+          + "numero_permis, telephone, courriel, date_de_naissance ,"
+          + "note) values (?, ?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query,
           Statement.RETURN_GENERATED_KEYS);
       statement.setString(1, client.getPrenom());
@@ -32,7 +34,8 @@ public class ClientDao {
       statement.setString(4, client.getNumeroPermis());
       statement.setString(5, client.getNumeoTelphone());
       statement.setString(6, client.getCourriel());
-      statement.setString(7, client.getNote());
+      statement.setObject(7, client.getDateDeNaissance());
+      statement.setString(8, client.getNote());
       statement.execute();
 
       ResultSet keys = statement.getGeneratedKeys();
@@ -57,7 +60,7 @@ public class ClientDao {
     try (Connection connection = DataAccess.getConnection()) {
 
       String query = "SELECT id, prenom, nom, adresse, numero_permis, "
-          + "telephone, courriel, note FROM Clients WHERE id = ?";
+          + "telephone, courriel, note, date_de_naissance FROM Clients WHERE id = ?";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setInt(1, clientId);
 
@@ -67,7 +70,9 @@ public class ClientDao {
         return new Client(resultSet.getString("nom"), resultSet.getString("prenom"),
             resultSet.getInt("id"), resultSet.getString("adresse"),
             resultSet.getString("numero_permis"), resultSet.getString("telephone"),
-            resultSet.getString("courriel"), resultSet.getString("note"));
+            resultSet.getString("courriel"), resultSet.getString("note"),
+            resultSet.getString("date_de_naissance") != null
+            ? LocalDate.parse(resultSet.getString("date_fin")) : null);
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -85,7 +90,7 @@ public class ClientDao {
     try (Connection connection = DataAccess.getConnection()) {
 
       String query = "SELECT id, prenom, nom, adresse, numero_permis, "
-          + "telephone, courriel, note FROM Clients";
+          + "telephone, courriel, note, date_de_naissance FROM Clients";
       Statement statement = connection.createStatement();
 
       ResultSet resultSet = statement.executeQuery(query);
@@ -94,7 +99,9 @@ public class ClientDao {
         result.add(new Client(resultSet.getString("nom"), resultSet.getString("prenom"),
             resultSet.getInt("id"), resultSet.getString("adresse"),
             resultSet.getString("numero_permis"), resultSet.getString("telephone"),
-            resultSet.getString("courriel"), resultSet.getString("note")));
+            resultSet.getString("courriel"), resultSet.getString("note"),
+            resultSet.getString("date_de_naissance") != null
+            ? LocalDate.parse(resultSet.getString("date_fin")) : null));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -114,7 +121,8 @@ public class ClientDao {
     try (Connection connection = DataAccess.getConnection()) {
 
       String query = "UPDATE Clients SET prenom = ?, nom = ?, adresse = ?, "
-          + "numero_permis = ?, telephone = ?, courriel = ?, note = ? WHERE id = ?";
+          + "numero_permis = ?, telephone = ?, courriel = ?, note = ?, "
+          + "date_de_naissance = ? WHERE id = ?";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, client.getPrenom());
       statement.setString(2, client.getNom());
@@ -123,7 +131,8 @@ public class ClientDao {
       statement.setString(5, client.getNumeoTelphone());
       statement.setString(6, client.getCourriel());
       statement.setString(7, client.getNote());
-      statement.setInt(8, client.getId());
+      statement.setObject(8, client.getDateDeNaissance());
+      statement.setInt(9, client.getId());
       statement.execute();
 
     } catch (SQLException e) {

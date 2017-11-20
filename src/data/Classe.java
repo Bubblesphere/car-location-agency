@@ -37,7 +37,7 @@ public class Classe {
    * @param nom
    *          nom de la classe.
    * @param prixJournalier
-   *           prix journalier de la classe.  
+   *          prix journalier de la classe.
    */
   public Classe(int id, String nom, float prixJournalier) {
     super();
@@ -46,14 +46,13 @@ public class Classe {
     this.prixJournalier = prixJournalier;
   }
 
-  
   /**
    * Constructeur pour Classe avant l'insertion
    * 
    * @param nom
    *          nom de la classe.
    * @param prixJournalier
-   *          prix journalier de la classe. 
+   *          prix journalier de la classe.
    */
   public Classe(String nom, float prixJournalier) {
     super();

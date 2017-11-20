@@ -32,7 +32,7 @@ public class Utilisateur extends Personne {
    * @param prenom
    *          prénom de l'utilisateur.
    * @param id
-   *          id de l'utilisateur.  
+   *          id de l'utilisateur.
    * @param courriel
    *          courriel de l'utilisateur.
    * @param numEmploye
@@ -89,7 +89,7 @@ public class Utilisateur extends Personne {
    * @param nom
    *          nom de l'utilisateur.
    * @param prenom
-   *          prénom de l'utilisateur.  
+   *          prénom de l'utilisateur.
    * @param motDePasse
    *          mot de passe de l'utilisateur.
    * @param courriel

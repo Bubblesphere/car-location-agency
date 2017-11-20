@@ -9,9 +9,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import dao.VehiculeDao;
-import data.Vehicule;
-
 public class TabbedWindow extends JFrame {
 
   private static final long serialVersionUID = 1L;
@@ -40,10 +37,13 @@ public class TabbedWindow extends JFrame {
           // Utilisateur u = new Utilisateur("password", 54165);
           // u = UtilisateurDao.checkAndRetrieve(u);
           // System.out.println(u);
-          
-          //Vehicule v = new Vehicule(1, "test", "test", 2017, 1000, 0, "test", false, 100, "test");
-          Vehicule v = VehiculeDao.retrieve(1);
-          System.out.println(v.getAnnee());
+
+          // Vehicule v = new Vehicule(1, "test", "test", 2017, 1000, 0, "test",
+          // false, 100, "test");
+          /*
+           * Vehicule v = VehiculeDao.retrieve(1);
+           * System.out.println(v.getAnnee());
+           */
 
           frame.setVisible(true);
         } catch (Exception e) {

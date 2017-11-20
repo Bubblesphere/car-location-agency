@@ -1,5 +1,7 @@
 package data;
 
+import java.time.LocalDate;
+
 public class Client extends Personne {
   private int id;
   private String adresse;
@@ -7,6 +9,7 @@ public class Client extends Personne {
   private String numeoTelphone;
   private String courriel;
   private String note;
+  private LocalDate dateDeNaissance;
 
   public String getAdresse() {
     return this.adresse;
@@ -55,6 +58,14 @@ public class Client extends Personne {
   public void setId(int id) {
     this.id = id;
   }
+  
+  public LocalDate getDateDeNaissance() {
+    return this.dateDeNaissance;
+  }
+
+  public void setDateDeNaissance(LocalDate dateDeNaissance) {
+    this.dateDeNaissance = dateDeNaissance;
+  }
 
   /**
    * Constructeur pour Client lors de la réservation
@@ -62,9 +73,9 @@ public class Client extends Personne {
    * @param nom
    *          nom du client.
    * @param prenom
-   *          prénom du client.  
+   *          prénom du client.
    * @param numeoTelphone
-   *          numéro de téléphone du client. 
+   *          numéro de téléphone du client.
    * @param note
    *          commentaire.
    */
@@ -75,6 +86,7 @@ public class Client extends Personne {
     this.adresse = "";
     this.numeroPermis = "";
     this.courriel = "";
+    this.dateDeNaissance = null;
   }
 
   /**
@@ -85,7 +97,7 @@ public class Client extends Personne {
    * @param prenom
    *          prénom du client.
    * @param id
-   *           id du client.
+   *          id du client.
    * @param adresse
    *          adresse du client.
    * @param numeroPermis
@@ -98,7 +110,7 @@ public class Client extends Personne {
    *          commentaire.
    */
   public Client(String nom, String prenom, int id, String adresse, String numeroPermis,
-      String numeoTelphone, String courriel, String note) {
+      String numeoTelphone, String courriel, String note, LocalDate dateDeNaissance) {
     super(nom, prenom);
     this.id = id;
     this.adresse = adresse;
@@ -106,6 +118,7 @@ public class Client extends Personne {
     this.numeoTelphone = numeoTelphone;
     this.courriel = courriel;
     this.note = note;
+    this.dateDeNaissance = dateDeNaissance;
   }
 
   /**
@@ -114,7 +127,7 @@ public class Client extends Personne {
    * @param nom
    *          nom du client.
    * @param prenom
-   *          prénom du client.  
+   *          prénom du client.
    * @param adresse
    *          adresse du client.
    * @param numeroPermis
@@ -127,12 +140,13 @@ public class Client extends Personne {
    *          commentaire.
    */
   public Client(String nom, String prenom, String adresse, String numeroPermis,
-      String numeoTelphone, String courriel, String note) {
+      String numeoTelphone, String courriel, String note, LocalDate dateDeNaissance) {
     super(nom, prenom);
     this.adresse = adresse;
     this.numeroPermis = numeroPermis;
     this.numeoTelphone = numeoTelphone;
     this.courriel = courriel;
     this.note = note;
+    this.dateDeNaissance = dateDeNaissance;
   }
 }

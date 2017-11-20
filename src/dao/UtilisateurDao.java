@@ -47,11 +47,11 @@ public class UtilisateurDao {
   }
 
   /**
-   * Méthode pour vérifier une combinaison d'un numéro d'employé et 
-   * un mot de passe pour un utilisateur
+   * Méthode pour vérifier une combinaison d'un numéro d'employé et un mot de
+   * passe pour un utilisateur
    * 
    * @param utilisateur
-   *          utilisateur à vérifier.  
+   *          utilisateur à vérifier.
    * @return l'utilisateur qui a été vérifier ou null.
    */
   public static Utilisateur checkAndRetrieve(Utilisateur utilisateur) {

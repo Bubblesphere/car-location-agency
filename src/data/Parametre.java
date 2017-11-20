@@ -48,9 +48,9 @@ public class Parametre extends TypeParametre {
    * @param description
    *          description du paramètre.
    * @param id
-   *           id du paramètre.
+   *          id du paramètre.
    * @param valeur
-   *           valeur du paramètre.
+   *          valeur du paramètre.
    * @param dateDebut
    *          date d'entré en vigueur de ce paramètre.
    * @param dateFin

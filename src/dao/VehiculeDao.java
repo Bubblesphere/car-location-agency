@@ -70,7 +70,7 @@ public class VehiculeDao {
       ResultSet resultSet = statement.executeQuery();
 
       if (resultSet.next()) {
-        Classe classe = ClasseDao.retrieve(resultSet.getInt("classe_id"));        
+        Classe classe = ClasseDao.retrieve(resultSet.getInt("classe_id"));
         Vehicule vehicule = new Vehicule(resultSet.getInt("id"), classe.getId(), classe,
             resultSet.getString("fabriquant"), resultSet.getString("marque"),
             resultSet.getInt("annee"), resultSet.getInt("kilometrage"), resultSet.getInt("etat"),

@@ -15,11 +15,11 @@ public class Paiement {
    * @param locationId
    *          location sur laquel ce paiement est attaché.
    * @param montant
-   *           montant du paiement.
+   *          montant du paiement.
    * @param methode
-   *           méthode de paiement.
+   *          méthode de paiement.
    * @param note
-   *          commentaire. 
+   *          commentaire.
    */
   public Paiement(int id, int locationId, float montant, int methode, String note) {
     super();

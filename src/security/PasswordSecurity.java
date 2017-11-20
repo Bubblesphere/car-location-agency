@@ -9,7 +9,9 @@ public class PasswordSecurity {
 
   /**
    * Méthode pour hash un mot de passe
-   * @param password le string à hasher.
+   * 
+   * @param password
+   *          le string à hasher.
    * @return the le mot de passe hashé.
    */
   public static String hashPassword(String password) {

@@ -102,17 +102,17 @@ public class Reservation {
    * @param clientId
    *          id du client de la réservation.
    * @param locataire
-   *           id du client de la la réservation.
+   *          id du client de la la réservation.
    * @param classeId
-   *           id de la classe de véhicule désiré.
+   *          id de la classe de véhicule désiré.
    * @param classeDesire
    *          la classe de véhicule désiré.
    * @param startDate
    *          la date de début de la location.
    * @param finDate
-   *           la date de fin de la location.
+   *          la date de fin de la location.
    * @param note
-   *           commentaire.
+   *          commentaire.
    * @param utilisateurId
    *          date d'entré en vigueur de ce paramètre.
    * @param employe

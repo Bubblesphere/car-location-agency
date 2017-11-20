@@ -26,7 +26,7 @@ public class Personne {
    * @param nom
    *          nom de la personne.
    * @param prenom
-   *          prenom de la personne. 
+   *          prenom de la personne.
    */
   public Personne(String nom, String prenom) {
     super();
