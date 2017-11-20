@@ -7,7 +7,6 @@ public class Client extends Personne {
   private String adresse;
   private String numeroPermis;
   private String numeoTelphone;
-  private String courriel;
   private String note;
   private LocalDate dateDeNaissance;
 
@@ -35,14 +34,6 @@ public class Client extends Personne {
     this.numeoTelphone = numeoTelphone;
   }
 
-  public String getCourriel() {
-    return this.courriel;
-  }
-
-  public void setCourriel(String courriel) {
-    this.courriel = courriel;
-  }
-
   public String getNote() {
     return this.note;
   }
@@ -68,24 +59,23 @@ public class Client extends Personne {
   }
 
   /**
-   * Constructeur pour Client lors de la réservation
+   * Constructeur pour Client lors de la rï¿½servation
    * 
    * @param nom
    *          nom du client.
    * @param prenom
-   *          prénom du client.
+   *          prï¿½nom du client.
    * @param numeoTelphone
-   *          numéro de téléphone du client.
+   *          numï¿½ro de tï¿½lï¿½phone du client.
    * @param note
    *          commentaire.
    */
   public Client(String nom, String prenom, String numeoTelphone, String note) {
-    super(nom, prenom);
+    super(nom, prenom, "");
     this.numeoTelphone = numeoTelphone;
     this.note = note;
     this.adresse = "";
     this.numeroPermis = "";
-    this.courriel = "";
     this.dateDeNaissance = null;
   }
 
@@ -95,15 +85,15 @@ public class Client extends Personne {
    * @param nom
    *          nom du client.
    * @param prenom
-   *          prénom du client.
+   *          prï¿½nom du client.
    * @param id
    *          id du client.
    * @param adresse
    *          adresse du client.
    * @param numeroPermis
-   *          numéro de permis du client.
+   *          numï¿½ro de permis du client.
    * @param numeoTelphone
-   *          numéro de téléphone du client.
+   *          numï¿½ro de tï¿½lï¿½phone du client.
    * @param courriel
    *          courriel du client.
    * @param note
@@ -111,29 +101,28 @@ public class Client extends Personne {
    */
   public Client(String nom, String prenom, int id, String adresse, String numeroPermis,
       String numeoTelphone, String courriel, String note, LocalDate dateDeNaissance) {
-    super(nom, prenom);
+    super(nom, prenom, courriel);
     this.id = id;
     this.adresse = adresse;
     this.numeroPermis = numeroPermis;
     this.numeoTelphone = numeoTelphone;
-    this.courriel = courriel;
     this.note = note;
     this.dateDeNaissance = dateDeNaissance;
   }
 
   /**
-   * Constructeur pour Client à la création
+   * Constructeur pour Client ï¿½ la crï¿½ation
    * 
    * @param nom
    *          nom du client.
    * @param prenom
-   *          prénom du client.
+   *          prï¿½nom du client.
    * @param adresse
    *          adresse du client.
    * @param numeroPermis
-   *          numéro de permis du client.
+   *          numï¿½ro de permis du client.
    * @param numeoTelphone
-   *          numéro de téléphone du client.
+   *          numï¿½ro de tï¿½lï¿½phone du client.
    * @param courriel
    *          courriel du client.
    * @param note
@@ -141,11 +130,10 @@ public class Client extends Personne {
    */
   public Client(String nom, String prenom, String adresse, String numeroPermis,
       String numeoTelphone, String courriel, String note, LocalDate dateDeNaissance) {
-    super(nom, prenom);
+    super(nom, prenom, courriel);
     this.adresse = adresse;
     this.numeroPermis = numeroPermis;
     this.numeoTelphone = numeoTelphone;
-    this.courriel = courriel;
     this.note = note;
     this.dateDeNaissance = dateDeNaissance;
   }

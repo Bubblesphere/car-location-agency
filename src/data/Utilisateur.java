@@ -5,7 +5,6 @@ import security.PasswordSecurity;
 public class Utilisateur extends Personne {
   private int id;
   private String motDePasse;
-  private String courriel;
   private int numEmploye;
   private int role;
   private Boolean desactive;
@@ -16,7 +15,7 @@ public class Utilisateur extends Personne {
    * @param motDePasse
    *          mot de passe de l'utilisateur.
    * @param numEmploye
-   *          numéro d'employe de l'utilisateur
+   *          numï¿½ro d'employe de l'utilisateur
    */
   public Utilisateur(String motDePasse, int numEmploye) {
     super();
@@ -25,28 +24,27 @@ public class Utilisateur extends Personne {
   }
 
   /**
-   * Constructeur pour Utilisateur à la sélection
+   * Constructeur pour Utilisateur ï¿½ la sï¿½lection
    * 
    * @param nom
    *          nom de l'utilisateur.
    * @param prenom
-   *          prénom de l'utilisateur.
+   *          prï¿½nom de l'utilisateur.
    * @param id
    *          id de l'utilisateur.
    * @param courriel
    *          courriel de l'utilisateur.
    * @param numEmploye
-   *          numéro d'employé de l'utilisateur.
+   *          numï¿½ro d'employï¿½ de l'utilisateur.
    * @param role
-   *          rôle de l'utilisateur. [Employé, Superviseur]
+   *          rï¿½le de l'utilisateur. [Employï¿½, Superviseur]
    * @param desactive
-   *          si l'utilisateur est désactivé.
+   *          si l'utilisateur est dï¿½sactivï¿½.
    */
   public Utilisateur(String nom, String prenom, int id, String courriel, int numEmploye, int role,
       Boolean desactive) {
-    super(nom, prenom);
+    super(nom, prenom, courriel);
     this.id = id;
-    this.courriel = courriel;
     this.numEmploye = numEmploye;
     this.role = role;
     this.desactive = desactive;
@@ -58,7 +56,7 @@ public class Utilisateur extends Personne {
    * @param nom
    *          nom de l'utilisateur.
    * @param prenom
-   *          prénom de l'utilisateur.
+   *          prï¿½nom de l'utilisateur.
    * @param id
    *          id de l'utilisateur.
    * @param motDePasse
@@ -66,46 +64,44 @@ public class Utilisateur extends Personne {
    * @param courriel
    *          courriel de l'utilisateur.
    * @param numEmploye
-   *          numéro d'employé de l'utilisateur.
+   *          numï¿½ro d'employï¿½ de l'utilisateur.
    * @param role
-   *          rôle de l'utilisateur. [Employé, Superviseur]
+   *          rï¿½le de l'utilisateur. [Employï¿½, Superviseur]
    * @param desactive
-   *          si l'utilisateur est désactivé.
+   *          si l'utilisateur est dï¿½sactivï¿½.
    */
   public Utilisateur(String nom, String prenom, int id, String motDePasse, String courriel,
       int numEmploye, int role, Boolean desactive) {
-    super(nom, prenom);
+    super(nom, prenom, courriel);
     this.id = id;
     setMotDePasse(motDePasse);
-    this.courriel = courriel;
     this.numEmploye = numEmploye;
     this.role = role;
     this.desactive = desactive;
   }
 
   /**
-   * Constructeur pour Utilisateur à la création
+   * Constructeur pour Utilisateur ï¿½ la crï¿½ation
    * 
    * @param nom
    *          nom de l'utilisateur.
    * @param prenom
-   *          prénom de l'utilisateur.
+   *          prï¿½nom de l'utilisateur.
    * @param motDePasse
    *          mot de passe de l'utilisateur.
    * @param courriel
    *          courriel de l'utilisateur.
    * @param numEmploye
-   *          numéro d'employé de l'utilisateur.
+   *          numï¿½ro d'employï¿½ de l'utilisateur.
    * @param role
-   *          rôle de l'utilisateur. [Employé, Superviseur]
+   *          rï¿½le de l'utilisateur. [Employï¿½, Superviseur]
    * @param desactive
-   *          si l'utilisateur est désactivé.
+   *          si l'utilisateur est dï¿½sactivï¿½.
    */
   public Utilisateur(String nom, String prenom, String motDePasse, String courriel, int numEmploye,
       int role, Boolean desactive) {
-    super(nom, prenom);
+    super(nom, prenom, courriel);
     setMotDePasse(motDePasse);
-    this.courriel = courriel;
     this.numEmploye = numEmploye;
     this.role = role;
     this.desactive = desactive;
@@ -117,14 +113,6 @@ public class Utilisateur extends Personne {
 
   public void setId(int id) {
     this.id = id;
-  }
-
-  public String getCourriel() {
-    return courriel;
-  }
-
-  public void setCourriel(String courriel) {
-    this.courriel = courriel;
   }
 
   public int getNumEmploye() {
