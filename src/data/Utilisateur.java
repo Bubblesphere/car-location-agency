@@ -1,9 +1,10 @@
 package data;
 
+import dao.UtilisateurDao;
 import security.PasswordSecurity;
 
 public class Utilisateur extends Personne {
-  private int id;
+  private int utilisateurId;
   private String motDePasse;
   private int numEmploye;
   private int role;
@@ -30,7 +31,7 @@ public class Utilisateur extends Personne {
    *          nom de l'utilisateur.
    * @param prenom
    *          pr�nom de l'utilisateur.
-   * @param id
+   * @param utilisateurId
    *          id de l'utilisateur.
    * @param courriel
    *          courriel de l'utilisateur.
@@ -41,10 +42,10 @@ public class Utilisateur extends Personne {
    * @param desactive
    *          si l'utilisateur est d�sactiv�.
    */
-  public Utilisateur(String nom, String prenom, int id, String courriel, int numEmploye, int role,
-      Boolean desactive) {
+  public Utilisateur(String nom, String prenom, int utilisateurId, String courriel, int numEmploye,
+      int role, Boolean desactive) {
     super(nom, prenom, courriel);
-    this.id = id;
+    this.setUtilisateurId(utilisateurId);
     this.numEmploye = numEmploye;
     this.role = role;
     this.desactive = desactive;
@@ -57,7 +58,7 @@ public class Utilisateur extends Personne {
    *          nom de l'utilisateur.
    * @param prenom
    *          pr�nom de l'utilisateur.
-   * @param id
+   * @param utilisateurId
    *          id de l'utilisateur.
    * @param motDePasse
    *          mot de passe de l'utilisateur.
@@ -70,10 +71,10 @@ public class Utilisateur extends Personne {
    * @param desactive
    *          si l'utilisateur est d�sactiv�.
    */
-  public Utilisateur(String nom, String prenom, int id, String motDePasse, String courriel,
-      int numEmploye, int role, Boolean desactive) {
+  public Utilisateur(String nom, String prenom, int utilisateurId, String motDePasse,
+      String courriel, int numEmploye, int role, Boolean desactive) {
     super(nom, prenom, courriel);
-    this.id = id;
+    this.setUtilisateurId(utilisateurId);
     setMotDePasse(motDePasse);
     this.numEmploye = numEmploye;
     this.role = role;
@@ -107,14 +108,6 @@ public class Utilisateur extends Personne {
     this.desactive = desactive;
   }
 
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
   public int getNumEmploye() {
     return numEmploye;
   }
@@ -145,6 +138,18 @@ public class Utilisateur extends Personne {
 
   public void setMotDePasse(String motDePasse) {
     this.motDePasse = PasswordSecurity.hashPassword(motDePasse);
+  }
+
+  public int getUtilisateurId() {
+    return utilisateurId;
+  }
+
+  public void setUtilisateurId(int utilisateurId) {
+    this.utilisateurId = utilisateurId;
+  }
+
+  public boolean verifierIdentification() {
+    return UtilisateurDao.check(this) >= 0;
   }
 
 }

@@ -1,16 +1,12 @@
 package data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-public class Location {
-  private int id;
-  private int vehiculeId;
-  private Vehicule vehiculeLoue;
-  private Reservation reservation;
+public class Location extends Reservation {
+  private int locationId;
+  private Vehicule vehicule;
   private Utilisateur locateur;
-  private int reservationId;
-  private int utilisateurId;
-  private Date dateDeRetour;
+  private LocalDate dateDeRetour;
   private boolean assurance;
   private boolean usureJournalier;
   private int essenceManquant;
@@ -22,20 +18,12 @@ public class Location {
   /**
    * Constructeur pour une Location
    * 
-   * @param id
+   * @param locationId
    *          id de la location.
-   * @param vehiculeId
-   *          id du véhicule de la location.
-   * @param vehiculeLoue
+   * @param vehicule
    *          véhicule de la locaiton.
-   * @param reservation
-   *          réservation ayant mené à la location.
    * @param locateur
    *          l'utilisateur qui a fait la location.
-   * @param reservationId
-   *          id de la réservation ayant mené à la location.
-   * @param utilisateurId
-   *          id de l'utilisateur qui a fait la location.
    * @param dateDeRetour
    *          date de retour du locataire.
    * @param assurance
@@ -53,58 +41,31 @@ public class Location {
    * @param estimationReparation
    *          estimation de réparation à faire au véhicule au retour.
    */
-  public Location(int id, int vehiculeId, Vehicule vehiculeLoue, Reservation reservation,
-      Utilisateur locateur, int reservationId, int utilisateurId, Date dateDeRetour,
-      boolean assurance, boolean usureJournalier, int essenceManquant, int departKm, int retourKm,
-      String note, float estimationReparation) {
-    super();
-    this.id = id;
-    this.vehiculeId = vehiculeId;
-    this.vehiculeLoue = vehiculeLoue;
-    this.reservation = reservation;
+  public Location(int reservationId, Client client, Classe classe, LocalDate startDate,
+      LocalDate retourAnticipeDate, String note, Utilisateur utilisateur, int locationId,
+      Vehicule vehicule, Utilisateur locateur, LocalDate dateDeRetour, boolean assurance,
+      boolean usureJournalier, int essenceManquant, int departKm, int retourKm, String note2,
+      float estimationReparation) {
+    super(reservationId, client, classe, startDate, retourAnticipeDate, note, utilisateur);
+    this.locationId = locationId;
+    this.vehicule = vehicule;
     this.locateur = locateur;
-    this.reservationId = reservationId;
-    this.utilisateurId = utilisateurId;
     this.dateDeRetour = dateDeRetour;
     this.assurance = assurance;
     this.usureJournalier = usureJournalier;
     this.essenceManquant = essenceManquant;
     this.departKm = departKm;
     this.retourKm = retourKm;
-    this.note = note;
+    note = note2;
     this.estimationReparation = estimationReparation;
   }
 
-  public int getId() {
-    return id;
+  public Vehicule getVehicule() {
+    return vehicule;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public int getVehiculeId() {
-    return vehiculeId;
-  }
-
-  public void setVehiculeId(int vehiculeId) {
-    this.vehiculeId = vehiculeId;
-  }
-
-  public Vehicule getVehiculeLoue() {
-    return vehiculeLoue;
-  }
-
-  public void setVehiculeLoue(Vehicule vehiculeLoue) {
-    this.vehiculeLoue = vehiculeLoue;
-  }
-
-  public Reservation getReservation() {
-    return reservation;
-  }
-
-  public void setReservation(Reservation reservation) {
-    this.reservation = reservation;
+  public void setVehicule(Vehicule vehicule) {
+    this.vehicule = vehicule;
   }
 
   public Utilisateur getLocateur() {
@@ -115,27 +76,11 @@ public class Location {
     this.locateur = locateur;
   }
 
-  public int getReservationId() {
-    return reservationId;
-  }
-
-  public void setReservationId(int reservationId) {
-    this.reservationId = reservationId;
-  }
-
-  public int getUtilisateurId() {
-    return utilisateurId;
-  }
-
-  public void setUtilisateurId(int utilisateurId) {
-    this.utilisateurId = utilisateurId;
-  }
-
-  public Date getDateDeRetour() {
+  public LocalDate getDateDeRetour() {
     return dateDeRetour;
   }
 
-  public void setDateDeRetour(Date dateDeRetour) {
+  public void setDateDeRetour(LocalDate dateDeRetour) {
     this.dateDeRetour = dateDeRetour;
   }
 
@@ -193,6 +138,14 @@ public class Location {
 
   public void setEstimationReparation(float estimationReparation) {
     this.estimationReparation = estimationReparation;
+  }
+
+  public int getLocationId() {
+    return locationId;
+  }
+
+  public void setLocationId(int locationId) {
+    this.locationId = locationId;
   }
 
 }

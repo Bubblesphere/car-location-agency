@@ -28,7 +28,7 @@ public class VehiculeDao {
           + "capacite_essence, note) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query,
           Statement.RETURN_GENERATED_KEYS);
-      statement.setInt(1, vehicule.getClasseId());
+      statement.setInt(1, vehicule.getVClasse().getClasseId());
       statement.setString(2, vehicule.getFabricant());
       statement.setString(3, vehicule.getMarque());
       statement.setInt(4, vehicule.getAnnee());
@@ -41,7 +41,7 @@ public class VehiculeDao {
 
       ResultSet keys = statement.getGeneratedKeys();
       keys.next();
-      vehicule.setId(keys.getInt(1));
+      vehicule.setVehiculeId(keys.getInt(1));
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -71,7 +71,7 @@ public class VehiculeDao {
 
       if (resultSet.next()) {
         Classe classe = ClasseDao.retrieve(resultSet.getInt("classe_id"));
-        Vehicule vehicule = new Vehicule(resultSet.getInt("id"), classe.getId(), classe,
+        Vehicule vehicule = new Vehicule(resultSet.getInt("id"), classe,
             resultSet.getString("fabriquant"), resultSet.getString("marque"),
             resultSet.getInt("annee"), resultSet.getInt("kilometrage"), resultSet.getInt("etat"),
             resultSet.getString("plaque"), resultSet.getBoolean("desactive"),
@@ -103,7 +103,7 @@ public class VehiculeDao {
 
       while (resultSet.next()) {
         Classe classe = ClasseDao.retrieve(resultSet.getInt("classe_id"));
-        Vehicule vehicule = new Vehicule(resultSet.getInt("id"), classe.getId(), classe,
+        Vehicule vehicule = new Vehicule(resultSet.getInt("id"), classe,
             resultSet.getString("fabriquant"), resultSet.getString("marque"),
             resultSet.getInt("annee"), resultSet.getInt("kilometrage"), resultSet.getInt("etat"),
             resultSet.getString("plaque"), resultSet.getBoolean("desactive"),
@@ -132,7 +132,7 @@ public class VehiculeDao {
           + "marque = ?, annee = ?, kilometrage = ?, etat = ?, plaque = ?, "
           + "desactive = ?, capacite_essence = ?, note = ? WHERE id = ?";
       PreparedStatement statement = connection.prepareStatement(query);
-      statement.setInt(1, vehicule.getClasseId());
+      statement.setInt(1, vehicule.getVClasse().getClasseId());
       statement.setString(2, vehicule.getFabricant());
       statement.setString(3, vehicule.getMarque());
       statement.setInt(4, vehicule.getAnnee());
@@ -142,7 +142,7 @@ public class VehiculeDao {
       statement.setBoolean(8, vehicule.getDesactive());
       statement.setInt(9, vehicule.getCapaciteEssence());
       statement.setString(10, vehicule.getNote());
-      statement.setInt(11, vehicule.getId());
+      statement.setInt(11, vehicule.getVehiculeId());
       statement.execute();
 
     } catch (SQLException e) {

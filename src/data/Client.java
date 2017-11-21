@@ -3,7 +3,7 @@ package data;
 import java.time.LocalDate;
 
 public class Client extends Personne {
-  private int id;
+  private int clientId;
   private String adresse;
   private String numeroPermis;
   private String numeoTelphone;
@@ -42,14 +42,6 @@ public class Client extends Personne {
     this.note = note;
   }
 
-  public int getId() {
-    return this.id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-  
   public LocalDate getDateDeNaissance() {
     return this.dateDeNaissance;
   }
@@ -86,7 +78,7 @@ public class Client extends Personne {
    *          nom du client.
    * @param prenom
    *          pr�nom du client.
-   * @param id
+   * @param clientId
    *          id du client.
    * @param adresse
    *          adresse du client.
@@ -99,10 +91,10 @@ public class Client extends Personne {
    * @param note
    *          commentaire.
    */
-  public Client(String nom, String prenom, int id, String adresse, String numeroPermis,
+  public Client(String nom, String prenom, int clientId, String adresse, String numeroPermis,
       String numeoTelphone, String courriel, String note, LocalDate dateDeNaissance) {
     super(nom, prenom, courriel);
-    this.id = id;
+    this.setClientId(clientId);
     this.adresse = adresse;
     this.numeroPermis = numeroPermis;
     this.numeoTelphone = numeoTelphone;
@@ -136,5 +128,13 @@ public class Client extends Personne {
     this.numeoTelphone = numeoTelphone;
     this.note = note;
     this.dateDeNaissance = dateDeNaissance;
+  }
+
+  public int getClientId() {
+    return clientId;
+  }
+
+  public void setClientId(int clientId) {
+    this.clientId = clientId;
   }
 }

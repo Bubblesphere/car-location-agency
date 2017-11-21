@@ -35,7 +35,7 @@ public class ParametreDao {
 
       ResultSet keys = statement.getGeneratedKeys();
       keys.next();
-      parametre.setId(keys.getInt(1));
+      parametre.setParametreId(keys.getInt(1));
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -118,7 +118,7 @@ public class ParametreDao {
       statement.setInt(2, parametre.getTypeId());
       statement.setObject(3, parametre.getDateDebut());
       statement.setObject(4, parametre.getDateFin());
-      statement.setInt(5, parametre.getId());
+      statement.setInt(5, parametre.getParametreId());
       statement.execute();
 
     } catch (SQLException e) {
