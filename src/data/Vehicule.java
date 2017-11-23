@@ -1,8 +1,7 @@
 package data;
 
 public class Vehicule {
-  private int id;
-  private int classeId;
+  private int vehiculeId;
   private Classe classe;
   private String fabricant;
   private String marque;
@@ -17,10 +16,8 @@ public class Vehicule {
   /**
    * Constructeur pour Véhicule
    * 
-   * @param id
+   * @param vehiculeId
    *          id du véhicule.
-   * @param classeId
-   *          id de la classe du véhicule.
    * @param classe
    *          classe du véhicule.
    * @param fabricant
@@ -42,12 +39,11 @@ public class Vehicule {
    * @param note
    *          commentaire.
    */
-  public Vehicule(int id, int classeId, Classe classe, String fabricant, String marque, int annee,
+  public Vehicule(int vehiculeId, Classe classe, String fabricant, String marque, int annee,
       int kilometrage, int etat, String plaque, Boolean desactive, int capaciteEssence,
       String note) {
     super();
-    this.id = id;
-    this.classeId = classeId;
+    this.setVehiculeId(vehiculeId);
     this.classe = classe;
     this.fabricant = fabricant;
     this.marque = marque;
@@ -63,10 +59,8 @@ public class Vehicule {
   /**
    * Constructeur pour Véhicule sans object de classe
    * 
-   * @param id
+   * @param vehiculeId
    *          id du véhicule.
-   * @param classeId
-   *          id de la classe du véhicule.
    * @param fabricant
    *          fabricant du véhicule.
    * @param marque
@@ -86,11 +80,11 @@ public class Vehicule {
    * @param note
    *          commentaire.
    */
-  public Vehicule(int id, int classeId, String fabricant, String marque, int annee, int kilometrage,
+  public Vehicule(int vehiculeId, String fabricant, String marque, int annee, int kilometrage,
       int etat, String plaque, Boolean desactive, int capaciteEssence, String note) {
     super();
-    this.id = id;
-    this.classeId = classeId;
+    this.setVehiculeId(vehiculeId);
+
     this.fabricant = fabricant;
     this.marque = marque;
     this.annee = annee;
@@ -104,9 +98,7 @@ public class Vehicule {
 
   /**
    * Constructeur pour Véhicule avant insertion
-   * 
-   * @param classeId
-   *          id de la classe du véhicule.
+   *
    * @param fabricant
    *          fabricant du véhicule.
    * @param marque
@@ -126,10 +118,9 @@ public class Vehicule {
    * @param note
    *          commentaire.
    */
-  public Vehicule(int classeId, String fabricant, String marque, int annee, int kilometrage,
-      int etat, String plaque, Boolean desactive, int capaciteEssence, String note) {
+  public Vehicule(String fabricant, String marque, int annee, int kilometrage, int etat,
+      String plaque, Boolean desactive, int capaciteEssence, String note) {
     super();
-    this.classeId = classeId;
     this.fabricant = fabricant;
     this.marque = marque;
     this.annee = annee;
@@ -141,28 +132,12 @@ public class Vehicule {
     this.note = note;
   }
 
-  public int getClasseId() {
-    return this.classeId;
-  }
-
-  public void setClasseId(int classeId) {
-    this.classeId = classeId;
-  }
-
   public Classe getVClasse() {
     return this.classe;
   }
 
   public void setVClasse(Classe classe) {
     this.classe = classe;
-  }
-
-  public int getId() {
-    return this.id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
   }
 
   public String getFabricant() {
@@ -235,6 +210,14 @@ public class Vehicule {
 
   public void setNote(String note) {
     this.note = note;
+  }
+
+  public int getVehiculeId() {
+    return vehiculeId;
+  }
+
+  public void setVehiculeId(int vehiculeId) {
+    this.vehiculeId = vehiculeId;
   }
 
 }

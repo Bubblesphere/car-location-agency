@@ -40,7 +40,7 @@ public class ClientDao {
 
       ResultSet keys = statement.getGeneratedKeys();
       keys.next();
-      client.setId(keys.getInt(1));
+      client.setClientId(keys.getInt(1));
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -72,7 +72,7 @@ public class ClientDao {
             resultSet.getString("numero_permis"), resultSet.getString("telephone"),
             resultSet.getString("courriel"), resultSet.getString("note"),
             resultSet.getString("date_de_naissance") != null
-            ? LocalDate.parse(resultSet.getString("date_fin")) : null);
+                ? LocalDate.parse(resultSet.getString("date_fin")) : null);
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -101,7 +101,7 @@ public class ClientDao {
             resultSet.getString("numero_permis"), resultSet.getString("telephone"),
             resultSet.getString("courriel"), resultSet.getString("note"),
             resultSet.getString("date_de_naissance") != null
-            ? LocalDate.parse(resultSet.getString("date_fin")) : null));
+                ? LocalDate.parse(resultSet.getString("date_fin")) : null));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -132,7 +132,7 @@ public class ClientDao {
       statement.setString(6, client.getCourriel());
       statement.setString(7, client.getNote());
       statement.setObject(8, client.getDateDeNaissance());
-      statement.setInt(9, client.getId());
+      statement.setInt(9, client.getClientId());
       statement.execute();
 
     } catch (SQLException e) {

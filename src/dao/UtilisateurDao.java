@@ -37,7 +37,7 @@ public class UtilisateurDao {
 
       ResultSet keys = statement.getGeneratedKeys();
       keys.next();
-      utilisateur.setId(keys.getInt(1));
+      utilisateur.setUtilisateurId(keys.getInt(1));
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -54,7 +54,7 @@ public class UtilisateurDao {
    *          utilisateur à vérifier.
    * @return l'utilisateur qui a été vérifier ou null.
    */
-  public static Utilisateur checkAndRetrieve(Utilisateur utilisateur) {
+  public static int check(Utilisateur utilisateur) {
     try (Connection connection = DataAccess.getConnection()) {
 
       String query = "SELECT id FROM Utilisateurs WHERE num_employe = ? "
@@ -65,12 +65,12 @@ public class UtilisateurDao {
       ResultSet resultSet = statement.executeQuery();
 
       if (resultSet.next()) {
-        return retrieve(resultSet.getInt(1));
+        return resultSet.getInt(1);
       }
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    return null;
+    return -1;
   }
 
   /**
@@ -148,7 +148,7 @@ public class UtilisateurDao {
       statement.setInt(5, utilisateur.getNumEmploye());
       statement.setInt(6, utilisateur.getRole());
       statement.setBoolean(7, utilisateur.getDesactive());
-      statement.setInt(8, utilisateur.getId());
+      statement.setInt(8, utilisateur.getUtilisateurId());
       statement.execute();
 
     } catch (SQLException e) {

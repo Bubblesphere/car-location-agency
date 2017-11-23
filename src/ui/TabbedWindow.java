@@ -39,6 +39,7 @@ import javax.swing.JTextField;
 import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
+import data.Location;
 
 public class TabbedWindow extends JFrame {
 
