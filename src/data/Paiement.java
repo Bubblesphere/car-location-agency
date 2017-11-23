@@ -1,8 +1,8 @@
 package data;
 
 public class Paiement {
-  private int paiementId;
-  private Location location;
+  private int id;
+  private int locationId;
   private float montant;
   private int methode;
   private String note;
@@ -10,9 +10,9 @@ public class Paiement {
   /**
    * Constructeur pour Paiement
    * 
-   * @param paiementId
+   * @param id
    *          id du paiement.
-   * @param location
+   * @param locationId
    *          location sur laquel ce paiement est attaché.
    * @param montant
    *          montant du paiement.
@@ -21,21 +21,29 @@ public class Paiement {
    * @param note
    *          commentaire.
    */
-  public Paiement(int paiementId, Location location, float montant, int methode, String note) {
+  public Paiement(int id, int locationId, float montant, int methode, String note) {
     super();
-    this.paiementId = paiementId;
-    this.setLocation(location);
+    this.id = id;
+    this.locationId = locationId;
     this.montant = montant;
     this.methode = methode;
     this.note = note;
   }
 
-  public int getPaiementId() {
-    return paiementId;
+  public int getId() {
+    return id;
   }
 
-  public void setPaiementId(int paiementId) {
-    this.paiementId = paiementId;
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public int getLocationId() {
+    return locationId;
+  }
+
+  public void setLocationId(int locationId) {
+    this.locationId = locationId;
   }
 
   public float getMontant() {
@@ -60,14 +68,6 @@ public class Paiement {
 
   public void setNote(String note) {
     this.note = note;
-  }
-
-  public Location getLocation() {
-    return location;
-  }
-
-  public void setLocation(Location location) {
-    this.location = location;
   }
 
 }

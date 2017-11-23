@@ -29,18 +29,18 @@ public class ReservationDao {
           + "start_date, end_date, note, utilisateur_id) values (?, ?, ?, ?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query,
           Statement.RETURN_GENERATED_KEYS);
-      statement.setInt(1, reservation.getClient().getClientId());
-      statement.setInt(2, reservation.getClasse().getClasseId());
+      statement.setInt(1, reservation.getClientId());
+      statement.setInt(2, reservation.getClasseId());
       statement.setObject(3, reservation.getStartDate());
-      statement.setObject(4, reservation.getRetourAnticipeDate());
+      statement.setObject(4, reservation.getFinDate());
       statement.setString(5, reservation.getNote());
-      statement.setInt(6, reservation.getReservateur().getUtilisateurId());
+      statement.setInt(6, reservation.getUtilisateurId());
 
       statement.execute();
 
       ResultSet keys = statement.getGeneratedKeys();
       keys.next();
-      reservation.setReservationId(keys.getInt(1));
+      reservation.setId(keys.getInt(1));
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -75,10 +75,10 @@ public class ReservationDao {
         Classe classe = ClasseDao.retrieve(resultSet.getInt("classe_id"));
         Client client = ClientDao.retrieve(resultSet.getInt("client_id"));
         Utilisateur utilisateur = UtilisateurDao.retrieve(resultSet.getInt("utilisateur_id"));
-        return new Reservation(resultSet.getInt("id"), client, classe,
-            LocalDate.parse(resultSet.getString("start_date")),
+        return new Reservation(resultSet.getInt("id"), client.getId(), client, classe.getId(),
+            classe, LocalDate.parse(resultSet.getString("start_date")),
             LocalDate.parse(resultSet.getString("end_date")),
-            resultSet.getString("reservation_note"), utilisateur);
+            resultSet.getString("reservation_note"), utilisateur.getId(), utilisateur);
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -109,10 +109,10 @@ public class ReservationDao {
         Classe classe = ClasseDao.retrieve(resultSet.getInt("classe_id"));
         Client client = ClientDao.retrieve(resultSet.getInt("client_id"));
         Utilisateur utilisateur = UtilisateurDao.retrieve(resultSet.getInt("utilisateur_id"));
-        Reservation reservation = new Reservation(resultSet.getInt("id"), client, classe,
-            LocalDate.parse(resultSet.getString("start_date")),
+        Reservation reservation = new Reservation(resultSet.getInt("id"), client.getId(), client,
+            classe.getId(), classe, LocalDate.parse(resultSet.getString("start_date")),
             LocalDate.parse(resultSet.getString("end_date")),
-            resultSet.getString("reservation_note"), utilisateur);
+            resultSet.getString("reservation_note"), utilisateur.getId(), utilisateur);
 
         result.add(reservation);
       }
@@ -136,13 +136,13 @@ public class ReservationDao {
       String query = "UPDATE Reservations SET client_id = ?, classe_id = ?, "
           + "start_date = ?,  end_date = ?, note = ?, utilisateur_id = ? WHERE id = ?";
       PreparedStatement statement = connection.prepareStatement(query);
-      statement.setInt(1, reservation.getClient().getClientId());
-      statement.setInt(2, reservation.getClasse().getClasseId());
+      statement.setInt(1, reservation.getClientId());
+      statement.setInt(2, reservation.getClasseId());
       statement.setObject(3, reservation.getStartDate());
-      statement.setObject(4, reservation.getRetourAnticipeDate());
+      statement.setObject(4, reservation.getFinDate());
       statement.setString(5, reservation.getNote());
-      statement.setInt(6, reservation.getReservateur().getUtilisateurId());
-      statement.setInt(7, reservation.getReservationId());
+      statement.setInt(6, reservation.getUtilisateurId());
+      statement.setInt(7, reservation.getId());
       statement.execute();
 
     } catch (SQLException e) {

@@ -3,10 +3,18 @@ package data;
 import java.time.LocalDate;
 
 public class Parametre extends TypeParametre {
-  private int parametreId;
+  private int id;
   private float valeur;
   private LocalDate dateDebut;
   private LocalDate dateFin;
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 
   public float getValeur() {
     return valeur;
@@ -39,7 +47,7 @@ public class Parametre extends TypeParametre {
    *          id du type de paramètre.
    * @param description
    *          description du paramètre.
-   * @param parametreId
+   * @param id
    *          id du paramètre.
    * @param valeur
    *          valeur du paramètre.
@@ -48,21 +56,13 @@ public class Parametre extends TypeParametre {
    * @param dateFin
    *          date de désactivation de ce paramètre.
    */
-  public Parametre(int typeId, String description, int parametreId, float valeur,
-      LocalDate dateDebut, LocalDate dateFin) {
+  public Parametre(int typeId, String description, int id, float valeur, LocalDate dateDebut,
+      LocalDate dateFin) {
     super(typeId, description);
-    this.parametreId = parametreId;
+    this.id = id;
     this.valeur = valeur;
     this.dateDebut = dateDebut;
     this.dateFin = dateFin;
-  }
-
-  public int getParametreId() {
-    return parametreId;
-  }
-
-  public void setParametreId(int parametreId) {
-    this.parametreId = parametreId;
   }
 
 }

@@ -46,7 +46,7 @@ public class Location extends Reservation {
       Vehicule vehicule, Utilisateur locateur, LocalDate dateDeRetour, boolean assurance,
       boolean usureJournalier, int essenceManquant, int departKm, int retourKm, String note2,
       float estimationReparation) {
-    super(reservationId, client, classe, startDate, retourAnticipeDate, note, utilisateur);
+    super(reservationId, client.getId(), client, classe.getId(), classe, startDate, retourAnticipeDate, note, utilisateur.getId(), utilisateur);
     this.locationId = locationId;
     this.vehicule = vehicule;
     this.locateur = locateur;

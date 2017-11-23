@@ -68,14 +68,14 @@ public class Client extends Personne {
   }
 
   /**
-   * Constructeur pour Client lors de la réservation
+   * Constructeur pour Client lors de la rÃ©servation
    * 
    * @param nom
    *          nom du client.
    * @param prenom
-   *          prénom du client.
+   *          prÃ©nom du client.
    * @param numeoTelphone
-   *          numéro de téléphone du client.
+   *          numÃ©ro de tÃ©lÃ©phone du client.
    * @param note
    *          commentaire.
    */
@@ -95,15 +95,15 @@ public class Client extends Personne {
    * @param nom
    *          nom du client.
    * @param prenom
-   *          prénom du client.
+   *          prÃ©nom du client.
    * @param id
    *          id du client.
    * @param adresse
    *          adresse du client.
    * @param numeroPermis
-   *          numéro de permis du client.
+   *          numÃ©ro de permis du client.
    * @param numeoTelphone
-   *          numéro de téléphone du client.
+   *          numÃ©ro de tÃ©lÃ©phone du client.
    * @param courriel
    *          courriel du client.
    * @param note
@@ -122,18 +122,18 @@ public class Client extends Personne {
   }
 
   /**
-   * Constructeur pour Client à la création
+   * Constructeur pour Client Ã  la crÃ©ation
    * 
    * @param nom
    *          nom du client.
    * @param prenom
-   *          prénom du client.
+   *          prÃ©nom du client.
    * @param adresse
    *          adresse du client.
    * @param numeroPermis
-   *          numéro de permis du client.
+   *          numÃ©ro de permis du client.
    * @param numeoTelphone
-   *          numéro de téléphone du client.
+   *          numÃ©ro de tÃ©lÃ©phone du client.
    * @param courriel
    *          courriel du client.
    * @param note
@@ -151,27 +151,17 @@ public class Client extends Personne {
   }
   
   /**
-   * Constructeur
+   * Constructeur pour la widget list
    * 
    * @param id
+   *          id du client.
+   * @param nom
    *          nom du client.
    * @param prenom
-   *          prénom du client.
-   * @param numeoTelphone
-   *          numéro de téléphone du client.
-   * @param note
-   *          commentaire.
+   *          prÃ©nom du client.
    */
   public Client(int id, String nom, String prenom) {
     super(nom, prenom);
-    this.numeoTelphone = numeoTelphone;
     this.id = id;
-    this.note = "";
-    this.adresse = "";
-    this.numeroPermis = "";
-    this.courriel = "";
-    this.dateDeNaissance = null;
   }
-
-  
 }

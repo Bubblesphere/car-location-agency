@@ -1,16 +1,16 @@
 package data;
 
 public class Classe {
-  private int classeId;
+  private int id;
   private String nom;
   private float prixJournalier;
 
-  public int getClasseId() {
-    return this.classeId;
+  public int getId() {
+    return this.id;
   }
 
-  public void setClasseId(int classeId) {
-    this.classeId = classeId;
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getNom() {
@@ -32,16 +32,16 @@ public class Classe {
   /**
    * Constructeur pour Classe à la selection
    * 
-   * @param classeId
+   * @param id
    *          id de la classe.
    * @param nom
    *          nom de la classe.
    * @param prixJournalier
    *          prix journalier de la classe.
    */
-  public Classe(int classeId, String nom, float prixJournalier) {
+  public Classe(int id, String nom, float prixJournalier) {
     super();
-    this.classeId = classeId;
+    this.id = id;
     this.nom = nom;
     this.prixJournalier = prixJournalier;
   }

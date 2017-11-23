@@ -31,7 +31,7 @@ public class ClasseDao {
 
       ResultSet keys = statement.getGeneratedKeys();
       keys.next();
-      classe.setClasseId(keys.getInt(1));
+      classe.setId(keys.getInt(1));
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -103,7 +103,7 @@ public class ClasseDao {
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setString(1, classe.getNom());
       statement.setFloat(2, classe.getPrixJournalier());
-      statement.setInt(3, classe.getClasseId());
+      statement.setInt(3, classe.getId());
       statement.execute();
 
     } catch (SQLException e) {

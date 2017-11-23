@@ -14,11 +14,11 @@ import java.util.List;
 public class ClientDao {
 
   /**
-   * Méthode pour créé une client
+   * MÃ©thode pour crÃ©Ã© une client
    * 
    * @param client
-   *          client à créé.
-   * @return le client qui a été créé avec son id de mis à jour.
+   *          client Ã  crÃ©Ã©.
+   * @return le client qui a Ã©tÃ© crÃ©Ã© avec son id de mis Ã  jour.
    */
   public static Client create(Client client) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -40,7 +40,7 @@ public class ClientDao {
 
       ResultSet keys = statement.getGeneratedKeys();
       keys.next();
-      client.setClientId(keys.getInt(1));
+      client.setId(keys.getInt(1));
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -50,11 +50,11 @@ public class ClientDao {
   }
 
   /**
-   * Méthode pour récupérer un client
+   * MÃ©thode pour rÃ©cupÃ©rer un client
    * 
    * @param clientId
-   *          id du client à récupérer.
-   * @return le client récupérer.
+   *          id du client Ã  rÃ©cupÃ©rer.
+   * @return le client rÃ©cupÃ©rer.
    */
   public static Client retrieve(int clientId) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -72,7 +72,7 @@ public class ClientDao {
             resultSet.getString("numero_permis"), resultSet.getString("telephone"),
             resultSet.getString("courriel"), resultSet.getString("note"),
             resultSet.getString("date_de_naissance") != null
-                ? LocalDate.parse(resultSet.getString("date_fin")) : null);
+            ? LocalDate.parse(resultSet.getString("date_fin")) : null);
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -81,7 +81,7 @@ public class ClientDao {
   }
 
   /**
-   * Méthode pour récupérer toutes les clients
+   * MÃ©thode pour rÃ©cupÃ©rer toutes les clients
    * 
    * @return liste de touts les clients.
    */
@@ -101,7 +101,7 @@ public class ClientDao {
             resultSet.getString("numero_permis"), resultSet.getString("telephone"),
             resultSet.getString("courriel"), resultSet.getString("note"),
             resultSet.getString("date_de_naissance") != null
-                ? LocalDate.parse(resultSet.getString("date_fin")) : null));
+            ? LocalDate.parse(resultSet.getString("date_fin")) : null));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -111,11 +111,11 @@ public class ClientDao {
   }
 
   /**
-   * Méthode pour mettre à jour un client
+   * MÃ©thode pour mettre Ã  jour un client
    * 
    * @param client
    *          le client avec les nouvelle valeurs.
-   * @return si la mise à jour a fonctionnée.
+   * @return si la mise Ã  jour a fonctionnÃ©e.
    */
   public static boolean update(Client client) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -132,7 +132,7 @@ public class ClientDao {
       statement.setString(6, client.getCourriel());
       statement.setString(7, client.getNote());
       statement.setObject(8, client.getDateDeNaissance());
-      statement.setInt(9, client.getClientId());
+      statement.setInt(9, client.getId());
       statement.execute();
 
     } catch (SQLException e) {
@@ -143,11 +143,11 @@ public class ClientDao {
   }
 
   /**
-   * Méthode pour supprimer un client
+   * MÃ©thode pour supprimer un client
    * 
    * @param clientId
-   *          le id du client à supprimer.
-   * @return si la suppression à fonctionnée.
+   *          le id du client Ã  supprimer.
+   * @return si la suppression Ã  fonctionnÃ©e.
    */
   public static boolean delete(int clientId) {
     try (Connection connection = DataAccess.getConnection()) {

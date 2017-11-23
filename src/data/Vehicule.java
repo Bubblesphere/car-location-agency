@@ -1,7 +1,7 @@
 package data;
 
 public class Vehicule {
-  private int vehiculeId;
+  private int id;
   private Classe classe;
   private String fabricant;
   private String marque;
@@ -16,7 +16,7 @@ public class Vehicule {
   /**
    * Constructeur pour Véhicule
    * 
-   * @param vehiculeId
+   * @param Id
    *          id du véhicule.
    * @param classe
    *          classe du véhicule.
@@ -43,7 +43,7 @@ public class Vehicule {
       int kilometrage, int etat, String plaque, Boolean desactive, int capaciteEssence,
       String note) {
     super();
-    this.setVehiculeId(vehiculeId);
+    this.setId(vehiculeId);
     this.classe = classe;
     this.fabricant = fabricant;
     this.marque = marque;
@@ -59,7 +59,7 @@ public class Vehicule {
   /**
    * Constructeur pour Véhicule sans object de classe
    * 
-   * @param vehiculeId
+   * @param Id
    *          id du véhicule.
    * @param fabricant
    *          fabricant du véhicule.
@@ -80,11 +80,12 @@ public class Vehicule {
    * @param note
    *          commentaire.
    */
-  public Vehicule(int vehiculeId, String fabricant, String marque, int annee, int kilometrage,
+  public Vehicule(int vehiculeId, int classeId, Classe classe, String fabricant, String marque, int annee, int kilometrage,
       int etat, String plaque, Boolean desactive, int capaciteEssence, String note) {
     super();
-    this.setVehiculeId(vehiculeId);
-
+    this.setId(vehiculeId);
+    this.classe = classe;
+    this.classe.setId(classeId);
     this.fabricant = fabricant;
     this.marque = marque;
     this.annee = annee;
@@ -118,9 +119,9 @@ public class Vehicule {
    * @param note
    *          commentaire.
    */
-  public Vehicule(String fabricant, String marque, int annee, int kilometrage, int etat,
+  public Vehicule(int vehiculeId, String fabricant, String marque, int annee, int kilometrage, int etat,
       String plaque, Boolean desactive, int capaciteEssence, String note) {
-    super();
+	  this.id = vehiculeId;
     this.fabricant = fabricant;
     this.marque = marque;
     this.annee = annee;
@@ -131,7 +132,7 @@ public class Vehicule {
     this.capaciteEssence = capaciteEssence;
     this.note = note;
   }
-
+  
   public Classe getVClasse() {
     return this.classe;
   }
@@ -212,12 +213,12 @@ public class Vehicule {
     this.note = note;
   }
 
-  public int getVehiculeId() {
-    return vehiculeId;
+  public int getId() {
+    return this.id;
   }
 
-  public void setVehiculeId(int vehiculeId) {
-    this.vehiculeId = vehiculeId;
+  public void setId(int vehiculeId) {
+    this.id = vehiculeId;
   }
 
 }
