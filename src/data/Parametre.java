@@ -2,7 +2,7 @@ package data;
 
 import java.time.LocalDate;
 
-public class Parametre extends TypeParametre {
+public class Parametre extends TypeParametre implements IListable {
   private int id;
   private float valeur;
   private LocalDate dateDebut;
@@ -64,5 +64,16 @@ public class Parametre extends TypeParametre {
     this.dateDebut = dateDebut;
     this.dateFin = dateFin;
   }
+
+
+	@Override
+	public int getKey() {
+		return this.getId();
+	}
+	
+	@Override
+	public String getDisplayedText() {
+		return this.getDescription() + " (" + this.getValeur() + "$)";
+	}
 
 }

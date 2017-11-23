@@ -1,6 +1,6 @@
 package data;
 
-public class Vehicule {
+public class Vehicule implements IListable {
   private int id;
   private Classe classe;
   private String fabricant;
@@ -220,5 +220,15 @@ public class Vehicule {
   public void setId(int vehiculeId) {
     this.id = vehiculeId;
   }
+
+	@Override
+	public int getKey() {
+		return this.getId();
+	}
+	
+	@Override
+	public String getDisplayedText() {
+		return this.getFabricant() + " " + this.getMarque();
+	}
 
 }

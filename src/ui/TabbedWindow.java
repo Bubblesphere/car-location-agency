@@ -9,17 +9,22 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import data.Classe;
 import data.Client;
 import ui.buttons.impl.WidgetButtonSaveClient;
 import ui.list.HashMapListModel;
 import ui.list.WidgetListHashMap;
 import ui.list.WidgetListHashMapAddPanel;
+import ui.panel.WidgetSplitPaneTab;
 
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JSplitPane;
-import java.awt.List;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -40,6 +45,10 @@ import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 import data.Location;
+import data.Parametre;
+import data.TypeParametre;
+import data.Utilisateur;
+import data.Vehicule;
 
 public class TabbedWindow extends JFrame {
 
@@ -103,29 +112,69 @@ public class TabbedWindow extends JFrame {
 
     JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
     contentPane.add(tabbedPane, BorderLayout.CENTER);
-
-    JPanel panel = new JPanel();
-    tabbedPane.addTab("Client", null, panel, null);
-    panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
     
-    JSplitPane splitPane = new JSplitPane();
-    panel.add(splitPane);
     
-    HashMapListModel list = new HashMapListModel();
-	list.addElement(new Client(0, "Deric", "Dallaire"));
-	list.addElement(new Client(1, "Bruno", "Hamel"));
-	WidgetListHashMapAddPanel panel_1 = new WidgetListHashMapAddPanel(list);
-    splitPane.setLeftComponent(panel_1);
- 
+    List<Utilisateur> users = new ArrayList<Utilisateur>();
+    users.add(new Utilisateur("Doe", "John", 0, "password", "dallaire.deric@gmail.com", 0, 1, false));
     
-    JPanel panel_2 = new JPanel();
-    splitPane.setRightComponent(panel_2);
+    List<Client> clients = new ArrayList<Client>();
+    clients.add(new Client(0, "Deric", "Dallaire"));
+    clients.add(new Client(1, "Bruno", "Hamel"));
+    clients.add(new Client(2, "Jean", "Bob"));
+    
+    List<Classe> classes = new ArrayList<Classe>();
+    classes.add(new Classe(0, "Sport", 30));
+    classes.add(new Classe(1, "Économique", 12));
+    
+    List<Vehicule> vehicules = new ArrayList<Vehicule>();
+    vehicules.add(new Vehicule(0, classes.get(0), "Tesla", "Roadster", 2017, 0, 0, "WTF FTW", false, 120, ""));
+    vehicules.add(new Vehicule(1, classes.get(1), "Honda", "Civic", 2016, 10000, 0, "PLA QUE", false, 100, ""));
+    
+    List<Location> locations = new ArrayList<Location>();
+    locations.add(new Location(0, clients.get(0), classes.get(0), LocalDate.now(), LocalDate.now(), "", users.get(0), 0, 
+    		vehicules.get(0), users.get(0), LocalDate.now(), false, false, 0, 0, 100, "", 0));
+    
+    List<TypeParametre> typeParametres = new ArrayList<TypeParametre>();
+    
+    List<Parametre> parametres = new ArrayList<Parametre>();
+    parametres.add(new Parametre(0, "Prix assurance", 0, 40, LocalDate.now(), LocalDate.now()));
+    parametres.add(new Parametre(0, "Prix test", 1, 50, LocalDate.now(), LocalDate.now()));
+    
+    WidgetSplitPaneTab tabClient = new WidgetSplitPaneTab(tabbedPane, "Client");
+    WidgetSplitPaneTab tabReservation = new WidgetSplitPaneTab(tabbedPane, "Réservation");
+    WidgetSplitPaneTab tabRetour = new WidgetSplitPaneTab(tabbedPane, "Retour");
+    WidgetSplitPaneTab tabVehicule = new WidgetSplitPaneTab(tabbedPane, "Véhicule");
+    WidgetSplitPaneTab tabParametre = new WidgetSplitPaneTab(tabbedPane, "Paramètre");
+    
+    HashMapListModel hMapClient = new HashMapListModel();
+    hMapClient.addFromList(clients);
+	WidgetListHashMapAddPanel addListClient = new WidgetListHashMapAddPanel(hMapClient);
+	tabClient.setLeftComponent(addListClient);
+	
+    HashMapListModel listLocation = new HashMapListModel();
+    listLocation.addFromList(locations);
+	WidgetListHashMapAddPanel addListLocation = new WidgetListHashMapAddPanel(listLocation);
+	tabReservation.setLeftComponent(addListLocation);
+	
+    HashMapListModel listVehicule = new HashMapListModel();
+    listVehicule.addFromList(vehicules);
+	WidgetListHashMapAddPanel addListVehicule = new WidgetListHashMapAddPanel(listVehicule);
+	tabVehicule.setLeftComponent(addListVehicule);
+	
+	HashMapListModel listParametre = new HashMapListModel();
+	listParametre.addFromList(parametres);
+	WidgetListHashMapAddPanel addListParametre = new WidgetListHashMapAddPanel(listParametre);
+	tabParametre.setLeftComponent(addListParametre);
+	
+    /*
+    JPanel rightPanel = new JPanel();
+    tabClient.setRightComponent(rightPanel);
     GridBagLayout gbl_panel_2 = new GridBagLayout();
     gbl_panel_2.columnWidths = new int[]{0, 0};
     gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     gbl_panel_2.columnWeights = new double[]{1.0, Double.MIN_VALUE};
     gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-    panel_2.setLayout(gbl_panel_2);
+    rightPanel.setLayout(gbl_panel_2);
     
     JLabel lblInformationSurLe = new JLabel("Information sur le client");
     lblInformationSurLe.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -134,7 +183,7 @@ public class TabbedWindow extends JFrame {
     gbc_lblInformationSurLe.insets = new Insets(32, 32, 5, 32);
     gbc_lblInformationSurLe.gridx = 0;
     gbc_lblInformationSurLe.gridy = 2;
-    panel_2.add(lblInformationSurLe, gbc_lblInformationSurLe);
+    rightPanel.add(lblInformationSurLe, gbc_lblInformationSurLe);
     
     JLabel lblNewLabel = new JLabel("Nom");
     lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -204,16 +253,6 @@ public class TabbedWindow extends JFrame {
     gbc_btnNewButton_1.gridx = 0;
     gbc_btnNewButton_1.gridy = 9;
     panel_2.add(buttonSaveClient, gbc_btnNewButton_1);
-    
-
-
-    JPanel panel1 = new JPanel();
-    tabbedPane.addTab("New tab", null, panel1, null);
-
-    JPanel panel2 = new JPanel();
-    tabbedPane.addTab("New tab", null, panel2, null);
-
-    JPanel panel3 = new JPanel();
-    tabbedPane.addTab("New tab", null, panel3, null);
+    */
   }
 }

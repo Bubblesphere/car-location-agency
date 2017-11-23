@@ -1,6 +1,7 @@
 package ui.list;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.AbstractListModel;
@@ -38,5 +39,11 @@ public class HashMapListModel extends AbstractListModel {
 	
 	public void addElement(IListable object) {
 		this.hmap.put(object.getKey(), object.getDisplayedText());
+	}
+	
+	public void addFromList(List<? extends IListable> list) {
+		for(IListable object : list) {
+			this.hmap.put(object.getKey(), object.getDisplayedText());
+		}
 	}
 }

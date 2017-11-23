@@ -2,7 +2,7 @@ package data;
 
 import java.time.LocalDate;
 
-public class Location extends Reservation {
+public class Location extends Reservation implements IListable {
   private int locationId;
   private Vehicule vehicule;
   private Utilisateur locateur;
@@ -147,5 +147,15 @@ public class Location extends Reservation {
   public void setLocationId(int locationId) {
     this.locationId = locationId;
   }
+
+@Override
+public int getKey() {
+	return locationId;
+}
+
+@Override
+public String getDisplayedText() {
+	return this.getLocataire().getPrenom() + " " + this.getLocataire().getNom() + " - " + this.getStartDate().toString();
+}
 
 }
