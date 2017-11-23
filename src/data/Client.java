@@ -149,4 +149,29 @@ public class Client extends Personne {
     this.note = note;
     this.dateDeNaissance = dateDeNaissance;
   }
+  
+  /**
+   * Constructeur
+   * 
+   * @param id
+   *          nom du client.
+   * @param prenom
+   *          prénom du client.
+   * @param numeoTelphone
+   *          numéro de téléphone du client.
+   * @param note
+   *          commentaire.
+   */
+  public Client(int id, String nom, String prenom) {
+    super(nom, prenom);
+    this.numeoTelphone = numeoTelphone;
+    this.id = id;
+    this.note = "";
+    this.adresse = "";
+    this.numeroPermis = "";
+    this.courriel = "";
+    this.dateDeNaissance = null;
+  }
+
+  
 }
