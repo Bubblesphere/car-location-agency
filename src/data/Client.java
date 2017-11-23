@@ -2,7 +2,7 @@ package data;
 
 import java.time.LocalDate;
 
-public class Client extends Personne {
+public class Client extends Personne implements IListable {
   private int id;
   private String adresse;
   private String numeroPermis;
@@ -164,4 +164,14 @@ public class Client extends Personne {
     super(nom, prenom);
     this.id = id;
   }
+
+	@Override
+	public int getKey() {
+		return this.id;
+	}
+	
+	@Override
+	public String getDisplayedText() {
+		return this.getPrenom() + " " + this.getNom();
+	}
 }

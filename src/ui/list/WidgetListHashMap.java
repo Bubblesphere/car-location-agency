@@ -7,32 +7,45 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public abstract class WidgetListHashMap extends JList {
-	protected AbstractHashmapListModel hmap;
-	public WidgetListHashMap(AbstractHashmapListModel list) {
+public class WidgetListHashMap extends JList {
+	protected HashMapListModel hmap;
+	protected int selectedKey = -1;
+	protected String selectedDisplayedText = "";
+	
+	public WidgetListHashMap(HashMapListModel list) {
 		super(list);
 		this.hmap = list;
 		this.setFont(new Font("Segoe UI", Font.PLAIN, 10));
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setAlignmentX(Component.LEFT_ALIGNMENT);
-		this.addMouseListener(new MouseAdapter() {
-	    	@Override
-	    	public void mouseClicked(MouseEvent e) {
-	    		onClick(e, getKeyForMouseEvent(e), getDisplayedTextForMouseEvent(e));
-	    	}
-	    });
+		this.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent listSelectionEvent) {
+				boolean isAdjusting = listSelectionEvent.getValueIsAdjusting();
+		        if (!isAdjusting) {
+		        	JList tempList = (JList) listSelectionEvent.getSource();
+					getKeyFromIndex(tempList.getSelectedIndices()[0]);
+		    		getDisplayedTextFromIndex(tempList.getSelectedIndices()[0]);
+		        }
+			}
+		});
 	}
 	
-	private int getKeyForMouseEvent(MouseEvent e) {
-		int selectedIndex = this.locationToIndex(e.getPoint());
-		return this.hmap.getKeyAt(selectedIndex);
+	public int getSelectedKey() {
+		return this.selectedKey;
 	}
 	
-	private String getDisplayedTextForMouseEvent(MouseEvent e) {
-		int selectedIndex = this.locationToIndex(e.getPoint());
-		return this.hmap.getElementAt(selectedIndex);
+	public String getSelectedDisplayedText() {
+		return this.selectedDisplayedText;
 	}
 	
-	protected abstract void onClick(MouseEvent e, int key, String displayedText);
+	private void getKeyFromIndex(int selectedIndex) {
+		this.selectedKey = this.hmap.getKeyAt(selectedIndex);
+	}
+	
+	private void getDisplayedTextFromIndex(int selectedIndex) {
+		this.selectedDisplayedText = this.hmap.getElementAt(selectedIndex);
+	}
 }

@@ -5,7 +5,9 @@ import java.util.Map;
 
 import javax.swing.AbstractListModel;
 
-public abstract class AbstractHashmapListModel extends AbstractListModel {
+import data.IListable;
+
+public class HashMapListModel extends AbstractListModel {
 	HashMap<Integer, String> hmap = new HashMap<Integer, String>();
 
 	@Override
@@ -33,8 +35,8 @@ public abstract class AbstractHashmapListModel extends AbstractListModel {
 	public int getSize() {
 		return hmap.size();
 	}
-
-	public abstract Object getFromKey(int key);
 	
-	public abstract void addElement(Object object);
+	public void addElement(IListable object) {
+		this.hmap.put(object.getKey(), object.getDisplayedText());
+	}
 }

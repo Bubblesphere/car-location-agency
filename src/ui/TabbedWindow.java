@@ -11,9 +11,9 @@ import javax.swing.border.EmptyBorder;
 
 import data.Client;
 import ui.buttons.impl.WidgetButtonSaveClient;
-import ui.list.ClientHashmapListModel;
+import ui.list.HashMapListModel;
 import ui.list.WidgetListHashMap;
-import ui.list.impl.WidgetListHashMapClient;
+import ui.list.WidgetListHashMapAddPanel;
 
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
@@ -111,43 +111,12 @@ public class TabbedWindow extends JFrame {
     JSplitPane splitPane = new JSplitPane();
     panel.add(splitPane);
     
-    JPanel panel_1 = new JPanel();
+    HashMapListModel list = new HashMapListModel();
+	list.addElement(new Client(0, "Deric", "Dallaire"));
+	list.addElement(new Client(1, "Bruno", "Hamel"));
+	WidgetListHashMapAddPanel panel_1 = new WidgetListHashMapAddPanel(list);
     splitPane.setLeftComponent(panel_1);
-    GridBagLayout gbl_panel_1 = new GridBagLayout();
-    gbl_panel_1.columnWidths = new int[]{97, 0};
-    gbl_panel_1.rowHeights = new int[]{16, 25, 539, 2, 0};
-    gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-    gbl_panel_1.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-    panel_1.setLayout(gbl_panel_1);
-    
-
-    ClientHashmapListModel clientList = new ClientHashmapListModel();
-    clientList.addElement(new Client(1, "Dallaire", "Deric"));
-    clientList.addElement(new Client(2, "Hamel", "Bruno"));
-    clientList.addElement(new Client(3, "Doe", "John"));
-    WidgetListHashMapClient list = new WidgetListHashMapClient(clientList);
-
-    
-    JButton btnNewButton = new JButton("Ajouter");
-    GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-    gbc_btnNewButton.fill = GridBagConstraints.BOTH;
-    gbc_btnNewButton.gridx = 0;
-    gbc_btnNewButton.gridy = 0;
-    panel_1.add(btnNewButton, gbc_btnNewButton);
-
-    
-
-    JScrollPane scrollPane = new JScrollPane(list);
-    GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-    gbc_scrollPane.fill = GridBagConstraints.BOTH;
-    gbc_scrollPane.gridwidth = GridBagConstraints.REMAINDER;
-    gbc_scrollPane.gridheight = GridBagConstraints.REMAINDER;
-    gbc_scrollPane.gridx = 0;
-    gbc_scrollPane.gridy = 1;
-    gbc_scrollPane.anchor = GridBagConstraints.LINE_END;
-    gbc_scrollPane.weightx = gbc_scrollPane.weighty = 1.0;
-    
-    panel_1.add(scrollPane, gbc_scrollPane);
+ 
     
     JPanel panel_2 = new JPanel();
     splitPane.setRightComponent(panel_2);
