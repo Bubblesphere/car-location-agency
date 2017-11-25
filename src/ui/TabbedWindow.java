@@ -12,10 +12,11 @@ import javax.swing.border.EmptyBorder;
 import data.Classe;
 import data.Client;
 import ui.buttons.impl.WidgetButtonSaveClient;
-import ui.list.HashMapListModel;
-import ui.list.WidgetListHashMap;
-import ui.list.WidgetListHashMapAddPanel;
-import ui.panel.WidgetSplitPaneTab;
+import ui.form.WFormClient;
+import ui.panel.WClientTab;
+import ui.panel.WSplitPaneTab;
+import ui.widgets.list.WList;
+import ui.widgets.listAdd.WListAdd;
 
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
@@ -114,57 +115,50 @@ public class TabbedWindow extends JFrame {
     contentPane.add(tabbedPane, BorderLayout.CENTER);
     
     
-    List<Utilisateur> users = new ArrayList<Utilisateur>();
-    users.add(new Utilisateur("Doe", "John", 0, "password", "dallaire.deric@gmail.com", 0, 1, false));
+    DefaultListModel<Utilisateur> users = new DefaultListModel<Utilisateur>();
+    users.addElement(new Utilisateur("Doe", "John", 0, "password", "dallaire.deric@gmail.com", 0, 1, false));
     
-    List<Client> clients = new ArrayList<Client>();
-    clients.add(new Client(0, "Deric", "Dallaire"));
-    clients.add(new Client(1, "Bruno", "Hamel"));
-    clients.add(new Client(2, "Jean", "Bob"));
+    DefaultListModel<Client> clients = new DefaultListModel<Client>();
+    clients.addElement(new Client(0, "Deric", "Dallaire"));
+    clients.addElement(new Client(1, "Bruno", "Hamel"));
+    clients.addElement(new Client(2, "Jean", "Bob"));
     
-    List<Classe> classes = new ArrayList<Classe>();
-    classes.add(new Classe(0, "Sport", 30));
-    classes.add(new Classe(1, "Économique", 12));
+    DefaultListModel<Classe> classes = new DefaultListModel<Classe>();
+    classes.addElement(new Classe(0, "Sport", 30));
+    classes.addElement(new Classe(1, "Économique", 12));
     
-    List<Vehicule> vehicules = new ArrayList<Vehicule>();
-    vehicules.add(new Vehicule(0, classes.get(0), "Tesla", "Roadster", 2017, 0, 0, "WTF FTW", false, 120, ""));
-    vehicules.add(new Vehicule(1, classes.get(1), "Honda", "Civic", 2016, 10000, 0, "PLA QUE", false, 100, ""));
+    DefaultListModel<Vehicule> vehicules = new DefaultListModel<Vehicule>();
+    vehicules.addElement(new Vehicule(0, classes.get(0), "Tesla", "Roadster", 2017, 0, 0, "WTF FTW", false, 120, ""));
+    vehicules.addElement(new Vehicule(1, classes.get(1), "Honda", "Civic", 2016, 10000, 0, "PLA QUE", false, 100, ""));
     
-    List<Location> locations = new ArrayList<Location>();
-    locations.add(new Location(0, clients.get(0), classes.get(0), LocalDate.now(), LocalDate.now(), "", users.get(0), 0, 
+    DefaultListModel<Location> locations = new DefaultListModel<Location>();
+    locations.addElement(new Location(0, clients.get(0), classes.get(0), LocalDate.now(), LocalDate.now(), "", users.get(0), 0, 
     		vehicules.get(0), users.get(0), LocalDate.now(), false, false, 0, 0, 100, "", 0));
     
-    List<TypeParametre> typeParametres = new ArrayList<TypeParametre>();
+    DefaultListModel<TypeParametre> typeParametres = new DefaultListModel<TypeParametre>();
     
-    List<Parametre> parametres = new ArrayList<Parametre>();
-    parametres.add(new Parametre(0, "Prix assurance", 0, 40, LocalDate.now(), LocalDate.now()));
-    parametres.add(new Parametre(0, "Prix test", 1, 50, LocalDate.now(), LocalDate.now()));
+    DefaultListModel<Parametre> parametres = new DefaultListModel<Parametre>();
+    parametres.addElement(new Parametre(0, "Prix assurance", 0, 40, LocalDate.now(), LocalDate.now()));
+    parametres.addElement(new Parametre(0, "Prix test", 1, 50, LocalDate.now(), LocalDate.now()));
     
-    WidgetSplitPaneTab tabClient = new WidgetSplitPaneTab(tabbedPane, "Client");
-    WidgetSplitPaneTab tabReservation = new WidgetSplitPaneTab(tabbedPane, "Réservation");
-    WidgetSplitPaneTab tabRetour = new WidgetSplitPaneTab(tabbedPane, "Retour");
-    WidgetSplitPaneTab tabVehicule = new WidgetSplitPaneTab(tabbedPane, "Véhicule");
-    WidgetSplitPaneTab tabParametre = new WidgetSplitPaneTab(tabbedPane, "Paramètre");
+    WClientTab tabClient = new WClientTab(tabbedPane, clients);
+    WSplitPaneTab tabReservation = new WSplitPaneTab(tabbedPane, "Réservation");
+    WSplitPaneTab tabRetour = new WSplitPaneTab(tabbedPane, "Retour");
+    WSplitPaneTab tabVehicule = new WSplitPaneTab(tabbedPane, "Véhicule");
+    WSplitPaneTab tabParametre = new WSplitPaneTab(tabbedPane, "Paramètre");
     
-    HashMapListModel hMapClient = new HashMapListModel();
-    hMapClient.addFromList(clients);
-	WidgetListHashMapAddPanel addListClient = new WidgetListHashMapAddPanel(hMapClient);
-	tabClient.setLeftComponent(addListClient);
+
+	/*
 	
-    HashMapListModel listLocation = new HashMapListModel();
-    listLocation.addFromList(locations);
-	WidgetListHashMapAddPanel addListLocation = new WidgetListHashMapAddPanel(listLocation);
+	ListHashMapAddPanel addListLocation = new ListHashMapAddPanel(locations);
 	tabReservation.setLeftComponent(addListLocation);
 	
-    HashMapListModel listVehicule = new HashMapListModel();
-    listVehicule.addFromList(vehicules);
-	WidgetListHashMapAddPanel addListVehicule = new WidgetListHashMapAddPanel(listVehicule);
+	ListHashMapAddPanel addListVehicule = new ListHashMapAddPanel(vehicules);
 	tabVehicule.setLeftComponent(addListVehicule);
 	
-	HashMapListModel listParametre = new HashMapListModel();
-	listParametre.addFromList(parametres);
-	WidgetListHashMapAddPanel addListParametre = new WidgetListHashMapAddPanel(listParametre);
+	ListHashMapAddPanel addListParametre = new ListHashMapAddPanel(parametres);
 	tabParametre.setLeftComponent(addListParametre);
+	*/
 	
     /*
     JPanel rightPanel = new JPanel();
