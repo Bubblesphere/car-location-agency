@@ -75,8 +75,16 @@ public class WListAdd extends JPanel {
 	    });
 	}
 	
+	public int getSelectedIndex() {
+		return this.widgetList.getSelectedIndex();
+	}
+	
 	public EventBubbler events() {
 		return this.events;
+	}
+	
+	public void setModel(DefaultListModel<? extends IListable> list) {
+		this.widgetList.setModel(list);
 	}
 	
 	public void addElement(IListable listable) {

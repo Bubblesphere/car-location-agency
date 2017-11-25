@@ -46,14 +46,14 @@ public class WList extends JList {
 		});
 	}
 
-	private int getKeyFromIndex(int selectedIndex) {
+	public int getKeyFromIndex(int selectedIndex) {
 		if (this.getSelectedIndex() != -1) {
 			return ((IListable)this.getModel().getElementAt(this.getSelectedIndex())).getKey();
 		}
 		return -1;
 	}
 	
-	private String getDisplayedTextFromIndex(int selectedIndex) {
+	public String getDisplayedTextFromIndex(int selectedIndex) {
 		return ((IListable)this.getModel().getElementAt(this.getSelectedIndex())).getDisplayedText();
 	}
 	
