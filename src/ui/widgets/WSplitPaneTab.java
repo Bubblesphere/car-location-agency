@@ -1,4 +1,4 @@
-package ui.panel;
+package ui.widgets;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;

@@ -1,4 +1,4 @@
-package ui.form;
+package ui.widgets;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,8 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import data.IListable;
-import ui.widgets.utils.Event;
-import ui.widgets.utils.EventBubbler;
+import ui.utils.Event;
+import ui.utils.EventBubbler;
 
 public class WFormButton extends JPanel {
 	private EventBubbler events;

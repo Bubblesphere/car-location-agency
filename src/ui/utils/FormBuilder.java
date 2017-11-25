@@ -1,4 +1,4 @@
-package ui.form;
+package ui.utils;
 
 import java.awt.GridBagConstraints;
 

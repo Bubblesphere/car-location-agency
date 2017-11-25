@@ -1,4 +1,4 @@
-package ui.widgets.listAdd;
+package ui.widgets;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,9 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import data.IListable;
-import ui.widgets.list.WList;
-import ui.widgets.utils.Event;
-import ui.widgets.utils.EventBubbler;
+import ui.utils.Event;
+import ui.utils.EventBubbler;
 
 public class WListAdd extends JPanel {
 	private EventBubbler events;
@@ -41,7 +40,7 @@ public class WListAdd extends JPanel {
 		this.setLayout(this.layout);
 		
 		widgetList = new WList(list);
-		widgetList.events().addListener(new ui.widgets.utils.EventListener() {		
+		widgetList.events().addListener(new ui.utils.EventListener() {		
 			@Override
 			public void handleEvent(Event evt) {
 				System.out.println("ListValueChanged from ListAdd");
@@ -69,14 +68,13 @@ public class WListAdd extends JPanel {
 		this.addButton.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		System.out.println("ButtonAddClick from ListAdd");
 	    		eventHandler("ButtonAddClick");
 	    	}
 	    });
 	}
 	
 	public int getSelectedIndex() {
-		return this.widgetList.getSelectedIndex();
+		return this.widgetList.getLastSelectedIndex();
 	}
 	
 	public EventBubbler events() {

@@ -1,4 +1,4 @@
-package ui.form;
+package ui.widgets;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

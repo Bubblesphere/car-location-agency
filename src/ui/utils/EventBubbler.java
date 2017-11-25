@@ -1,4 +1,4 @@
-package ui.widgets.utils;
+package ui.utils;
 
 import javax.swing.event.EventListenerList;
 

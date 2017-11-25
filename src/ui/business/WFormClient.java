@@ -1,4 +1,4 @@
-package ui.form;
+package ui.business;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -12,43 +12,33 @@ import javax.swing.border.EmptyBorder;
 
 import data.Client;
 import data.IListable;
-import ui.widgets.utils.Event;
-import ui.widgets.utils.EventBubbler;
-import ui.widgets.utils.EventListener;
+import ui.utils.Event;
+import ui.utils.EventBubbler;
+import ui.utils.EventListener;
+import ui.utils.FormBuilder;
+import ui.widgets.WAbstractFormPanel;
+import ui.widgets.WFormButton;
+import ui.widgets.WFormTextField;
 
-public class WFormClient extends JPanel{
+public class WFormClient extends WAbstractFormPanel {
 	private EventBubbler events;
 	
 	private GridBagLayout layout;
-	private JLabel lblTitle;
-	private GridBagConstraints gbcTitle;
 	private WFormTextField textFieldNom;
 	private GridBagConstraints gbcNom;
 	private WFormTextField textFieldPrenom;
 	private GridBagConstraints gbcPrenom;
 	private WFormTextField textFieldPermis;
 	private GridBagConstraints gbcPermis;
-	private WFormButton saveButton;
-	private GridBagConstraints gbcSaveButton;
-	
 	
 	public WFormClient() {
 		this.events = new EventBubbler(this.listenerList);
-		
-	    this.setBorder(new EmptyBorder(32, 32, 32, 32));
 	    
 	    this.layout = new GridBagLayout();
 	    this.layout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	    this.layout.columnWeights = new double[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 	    this.layout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 	    this.setLayout(this.layout);
-
-	    this.lblTitle = new JLabel("Information sur le client");
-	    this.lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 16));
-	    this.gbcTitle = FormBuilder.getGBCFullRow();
-	    this.gbcTitle.gridx = 0;
-	    this.gbcTitle.gridy = 0;
-	    this.add(this.lblTitle, this.gbcTitle);
 	    
 	    this.textFieldNom = new WFormTextField("Nom");
 	    this.gbcNom = FormBuilder.getGBCPartialRow();
@@ -67,29 +57,19 @@ public class WFormClient extends JPanel{
 	    this.gbcPermis.gridx = 0;
 	    this.gbcPermis.gridy = 2;
 	    this.add(this.textFieldPermis, this.gbcPermis);
-	    
-    	this.saveButton = new WFormButton("Sauvegarder");
-    	this.saveButton.events().addListener(new EventListener() {		
-			@Override
-			public void handleEvent(Event evt) {
-				eventHandler("ButtonSaveClick");
-			}
-		});
-    	this.gbcSaveButton = FormBuilder.getGBCPartialRow();
-	    this.gbcSaveButton.gridx = 1;
-	    this.gbcSaveButton.gridy = 3;
-	    this.add(this.saveButton, this.gbcSaveButton);
 	}
 	
-	public Client getClient() {
+	@Override
+	public IListable get() {
 		// TODO: ID
 		return new Client(0, this.textFieldNom.getText(), this.textFieldPrenom.getText());
 	}
-	
-	public void setClient(Client client) {
-		this.textFieldNom.setText(client.getNom());
-		this.textFieldPrenom.setText(client.getPrenom());
-		this.textFieldPermis.setText(client.getNumeroPermis());
+
+	@Override
+	public void set(IListable listable) {
+		this.textFieldNom.setText(((Client)listable).getNom());
+		this.textFieldPrenom.setText(((Client)listable).getPrenom());
+		this.textFieldPermis.setText(((Client)listable).getNumeroPermis());
 	}
 	
 	public EventBubbler events() {
@@ -99,4 +79,6 @@ public class WFormClient extends JPanel{
 	private void eventHandler(String command) {
 		this.events.fireEvent(new Event(this, command));
 	}
+
+
 }

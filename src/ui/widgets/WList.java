@@ -1,4 +1,4 @@
-package ui.widgets.list;
+package ui.widgets;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -16,12 +16,14 @@ import javax.swing.event.ListSelectionListener;
 
 import data.Client;
 import data.IListable;
-import ui.widgets.utils.Event;
-import ui.widgets.utils.EventBubbler;
+import ui.utils.Event;
+import ui.utils.EventBubbler;
+import ui.utils.ListableCellRenderer;
 
 public class WList extends JList {
 	private EventBubbler events;
-
+	protected int lastSelectedIndex;
+	
 	public WList(DefaultListModel<? extends IListable> list) {
 		super(list);
 
@@ -38,7 +40,7 @@ public class WList extends JList {
 		        if (!isAdjusting) {
 		        	JList tempList = (JList) listSelectionEvent.getSource();
 		        	if (tempList.getSelectedIndices().length > 0) {
-		        		System.out.println("ListValueChanged from List");
+		        		updateLastSelected();
 		        		eventHandler("ListValueChanged");
 		        	}
 		        }
@@ -57,13 +59,21 @@ public class WList extends JList {
 		return ((IListable)this.getModel().getElementAt(this.getSelectedIndex())).getDisplayedText();
 	}
 	
-	public EventBubbler events() {
-		return this.events;
-	}
-	
 	public void addElement(IListable element) {
 		DefaultListModel model = (DefaultListModel) this.getModel();
 		model.addElement(element);
+	}
+	
+	public int getLastSelectedIndex() {
+		return this.lastSelectedIndex;
+	}
+	
+	private void updateLastSelected() {
+		this.lastSelectedIndex = this.getSelectedIndex();
+	}
+	
+	public EventBubbler events() {
+		return this.events;
 	}
 	
 	private void eventHandler(String command) {

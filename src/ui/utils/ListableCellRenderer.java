@@ -1,4 +1,4 @@
-package ui.widgets.list;
+package ui.utils;
 
 import java.awt.Component;
 

@@ -11,12 +11,11 @@ import javax.swing.border.EmptyBorder;
 
 import data.Classe;
 import data.Client;
-import ui.buttons.impl.WidgetButtonSaveClient;
-import ui.form.WFormClient;
-import ui.panel.WClientTab;
-import ui.panel.WSplitPaneTab;
-import ui.widgets.list.WList;
-import ui.widgets.listAdd.WListAdd;
+import ui.business.WClientTab;
+import ui.business.WFormClient;
+import ui.widgets.WList;
+import ui.widgets.WListAdd;
+import ui.widgets.WSplitPaneTab;
 
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
@@ -69,26 +68,6 @@ public class TabbedWindow extends JFrame {
         try {
           TabbedWindow frame = new TabbedWindow();
           frame.setMinimumSize(new Dimension(860, 680));
-          /*
-           * Client c = new Client("Hamel", "Bruno", "8196641781", "");
-           * Utilisateur u = new Utilisateur("Dallaire", "Déric", "password",
-           * "deric.dallaire@gmail.com", 54165, 0, false); ClientDao.create(c);
-           * UtilisateurDao.create(u);
-           */
-
-          // Utilisateur u = new Utilisateur("Dallaire", "Déric",
-          // "password", "deric.dallaire@gmail.com", 54165, 0, false);
-          // UtilisateurDao.create(u);
-          // Utilisateur u = new Utilisateur("password", 54165);
-          // u = UtilisateurDao.checkAndRetrieve(u);
-          // System.out.println(u);
-
-          // Vehicule v = new Vehicule(1, "test", "test", 2017, 1000, 0, "test",
-          // false, 100, "test");
-          /*
-           * Vehicule v = VehiculeDao.retrieve(1);
-           * System.out.println(v.getAnnee());
-           */
 
           frame.setVisible(true);
         } catch (Exception e) {
@@ -146,107 +125,5 @@ public class TabbedWindow extends JFrame {
     WSplitPaneTab tabRetour = new WSplitPaneTab(tabbedPane, "Retour");
     WSplitPaneTab tabVehicule = new WSplitPaneTab(tabbedPane, "Véhicule");
     WSplitPaneTab tabParametre = new WSplitPaneTab(tabbedPane, "Paramètre");
-    
-
-	/*
-	
-	ListHashMapAddPanel addListLocation = new ListHashMapAddPanel(locations);
-	tabReservation.setLeftComponent(addListLocation);
-	
-	ListHashMapAddPanel addListVehicule = new ListHashMapAddPanel(vehicules);
-	tabVehicule.setLeftComponent(addListVehicule);
-	
-	ListHashMapAddPanel addListParametre = new ListHashMapAddPanel(parametres);
-	tabParametre.setLeftComponent(addListParametre);
-	*/
-	
-    /*
-    JPanel rightPanel = new JPanel();
-    tabClient.setRightComponent(rightPanel);
-    GridBagLayout gbl_panel_2 = new GridBagLayout();
-    gbl_panel_2.columnWidths = new int[]{0, 0};
-    gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    gbl_panel_2.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-    gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-    rightPanel.setLayout(gbl_panel_2);
-    
-    JLabel lblInformationSurLe = new JLabel("Information sur le client");
-    lblInformationSurLe.setFont(new Font("Segoe UI", Font.BOLD, 16));
-    GridBagConstraints gbc_lblInformationSurLe = new GridBagConstraints();
-    gbc_lblInformationSurLe.anchor = GridBagConstraints.LINE_START;
-    gbc_lblInformationSurLe.insets = new Insets(32, 32, 5, 32);
-    gbc_lblInformationSurLe.gridx = 0;
-    gbc_lblInformationSurLe.gridy = 2;
-    rightPanel.add(lblInformationSurLe, gbc_lblInformationSurLe);
-    
-    JLabel lblNewLabel = new JLabel("Nom");
-    lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-    GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-    gbc_lblNewLabel.anchor = GridBagConstraints.LINE_START;
-    gbc_lblNewLabel.insets = new Insets(16, 32, 5, 32);
-    gbc_lblNewLabel.gridx = 0;
-    gbc_lblNewLabel.gridy = 3;
-    panel_2.add(lblNewLabel, gbc_lblNewLabel);
-    
-    textField = new JTextField();
-    textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-    GridBagConstraints gbc_textField = new GridBagConstraints();
-    gbc_textField.anchor = GridBagConstraints.LINE_START;
-    gbc_textField.insets = new Insets(0, 32, 5, 32);
-    gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-    gbc_textField.gridx = 0;
-    gbc_textField.gridy = 4;
-    panel_2.add(textField, gbc_textField);
-    textField.setColumns(10);
-    
-    JLabel lblPrnom = new JLabel("Pr\u00E9nom");
-    lblPrnom.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-    GridBagConstraints gbc_lblPrnom = new GridBagConstraints();
-    gbc_lblPrnom.anchor = GridBagConstraints.LINE_START;
-    gbc_lblPrnom.insets = new Insets(16, 32, 5, 32);
-    gbc_lblPrnom.gridx = 0;
-    gbc_lblPrnom.gridy = 5;
-    panel_2.add(lblPrnom, gbc_lblPrnom);
-    
-    textField_1 = new JTextField();
-    textField_1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-    textField_1.setColumns(10);
-    GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-    gbc_textField_1.anchor = GridBagConstraints.LINE_START;
-    gbc_textField_1.insets = new Insets(0, 32, 5, 32);
-    gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-    gbc_textField_1.gridx = 0;
-    gbc_textField_1.gridy = 6;
-    panel_2.add(textField_1, gbc_textField_1);
-    
-    JLabel lblPermisDeConduire = new JLabel("Permis de conduire");
-    lblPermisDeConduire.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-    GridBagConstraints gbc_lblPermisDeConduire = new GridBagConstraints();
-    gbc_lblPermisDeConduire.anchor = GridBagConstraints.LINE_START;
-    gbc_lblPermisDeConduire.insets = new Insets(16, 32, 5, 32);
-    gbc_lblPermisDeConduire.gridx = 0;
-    gbc_lblPermisDeConduire.gridy = 7;
-    panel_2.add(lblPermisDeConduire, gbc_lblPermisDeConduire);
-    
-    textField_2 = new JTextField();
-    textField_2.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-    textField_2.setColumns(10);
-    GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-    gbc_textField_2.insets = new Insets(0, 32, 5, 32);
-    gbc_textField_2.anchor = GridBagConstraints.LINE_START;
-    gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-    gbc_textField_2.gridx = 0;
-    gbc_textField_2.gridy = 8;
-    panel_2.add(textField_2, gbc_textField_2);
-    
-    WidgetButtonSaveClient buttonSaveClient = new WidgetButtonSaveClient();
-    
-    GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-    gbc_btnNewButton_1.insets = new Insets(32, 32, 5, 32);
-    gbc_btnNewButton_1.anchor = GridBagConstraints.SOUTHEAST;
-    gbc_btnNewButton_1.gridx = 0;
-    gbc_btnNewButton_1.gridy = 9;
-    panel_2.add(buttonSaveClient, gbc_btnNewButton_1);
-    */
   }
 }
