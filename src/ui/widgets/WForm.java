@@ -32,13 +32,10 @@ private EventBubbler events;
 		
 	    this.setBorder(new EmptyBorder(32, 32, 32, 32));
 	    
-	    this.layout = new GridBagLayout();
-	    this.layout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	    this.layout.columnWeights = new double[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-	    this.layout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+	    this.layout = FormBuilder.getLayout();
 	    this.setLayout(this.layout);
 
-	    this.lblTitle = new JLabel("Information sur le client");
+	    this.lblTitle = new JLabel(title);
 	    this.lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 16));
 	    this.gbcTitle = FormBuilder.getGBCFullRow();
 	    this.gbcTitle.gridx = 0;

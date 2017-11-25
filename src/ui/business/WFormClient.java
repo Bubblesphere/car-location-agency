@@ -34,10 +34,7 @@ public class WFormClient extends WAbstractFormPanel {
 	public WFormClient() {
 		this.events = new EventBubbler(this.listenerList);
 	    
-	    this.layout = new GridBagLayout();
-	    this.layout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	    this.layout.columnWeights = new double[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-	    this.layout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+	    this.layout = FormBuilder.getLayout();
 	    this.setLayout(this.layout);
 	    
 	    this.textFieldNom = new WFormTextField("Nom");
