@@ -3,6 +3,7 @@ package ui.business.tab;
 import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
+import dao.VehiculeDao;
 import data.Vehicule;
 import ui.business.form.WFormVehicule;
 import ui.events.Event;
@@ -27,7 +28,7 @@ public class WTabVehicule extends WSplitPaneTab {
             int vehiculeId = addListVehicule.getSelectedIndex();
             vehicules.set(vehiculeId, (Vehicule) form.get());
             Vehicule currentVehicule = vehicules.getElementAt(vehiculeId);
-            // TODO: Update db
+            VehiculeDao.update(currentVehicule);
             addListVehicule.setModel(vehicules);
             break;
           default:
