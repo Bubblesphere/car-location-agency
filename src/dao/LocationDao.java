@@ -69,7 +69,7 @@ public class LocationDao {
 
       String query = "SELECT vehicule_id, reservation_id, date_de_retour, essence_manquant, "
           + "retour_km, note, utilisateur_id, assurance, usure_journalier, depart_km, "
-          + "estimation_reparation WHERE id = ?";
+          + "estimation_reparation FROM Locations WHERE id = ?";
       PreparedStatement statement = connection.prepareStatement(query);
       statement.setInt(1, locationId);
       ResultSet resultSet = statement.executeQuery();
@@ -106,7 +106,7 @@ public class LocationDao {
 
       String query = "SELECT id, vehicule_id, reservation_id, date_de_retour, essence_manquant, "
           + "retour_km, note, utilisateur_id, assurance, usure_journalier, depart_km, "
-          + "estimation_reparation";
+          + "estimation_reparation FROM Locations";
       Statement statement = connection.createStatement();
       ResultSet resultSet = statement.executeQuery(query);
 

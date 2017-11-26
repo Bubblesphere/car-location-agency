@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.ClasseDao;
 import dao.ClientDao;
+import dao.LocationDao;
 import dao.ParametreDao;
 import dao.ReservationDao;
 import dao.UtilisateurDao;
@@ -95,11 +96,11 @@ public class TabbedWindow extends JFrame {
       vehicules.addElement(vehicule);
     }    
   
-    DefaultListModel<Location> retours = new DefaultListModel<Location>();    
-    retours.addElement(new Location(0, clients.get(0), classes.get(0), LocalDate.now(),
-        LocalDate.now(), "", users.get(0), 0, vehicules.get(0), users.get(0), LocalDate.now(),
-        false, false, 0, 0, 100, "", 0));
-
+    DefaultListModel<Location> retours = new DefaultListModel<Location>();  
+    for(Location location:LocationDao.retrieveAll()){
+      retours.addElement(location);
+    }
+    
     DefaultListModel<Reservation> reservations = new DefaultListModel<Reservation>();
     for(Reservation reservation: ReservationDao.retrieveAll()){
       reservations.addElement(reservation);
