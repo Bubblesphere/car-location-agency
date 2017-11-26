@@ -12,7 +12,7 @@ import java.util.List;
 import data.Parametre;
 
 public class ParametreDao {
-
+  
   /**
    * Méthode pour créé un paramètre
    * 
@@ -20,17 +20,15 @@ public class ParametreDao {
    *          paramètre à créé.
    * @return le paramètre qui a été créé avec son id de mis à jour.
    */
-  public static Parametre create(Parametre parametre) {
+  private static Parametre create(Parametre parametre) {
     try (Connection connection = DataAccess.getConnection()) {
 
-      String query = "INSERT INTO Parametres (valeur, type_id, date_debut, "
-          + "date_fin) values (?, ?, ?, ?)";
+      String query = "INSERT INTO Parametres (valeur, type_id, date_debut) values (?, ?, ?)";
       PreparedStatement statement = connection.prepareStatement(query,
           Statement.RETURN_GENERATED_KEYS);
       statement.setFloat(1, parametre.getValeur());
       statement.setInt(2, parametre.getTypeId());
       statement.setObject(3, parametre.getDateDebut());
-      statement.setObject(4, parametre.getDateFin());
       statement.execute();
 
       ResultSet keys = statement.getGeneratedKeys();
@@ -79,11 +77,18 @@ public class ParametreDao {
    * @return liste de touts les paramètres.
    */
   public static List<Parametre> retrieveAll() {
+    return retrieveAll(false);
+  }
+  
+  public static List<Parametre> retrieveAll(Boolean active) {
     List<Parametre> result = new ArrayList<Parametre>();
     try (Connection connection = DataAccess.getConnection()) {
 
       String query = "SELECT P.id, P.valeur, P.type_id, P.date_debut, P.date_fin, T.description "
           + "FROM Parametres P LEFT JOIN TypesParametre T ON T.id = P.type_id";
+      if(active){
+        query += " WHERE P.date_fin IS NULL";
+      }
       Statement statement = connection.createStatement();
       ResultSet resultSet = statement.executeQuery(query);
 
@@ -108,24 +113,21 @@ public class ParametreDao {
    *          le paramètre avec les nouvelle valeurs.
    * @return si la mise à jour a fonctionnée.
    */
-  public static boolean update(Parametre parametre) {
+  public static Parametre update(Parametre parametre) {
     try (Connection connection = DataAccess.getConnection()) {
 
-      String query = "UPDATE Parametres SET valeur = ?, type_id = ?, "
-          + "date_debut = ?, date_fin = ? WHERE id = ?";
-      PreparedStatement statement = connection.prepareStatement(query);
-      statement.setFloat(1, parametre.getValeur());
-      statement.setInt(2, parametre.getTypeId());
-      statement.setObject(3, parametre.getDateDebut());
+      String query = "UPDATE Parametres SET date_fin = ? WHERE id = ?";
+      PreparedStatement statement = connection.prepareStatement(query);      
       statement.setObject(4, parametre.getDateFin());
       statement.setInt(5, parametre.getId());
       statement.execute();
+      
+      return create(new Parametre(parametre.getTypeId(), parametre.getValeur()));
 
     } catch (SQLException e) {
       e.printStackTrace();
-      return false;
-    }
-    return true;
+      return null;
+    }    
   }
 
   /**

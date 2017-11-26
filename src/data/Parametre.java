@@ -64,6 +64,29 @@ public class Parametre extends TypeParametre implements IListable {
     this.dateDebut = dateDebut;
     this.dateFin = dateFin;
   }
+  
+  /**
+   * Constructeur pour Parametre
+   * 
+   * @param typeId
+   *          id du type de paramètre.
+   * @param description
+   *          description du paramètre.
+   * @param id
+   *          id du paramètre.
+   * @param valeur
+   *          valeur du paramètre.
+   * @param dateDebut
+   *          date d'entré en vigueur de ce paramètre.
+   * @param dateFin
+   *          date de désactivation de ce paramètre.
+   */
+  public Parametre(int typeId, float valeur) {
+    super(typeId);    
+    this.valeur = valeur;
+    this.dateDebut = LocalDate.now();
+    this.dateFin = null;
+  }
 
   @Override
   public String getDisplayedText() {

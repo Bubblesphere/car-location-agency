@@ -33,5 +33,10 @@ public class TypeParametre {
     this.typeId = typeId;
     this.description = description;
   }
+  
+  public TypeParametre(int typeId) {
+    super();
+    this.typeId = typeId;    
+  }
 
 }
