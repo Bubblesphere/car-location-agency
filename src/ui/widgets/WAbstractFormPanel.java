@@ -5,7 +5,13 @@ import javax.swing.JPanel;
 import data.IListable;
 
 public abstract class WAbstractFormPanel extends JPanel {
-  public abstract IListable get();
-
-  public abstract void set(IListable listable);
+	protected boolean hasUnsavedContent;
+	protected void setHasUnsavedContent(boolean hasUnsavedContent) {
+		this.hasUnsavedContent = hasUnsavedContent;
+	}
+	public boolean getHasUnsavedContent() {
+		return this.hasUnsavedContent;
+	}
+	public abstract IListable get();
+	public abstract void set(IListable listable);
 }

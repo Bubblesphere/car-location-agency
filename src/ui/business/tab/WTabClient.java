@@ -48,6 +48,7 @@ public class WTabClient extends WSplitPaneTab {
           addListClient.addElement(clientReturnedFromCreationWithinDb);
           break;
         case LIST_VALUE_CHANGED:
+        	System.out.println("Form unsaved? " + form.getHasUnsavedContent());
           form.set(clients.getElementAt(addListClient.getSelectedIndex()));
           break;
         default:

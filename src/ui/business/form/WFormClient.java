@@ -4,10 +4,16 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import dao.ClientDao;
 import data.Client;
 import data.IListable;
+import ui.events.Event;
+import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
+import ui.widgets.WForm;
 import ui.widgets.WFormTextField;
 
 // TODO: Are we fetching more fields to populate a client? If so, Client potentially needs new constructor and adjustments are to be made here.
@@ -85,8 +91,30 @@ public class WFormClient extends WAbstractFormPanel {
     this.gbcNote.gridy = 5;
     this.add(this.textFieldNote, this.gbcNote); 
 
+    EventListener textBoxValueChangedListener = new EventListener() {
+        @Override
+        public void handleEvent(Event evt) {
+          switch ((WFormTextField.Events) evt.getEventName()) {
+          case TEXTFIELD_TEXT_CHANGED:
+            setHasUnsavedContent(true);
+            break;
+          default:
+            break;
+          }
+        }
+      };
+    
+    textFieldNom.events().addListener(textBoxValueChangedListener);
+    textFieldPrenom.events().addListener(textBoxValueChangedListener);
+    textFieldCourriel.events().addListener(textBoxValueChangedListener);
+    textFieldNumeroTelephone.events().addListener(textBoxValueChangedListener);
+    textFieldPermis.events().addListener(textBoxValueChangedListener);
+    textFieldAdresse.events().addListener(textBoxValueChangedListener);
+    textFieldNote.events().addListener(textBoxValueChangedListener);
   }
-
+  
+  
+  
   @Override
   public IListable get() {
     return new Client(this.textFieldNom.getText(),
@@ -104,5 +132,6 @@ public class WFormClient extends WAbstractFormPanel {
     this.textFieldNumeroTelephone.setText(client.getNumeoTelphone());
     this.textFieldCourriel.setText(client.getCourriel());
     this.textFieldNote.setText(client.getNote());
+    this.hasUnsavedContent = false;
   }
 }

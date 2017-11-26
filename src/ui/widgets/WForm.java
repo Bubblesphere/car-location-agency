@@ -55,7 +55,8 @@ public class WForm extends JPanel {
     this.saveButton.events().addListener(new EventListener() {
       @Override
       public void handleEvent(Event evt) {
-        eventHandler(WForm.Events.BUTTON_SAVE_CLICK);
+    	  save();
+    	  eventHandler(WForm.Events.BUTTON_SAVE_CLICK);
       }
     });
     this.gbcSaveButton = FormBuilder.getGBCPartialRow();
@@ -64,6 +65,14 @@ public class WForm extends JPanel {
     this.add(this.saveButton, this.gbcSaveButton);
   }
 
+  public boolean getHasUnsavedContent() {
+	  return this.form.getHasUnsavedContent();
+  }
+  
+  private void save() {
+	  this.form.setHasUnsavedContent(false);
+  }
+  
   public IListable get() {
     return this.form.get();
   }
