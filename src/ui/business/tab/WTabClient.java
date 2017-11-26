@@ -26,7 +26,10 @@ public class WTabClient extends WSplitPaneTab {
 			public void handleEvent(Event evt) {
 				switch((WForm.Events)evt.getEventName()) {
 					case BUTTON_SAVE_CLICK:
-						clients.set(addListClient.getSelectedIndex(), (Client)form.get());
+						int clientId = addListClient.getSelectedIndex();
+						clients.set(clientId, (Client)form.get());
+						Client currentClient = clients.getElementAt(clientId);
+						// TODO: Update db
 						addListClient.setModel(clients);
 						break;
 					default:
@@ -41,7 +44,7 @@ public class WTabClient extends WSplitPaneTab {
 				
 				switch((WListAdd.Events)evt.getEventName()) {
 					case BUTTON_ADD_CLICKED:
-						// TODO: fetch clientReturnedFromCreationWithinDb from db
+						// TODO: Add Empty to db and return the new client
 						Client clientReturnedFromCreationWithinDb = new Client(3, "Dallaire", "Deric", "DSAD12");
 						addListClient.addElement(clientReturnedFromCreationWithinDb);
 						break;

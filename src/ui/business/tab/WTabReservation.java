@@ -3,6 +3,7 @@ package ui.business.tab;
 import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
+import data.Parametre;
 import data.Reservation;
 import ui.business.form.WFormReservation;
 import ui.events.Event;
@@ -24,7 +25,10 @@ public class WTabReservation extends WSplitPaneTab {
 			public void handleEvent(Event evt) {
 				switch((WForm.Events)evt.getEventName()) {
 					case BUTTON_SAVE_CLICK:
-						reservations.set(addListReservation.getSelectedIndex(), (Reservation)form.get());
+						int reservationId = addListReservation.getSelectedIndex();
+						reservations.set(reservationId, (Reservation)form.get());
+						Reservation currentReservation = reservations.getElementAt(reservationId);
+						// TODO: Update db
 						addListReservation.setModel(reservations);
 						break;
 					default:
@@ -38,8 +42,8 @@ public class WTabReservation extends WSplitPaneTab {
 			public void handleEvent(Event evt) {
 				switch((WListAdd.Events)evt.getEventName()) {
 					case BUTTON_ADD_CLICKED:
-						// TODO: Handle new empty location
-						//addListReservation.addElement(new Reservation());
+						// TODO: Add Empty to db and return the new reservation
+						// TODO: Implement addListReservation.addElement(RESERVATION_FROM_PREVIOUS_STEP);
 						break;
 					case LIST_VALUE_CHANGED:
 						form.set(reservations.getElementAt(addListReservation.getSelectedIndex()));

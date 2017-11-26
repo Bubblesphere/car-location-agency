@@ -3,6 +3,7 @@ package ui.business.tab;
 import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
+import data.Location;
 import data.Vehicule;
 import ui.business.form.WFormVehicule;
 import ui.events.Event;
@@ -24,11 +25,13 @@ public class WTabVehicule extends WSplitPaneTab {
 			public void handleEvent(Event evt) {
 				switch((WForm.Events)evt.getEventName()) {
 					case BUTTON_SAVE_CLICK:
-						vehicules.set(addListVehicule.getSelectedIndex(), (Vehicule)form.get());
+						int vehiculeId = addListVehicule.getSelectedIndex();
+						vehicules.set(vehiculeId, (Vehicule)form.get());
+						Vehicule currentVehicule = vehicules.getElementAt(vehiculeId);
+						// TODO: Update db
 						addListVehicule.setModel(vehicules);
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}	
 			}
@@ -39,14 +42,13 @@ public class WTabVehicule extends WSplitPaneTab {
 			public void handleEvent(Event evt) {
 				switch((WListAdd.Events)evt.getEventName()) {
 					case BUTTON_ADD_CLICKED:
-						// TODO: Handle new empty location
-						//addListVehicule.addElement(new Vehicule(3, "Dallaire", "Deric"));
+						// TODO: Add Empty to db and return the new vehicule
+						// TODO: Implement addListVehicule.addElement(VEHICULE_FROM_PREVIOUS_STEP);
 						break;
 					case LIST_VALUE_CHANGED:
 						form.set(vehicules.getElementAt(addListVehicule.getSelectedIndex()));
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}		
 			}

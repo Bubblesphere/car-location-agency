@@ -3,6 +3,7 @@ package ui.business.tab;
 import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
+import data.Client;
 import data.Location;
 import ui.business.form.WFormRetour;
 import ui.events.Event;
@@ -24,11 +25,13 @@ public class WTabRetour extends WSplitPaneTab {
 			public void handleEvent(Event evt) {
 				switch((WForm.Events)evt.getEventName()) {
 					case BUTTON_SAVE_CLICK:
-						locations.set(addListLocation.getSelectedIndex(), (Location)form.get());
+						int locationId = addListLocation.getSelectedIndex();
+						locations.set(locationId, (Location)form.get());
+						Location currentLocation = locations.getElementAt(locationId);
+						// TODO: Update db
 						addListLocation.setModel(locations);
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}	
 			}
@@ -39,8 +42,8 @@ public class WTabRetour extends WSplitPaneTab {
 			public void handleEvent(Event evt) {
 				switch((WListAdd.Events)evt.getEventName()) {
 					case BUTTON_ADD_CLICKED:
-						// TODO: Handle new empty location
-						//addListClient.addElement(new Location()));
+						// TODO: Add Empty to db and return the new location
+						// TODO: Implement addListClient.addElement(LOCATION_FROM_PREVIOUS_STEP));
 						break;
 					case LIST_VALUE_CHANGED:
 						form.set(locations.getElementAt(addListLocation.getSelectedIndex()));
