@@ -4,8 +4,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import dao.ClientDao;
 import data.Client;
 import data.IListable;
