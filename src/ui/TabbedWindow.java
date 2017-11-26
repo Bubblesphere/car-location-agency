@@ -13,8 +13,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import dao.ClasseDao;
 import dao.ClientDao;
 import dao.ParametreDao;
+import dao.ReservationDao;
+import dao.UtilisateurDao;
+import dao.VehiculeDao;
 import data.Classe;
 import data.Client;
 import data.Location;
@@ -72,8 +76,9 @@ public class TabbedWindow extends JFrame {
     contentPane.add(tabbedPane, BorderLayout.CENTER);
 
     DefaultListModel<Utilisateur> users = new DefaultListModel<Utilisateur>();
-    users.addElement(
-        new Utilisateur("Doe", "John", 0, "password", "dallaire.deric@gmail.com", 0, 1, false));
+    for(Utilisateur user : UtilisateurDao.retrieveAll()){
+      users.addElement(user);
+    }
 
     DefaultListModel<Client> clients = new DefaultListModel<Client>();
     for(Client client : ClientDao.retrieveAll()){
@@ -81,24 +86,24 @@ public class TabbedWindow extends JFrame {
     }
 
     DefaultListModel<Classe> classes = new DefaultListModel<Classe>();
-    classes.addElement(new Classe(0, "Sport", 30));
-    classes.addElement(new Classe(1, "Économique", 12));
+    for(Classe classe: ClasseDao.retrieveAll()){
+      classes.addElement(classe);
+    }
 
     DefaultListModel<Vehicule> vehicules = new DefaultListModel<Vehicule>();
-    vehicules.addElement(new Vehicule(0, classes.get(0), "Tesla", "Roadster", 2017, 0, 0, "WTF FTW",
-        false, 120, ""));
-    vehicules.addElement(new Vehicule(1, classes.get(1), "Honda", "Civic", 2016, 10000, 0,
-        "PLA QUE", false, 100, ""));
-
-    DefaultListModel<Location> retours = new DefaultListModel<Location>();
+    for(Vehicule vehicule : VehiculeDao.retrieveAll()){
+      vehicules.addElement(vehicule);
+    }    
+  
+    DefaultListModel<Location> retours = new DefaultListModel<Location>();    
     retours.addElement(new Location(0, clients.get(0), classes.get(0), LocalDate.now(),
         LocalDate.now(), "", users.get(0), 0, vehicules.get(0), users.get(0), LocalDate.now(),
         false, false, 0, 0, 100, "", 0));
 
     DefaultListModel<Reservation> reservations = new DefaultListModel<Reservation>();
-    reservations.addElement(new Reservation(0, 0, clients.get(0), 1, classes.get(0),
-        LocalDate.now(), LocalDate.now(), "", 0, users.get(0)));
-
+    for(Reservation reservation: ReservationDao.retrieveAll()){
+      reservations.addElement(reservation);
+    }
     
     DefaultListModel<Parametre> parametres = new DefaultListModel<Parametre>();
     for(Parametre param : ParametreDao.retrieveAll()){

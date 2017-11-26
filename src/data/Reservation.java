@@ -3,56 +3,47 @@ package data;
 import java.time.LocalDate;
 
 public class Reservation implements IListable {
-  private int id;
-  private int clientId;
-  private Client locataire;
-  private int classeId;
-  private Classe classeDesire;
+  private int reservationId;
+  private Client clientReservation;
+  private Classe classeReservation;
   private LocalDate startDate;
   private LocalDate finDate;
-  private String note;
-  private int utilisateurId;
-  private Utilisateur employe;
+  private String noteReservation;
+  private Utilisateur utilisateurReservation;
 
-  public int getId() {
-    return id;
+
+
+  public Client getClientReservation() {
+    return clientReservation;
   }
 
-  public void setId(int id) {
-    this.id = id;
+  public void setClientReservation(Client clientReservation) {
+    this.clientReservation = clientReservation;
   }
 
-  public int getClientId() {
-    return clientId;
+  public Classe getClasseReservation() {
+    return classeReservation;
   }
 
-  public void setClientId(int clientId) {
-    this.clientId = clientId;
+  public void setClasseReservation(Classe classeReservation) {
+    this.classeReservation = classeReservation;
   }
 
-  public Client getLocataire() {
-    return locataire;
+  public Utilisateur getUtilisateurReservation() {
+    return utilisateurReservation;
   }
 
-  public void setLocataire(Client locataire) {
-    this.locataire = locataire;
+  public void setUtilisateurReservation(Utilisateur utilisateurReservation) {
+    this.utilisateurReservation = utilisateurReservation;
   }
 
-  public int getClasseId() {
-    return classeId;
+  public int getReservationId() {
+    return reservationId;
   }
 
-  public void setClasseId(int classeId) {
-    this.classeId = classeId;
-  }
-
-  public Classe getClasseDesire() {
-    return classeDesire;
-  }
-
-  public void setClasseDesire(Classe classeDesire) {
-    this.classeDesire = classeDesire;
-  }
+  public void setReservationId(int reservationId) {
+    this.reservationId = reservationId;
+  }  
 
   public LocalDate getStartDate() {
     return startDate;
@@ -70,72 +61,49 @@ public class Reservation implements IListable {
     this.finDate = finDate;
   }
 
-  public String getNote() {
-    return note;
+  public String getNoteReservation() {
+    return noteReservation;
   }
 
-  public void setNote(String note) {
-    this.note = note;
+  public void setNoteReservation(String noteReservation) {
+    this.noteReservation = noteReservation;
   }
 
-  public int getUtilisateurId() {
-    return utilisateurId;
-  }
-
-  public void setUtilisateurId(int utilisateurId) {
-    this.utilisateurId = utilisateurId;
-  }
-
-  public Utilisateur getEmploye() {
-    return employe;
-  }
-
-  public void setEmploye(Utilisateur employe) {
-    this.employe = employe;
-  }
+  
 
   /**
    * Constructeur pour Reservation
    * 
-   * @param id
+   * @param reservationId
    *          id de la réservation.
-   * @param clientId
-   *          id du client de la réservation.
-   * @param locataire
+   * @param clientReservation
    *          id du client de la la réservation.
-   * @param classeId
-   *          id de la classe de véhicule désiré.
-   * @param classeDesire
+   * @param classeReservation
    *          la classe de véhicule désiré.
    * @param startDate
    *          la date de début de la location.
    * @param finDate
    *          la date de fin de la location.
-   * @param note
-   *          commentaire.
-   * @param utilisateurId
-   *          date d'entré en vigueur de ce paramètre.
-   * @param employe
+   * @param noteReservation
+   *          commentaire.   
+   * @param utilisateurReservation
    *          id de l'utilisateur qui a créé la réservation..
    */
-  public Reservation(int id, int clientId, Client locataire, int classeId, Classe classeDesire,
-      LocalDate startDate, LocalDate finDate, String note, int utilisateurId, Utilisateur employe) {
+  public Reservation(int reservationId, Client clientReservation, Classe classeReservation,
+      LocalDate startDate, LocalDate finDate, String noteReservation, Utilisateur utilisateurReservation) {
     super();
-    this.id = id;
-    this.clientId = clientId;
-    this.locataire = locataire;
-    this.classeId = classeId;
-    this.classeDesire = classeDesire;
+    this.reservationId = reservationId;    
+    this.clientReservation = clientReservation;    
+    this.classeReservation = classeReservation;
     this.startDate = startDate;
     this.finDate = finDate;
-    this.note = note;
-    this.utilisateurId = utilisateurId;
-    this.employe = employe;
+    this.noteReservation = noteReservation;    
+    this.utilisateurReservation = utilisateurReservation;
   }
 
   @Override
   public String getDisplayedText() {
-    return this.getLocataire().getPrenom() + " " + this.getLocataire().getNom() + " - "
+    return this.getClientReservation().getPrenom() + " " + this.getClientReservation().getNom() + " - "
         + this.getStartDate().toString();
   }
 
