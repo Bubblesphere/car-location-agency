@@ -80,8 +80,9 @@ public class Vehicule implements IListable {
    * @param note
    *          commentaire.
    */
-  public Vehicule(int vehiculeId, int classeId, Classe classe, String fabricant, String marque, int annee, int kilometrage,
-      int etat, String plaque, Boolean desactive, int capaciteEssence, String note) {
+  public Vehicule(int vehiculeId, int classeId, Classe classe, String fabricant, String marque,
+      int annee, int kilometrage, int etat, String plaque, Boolean desactive, int capaciteEssence,
+      String note) {
     super();
     this.setId(vehiculeId);
     this.classe = classe;
@@ -119,9 +120,9 @@ public class Vehicule implements IListable {
    * @param note
    *          commentaire.
    */
-  public Vehicule(int vehiculeId, String fabricant, String marque, int annee, int kilometrage, int etat,
-      String plaque, Boolean desactive, int capaciteEssence, String note) {
-	  this.id = vehiculeId;
+  public Vehicule(int vehiculeId, String fabricant, String marque, int annee, int kilometrage,
+      int etat, String plaque, Boolean desactive, int capaciteEssence, String note) {
+    this.id = vehiculeId;
     this.fabricant = fabricant;
     this.marque = marque;
     this.annee = annee;
@@ -132,7 +133,7 @@ public class Vehicule implements IListable {
     this.capaciteEssence = capaciteEssence;
     this.note = note;
   }
-  
+
   public Classe getVClasse() {
     return this.classe;
   }
@@ -220,10 +221,10 @@ public class Vehicule implements IListable {
   public void setId(int vehiculeId) {
     this.id = vehiculeId;
   }
-	
-	@Override
-	public String getDisplayedText() {
-		return this.getFabricant() + " " + this.getMarque();
-	}
+
+  @Override
+  public String getDisplayedText() {
+    return this.getFabricant() + " " + this.getMarque();
+  }
 
 }

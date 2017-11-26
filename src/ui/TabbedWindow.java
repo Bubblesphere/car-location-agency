@@ -1,33 +1,34 @@
 package ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.time.LocalDate;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import dao.ClientDao;
+import dao.ParametreDao;
 import data.Classe;
 import data.Client;
-import ui.business.tab.WTabClient;
-import ui.business.tab.WTabRetour;
-import ui.business.tab.WTabParametre;
-import ui.business.tab.WTabReservation;
-import ui.business.tab.WTabVehicule;
-import java.time.LocalDate;
-
-import java.awt.Dimension;
-import javax.swing.DefaultListModel;
-import javax.swing.JTextField;
-import java.awt.Toolkit;
 import data.Location;
 import data.Parametre;
 import data.Reservation;
 import data.TypeParametre;
 import data.Utilisateur;
 import data.Vehicule;
+import sun.util.resources.LocaleData;
+import ui.business.tab.WTabClient;
+import ui.business.tab.WTabParametre;
+import ui.business.tab.WTabReservation;
+import ui.business.tab.WTabRetour;
+import ui.business.tab.WTabVehicule;
 
 public class TabbedWindow extends JFrame {
 
@@ -57,8 +58,9 @@ public class TabbedWindow extends JFrame {
    * Create the frame.
    */
   public TabbedWindow() {
-  	setIconImage(Toolkit.getDefaultToolkit().getImage(TabbedWindow.class.getResource("/com/sun/javafx/scene/control/skin/modena/dialog-more-details@2x.png")));
-  	setTitle("Syst\u00E8me de gestion de location");
+    setIconImage(Toolkit.getDefaultToolkit().getImage(TabbedWindow.class
+        .getResource("/com/sun/javafx/scene/control/skin/modena/dialog-more-details@2x.png")));
+    setTitle("Syst\u00E8me de gestion de location");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 674, 670);
     contentPane = new JPanel();
@@ -68,36 +70,41 @@ public class TabbedWindow extends JFrame {
 
     JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
     contentPane.add(tabbedPane, BorderLayout.CENTER);
-    
+
     DefaultListModel<Utilisateur> users = new DefaultListModel<Utilisateur>();
-    users.addElement(new Utilisateur("Doe", "John", 0, "password", "dallaire.deric@gmail.com", 0, 1, false));
-    
+    users.addElement(
+        new Utilisateur("Doe", "John", 0, "password", "dallaire.deric@gmail.com", 0, 1, false));
+
     DefaultListModel<Client> clients = new DefaultListModel<Client>();
-    clients.addElement(new Client(0, "Deric", "Dallaire", "PERMIS"));
-    clients.addElement(new Client(1, "Bruno", "Hamel", "PERMIS2"));
-    clients.addElement(new Client(2, "Jean", "Bob", "Permis3"));
-    
+    for(Client client : ClientDao.retrieveAll()){
+      clients.addElement(client);
+    }
+
     DefaultListModel<Classe> classes = new DefaultListModel<Classe>();
     classes.addElement(new Classe(0, "Sport", 30));
     classes.addElement(new Classe(1, "Économique", 12));
-    
+
     DefaultListModel<Vehicule> vehicules = new DefaultListModel<Vehicule>();
-    vehicules.addElement(new Vehicule(0, classes.get(0), "Tesla", "Roadster", 2017, 0, 0, "WTF FTW", false, 120, ""));
-    vehicules.addElement(new Vehicule(1, classes.get(1), "Honda", "Civic", 2016, 10000, 0, "PLA QUE", false, 100, ""));
-    
+    vehicules.addElement(new Vehicule(0, classes.get(0), "Tesla", "Roadster", 2017, 0, 0, "WTF FTW",
+        false, 120, ""));
+    vehicules.addElement(new Vehicule(1, classes.get(1), "Honda", "Civic", 2016, 10000, 0,
+        "PLA QUE", false, 100, ""));
+
     DefaultListModel<Location> retours = new DefaultListModel<Location>();
-    retours.addElement(new Location(0, clients.get(0), classes.get(0), LocalDate.now(), LocalDate.now(), "", users.get(0), 0, 
-    		vehicules.get(0), users.get(0), LocalDate.now(), false, false, 0, 0, 100, "", 0));
-    
+    retours.addElement(new Location(0, clients.get(0), classes.get(0), LocalDate.now(),
+        LocalDate.now(), "", users.get(0), 0, vehicules.get(0), users.get(0), LocalDate.now(),
+        false, false, 0, 0, 100, "", 0));
+
     DefaultListModel<Reservation> reservations = new DefaultListModel<Reservation>();
-    reservations.addElement(new Reservation(0, 0, clients.get(0), 1, classes.get(0), LocalDate.now(), LocalDate.now(), "", 0, users.get(0)));
-    
-    DefaultListModel<TypeParametre> typeParametres = new DefaultListModel<TypeParametre>();
+    reservations.addElement(new Reservation(0, 0, clients.get(0), 1, classes.get(0),
+        LocalDate.now(), LocalDate.now(), "", 0, users.get(0)));
+
     
     DefaultListModel<Parametre> parametres = new DefaultListModel<Parametre>();
-    parametres.addElement(new Parametre(0, "Prix assurance", 0, 40, LocalDate.now(), LocalDate.now()));
-    parametres.addElement(new Parametre(0, "Prix test", 1, 50, LocalDate.now(), LocalDate.now()));
-    
+    for(Parametre param : ParametreDao.retrieveAll()){
+      parametres.addElement(param);
+    }
+
     WTabClient tabClient = new WTabClient(tabbedPane, clients);
     WTabReservation tabReservation = new WTabReservation(tabbedPane, reservations);
     WTabRetour tabRetour = new WTabRetour(tabbedPane, retours);

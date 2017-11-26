@@ -58,7 +58,7 @@ public class Client extends Personne implements IListable {
   public void setId(int id) {
     this.id = id;
   }
-  
+
   public LocalDate getDateDeNaissance() {
     return this.dateDeNaissance;
   }
@@ -108,6 +108,8 @@ public class Client extends Personne implements IListable {
    *          courriel du client.
    * @param note
    *          commentaire.
+   * @param dateDeNaissance
+   *          date de naissance.
    */
   public Client(String nom, String prenom, int id, String adresse, String numeroPermis,
       String numeoTelphone, String courriel, String note, LocalDate dateDeNaissance) {
@@ -138,6 +140,8 @@ public class Client extends Personne implements IListable {
    *          courriel du client.
    * @param note
    *          commentaire.
+   * @param dateDeNaissance
+   *          date de naissance.
    */
   public Client(String nom, String prenom, String adresse, String numeroPermis,
       String numeoTelphone, String courriel, String note, LocalDate dateDeNaissance) {
@@ -149,7 +153,7 @@ public class Client extends Personne implements IListable {
     this.note = note;
     this.dateDeNaissance = dateDeNaissance;
   }
-  
+
   /**
    * Constructeur pour la widget list
    * 
@@ -165,9 +169,8 @@ public class Client extends Personne implements IListable {
     this.id = id;
   }
 
-	
-	@Override
-	public String getDisplayedText() {
-		return this.getPrenom() + " " + this.getNom();
-	}
+  @Override
+  public String getDisplayedText() {
+    return this.getPrenom() + " " + this.getNom();
+  }
 }
