@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import data.Client;
 import data.IListable;
 import ui.utils.Event;
 import ui.utils.EventBubbler;

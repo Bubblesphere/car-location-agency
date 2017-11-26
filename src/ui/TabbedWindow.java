@@ -11,43 +11,17 @@ import javax.swing.border.EmptyBorder;
 
 import data.Classe;
 import data.Client;
-import ui.business.form.WFormClient;
 import ui.business.tab.WTabClient;
 import ui.business.tab.WTabRetour;
 import ui.business.tab.WTabParametre;
 import ui.business.tab.WTabReservation;
 import ui.business.tab.WTabVehicule;
-import ui.widgets.WList;
-import ui.widgets.WListAdd;
-import ui.widgets.WSplitPaneTab;
-
-import javax.swing.JLabel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.JSplitPane;
-import java.awt.Component;
 import java.awt.Dimension;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.JTree;
-import javax.swing.JSeparator;
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Font;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
-import javax.swing.UIManager;
-import javax.swing.ImageIcon;
 import data.Location;
 import data.Parametre;
 import data.Reservation;
@@ -59,9 +33,6 @@ public class TabbedWindow extends JFrame {
 
   private static final long serialVersionUID = 1L;
   private JPanel contentPane;
-  private JTextField textField;
-  private JTextField textField_1;
-  private JTextField textField_2;
 
   /**
    * Launch the application.

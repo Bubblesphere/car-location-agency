@@ -1,23 +1,11 @@
 package ui.business.form;
 
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import data.Client;
 import data.IListable;
-import ui.utils.Event;
-import ui.utils.EventBubbler;
-import ui.utils.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WFormButton;
 import ui.widgets.WFormTextField;
 
 public class WFormClient extends WAbstractFormPanel {

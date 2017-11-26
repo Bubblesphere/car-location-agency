@@ -3,9 +3,7 @@ package ui.business.tab;
 import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
-import data.Client;
 import data.Vehicule;
-import ui.business.form.WFormClient;
 import ui.business.form.WFormVehicule;
 import ui.utils.Event;
 import ui.utils.EventListener;
