@@ -47,7 +47,7 @@ public class WTabClient extends WSplitPaneTab {
           Client clientReturnedFromCreationWithinDb = new Client(3, "Dallaire", "Deric", "DSAD12");
           addListClient.addElement(clientReturnedFromCreationWithinDb);
           break;
-        case LIST_VALUE_CHANGED:
+        case LIST_VALUE_CHANGED:          
           form.set(clients.getElementAt(addListClient.getSelectedIndex()));
           break;
         default:

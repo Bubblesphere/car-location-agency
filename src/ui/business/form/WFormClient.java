@@ -10,12 +10,11 @@ import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormTextField;
 
-// TODO: Are we fetching more fields to populate a client? If so, Client potentially needs new constructor and adjustments are to be made here.
-
 public class WFormClient extends WAbstractFormPanel {
   private int formClientID;
 
   private GridBagLayout layout;
+  
   private WFormTextField textFieldNom;
   private GridBagConstraints gbcNom;
   
@@ -37,7 +36,7 @@ public class WFormClient extends WAbstractFormPanel {
   private WFormTextField textFieldNote;
   private GridBagConstraints gbcNote;
   
-  // dateDeNaissance
+  // TODO: dateDeNaissance
 
   public WFormClient() {
     this.layout = FormBuilder.getLayout();
@@ -90,7 +89,15 @@ public class WFormClient extends WAbstractFormPanel {
   @Override
   public IListable get() {
     return new Client(this.textFieldNom.getText(),
-        this.textFieldPrenom.getText(),this.formClientID, this.textFieldAdresse.getText(),this.textFieldPermis.getText(), "tel", "courriel", "note" , LocalDate.parse("2017-11-13"));
+        this.textFieldPrenom.getText(),
+        this.formClientID, 
+        this.textFieldAdresse.getText(),
+        this.textFieldPermis.getText(), 
+        this.textFieldNumeroTelephone.getText(), 
+        this.textFieldCourriel.getText(), 
+        this.textFieldNote.getText(), 
+        LocalDate.parse("2017-11-13"));
+ // TODO: dateDeNaissance
   }
 
   @Override
@@ -104,5 +111,6 @@ public class WFormClient extends WAbstractFormPanel {
     this.textFieldNumeroTelephone.setText(client.getNumeoTelphone());
     this.textFieldCourriel.setText(client.getCourriel());
     this.textFieldNote.setText(client.getNote());
+ // TODO: dateDeNaissance
   }
 }
