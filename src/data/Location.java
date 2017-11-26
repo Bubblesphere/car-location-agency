@@ -46,7 +46,8 @@ public class Location extends Reservation implements IListable {
       Vehicule vehicule, Utilisateur locateur, LocalDate dateDeRetour, boolean assurance,
       boolean usureJournalier, int essenceManquant, int departKm, int retourKm, String note2,
       float estimationReparation) {
-    super(reservationId, client.getId(), client, classe.getId(), classe, startDate, retourAnticipeDate, note, utilisateur.getId(), utilisateur);
+    super(reservationId, client.getId(), client, classe.getId(), classe, startDate,
+        retourAnticipeDate, note, utilisateur.getId(), utilisateur);
     this.locationId = locationId;
     this.vehicule = vehicule;
     this.locateur = locateur;
@@ -148,10 +149,10 @@ public class Location extends Reservation implements IListable {
     this.locationId = locationId;
   }
 
-
-@Override
-public String getDisplayedText() {
-	return this.getLocataire().getPrenom() + " " + this.getLocataire().getNom() + " - " + this.getStartDate().toString();
-}
+  @Override
+  public String getDisplayedText() {
+    return this.getLocataire().getPrenom() + " " + this.getLocataire().getNom() + " - "
+        + this.getStartDate().toString();
+  }
 
 }

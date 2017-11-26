@@ -1,7 +1,5 @@
 package dao;
 
-import data.Client;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +8,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import data.Client;
 
 public class ClientDao {
 
@@ -72,7 +72,7 @@ public class ClientDao {
             resultSet.getString("numero_permis"), resultSet.getString("telephone"),
             resultSet.getString("courriel"), resultSet.getString("note"),
             resultSet.getString("date_de_naissance") != null
-            ? LocalDate.parse(resultSet.getString("date_fin")) : null);
+                ? LocalDate.parse(resultSet.getString("date_de_naissance")) : null);
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -101,7 +101,7 @@ public class ClientDao {
             resultSet.getString("numero_permis"), resultSet.getString("telephone"),
             resultSet.getString("courriel"), resultSet.getString("note"),
             resultSet.getString("date_de_naissance") != null
-            ? LocalDate.parse(resultSet.getString("date_fin")) : null));
+                ? LocalDate.parse(resultSet.getString("date_de_naissance")) : null));
       }
     } catch (SQLException e) {
       e.printStackTrace();

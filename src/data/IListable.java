@@ -1,5 +1,5 @@
 package data;
 
 public interface IListable {
-	public String getDisplayedText();
+  public String getDisplayedText();
 }
