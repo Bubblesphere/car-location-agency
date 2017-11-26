@@ -2,14 +2,13 @@ package ui.widgets;
 
 import java.awt.Font;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class WFormTextField extends JPanel {
 	private BoxLayout layout;
-	private JLabel label;
+	private WLabel label;
 	private JTextField textField;
 	
 	public WFormTextField(String labelText) {
@@ -17,12 +16,8 @@ public class WFormTextField extends JPanel {
 	    this.setBorder(new EmptyBorder(24, 0, 0, 16));
 	    this.setLayout(this.layout);
 
-	    this.label = new JLabel(labelText);
-	    this.label.setBorder(new EmptyBorder(0, 0, 16, 0));
-	    this.label.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-	    this.label.setAlignmentX(this.LEFT_ALIGNMENT);
+	    this.label = new WLabel(labelText);
 	    this.add(this.label);
-	    
 	    
 	    this.textField = new JTextField();
 	    this.textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
