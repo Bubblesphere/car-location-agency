@@ -5,14 +5,14 @@ import java.time.LocalDate;
 public class Location extends Reservation implements IListable {
   private int locationId;
   private Vehicule vehicule;
-  private Utilisateur locateur;
+  private Utilisateur utilisateurLocation;
   private LocalDate dateDeRetour;
   private boolean assurance;
   private boolean usureJournalier;
   private int essenceManquant;
   private int departKm;
   private int retourKm;
-  private String note;
+  private String noteLocation;
   private float estimationReparation;
 
   /**
@@ -36,28 +36,28 @@ public class Location extends Reservation implements IListable {
    *          kilométrage du véhicule au départ.
    * @param retourKm
    *          kilométrage du véhicule au retour.
-   * @param note
+   * @param noteLocation
    *          commentaire.
    * @param estimationReparation
    *          estimation de réparation à faire au véhicule au retour.
    */
-  public Location(int reservationId, Client client, Classe classe, LocalDate startDate,
-      LocalDate retourAnticipeDate, String note, Utilisateur utilisateur, int locationId,
-      Vehicule vehicule, Utilisateur locateur, LocalDate dateDeRetour, boolean assurance,
-      boolean usureJournalier, int essenceManquant, int departKm, int retourKm, String note2,
+  public Location(int reservationId, Client clientReservation, Classe classeReservation, LocalDate startDate,
+      LocalDate finDate, String noteLocation, Utilisateur utilisateurReservation, int locationId,
+      Vehicule vehicule, Utilisateur utilisateurLocation, LocalDate dateDeRetour, boolean assurance,
+      boolean usureJournalier, int essenceManquant, int departKm, int retourKm, String noteReservation,
       float estimationReparation) {
-    super(reservationId, client.getId(), client, classe.getId(), classe, startDate,
-        retourAnticipeDate, note, utilisateur.getId(), utilisateur);
+    super(reservationId, clientReservation, classeReservation, startDate,
+        finDate, noteReservation, utilisateurReservation);
     this.locationId = locationId;
     this.vehicule = vehicule;
-    this.locateur = locateur;
+    this.utilisateurLocation = utilisateurLocation;
     this.dateDeRetour = dateDeRetour;
     this.assurance = assurance;
     this.usureJournalier = usureJournalier;
     this.essenceManquant = essenceManquant;
     this.departKm = departKm;
     this.retourKm = retourKm;
-    note = note2;
+    this.noteLocation = noteLocation;
     this.estimationReparation = estimationReparation;
   }
 
@@ -69,12 +69,12 @@ public class Location extends Reservation implements IListable {
     this.vehicule = vehicule;
   }
 
-  public Utilisateur getLocateur() {
-    return locateur;
+  public Utilisateur getUtilisateurLocation() {
+    return utilisateurLocation;
   }
 
-  public void setLocateur(Utilisateur locateur) {
-    this.locateur = locateur;
+  public void setUtilisateurLocation(Utilisateur utilisateurLocation) {
+    this.utilisateurLocation = utilisateurLocation;
   }
 
   public LocalDate getDateDeRetour() {
@@ -125,12 +125,12 @@ public class Location extends Reservation implements IListable {
     this.retourKm = retourKm;
   }
 
-  public String getNote() {
-    return note;
+  public String getNoteLocation() {
+    return noteLocation;
   }
 
-  public void setNote(String note) {
-    this.note = note;
+  public void setNoteLocation(String noteLocation) {
+    this.noteLocation = noteLocation;
   }
 
   public float getEstimationReparation() {
@@ -151,7 +151,7 @@ public class Location extends Reservation implements IListable {
 
   @Override
   public String getDisplayedText() {
-    return this.getLocataire().getPrenom() + " " + this.getLocataire().getNom() + " - "
+    return this.getClientReservation().getPrenom() + " " + this.getClientReservation().getNom() + " - "
         + this.getStartDate().toString();
   }
 
