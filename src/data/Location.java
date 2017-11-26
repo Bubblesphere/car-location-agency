@@ -148,10 +148,6 @@ public class Location extends Reservation implements IListable {
     this.locationId = locationId;
   }
 
-@Override
-public int getKey() {
-	return locationId;
-}
 
 @Override
 public String getDisplayedText() {

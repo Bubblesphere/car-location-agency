@@ -5,8 +5,8 @@ import javax.swing.JTabbedPane;
 
 import data.Reservation;
 import ui.business.form.WFormReservation;
-import ui.utils.Event;
-import ui.utils.EventListener;
+import ui.events.Event;
+import ui.events.EventListener;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
@@ -19,16 +19,15 @@ public class WTabReservation extends WSplitPaneTab {
 		WListAdd addListReservation = new WListAdd(reservations);
 		
 		WForm form = new WForm("Information sur la réservation", new WFormReservation());
-		form.events().addListener(new ui.utils.EventListener() {		
+		form.events().addListener(new ui.events.EventListener() {		
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonSaveClick":
+				switch((WForm.Events)evt.getEventName()) {
+					case BUTTON_SAVE_CLICK:
 						reservations.set(addListReservation.getSelectedIndex(), (Reservation)form.get());
 						addListReservation.setModel(reservations);
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}	
 			}
@@ -37,16 +36,15 @@ public class WTabReservation extends WSplitPaneTab {
 		addListReservation.events().addListener(new EventListener() {
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonAddClick":
+				switch((WListAdd.Events)evt.getEventName()) {
+					case BUTTON_ADD_CLICKED:
 						// TODO: Handle new empty location
 						//addListReservation.addElement(new Reservation());
 						break;
-					case "ListValueChanged":
+					case LIST_VALUE_CHANGED:
 						form.set(reservations.getElementAt(addListReservation.getSelectedIndex()));
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}		
 			}

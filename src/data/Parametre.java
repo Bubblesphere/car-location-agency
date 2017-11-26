@@ -64,12 +64,6 @@ public class Parametre extends TypeParametre implements IListable {
     this.dateDebut = dateDebut;
     this.dateFin = dateFin;
   }
-
-
-	@Override
-	public int getKey() {
-		return this.getId();
-	}
 	
 	@Override
 	public String getDisplayedText() {

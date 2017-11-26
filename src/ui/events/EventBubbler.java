@@ -1,4 +1,4 @@
-package ui.utils;
+package ui.events;
 
 import javax.swing.event.EventListenerList;
 

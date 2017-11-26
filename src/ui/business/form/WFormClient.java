@@ -8,7 +8,12 @@ import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormTextField;
 
+
+// TODO: Are we fetching more fields to populate a client? If so, Client potentially needs new constructor and adjustments are to be made here.
+
 public class WFormClient extends WAbstractFormPanel {
+	private int formClientID;
+	
 	private GridBagLayout layout;
 	private WFormTextField textFieldNom;
 	private GridBagConstraints gbcNom;
@@ -42,14 +47,15 @@ public class WFormClient extends WAbstractFormPanel {
 	
 	@Override
 	public IListable get() {
-		// TODO: ID
-		return new Client(0, this.textFieldNom.getText(), this.textFieldPrenom.getText());
+		return new Client(this.formClientID, this.textFieldNom.getText(), this.textFieldPrenom.getText(), this.textFieldPermis.getText());
 	}
 
 	@Override
 	public void set(IListable listable) {
-		this.textFieldNom.setText(((Client)listable).getNom());
-		this.textFieldPrenom.setText(((Client)listable).getPrenom());
-		this.textFieldPermis.setText(((Client)listable).getNumeroPermis());
+		Client client = (Client)listable;
+		this.formClientID = client.getId();
+		this.textFieldNom.setText(client.getNom());
+		this.textFieldPrenom.setText(client.getPrenom());
+		this.textFieldPermis.setText(client.getNumeroPermis());
 	}
 }

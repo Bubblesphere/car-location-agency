@@ -1,12 +1,14 @@
 package ui.business.tab;
 
+import java.text.Normalizer.Form;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
 import data.Client;
 import ui.business.form.WFormClient;
-import ui.utils.Event;
-import ui.utils.EventListener;
+import ui.events.Event;
+import ui.events.EventListener;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
@@ -19,16 +21,15 @@ public class WTabClient extends WSplitPaneTab {
 		WListAdd addListClient = new WListAdd(clients);
 		
 		WForm form = new WForm("Information sur le client", new WFormClient());
-		form.events().addListener(new ui.utils.EventListener() {		
+		form.events().addListener(new ui.events.EventListener() {		
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonSaveClick":
+				switch((WForm.Events)evt.getEventName()) {
+					case BUTTON_SAVE_CLICK:
 						clients.set(addListClient.getSelectedIndex(), (Client)form.get());
 						addListClient.setModel(clients);
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}	
 			}
@@ -37,16 +38,17 @@ public class WTabClient extends WSplitPaneTab {
 		addListClient.events().addListener(new EventListener() {
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonAddClick":
-						// TODO: Handle new empty location
-						addListClient.addElement(new Client(3, "Dallaire", "Deric"));
+				
+				switch((WListAdd.Events)evt.getEventName()) {
+					case BUTTON_ADD_CLICKED:
+						// TODO: fetch clientReturnedFromCreationWithinDb from db
+						Client clientReturnedFromCreationWithinDb = new Client(3, "Dallaire", "Deric", "DSAD12");
+						addListClient.addElement(clientReturnedFromCreationWithinDb);
 						break;
-					case "ListValueChanged":
+					case LIST_VALUE_CHANGED:
 						form.set(clients.getElementAt(addListClient.getSelectedIndex()));
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}		
 			}

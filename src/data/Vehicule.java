@@ -220,11 +220,6 @@ public class Vehicule implements IListable {
   public void setId(int vehiculeId) {
     this.id = vehiculeId;
   }
-
-	@Override
-	public int getKey() {
-		return this.getId();
-	}
 	
 	@Override
 	public String getDisplayedText() {

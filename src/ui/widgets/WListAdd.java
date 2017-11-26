@@ -11,8 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import data.IListable;
-import ui.utils.Event;
-import ui.utils.EventBubbler;
+import ui.events.Event;
+import ui.events.EventBubbler;
+import ui.events.IEventName;
 
 public class WListAdd extends JPanel {
 	private EventBubbler events;
@@ -24,6 +25,10 @@ public class WListAdd extends JPanel {
 	private JScrollPane scrollPane;
 	private GridBagConstraints gbcScrollPane;
 	
+	public static enum Events implements IEventName {
+		LIST_VALUE_CHANGED,
+		BUTTON_ADD_CLICKED
+	}
 	
 	public WListAdd(DefaultListModel<? extends IListable> list) {
 	    this.events = new EventBubbler(this.listenerList);
@@ -36,11 +41,10 @@ public class WListAdd extends JPanel {
 		this.setLayout(this.layout);
 		
 		widgetList = new WList(list);
-		widgetList.events().addListener(new ui.utils.EventListener() {		
+		widgetList.events().addListener(new ui.events.EventListener() {		
 			@Override
 			public void handleEvent(Event evt) {
-				System.out.println("ListValueChanged from ListAdd");
-				eventHandler("ListValueChanged");
+				eventHandler(Events.LIST_VALUE_CHANGED);
 			}
 		});
 		
@@ -64,7 +68,7 @@ public class WListAdd extends JPanel {
 		this.addButton.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		eventHandler("ButtonAddClick");
+	    		eventHandler(Events.BUTTON_ADD_CLICKED);
 	    	}
 	    });
 	}
@@ -85,8 +89,8 @@ public class WListAdd extends JPanel {
 		this.widgetList.addElement(listable);
 	}
 	
-	private void eventHandler(String command) {
-		this.events.fireEvent(new Event(this, command));
+	private void eventHandler(Events eventName) {
+		this.events.fireEvent(new Event(this, eventName));
 	}
 }
 

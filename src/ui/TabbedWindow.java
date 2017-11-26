@@ -73,9 +73,9 @@ public class TabbedWindow extends JFrame {
     users.addElement(new Utilisateur("Doe", "John", 0, "password", "dallaire.deric@gmail.com", 0, 1, false));
     
     DefaultListModel<Client> clients = new DefaultListModel<Client>();
-    clients.addElement(new Client(0, "Deric", "Dallaire"));
-    clients.addElement(new Client(1, "Bruno", "Hamel"));
-    clients.addElement(new Client(2, "Jean", "Bob"));
+    clients.addElement(new Client(0, "Deric", "Dallaire", "PERMIS"));
+    clients.addElement(new Client(1, "Bruno", "Hamel", "PERMIS2"));
+    clients.addElement(new Client(2, "Jean", "Bob", "Permis3"));
     
     DefaultListModel<Classe> classes = new DefaultListModel<Classe>();
     classes.addElement(new Classe(0, "Sport", 30));

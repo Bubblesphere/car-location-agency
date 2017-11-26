@@ -5,8 +5,8 @@ import javax.swing.JTabbedPane;
 
 import data.Parametre;
 import ui.business.form.WFormParametre;
-import ui.utils.Event;
-import ui.utils.EventListener;
+import ui.events.Event;
+import ui.events.EventListener;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
@@ -19,16 +19,15 @@ public class WTabParametre extends WSplitPaneTab {
 		WListAdd addListParametre = new WListAdd(parametres);
 		
 		WForm form = new WForm("Information sur le paramètre", new WFormParametre());
-		form.events().addListener(new ui.utils.EventListener() {		
+		form.events().addListener(new ui.events.EventListener() {		
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonSaveClick":
+				switch((WForm.Events)evt.getEventName()) {
+					case BUTTON_SAVE_CLICK:
 						parametres.set(addListParametre.getSelectedIndex(), (Parametre)form.get());
 						addListParametre.setModel(parametres);
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}	
 			}
@@ -37,16 +36,15 @@ public class WTabParametre extends WSplitPaneTab {
 		addListParametre.events().addListener(new EventListener() {
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonAddClick":
+				switch((WListAdd.Events)evt.getEventName()) {
+					case BUTTON_ADD_CLICKED:
 						// TODO: Handle new empty location
 						//addListParametre.addElement(new Parametre());
 						break;
-					case "ListValueChanged":
+					case LIST_VALUE_CHANGED:
 						form.set(parametres.getElementAt(addListParametre.getSelectedIndex()));
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}		
 			}

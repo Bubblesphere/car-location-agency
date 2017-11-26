@@ -5,8 +5,8 @@ import javax.swing.JTabbedPane;
 
 import data.Vehicule;
 import ui.business.form.WFormVehicule;
-import ui.utils.Event;
-import ui.utils.EventListener;
+import ui.events.Event;
+import ui.events.EventListener;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
@@ -19,11 +19,11 @@ public class WTabVehicule extends WSplitPaneTab {
 		WListAdd addListVehicule = new WListAdd(vehicules);
 		
 		WForm form = new WForm("Information sur le véhicule", new WFormVehicule());
-		form.events().addListener(new ui.utils.EventListener() {		
+		form.events().addListener(new ui.events.EventListener() {		
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonSaveClick":
+				switch((WForm.Events)evt.getEventName()) {
+					case BUTTON_SAVE_CLICK:
 						vehicules.set(addListVehicule.getSelectedIndex(), (Vehicule)form.get());
 						addListVehicule.setModel(vehicules);
 						break;
@@ -37,12 +37,12 @@ public class WTabVehicule extends WSplitPaneTab {
 		addListVehicule.events().addListener(new EventListener() {
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonAddClick":
+				switch((WListAdd.Events)evt.getEventName()) {
+					case BUTTON_ADD_CLICKED:
 						// TODO: Handle new empty location
 						//addListVehicule.addElement(new Vehicule(3, "Dallaire", "Deric"));
 						break;
-					case "ListValueChanged":
+					case LIST_VALUE_CHANGED:
 						form.set(vehicules.getElementAt(addListVehicule.getSelectedIndex()));
 						break;
 					default:

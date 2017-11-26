@@ -134,11 +134,6 @@ public class Reservation implements IListable {
   }
 
   @Override
-  public int getKey() {
-  	return this.id;
-  }
-
-  @Override
   public String getDisplayedText() {
   	return this.getLocataire().getPrenom() + " " + this.getLocataire().getNom() + " - " + this.getStartDate().toString();
   }

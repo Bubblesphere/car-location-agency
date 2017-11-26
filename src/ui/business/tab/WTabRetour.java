@@ -5,8 +5,8 @@ import javax.swing.JTabbedPane;
 
 import data.Location;
 import ui.business.form.WFormRetour;
-import ui.utils.Event;
-import ui.utils.EventListener;
+import ui.events.Event;
+import ui.events.EventListener;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
@@ -19,11 +19,11 @@ public class WTabRetour extends WSplitPaneTab {
 		WListAdd addListLocation = new WListAdd(locations);
 		
 		WForm form = new WForm("Information sur le retour", new WFormRetour());
-		form.events().addListener(new ui.utils.EventListener() {		
+		form.events().addListener(new ui.events.EventListener() {		
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonSaveClick":
+				switch((WForm.Events)evt.getEventName()) {
+					case BUTTON_SAVE_CLICK:
 						locations.set(addListLocation.getSelectedIndex(), (Location)form.get());
 						addListLocation.setModel(locations);
 						break;
@@ -37,16 +37,15 @@ public class WTabRetour extends WSplitPaneTab {
 		addListLocation.events().addListener(new EventListener() {
 			@Override
 			public void handleEvent(Event evt) {
-				switch(evt.getCommand()) {
-					case "ButtonAddClick":
+				switch((WListAdd.Events)evt.getEventName()) {
+					case BUTTON_ADD_CLICKED:
 						// TODO: Handle new empty location
 						//addListClient.addElement(new Location()));
 						break;
-					case "ListValueChanged":
+					case LIST_VALUE_CHANGED:
 						form.set(locations.getElementAt(addListLocation.getSelectedIndex()));
 						break;
 					default:
-						System.out.println("Unhandled event");
 						break;
 				}		
 			}
