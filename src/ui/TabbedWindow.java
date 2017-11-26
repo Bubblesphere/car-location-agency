@@ -11,8 +11,12 @@ import javax.swing.border.EmptyBorder;
 
 import data.Classe;
 import data.Client;
-import ui.business.WClientTab;
-import ui.business.WFormClient;
+import ui.business.form.WFormClient;
+import ui.business.tab.WTabClient;
+import ui.business.tab.WTabRetour;
+import ui.business.tab.WTabParametre;
+import ui.business.tab.WTabReservation;
+import ui.business.tab.WTabVehicule;
 import ui.widgets.WList;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
@@ -46,6 +50,7 @@ import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 import data.Location;
 import data.Parametre;
+import data.Reservation;
 import data.TypeParametre;
 import data.Utilisateur;
 import data.Vehicule;
@@ -93,7 +98,6 @@ public class TabbedWindow extends JFrame {
     JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
     contentPane.add(tabbedPane, BorderLayout.CENTER);
     
-    
     DefaultListModel<Utilisateur> users = new DefaultListModel<Utilisateur>();
     users.addElement(new Utilisateur("Doe", "John", 0, "password", "dallaire.deric@gmail.com", 0, 1, false));
     
@@ -110,9 +114,12 @@ public class TabbedWindow extends JFrame {
     vehicules.addElement(new Vehicule(0, classes.get(0), "Tesla", "Roadster", 2017, 0, 0, "WTF FTW", false, 120, ""));
     vehicules.addElement(new Vehicule(1, classes.get(1), "Honda", "Civic", 2016, 10000, 0, "PLA QUE", false, 100, ""));
     
-    DefaultListModel<Location> locations = new DefaultListModel<Location>();
-    locations.addElement(new Location(0, clients.get(0), classes.get(0), LocalDate.now(), LocalDate.now(), "", users.get(0), 0, 
+    DefaultListModel<Location> retours = new DefaultListModel<Location>();
+    retours.addElement(new Location(0, clients.get(0), classes.get(0), LocalDate.now(), LocalDate.now(), "", users.get(0), 0, 
     		vehicules.get(0), users.get(0), LocalDate.now(), false, false, 0, 0, 100, "", 0));
+    
+    DefaultListModel<Reservation> reservations = new DefaultListModel<Reservation>();
+    reservations.addElement(new Reservation(0, 0, clients.get(0), 1, classes.get(0), LocalDate.now(), LocalDate.now(), "", 0, users.get(0)));
     
     DefaultListModel<TypeParametre> typeParametres = new DefaultListModel<TypeParametre>();
     
@@ -120,10 +127,10 @@ public class TabbedWindow extends JFrame {
     parametres.addElement(new Parametre(0, "Prix assurance", 0, 40, LocalDate.now(), LocalDate.now()));
     parametres.addElement(new Parametre(0, "Prix test", 1, 50, LocalDate.now(), LocalDate.now()));
     
-    WClientTab tabClient = new WClientTab(tabbedPane, clients);
-    WSplitPaneTab tabReservation = new WSplitPaneTab(tabbedPane, "Réservation");
-    WSplitPaneTab tabRetour = new WSplitPaneTab(tabbedPane, "Retour");
-    WSplitPaneTab tabVehicule = new WSplitPaneTab(tabbedPane, "Véhicule");
-    WSplitPaneTab tabParametre = new WSplitPaneTab(tabbedPane, "Paramètre");
+    WTabClient tabClient = new WTabClient(tabbedPane, clients);
+    WTabReservation tabReservation = new WTabReservation(tabbedPane, reservations);
+    WTabRetour tabRetour = new WTabRetour(tabbedPane, retours);
+    WTabVehicule tabVehicule = new WTabVehicule(tabbedPane, vehicules);
+    WTabParametre tabParametre = new WTabParametre(tabbedPane, parametres);
   }
 }

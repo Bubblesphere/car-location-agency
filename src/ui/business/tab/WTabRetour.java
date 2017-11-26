@@ -1,30 +1,33 @@
-package ui.business;
+package ui.business.tab;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
 import data.Client;
+import data.Location;
+import ui.business.form.WFormClient;
+import ui.business.form.WFormRetour;
 import ui.utils.Event;
 import ui.utils.EventListener;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
-public class WClientTab extends WSplitPaneTab {
+public class WTabRetour extends WSplitPaneTab {
 
-	public WClientTab(JTabbedPane tabbedPane, DefaultListModel<Client> clients) {
+	public WTabRetour(JTabbedPane tabbedPane, DefaultListModel<Location> locations) {
 		super(tabbedPane, "Client");
 		
-		WListAdd addListClient = new WListAdd(clients);
+		WListAdd addListLocation = new WListAdd(locations);
 		
-		WForm form = new WForm("Information sur le client", new WFormClient());
+		WForm form = new WForm("Information sur le retour", new WFormRetour());
 		form.events().addListener(new ui.utils.EventListener() {		
 			@Override
 			public void handleEvent(Event evt) {
 				switch(evt.getCommand()) {
 					case "ButtonSaveClick":
-						clients.set(addListClient.getSelectedIndex(), (Client)form.get());
-						addListClient.setModel(clients);
+						locations.set(addListLocation.getSelectedIndex(), (Location)form.get());
+						addListLocation.setModel(locations);
 						break;
 					default:
 						System.out.println("Unhandled event");
@@ -33,15 +36,16 @@ public class WClientTab extends WSplitPaneTab {
 			}
 		});
 		
-		addListClient.events().addListener(new EventListener() {
+		addListLocation.events().addListener(new EventListener() {
 			@Override
 			public void handleEvent(Event evt) {
 				switch(evt.getCommand()) {
 					case "ButtonAddClick":
-						addListClient.addElement(new Client(3, "Dallaire", "Deric"));
+						// TODO: Handle new empty location
+						//addListClient.addElement(new Location()));
 						break;
 					case "ListValueChanged":
-						form.set(clients.getElementAt(addListClient.getSelectedIndex()));
+						form.set(locations.getElementAt(addListLocation.getSelectedIndex()));
 						break;
 					default:
 						System.out.println("Unhandled event");
@@ -50,7 +54,7 @@ public class WClientTab extends WSplitPaneTab {
 			}
 		});
 		
-		this.setLeftComponent(addListClient);
+		this.setLeftComponent(addListLocation);
 		this.setRightComponent(form);
 	}
 

@@ -1,4 +1,4 @@
-package ui.business;
+package ui.business.form;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -21,8 +21,6 @@ import ui.widgets.WFormButton;
 import ui.widgets.WFormTextField;
 
 public class WFormClient extends WAbstractFormPanel {
-	private EventBubbler events;
-	
 	private GridBagLayout layout;
 	private WFormTextField textFieldNom;
 	private GridBagConstraints gbcNom;
@@ -32,8 +30,6 @@ public class WFormClient extends WAbstractFormPanel {
 	private GridBagConstraints gbcPermis;
 	
 	public WFormClient() {
-		this.events = new EventBubbler(this.listenerList);
-	    
 	    this.layout = FormBuilder.getLayout();
 	    this.setLayout(this.layout);
 	    
@@ -68,14 +64,4 @@ public class WFormClient extends WAbstractFormPanel {
 		this.textFieldPrenom.setText(((Client)listable).getPrenom());
 		this.textFieldPermis.setText(((Client)listable).getNumeroPermis());
 	}
-	
-	public EventBubbler events() {
-		return this.events;
-	}
-	
-	private void eventHandler(String command) {
-		this.events.fireEvent(new Event(this, command));
-	}
-
-
 }

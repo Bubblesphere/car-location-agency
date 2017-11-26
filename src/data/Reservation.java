@@ -2,7 +2,7 @@ package data;
 
 import java.time.LocalDate;
 
-public class Reservation {
+public class Reservation implements IListable {
   private int id;
   private int clientId;
   private Client locataire;
@@ -131,6 +131,16 @@ public class Reservation {
     this.note = note;
     this.utilisateurId = utilisateurId;
     this.employe = employe;
+  }
+
+  @Override
+  public int getKey() {
+  	return this.id;
+  }
+
+  @Override
+  public String getDisplayedText() {
+  	return this.getLocataire().getPrenom() + " " + this.getLocataire().getNom() + " - " + this.getStartDate().toString();
   }
 
 }
