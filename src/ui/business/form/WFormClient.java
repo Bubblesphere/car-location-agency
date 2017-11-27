@@ -4,14 +4,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
 
-import dao.ClientDao;
 import data.Client;
 import data.IListable;
 import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WForm;
 import ui.widgets.WFormTextField;
 
 public class WFormClient extends WAbstractFormPanel {

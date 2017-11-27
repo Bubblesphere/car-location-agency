@@ -37,16 +37,16 @@ public class WTabClient extends WSplitPaneTab {
           break;
         }
       }
-    });
-
+    });    
+    
     addListClient.events().addListener(new EventListener() {
       @Override
       public void handleEvent(Event evt) {
 
         switch ((WListAdd.Events) evt.getEventName()) {
         case BUTTON_ADD_CLICKED:
-          if(!form.getHasUnsavedContent()){
-          Client emptyClient = new Client(-1, "Nouveau", "Nouveau");
+          if (!form.getHasUnsavedContent()) {
+            Client emptyClient = new Client(-1, "Nouveau", "Nouveau");
             addListClient.addElement(emptyClient);
             form.set(emptyClient);
             form.setHasUnsavedContent(true);
@@ -54,27 +54,27 @@ public class WTabClient extends WSplitPaneTab {
           break;
         case LIST_VALUE_CHANGED:
           Client selectedClient = clients.getElementAt(addListClient.getSelectedIndex());
-          
-          if(form.getHasUnsavedContent()){
-            int dialogResult = JOptionPane.showConfirmDialog (null, 
+
+          if (form.getHasUnsavedContent()) {
+            int dialogResult = JOptionPane.showConfirmDialog(null,
                 "Vous êtes en train de changer de client, voulez vous-l'enregistrer avant de quitter ?",
-                "Attention",
-                JOptionPane.YES_NO_CANCEL_OPTION);
-            
-            if(dialogResult == JOptionPane.YES_OPTION){              
+                "Attention", JOptionPane.YES_NO_CANCEL_OPTION);
+
+            if (dialogResult == JOptionPane.YES_OPTION) {
               Client currentClient = (Client) form.get();
               currentClient = ClientDao.create(currentClient);
-              clients.set(clients.size()-1, currentClient);      
+              clients.set(clients.size() - 1, currentClient);
               addListClient.setModel(clients);
-              form.setHasUnsavedContent(false);              
-            }else if(dialogResult == JOptionPane.NO_OPTION){
-              clients.remove(clients.size() - 1);
-              form.setHasUnsavedContent(false);              
+              form.setHasUnsavedContent(false);
+            } else if (dialogResult == JOptionPane.NO_OPTION) {
+              if(selectedClient.getId() == -1){
+                clients.remove(clients.size() - 1);
+              }              
+              form.setHasUnsavedContent(false);
             }
             break;
           }
           form.set(clients.getElementAt(addListClient.getSelectedIndex()));
-          
           break;
         default:
           break;
