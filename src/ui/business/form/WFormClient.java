@@ -38,7 +38,8 @@ public class WFormClient extends WAbstractFormPanel {
   private WFormTextField textFieldNote;
   private GridBagConstraints gbcNote;
   
-  // TODO: dateDeNaissance
+  private WFormTextField textFieldDateDeNaissance;
+  private GridBagConstraints gbcDateDeNaissance;
 
   public WFormClient() {
     this.layout = FormBuilder.getLayout();
@@ -68,9 +69,15 @@ public class WFormClient extends WAbstractFormPanel {
     this.gbcNumeroTelephone.gridy = 2;
     this.add(this.textFieldNumeroTelephone, this.gbcNumeroTelephone);
 
+    this.textFieldDateDeNaissance = new WFormTextField("Date de naissance");
+    this.gbcDateDeNaissance = FormBuilder.getGBCPartialRow();
+    this.gbcDateDeNaissance.gridx = 0;
+    this.gbcDateDeNaissance.gridy = 3;
+    this.add(this.textFieldDateDeNaissance, this.gbcDateDeNaissance); 
+    
     this.textFieldPermis = new WFormTextField("Permis de conduire");
-    this.gbcPermis = FormBuilder.getGBCFullRow();
-    this.gbcPermis.gridx = 0;
+    this.gbcPermis = FormBuilder.getGBCPartialRow();
+    this.gbcPermis.gridx = 1;
     this.gbcPermis.gridy = 3;
     this.add(this.textFieldPermis, this.gbcPermis);
     
@@ -84,7 +91,7 @@ public class WFormClient extends WAbstractFormPanel {
     this.gbcNote = FormBuilder.getGBCFullRow();
     this.gbcNote.gridx = 0;
     this.gbcNote.gridy = 5;
-    this.add(this.textFieldNote, this.gbcNote); 
+    this.add(this.textFieldNote, this.gbcNote);
 
     EventListener textBoxValueChangedListener = new EventListener() {
         @Override
@@ -106,6 +113,7 @@ public class WFormClient extends WAbstractFormPanel {
     textFieldPermis.events().addListener(textBoxValueChangedListener);
     textFieldAdresse.events().addListener(textBoxValueChangedListener);
     textFieldNote.events().addListener(textBoxValueChangedListener);
+    textFieldDateDeNaissance.events().addListener(textBoxValueChangedListener);
   }
   
   @Override
@@ -118,8 +126,7 @@ public class WFormClient extends WAbstractFormPanel {
         this.textFieldNumeroTelephone.getText(), 
         this.textFieldCourriel.getText(), 
         this.textFieldNote.getText(), 
-        LocalDate.parse("2017-11-13"));
- // TODO: dateDeNaissance
+        LocalDate.parse(textFieldDateDeNaissance.getText()));
   }
 
   @Override
@@ -133,7 +140,7 @@ public class WFormClient extends WAbstractFormPanel {
     this.textFieldNumeroTelephone.setText(client.getNumeoTelphone());
     this.textFieldCourriel.setText(client.getCourriel());
     this.textFieldNote.setText(client.getNote());
+    this.textFieldDateDeNaissance.setText(client.getDateDeNaissance().toString());
     this.hasUnsavedContent = false;
- // TODO: dateDeNaissance
   }
 }
