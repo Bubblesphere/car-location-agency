@@ -29,9 +29,10 @@ public class WTabClient extends WSplitPaneTab {
           int clientId = addListClient.getSelectedIndex();
           clients.set(clientId, (Client) form.get());
           Client currentClient = clients.getElementAt(clientId);
-          ClientDao.update(currentClient);
+          ClientDao.update(currentClient);         
           addListClient.setModel(clients);
           form.setHasUnsavedContent(false);
+          
           break;
         default:
           break;
@@ -48,7 +49,8 @@ public class WTabClient extends WSplitPaneTab {
           if (!form.getHasUnsavedContent()) {
             Client emptyClient = new Client(-1, "Nouveau", "Nouveau");
             addListClient.addElement(emptyClient);
-            form.set(emptyClient);
+            form.set(emptyClient);            
+            addListClient.setSelectedIndex(clients.size() - 1);
             form.setHasUnsavedContent(true);
           }
           break;
@@ -71,8 +73,9 @@ public class WTabClient extends WSplitPaneTab {
                 clients.remove(clients.size() - 1);
               }              
               form.setHasUnsavedContent(false);
+            }else{
+              break;
             }
-            break;
           }
           form.set(clients.getElementAt(addListClient.getSelectedIndex()));
           break;
