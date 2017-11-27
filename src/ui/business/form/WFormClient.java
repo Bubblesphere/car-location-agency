@@ -110,8 +110,6 @@ public class WFormClient extends WAbstractFormPanel {
     textFieldNote.events().addListener(textBoxValueChangedListener);
   }
   
-  
-  
   @Override
   public IListable get() {
     return new Client(this.textFieldNom.getText(),
