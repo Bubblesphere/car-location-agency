@@ -1,14 +1,12 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import data.Parametre;
 
 public class ParametreDao {
@@ -85,7 +83,9 @@ public class ParametreDao {
     try (Connection connection = DataAccess.getConnection()) {
 
       String query = "SELECT P.id, P.valeur, P.type_id, P.date_debut, P.date_fin, T.description "
-          + "FROM Parametres P LEFT JOIN TypesParametre T ON T.id = P.type_id";
+          + "FROM Parametres P LEFT JOIN TypesParametre T ON T.id = P.type_id "
+          + "GROUP BY P.type_id "
+          + "ORDER BY P.type_id ASC, P.id DESC";
       if(active){
         query += " WHERE P.date_fin IS NULL";
       }
@@ -106,8 +106,54 @@ public class ParametreDao {
     return result;
   }
 
+  public static Parametre updateValue(int oldId, Parametre parametre) {
+    try (Connection connection = DataAccess.getConnection()) {
+      LocalDate now = LocalDate.now();
+
+      Parametre oldParam = parametre;
+      archiver(oldId);
+
+      parametre.setDateDebut(now);
+      parametre.setDateFin(null);
+
+      create(parametre);
+
+      return parametre;
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
   /**
    * Méthode pour mettre à jour un paramètre
+   *
+   * @param pid ID du paramètre à archiver
+   * @return true si l'archivage
+   */
+  public static Boolean archiver(int pid) {
+    try (Connection connection = DataAccess.getConnection()) {
+      final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+
+      String query = "UPDATE Parametres SET date_fin = ? WHERE id = ?";
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setString(1, LocalDate.now().format(formatter));
+      statement.setInt(2, pid);
+
+      statement.executeUpdate();
+
+      return true;
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  /**
+   * M?thode pour mettre ? jour un param?tre
    * 
    * @param parametre
    *          le paramètre avec les nouvelle valeurs.
@@ -118,11 +164,11 @@ public class ParametreDao {
 
       String query = "UPDATE Parametres SET date_fin = ? WHERE id = ?";
       PreparedStatement statement = connection.prepareStatement(query);      
-      statement.setObject(4, parametre.getDateFin());
-      statement.setInt(5, parametre.getId());
+      statement.setObject(1, parametre.getDateFin());
+      statement.setInt(2, parametre.getId());
       statement.execute();
       
-      return create(new Parametre(parametre.getTypeId(), parametre.getValeur()));
+      return parametre;
 
     } catch (SQLException e) {
       e.printStackTrace();

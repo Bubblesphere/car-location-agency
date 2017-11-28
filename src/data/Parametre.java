@@ -70,16 +70,8 @@ public class Parametre extends TypeParametre implements IListable {
    * 
    * @param typeId
    *          id du type de paramètre.
-   * @param description
-   *          description du paramètre.
-   * @param id
-   *          id du paramètre.
    * @param valeur
    *          valeur du paramètre.
-   * @param dateDebut
-   *          date d'entré en vigueur de ce paramètre.
-   * @param dateFin
-   *          date de désactivation de ce paramètre.
    */
   public Parametre(int typeId, float valeur) {
     super(typeId);    

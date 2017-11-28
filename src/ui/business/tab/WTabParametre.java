@@ -26,11 +26,18 @@ public class WTabParametre extends WSplitPaneTab {
         switch ((WForm.Events) evt.getEventName()) {
           case BUTTON_SAVE_CLICK:
             int parameterId = listParametre.getSelectedIndex();
-            parametres.set(parameterId, (Parametre) form.get());
             Parametre currentParametre = parametres.getElementAt(parameterId);
-            ParametreDao.update(currentParametre);
-            listParametre.setModel(parametres);
+            Parametre formVals = (Parametre) form.get();
+            Parametre newValues = currentParametre;
+
+            newValues.setValeur(formVals.getValeur());
+
+            parametres.set(parameterId, newValues);
+
+            ParametreDao.updateValue(currentParametre.getId(), newValues);
+            listParametre.setModel(parametres); //Pourquoi est-ce que ça refresh avec NULL comme valeur dans la liste? Parce que le form ne contient pas de type?
             break;
+
           default:
             break;
         }
