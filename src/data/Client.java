@@ -164,13 +164,17 @@ public class Client extends Personne implements IListable {
    * @param prenom
    *          prénom du client.
    */
-  public Client(int id, String nom, String prenom, String permis) {
+  public Client(int id, String nom, String prenom) {
     super(nom, prenom);
     this.id = id;
   }
 
   @Override
   public String getDisplayedText() {
-    return this.getPrenom() + " " + this.getNom();
+    String display = this.getPrenom() + " " + this.getNom();
+    if(this.getId() != -1){
+      display = this.getId() + "-" + display;
+    }
+    return display;
   }
 }

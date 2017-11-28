@@ -69,6 +69,10 @@ public class WForm extends JPanel {
 	  return this.form.getHasUnsavedContent();
   }
   
+  public void setHasUnsavedContent(Boolean hasUnsavedContent) {
+    this.form.setHasUnsavedContent(hasUnsavedContent);
+}
+  
   private void save() {
 	  this.form.setHasUnsavedContent(false);
   }

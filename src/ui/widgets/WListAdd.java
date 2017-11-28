@@ -75,6 +75,10 @@ public class WListAdd extends JPanel {
   public int getSelectedIndex() {
     return this.widgetList.getLastSelectedIndex();
   }
+  
+  public void setSelectedIndex(int index){
+    this.widgetList.setSelectedIndex(index);
+  }
 
   public EventBubbler events() {
     return this.events;
