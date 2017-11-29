@@ -30,10 +30,14 @@ public class WTabClient extends WSplitPaneTab {
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
         case BUTTON_SAVE_CLICK:
-          int clientId = addListClient.getSelectedIndex();
-          clients.set(clientId, (Client) form.get());
-          Client currentClient = clients.getElementAt(clientId);
-          ClientDao.update(currentClient);         
+          int clientId = addListClient.getSelectedIndex();          
+          Client currentClient = (Client) form.get();
+          if(currentClient.getId() > 0){
+            ClientDao.update(currentClient);
+          }else{
+            currentClient = ClientDao.create(currentClient);
+          }       
+          clients.set(clientId, currentClient);
           addListClient.setModel(clients);
           form.setHasUnsavedContent(false);          
           break;

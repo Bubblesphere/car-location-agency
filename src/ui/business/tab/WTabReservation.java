@@ -3,6 +3,7 @@ package ui.business.tab;
 import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
+import dao.ReservationDao;
 import data.Reservation;
 import ui.business.form.WFormReservation;
 import ui.events.Event;
@@ -27,6 +28,7 @@ public class WTabReservation extends WSplitPaneTab {
             int reservationId = addListReservation.getSelectedIndex();
             reservations.set(reservationId, (Reservation) form.get());
             Reservation currentReservation = reservations.getElementAt(reservationId);
+            
             // TODO: Update db
             addListReservation.setModel(reservations);
             break;

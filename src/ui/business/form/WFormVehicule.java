@@ -3,8 +3,11 @@ package ui.business.form;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import data.Classe;
 import data.IListable;
 import data.Vehicule;
+import ui.events.Event;
+import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormTextField;
@@ -33,7 +36,8 @@ public class WFormVehicule extends WAbstractFormPanel {
   private GridBagConstraints gbcCapaciteEssence;
   
   private WFormTextField textFieldNote;
-  private GridBagConstraints gbcNote;
+  private GridBagConstraints gbcNote; 
+
   
   // TODO: Classe classe, int etat, Boolean desactive
   
@@ -83,14 +87,33 @@ public class WFormVehicule extends WAbstractFormPanel {
     this.gbcNote.gridx = 0;
     this.gbcNote.gridy = 4;
     this.add(this.textFieldNote, this.gbcNote);
+    
+
 
     // TODO: Classe classe, int etat, Boolean desactive
   }
+  
+  EventListener textBoxValueChangedListener = new EventListener() {
+    @Override
+    public void handleEvent(Event evt) {
+      switch ((WFormTextField.Events) evt.getEventName()) {
+      case TEXTFIELD_TEXT_CHANGED:
+        setHasUnsavedContent(true);
+        break;
+      default:
+        break;
+      }
+    }
+  };
 
   @Override
-  public IListable get() {
-    // TODO: Implement
-    return null;
+  public IListable get() {   
+ // TODO: Classe classe, int etat, Boolean desactive
+    return new Vehicule(this.formvehiculeId, new Classe(1, "test", 10.0f), this.textFieldFabricant.getText(), 
+        this.textFieldMarque.getText(), Integer.parseInt(this.textFieldAnnee.getText()), 
+        Integer.parseInt(this.textFieldKilometrage.getText()), 1, 
+        this.textFieldPlaque.getText(), false, 
+        Integer.parseInt(this.textFieldCapaciteEssence.getText()), this.textFieldNote.getText());
   }
 
   @Override

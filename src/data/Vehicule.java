@@ -133,6 +133,34 @@ public class Vehicule implements IListable {
     this.capaciteEssence = capaciteEssence;
     this.note = note;
   }
+  
+  /**
+   * Constructeur pour Véhicule avant insertion
+   *
+   * @param fabricant
+   *          fabricant du véhicule.
+   * @param marque
+   *          marque du véhicule.
+ 
+   * @param desactive
+   *          si le véhicule est désactivé.
+   * @param capaciteEssence
+   *          capacité d'essence du véhicule.
+   * @param note
+   *          commentaire.
+   */
+  public Vehicule(int vehiculeId, String fabricant, String marque) {
+    this.id = vehiculeId;
+    this.fabricant = fabricant;
+    this.marque = marque;
+    this.annee = 2017;
+    this.kilometrage = 0;
+    this.etat = 1;
+    this.plaque = "";
+    this.desactive = true;
+    this.capaciteEssence = 0;
+    this.note = "";
+  }
 
   public Classe getVClasse() {
     return this.classe;
@@ -224,7 +252,11 @@ public class Vehicule implements IListable {
 
   @Override
   public String getDisplayedText() {
-    return this.getFabricant() + " " + this.getMarque();
+    String display = this.getFabricant() + " " + this.getMarque();
+    if(this.getId() != -1){
+      display = this.getId() + "-" + display;
+    }
+    return display;
   }
 
 }

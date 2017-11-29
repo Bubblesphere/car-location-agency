@@ -90,7 +90,7 @@ public class ReservationDao {
     try (Connection connection = DataAccess.getConnection()) {
 
       String query = "SELECT id, client_id, classe_id, start_date, end_date, "
-          + "note AS reservation_note, utilisateur_id FROM Reservations WHERE id = ?";
+          + "note AS reservation_note, utilisateur_id FROM Reservations";
       Statement statement = connection.createStatement();
       ResultSet resultSet = statement.executeQuery(query);
 
