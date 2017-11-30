@@ -36,7 +36,7 @@ public class WFormReservation extends WAbstractFormPanel {
     this.layout = FormBuilder.getLayout();
     this.setLayout(this.layout);
 
-    this.textFieldStartDate = new WFormTextField("Début");
+    this.textFieldStartDate = new WFormTextField("Dï¿½but");
     this.gbcStartDate = FormBuilder.getGBCPartialRow();
     this.gbcStartDate.gridx = 0;
     this.gbcStartDate.gridy = 1;
@@ -80,6 +80,11 @@ public class WFormReservation extends WAbstractFormPanel {
         new Classe(1, "sedan", 10.0f), LocalDate.parse(this.textFieldStartDate.getText()),
         LocalDate.parse(this.textFieldEndDate.getText()), this.textFieldNote.getText(),
         new Utilisateur("nom", "prenom", 1, "blbalblab", "courriel", 123, 1, false));
+  }
+  
+  @Override
+  public void init() {
+	  
   }
 
   @Override

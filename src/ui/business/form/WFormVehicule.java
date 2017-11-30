@@ -115,6 +115,11 @@ public class WFormVehicule extends WAbstractFormPanel {
         this.textFieldPlaque.getText(), false, 
         Integer.parseInt(this.textFieldCapaciteEssence.getText()), this.textFieldNote.getText());
   }
+  
+  @Override
+  public void init() {
+	  
+  }
 
   @Override
   public void set(IListable listable) {    

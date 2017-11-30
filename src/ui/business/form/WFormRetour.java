@@ -21,6 +21,11 @@ public class WFormRetour extends WAbstractFormPanel {
     // TODO: Implement
     return null;
   }
+  
+  @Override
+  public void init() {
+	  
+  }
 
   @Override
   public void set(IListable listable) {

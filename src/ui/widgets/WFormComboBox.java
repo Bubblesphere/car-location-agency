@@ -42,6 +42,10 @@ public class WFormComboBox extends JPanel {
 	  this.comboBox.setRenderer(new ListableCellRenderer());
 	  this.add(this.comboBox);
 	}
+	
+	public void set(ArrayList <? extends IListable> list) {
+		this.comboBox.setModel(ArrayListHelper.toDefaultComboBoxListModel(list));
+	}
 
 	public IListable getSelected() {
 		return (IListable)this.comboBox.getSelectedItem();

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.sun.java.swing.plaf.windows.WindowsComboBoxUI.WindowsComboBoxEditor;
 
+import dao.ClientDao;
 import data.Client;
 import data.IListable;
 import ui.events.Event;
@@ -49,12 +50,12 @@ public class WFormClient extends WAbstractFormPanel {
   private WFormTextField textFieldDateDeNaissance;
   private GridBagConstraints gbcDateDeNaissance;
 
-  public WFormClient(ArrayList<Client> clients) {
+  public WFormClient() {
     this.layout = FormBuilder.getLayout();
     this.setLayout(this.layout);
     
     // TODO: Remove
-    this.comboBox = new WFormComboBox("Exemple combobox",  clients);
+    this.comboBox = new WFormComboBox("Exemple combobox", (ArrayList<? extends IListable>) ClientDao.retrieveAll());
     this.gbcComboBox = FormBuilder.getGBCPartialRow();
     this.gbcComboBox.gridx = 0;
     this.gbcComboBox.gridy = 1;
@@ -157,5 +158,20 @@ public class WFormClient extends WAbstractFormPanel {
     this.textFieldNote.setText(client.getNote());
     this.textFieldDateDeNaissance.setText(client.getDateDeNaissance().toString());
     this.hasUnsavedContent = false;
+  }
+  
+  @Override
+  public void init() {
+	  this.formClientID = -1;
+	    this.textFieldNom.setText("");
+	    this.textFieldPrenom.setText("");
+	    this.textFieldPermis.setText("");
+	    this.textFieldAdresse.setText("");
+	    this.textFieldNumeroTelephone.setText("");
+	    this.textFieldCourriel.setText("");
+	    this.textFieldNote.setText("");
+	    this.textFieldDateDeNaissance.setText("");
+	    this.hasUnsavedContent = false;
+	    this.comboBox.set((ArrayList) ClientDao.retrieveAll());
   }
 }

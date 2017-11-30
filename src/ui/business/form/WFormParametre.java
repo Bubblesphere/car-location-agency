@@ -49,4 +49,9 @@ public class WFormParametre extends WAbstractFormPanel {
 
     this.textFieldValue.setText(Float.toString(param.getValeur()));
   }
+  
+  @Override
+  public void init() {
+	  
+  }
 }

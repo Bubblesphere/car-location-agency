@@ -14,4 +14,5 @@ public abstract class WAbstractFormPanel extends JPanel {
 	}
 	public abstract IListable get();
 	public abstract void set(IListable listable);
+	public abstract void init();
 }

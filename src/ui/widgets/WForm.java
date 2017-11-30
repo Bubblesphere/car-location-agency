@@ -63,6 +63,8 @@ public class WForm extends JPanel {
     this.gbcSaveButton.gridx = 1;
     this.gbcSaveButton.gridy = 3;
     this.add(this.saveButton, this.gbcSaveButton);
+    
+    this.form.init();
   }
 
   public boolean getHasUnsavedContent() {
@@ -83,6 +85,10 @@ public class WForm extends JPanel {
 
   public void set(IListable listable) {
     this.form.set(listable);
+  }
+  
+  public void init() {
+	  this.form.init();
   }
 
   public EventBubbler events() {

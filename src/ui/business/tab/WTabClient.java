@@ -3,6 +3,8 @@ package ui.business.tab;
 import data.Client;
 import data.Utilisateur;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,14 +26,17 @@ import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabClient extends WSplitPaneTab {
+	private WForm form;
 
-  public WTabClient(JTabbedPane tabbedPane, ArrayList<Client> clients) {
+  public WTabClient(JTabbedPane tabbedPane) {
     super(tabbedPane, "Client");
+    
+    ArrayList<Client> clients = (ArrayList<Client>)ClientDao.retrieveAll();
 
     WListAdd addListClient = new WListAdd(clients);
 
-    WForm form = new WForm("Information sur le client", new WFormClient(clients));
-    form.events().addListener(new ui.events.EventListener() {
+    this.form = new WForm("Information sur le client", new WFormClient());
+    this.form.events().addListener(new ui.events.EventListener() {
       @Override
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
@@ -51,7 +56,7 @@ public class WTabClient extends WSplitPaneTab {
           break;
         }
       }
-    });    
+    });       
     
     addListClient.events().addListener(new EventListener() {
       @Override
@@ -73,7 +78,7 @@ public class WTabClient extends WSplitPaneTab {
 
           if (form.getHasUnsavedContent()) {
             int dialogResult = JOptionPane.showConfirmDialog(null,
-                "Vous êtes en train de changer de client, voulez vous-l'enregistrer avant de quitter ?",
+                "Vous ï¿½tes en train de changer de client, voulez vous-l'enregistrer avant de quitter ?",
                 "Attention", JOptionPane.YES_NO_CANCEL_OPTION);
 
             if (dialogResult == JOptionPane.YES_OPTION) {
@@ -112,4 +117,7 @@ public class WTabClient extends WSplitPaneTab {
     this.setRightComponent(form);
   }
 
+  public WForm getForm() {
+	  return this.form;
+  }
 }
