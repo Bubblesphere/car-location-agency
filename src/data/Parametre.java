@@ -1,5 +1,6 @@
 package data;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 
 public class Parametre extends TypeParametre implements IListable {
@@ -82,7 +83,8 @@ public class Parametre extends TypeParametre implements IListable {
 
   @Override
   public String getDisplayedText() {
-    return this.getDescription() + " (" + this.getValeur() + "$)";
+	  NumberFormat formatter = NumberFormat.getCurrencyInstance();
+	  return this.getDescription() + " (" + formatter.format(this.getValeur()) + ")";
   }
 
 }
