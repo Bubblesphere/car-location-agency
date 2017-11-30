@@ -22,6 +22,7 @@ import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
+import ui.widgets.WFormComboBox;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
@@ -35,7 +36,8 @@ public class WTabClient extends WSplitPaneTab {
 
     WListAdd addListClient = new WListAdd(clients);
 
-    this.form = new WForm("Information sur le client", new WFormClient());
+    WFormClient formClient = new WFormClient();
+    this.form = new WForm("Information sur le client", formClient);
     this.form.events().addListener(new ui.events.EventListener() {
       @Override
       public void handleEvent(Event evt) {
@@ -56,7 +58,20 @@ public class WTabClient extends WSplitPaneTab {
           break;
         }
       }
-    });       
+    });     
+    
+    formClient.getComboBox().events().addListener(new EventListener() {
+        @Override
+        public void handleEvent(Event evt) {
+        	  switch ((WFormComboBox.Events) evt.getEventName()) {
+              	case COMBO_BOX_OPENED:
+              		System.out.println("Open");
+              		break;
+            	default:
+            		break;
+        	  }
+        }   
+     });
     
     addListClient.events().addListener(new EventListener() {
       @Override

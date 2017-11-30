@@ -16,6 +16,7 @@ import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
+import ui.widgets.WListAdd;
 
 public class WFormClient extends WAbstractFormPanel {
   private int formClientID;
@@ -173,5 +174,9 @@ public class WFormClient extends WAbstractFormPanel {
 	    this.textFieldDateDeNaissance.setText("");
 	    this.hasUnsavedContent = false;
 	    this.comboBox.set((ArrayList) ClientDao.retrieveAll());
+  }
+  
+  public WFormComboBox getComboBox() {
+	  return this.comboBox;
   }
 }

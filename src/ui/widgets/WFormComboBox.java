@@ -10,12 +10,16 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import data.IListable;
+import ui.events.Event;
 import ui.events.EventBubbler;
 import ui.events.IEventName;
 import ui.utils.ArrayListHelper;
 import ui.utils.ListableCellRenderer;
+import ui.widgets.WFormTextField.Events;
 
 public class WFormComboBox extends JPanel {
 	private EventBubbler events;
@@ -24,7 +28,7 @@ public class WFormComboBox extends JPanel {
 	private JComboBox<? extends IListable> comboBox;
 
 	public static enum Events implements IEventName {
-		TEXTFIELD_TEXT_CHANGED
+		COMBO_BOX_OPENED, COMBO_BOX_CLOSED, COMBO_BOX_CANCELLED 
 	}
 	  
 	public WFormComboBox(String labelText, ArrayList<? extends IListable> list) {
@@ -41,6 +45,24 @@ public class WFormComboBox extends JPanel {
 	  this.comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 	  this.comboBox.setAlignmentX(this.LEFT_ALIGNMENT);
 	  this.comboBox.setRenderer(new ListableCellRenderer());
+	  this.comboBox.addPopupMenuListener(new PopupMenuListener() {
+
+		@Override
+		public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+			eventHandler(Events.COMBO_BOX_OPENED);
+		}
+
+		@Override
+		public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			eventHandler(Events.COMBO_BOX_CLOSED);
+		}
+
+		@Override
+		public void popupMenuCanceled(PopupMenuEvent e) {
+			eventHandler(Events.COMBO_BOX_CANCELLED);
+		}
+		  
+	  });
 	  this.add(this.comboBox);
 	}
 	
@@ -55,4 +77,12 @@ public class WFormComboBox extends JPanel {
 	public void setSelected(IListable listable) {
 		this.comboBox.setSelectedItem(listable);
 	}
+	
+	  public EventBubbler events() {
+	    return this.events;
+	  }
+	
+	  private void eventHandler(Enum eventName) {
+	    this.events.fireEvent(new Event(this, eventName));
+	  }
 }
