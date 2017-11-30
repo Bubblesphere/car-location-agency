@@ -69,7 +69,22 @@ public class Reservation implements IListable {
     this.noteReservation = noteReservation;
   }
 
-  
+  /**
+   * Constructeur pour Reservation
+   * 
+   * @param reservationId
+   *          id de la réservation.
+   */
+  public Reservation(int reservationId) {
+    super();
+    this.reservationId = reservationId;    
+    this.clientReservation = null;    
+    this.classeReservation = null;
+    this.startDate = LocalDate.now();
+    this.finDate = LocalDate.now();;
+    this.noteReservation = "";    
+    this.utilisateurReservation = null;
+  }
 
   /**
    * Constructeur pour Reservation
@@ -103,8 +118,13 @@ public class Reservation implements IListable {
 
   @Override
   public String getDisplayedText() {
-    return this.getClientReservation().getPrenom() + " " + this.getClientReservation().getNom() + " - "
-        + this.getStartDate().toString();
+    if(this.getReservationId() == -1){
+      return this.getStartDate().toString();
+    }else{
+      return this.getClientReservation().getPrenom() + " " + this.getClientReservation().getNom() + " - "
+          + this.getStartDate().toString();
+    }
+    
   }
 
 }
