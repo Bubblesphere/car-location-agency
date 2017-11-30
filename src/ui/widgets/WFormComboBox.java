@@ -46,4 +46,8 @@ public class WFormComboBox extends JPanel {
 	public IListable getSelected() {
 		return (IListable)this.comboBox.getSelectedItem();
 	}
+	
+	public void setSelected(IListable listable) {
+		this.comboBox.setSelectedItem(listable);
+	}
 }
