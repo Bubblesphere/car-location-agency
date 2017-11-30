@@ -4,9 +4,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -29,7 +32,7 @@ public class WListAdd extends JPanel {
     LIST_VALUE_CHANGED, BUTTON_ADD_CLICKED
   }
 
-  public WListAdd(DefaultListModel<? extends IListable> list) {
+  public WListAdd(ArrayList<? extends IListable> list) {
     this.events = new EventBubbler(this.listenerList);
 
     this.layout = new GridBagLayout();
@@ -70,6 +73,10 @@ public class WListAdd extends JPanel {
         eventHandler(Events.BUTTON_ADD_CLICKED);
       }
     });
+  }
+  
+  public void setModel(JList<? extends IListable> list) {
+	  this.widgetList.setModel((DefaultComboBoxModel<? extends IListable>) list.getModel());
   }
 
   public int getSelectedIndex() {

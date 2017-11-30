@@ -3,6 +3,9 @@ package ui.business.form;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
+import com.sun.java.swing.plaf.windows.WindowsComboBoxUI.WindowsComboBoxEditor;
 
 import data.Client;
 import data.IListable;
@@ -10,12 +13,17 @@ import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
+import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
 public class WFormClient extends WAbstractFormPanel {
   private int formClientID;
 
   private GridBagLayout layout;
+  
+  // TODO: Remove
+  private WFormComboBox comboBox;
+  private GridBagConstraints gbcComboBox;
   
   private WFormTextField textFieldNom;
   private GridBagConstraints gbcNom;
@@ -41,16 +49,23 @@ public class WFormClient extends WAbstractFormPanel {
   private WFormTextField textFieldDateDeNaissance;
   private GridBagConstraints gbcDateDeNaissance;
 
-  public WFormClient() {
+  public WFormClient(ArrayList<Client> clients) {
     this.layout = FormBuilder.getLayout();
     this.setLayout(this.layout);
-
+    
+    // TODO: Remove
+    this.comboBox = new WFormComboBox("Exemple combobox",  clients);
+    this.gbcComboBox = FormBuilder.getGBCPartialRow();
+    this.gbcComboBox.gridx = 0;
+    this.gbcComboBox.gridy = 1;
+    this.add(this.comboBox, this.gbcComboBox);		
+    
     this.textFieldNom = new WFormTextField("Nom");
     this.gbcNom = FormBuilder.getGBCPartialRow();
     this.gbcNom.gridx = 0;
     this.gbcNom.gridy = 1;
-    this.add(this.textFieldNom, this.gbcNom);
-
+    //this.add(this.textFieldNom, this.gbcNom);
+	
     this.textFieldPrenom = new WFormTextField("Prenom");
     this.gbcPrenom = FormBuilder.getGBCPartialRow();
     this.gbcPrenom.gridx = 1;

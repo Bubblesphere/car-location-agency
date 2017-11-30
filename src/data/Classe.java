@@ -1,6 +1,6 @@
 package data;
 
-public class Classe {
+public class Classe implements IListable {
   private int id;
   private String nom;
   private float prixJournalier;
@@ -59,5 +59,10 @@ public class Classe {
     this.nom = nom;
     this.prixJournalier = prixJournalier;
   }
+
+@Override
+public String getDisplayedText() {
+	return this.getNom();
+}
 
 }

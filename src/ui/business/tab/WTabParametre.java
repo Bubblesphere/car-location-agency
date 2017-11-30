@@ -1,5 +1,7 @@
 package ui.business.tab;
 
+import java.util.ArrayList;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
@@ -8,13 +10,14 @@ import data.Parametre;
 import ui.business.form.WFormParametre;
 import ui.events.Event;
 import ui.events.EventListener;
+import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
 import ui.widgets.WList;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabParametre extends WSplitPaneTab {
 
-  public WTabParametre(JTabbedPane tabbedPane, DefaultListModel<Parametre> parametres) {
+  public WTabParametre(JTabbedPane tabbedPane, ArrayList<Parametre> parametres) {
     super(tabbedPane, "Paramètre");
 
     WList listParametre = new WList(parametres);
@@ -26,7 +29,7 @@ public class WTabParametre extends WSplitPaneTab {
         switch ((WForm.Events) evt.getEventName()) {
           case BUTTON_SAVE_CLICK:
             int parameterId = listParametre.getSelectedIndex();
-            Parametre currentParametre = parametres.getElementAt(parameterId);
+            Parametre currentParametre = parametres.get(parameterId);
             Parametre formVals = (Parametre) form.get();
             Parametre newValues = currentParametre;
 
@@ -35,7 +38,7 @@ public class WTabParametre extends WSplitPaneTab {
             parametres.set(parameterId, newValues);
 
             ParametreDao.updateValue(currentParametre.getId(), newValues);
-            listParametre.setModel(parametres); //Pourquoi est-ce que ça refresh avec NULL comme valeur dans la liste? Parce que le form ne contient pas de type?
+            listParametre.setModel(ArrayListHelper.toDefaultListModel(parametres)); //Pourquoi est-ce que ça refresh avec NULL comme valeur dans la liste? Parce que le form ne contient pas de type?
             break;
 
           default:
@@ -49,7 +52,7 @@ public class WTabParametre extends WSplitPaneTab {
       public void handleEvent(Event evt) {
         switch ((WList.Events) evt.getEventName()) {
           case LIST_VALUE_CHANGED:
-            form.set(parametres.getElementAt(listParametre.getSelectedIndex()));
+            form.set(parametres.get(listParametre.getSelectedIndex()));
             break;
           default:
             break;

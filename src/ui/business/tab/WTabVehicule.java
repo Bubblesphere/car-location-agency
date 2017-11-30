@@ -1,5 +1,6 @@
 package ui.business.tab;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.DefaultListModel;
@@ -12,13 +13,14 @@ import data.Vehicule;
 import ui.business.form.WFormVehicule;
 import ui.events.Event;
 import ui.events.EventListener;
+import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabVehicule extends WSplitPaneTab {
 
-  public WTabVehicule(JTabbedPane tabbedPane, DefaultListModel<Vehicule> vehicules) {
+  public WTabVehicule(JTabbedPane tabbedPane, ArrayList<Vehicule> vehicules) {
     super(tabbedPane, "Véhicule");
 
     WListAdd addListVehicule = new WListAdd(vehicules);
@@ -37,7 +39,7 @@ public class WTabVehicule extends WSplitPaneTab {
               currentVehicule = VehiculeDao.create(currentVehicule);
             }
             vehicules.set(vehiculeId, currentVehicule);
-            addListVehicule.setModel(vehicules);
+            addListVehicule.setModel(ArrayListHelper.toDefaultListModel(vehicules));
             form.setHasUnsavedContent(false);
             break;
           default:
@@ -77,19 +79,19 @@ public class WTabVehicule extends WSplitPaneTab {
                       .findFirst().orElse(null); 
                   vehicules.set(vehicules.indexOf(preUpdateVehicule), currentVehicule);
                 }              
-                addListVehicule.setModel(vehicules);
+                addListVehicule.setModel(ArrayListHelper.toDefaultListModel(vehicules));
                 form.setHasUnsavedContent(false);
               } else if (dialogResult == JOptionPane.NO_OPTION) {              
                 Vehicule newVehicule = (Vehicule) Arrays.asList(vehicules.toArray())
                     .stream().filter(v->((Vehicule) v).getId() == -1)
                     .findFirst().orElse(null);              
-                vehicules.removeElement(newVehicule);                            
+                vehicules.remove(newVehicule);                            
                 form.setHasUnsavedContent(false);
               }else{
                 break;
               }
             }
-            form.set(vehicules.getElementAt(addListVehicule.getSelectedIndex()));
+            form.set(vehicules.get(addListVehicule.getSelectedIndex()));
             break;
           default:
             break;

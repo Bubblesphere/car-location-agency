@@ -2,6 +2,7 @@ package ui.widgets;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -13,6 +14,7 @@ import data.IListable;
 import ui.events.Event;
 import ui.events.EventBubbler;
 import ui.events.IEventName;
+import ui.utils.ArrayListHelper;
 import ui.utils.ListableCellRenderer;
 
 public class WList extends JList {
@@ -23,8 +25,8 @@ public class WList extends JList {
     LIST_VALUE_CHANGED
   }
 
-  public WList(DefaultListModel<? extends IListable> list) {
-    super(list);
+  public WList(ArrayList<? extends IListable> list) {
+    super(ArrayListHelper.toDefaultListModel(list));
 
     this.setCellRenderer(new ListableCellRenderer());
     this.setFont(new Font("Segoe UI", Font.PLAIN, 10));

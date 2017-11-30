@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -76,40 +77,14 @@ public class TabbedWindow extends JFrame {
     JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
     contentPane.add(tabbedPane, BorderLayout.CENTER);
 
-    DefaultListModel<Utilisateur> users = new DefaultListModel<Utilisateur>();
-    for(Utilisateur user : UtilisateurDao.retrieveAll()){
-      users.addElement(user);
-    }
-
-    DefaultListModel<Client> clients = new DefaultListModel<Client>();
-    for(Client client : ClientDao.retrieveAll()){
-      clients.addElement(client);
-    }
-
-    DefaultListModel<Classe> classes = new DefaultListModel<Classe>();
-    for(Classe classe: ClasseDao.retrieveAll()){
-      classes.addElement(classe);
-    }
-
-    DefaultListModel<Vehicule> vehicules = new DefaultListModel<Vehicule>();
-    for(Vehicule vehicule : VehiculeDao.retrieveAll()){
-      vehicules.addElement(vehicule);
-    }    
-  
-    DefaultListModel<Location> retours = new DefaultListModel<Location>();  
-    for(Location location:LocationDao.retrieveAll()){
-      retours.addElement(location);
-    }
-    
-    DefaultListModel<Reservation> reservations = new DefaultListModel<Reservation>();
-    for(Reservation reservation: ReservationDao.retrieveAll()){
-      reservations.addElement(reservation);
-    }
-    
-    DefaultListModel<Parametre> parametres = new DefaultListModel<Parametre>();
-    for(Parametre param : ParametreDao.retrieveAll()){
-      parametres.addElement(param);
-    }
+    ArrayList<Utilisateur> users1 = (ArrayList<Utilisateur>) UtilisateurDao.retrieveAll();
+    ArrayList<Utilisateur> users = (ArrayList<Utilisateur>) users1;
+    ArrayList<Client> clients = (ArrayList<Client>)ClientDao.retrieveAll();
+    ArrayList<Classe> classes = (ArrayList<Classe>)ClasseDao.retrieveAll();
+    ArrayList<Vehicule> vehicules = (ArrayList<Vehicule>)VehiculeDao.retrieveAll();
+    ArrayList<Location> retours = (ArrayList<Location>)LocationDao.retrieveAll();
+    ArrayList<Reservation> reservations = (ArrayList<Reservation>)ReservationDao.retrieveAll();
+    ArrayList<Parametre> parametres = (ArrayList<Parametre>)ParametreDao.retrieveAll();
 
     WTabClient tabClient = new WTabClient(tabbedPane, clients);
     WTabReservation tabReservation = new WTabReservation(tabbedPane, reservations);

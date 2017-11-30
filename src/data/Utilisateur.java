@@ -2,7 +2,7 @@ package data;
 
 import security.PasswordSecurity;
 
-public class Utilisateur extends Personne {
+public class Utilisateur extends Personne implements IListable {
   private int id;
   private String motDePasse;
   private String courriel;
@@ -158,5 +158,10 @@ public class Utilisateur extends Personne {
   public void setMotDePasse(String motDePasse) {
     this.motDePasse = PasswordSecurity.hashPassword(motDePasse);
   }
+
+	@Override
+	public String getDisplayedText() {
+		return this.getPrenom();
+	}
 
 }

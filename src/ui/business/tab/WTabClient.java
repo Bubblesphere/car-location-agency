@@ -1,30 +1,36 @@
 package ui.business.tab;
 
 import data.Client;
+import data.Utilisateur;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import dao.ClientDao;
+import dao.UtilisateurDao;
 import ui.business.form.WFormClient;
 import ui.events.Event;
 import ui.events.EventListener;
+import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabClient extends WSplitPaneTab {
 
-  public WTabClient(JTabbedPane tabbedPane, DefaultListModel<Client> clients) {
+  public WTabClient(JTabbedPane tabbedPane, ArrayList<Client> clients) {
     super(tabbedPane, "Client");
 
     WListAdd addListClient = new WListAdd(clients);
 
-    WForm form = new WForm("Information sur le client", new WFormClient());
+    WForm form = new WForm("Information sur le client", new WFormClient(clients));
     form.events().addListener(new ui.events.EventListener() {
       @Override
       public void handleEvent(Event evt) {
@@ -38,7 +44,7 @@ public class WTabClient extends WSplitPaneTab {
             currentClient = ClientDao.create(currentClient);
           }       
           clients.set(clientId, currentClient);
-          addListClient.setModel(clients);
+          addListClient.setModel(ArrayListHelper.toDefaultListModel(clients));
           form.setHasUnsavedContent(false);          
           break;
         default:
@@ -63,7 +69,7 @@ public class WTabClient extends WSplitPaneTab {
           }
           break;
         case LIST_VALUE_CHANGED:
-          Client selectedClient = clients.getElementAt(addListClient.getSelectedIndex());
+          Client selectedClient = clients.get(addListClient.getSelectedIndex());
 
           if (form.getHasUnsavedContent()) {
             int dialogResult = JOptionPane.showConfirmDialog(null,
@@ -82,19 +88,19 @@ public class WTabClient extends WSplitPaneTab {
                     .findFirst().orElse(null); 
                 clients.set(clients.indexOf(preUpdateClient), currentClient);
               }              
-              addListClient.setModel(clients);
+              addListClient.setModel(ArrayListHelper.toDefaultListModel(clients));
               form.setHasUnsavedContent(false);
             } else if (dialogResult == JOptionPane.NO_OPTION) {              
               Client newClient = (Client) Arrays.asList(clients.toArray())
                   .stream().filter(c->((Client) c).getId() == -1)
                   .findFirst().orElse(null);              
-              clients.removeElement(newClient);                            
+              clients.remove(newClient);                            
               form.setHasUnsavedContent(false);
             }else{
               break;
             }
           }
-          form.set(clients.getElementAt(addListClient.getSelectedIndex()));
+          form.set(clients.get(addListClient.getSelectedIndex()));
           break;
         default:
           break;

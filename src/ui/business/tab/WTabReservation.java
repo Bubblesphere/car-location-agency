@@ -1,5 +1,6 @@
 package ui.business.tab;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.DefaultListModel;
@@ -13,13 +14,14 @@ import data.Reservation;
 import ui.business.form.WFormReservation;
 import ui.events.Event;
 import ui.events.EventListener;
+import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabReservation extends WSplitPaneTab {
 
-  public WTabReservation(JTabbedPane tabbedPane, DefaultListModel<Reservation> reservations) {
+  public WTabReservation(JTabbedPane tabbedPane, ArrayList<Reservation> reservations) {
     super(tabbedPane, "Réservation");
 
     WListAdd addListReservation = new WListAdd(reservations);
@@ -32,14 +34,14 @@ public class WTabReservation extends WSplitPaneTab {
           case BUTTON_SAVE_CLICK:
             int reservationId = addListReservation.getSelectedIndex();
             reservations.set(reservationId, (Reservation) form.get());
-            Reservation currentReservation = reservations.getElementAt(reservationId);
+            Reservation currentReservation = reservations.get(reservationId);
             if(currentReservation.getReservationId() > 0){
               ReservationDao.update(currentReservation);
             }else{
               currentReservation = ReservationDao.create(currentReservation);
             }       
             reservations.set(reservationId, currentReservation);
-            addListReservation.setModel(reservations);
+            addListReservation.setModel(ArrayListHelper.toDefaultListModel(reservations));
             form.setHasUnsavedContent(false);
             break;
           default:
@@ -62,7 +64,7 @@ public class WTabReservation extends WSplitPaneTab {
             } 
             break;
           case LIST_VALUE_CHANGED:
-            Reservation selectedReservations = reservations.getElementAt(addListReservation.getSelectedIndex());
+            Reservation selectedReservations = reservations.get(addListReservation.getSelectedIndex());
 
             if (form.getHasUnsavedContent()) {
               int dialogResult = JOptionPane.showConfirmDialog(null,
@@ -81,19 +83,19 @@ public class WTabReservation extends WSplitPaneTab {
                       .findFirst().orElse(null); 
                   reservations.set(reservations.indexOf(preUpdateReservation), currentReservation);
                 }              
-                addListReservation.setModel(reservations);
+                addListReservation.setModel(ArrayListHelper.toDefaultListModel(reservations));
                 form.setHasUnsavedContent(false);
               } else if (dialogResult == JOptionPane.NO_OPTION) {              
                 Reservation newReservation = (Reservation) Arrays.asList(reservations.toArray())
                     .stream().filter(r->((Reservation) r).getReservationId() == -1)
                     .findFirst().orElse(null);              
-                reservations.removeElement(newReservation);                            
+                reservations.remove(newReservation);                            
                 form.setHasUnsavedContent(false);
               }else{
                 break;
               }
             }
-            form.set(reservations.getElementAt(addListReservation.getSelectedIndex()));
+            form.set(reservations.get(addListReservation.getSelectedIndex()));
             break;
           default:
             break;
