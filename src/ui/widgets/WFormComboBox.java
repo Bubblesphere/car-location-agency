@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -43,7 +44,7 @@ public class WFormComboBox extends JPanel {
 	  this.add(this.comboBox);
 	}
 	
-	public void set(ArrayList <? extends IListable> list) {
+	public void set(ArrayList<IListable> list) {
 		this.comboBox.setModel(ArrayListHelper.toDefaultComboBoxListModel(list));
 	}
 
