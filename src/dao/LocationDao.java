@@ -9,8 +9,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.Classe;
-import data.Client;
 import data.Location;
 import data.Reservation;
 import data.Utilisateur;
@@ -18,11 +16,11 @@ import data.Vehicule;
 
 public class LocationDao {
   /**
-   * Méthode pour créé une Réservation
+   * Mï¿½thode pour crï¿½ï¿½ une Rï¿½servation
    * 
    * @param reservation
-   *          réservation à créé.
-   * @return la réservation qui a été créé avec son id de mis à jour.
+   *          rï¿½servation ï¿½ crï¿½ï¿½.
+   * @return la rï¿½servation qui a ï¿½tï¿½ crï¿½ï¿½ avec son id de mis ï¿½ jour.
    */
   public static Location create(Location location) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -58,11 +56,11 @@ public class LocationDao {
   }
 
   /**
-   * Méthode pour récupérer une location
+   * Mï¿½thode pour rï¿½cupï¿½rer une location
    * 
    * @param locationId
-   *          id de la location à récupérer.
-   * @return la réservation récupérer.
+   *          id de la location ï¿½ rï¿½cupï¿½rer.
+   * @return la rï¿½servation rï¿½cupï¿½rer.
    */
   public static Location retrieve(int locationId) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -96,9 +94,9 @@ public class LocationDao {
   }
 
   /**
-   * Méthode pour récupérer toutes les réservation
+   * Mï¿½thode pour rï¿½cupï¿½rer toutes les rï¿½servation
    * 
-   * @return liste de toutes les réservations.
+   * @return liste de toutes les rï¿½servations.
    */
   public static List<Location> retrieveAll() {
     List<Location> result = new ArrayList<Location>();
@@ -135,11 +133,11 @@ public class LocationDao {
   }
 
   /**
-   * Méthode pour mettre à jour une location
+   * Mï¿½thode pour mettre ï¿½ jour une location
    * 
    * @param location
-   *          la réservation avec les nouvelle valeurs.
-   * @return si la mise à jour a fonctionnée.
+   *          la rï¿½servation avec les nouvelle valeurs.
+   * @return si la mise ï¿½ jour a fonctionnï¿½e.
    */
   public static boolean update(Location location) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -170,11 +168,11 @@ public class LocationDao {
   }
 
   /**
-   * Méthode pour supprimer une location
+   * Mï¿½thode pour supprimer une location
    * 
    * @param locationId
-   *          le id de la location à supprimer.
-   * @return si la suppression à fonctionnée.
+   *          le id de la location ï¿½ supprimer.
+   * @return si la suppression ï¿½ fonctionnï¿½e.
    */
   public static boolean delete(int locationId) {
     try (Connection connection = DataAccess.getConnection()) {

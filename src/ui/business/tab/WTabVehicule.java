@@ -3,11 +3,9 @@ package ui.business.tab;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
-import dao.ClientDao;
 import dao.VehiculeDao;
 import data.Client;
 import data.Vehicule;
@@ -23,14 +21,14 @@ import ui.widgets.WSplitPaneTab;
 public class WTabVehicule extends WSplitPaneTab {
 
   public WTabVehicule(JTabbedPane tabbedPane) {
-    super(tabbedPane, "Véhicule");
+    super(tabbedPane, "Vï¿½hicule");
     
     ArrayList<Vehicule> vehicules = (ArrayList<Vehicule>)VehiculeDao.retrieveAll();
 
     WListAdd addListVehicule = new WListAdd(vehicules);
 
     WFormVehicule formVehicule = new WFormVehicule();
-    WForm form = new WForm("Information sur le véhicule", formVehicule);
+    WForm form = new WForm("Information sur le vï¿½hicule", formVehicule);
     form.events().addListener(new ui.events.EventListener() {
       @Override
       public void handleEvent(Event evt) {
@@ -82,7 +80,7 @@ public class WTabVehicule extends WSplitPaneTab {
           case LIST_VALUE_CHANGED:
             if (form.getHasUnsavedContent()) {
               int dialogResult = JOptionPane.showConfirmDialog(null,
-                  "Vous êtes en train de changer de véhicule, voulez vous-l'enregistrer avant de quitter ?",
+                  "Vous ï¿½tes en train de changer de vï¿½hicule, voulez vous-l'enregistrer avant de quitter ?",
                   "Attention", JOptionPane.YES_NO_CANCEL_OPTION);
 
               if (dialogResult == JOptionPane.YES_OPTION) {

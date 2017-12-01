@@ -4,8 +4,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
 
-import com.sun.security.auth.UserPrincipal;
-
 import data.Classe;
 import data.Client;
 import data.IListable;

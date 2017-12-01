@@ -1,11 +1,10 @@
 package ui.business.form;
 
-import java.awt.GridBagLayout;
-import data.IListable;
-
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.time.format.DateTimeFormatter;
 
+import data.IListable;
 import data.Parametre;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;

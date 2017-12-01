@@ -130,6 +130,10 @@ public class WFormVehicule extends WAbstractFormPanel {
   public void init() {
 	  
   }
+  
+  public WFormComboBox getComboBox() {
+	  return this.comboClasse;
+  }
 
   @Override
   public void set(IListable listable) {    

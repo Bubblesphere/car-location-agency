@@ -4,10 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
@@ -19,7 +16,6 @@ import ui.events.EventBubbler;
 import ui.events.IEventName;
 import ui.utils.ArrayListHelper;
 import ui.utils.ListableCellRenderer;
-import ui.widgets.WFormTextField.Events;
 
 public class WFormComboBox extends JPanel {
 	private EventBubbler events;

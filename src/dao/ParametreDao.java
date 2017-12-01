@@ -1,22 +1,25 @@
 package dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import data.Parametre;
 
 public class ParametreDao {
   
   /**
-   * Méthode pour créé un paramètre
+   * Mï¿½thode pour crï¿½ï¿½ un paramï¿½tre
    * 
    * @param parametre
-   *          paramètre à créé.
-   * @return le paramètre qui a été créé avec son id de mis à jour.
+   *          paramï¿½tre ï¿½ crï¿½ï¿½.
+   * @return le paramï¿½tre qui a ï¿½tï¿½ crï¿½ï¿½ avec son id de mis ï¿½ jour.
    */
   private static Parametre create(Parametre parametre) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -41,11 +44,11 @@ public class ParametreDao {
   }
 
   /**
-   * Méthode pour récupérer une paramètre
+   * Mï¿½thode pour rï¿½cupï¿½rer une paramï¿½tre
    * 
    * @param parametreId
-   *          id du paramètre à récupérer.
-   * @return le paramètre récupérer.
+   *          id du paramï¿½tre ï¿½ rï¿½cupï¿½rer.
+   * @return le paramï¿½tre rï¿½cupï¿½rer.
    */
   public static Parametre retrieve(int parametreId) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -70,9 +73,9 @@ public class ParametreDao {
   }
 
   /**
-   * Méthode pour récupérer touts les paramètres
+   * Mï¿½thode pour rï¿½cupï¿½rer touts les paramï¿½tres
    * 
-   * @return liste de touts les paramètres.
+   * @return liste de touts les paramï¿½tres.
    */
   public static List<Parametre> retrieveAll() {
     return retrieveAll(false);
@@ -127,9 +130,9 @@ public class ParametreDao {
   }
 
   /**
-   * Méthode pour mettre à jour un paramètre
+   * Mï¿½thode pour mettre ï¿½ jour un paramï¿½tre
    *
-   * @param pid ID du paramètre à archiver
+   * @param pid ID du paramï¿½tre ï¿½ archiver
    * @return true si l'archivage
    */
   public static Boolean archiver(int pid) {
@@ -156,8 +159,8 @@ public class ParametreDao {
    * M?thode pour mettre ? jour un param?tre
    * 
    * @param parametre
-   *          le paramètre avec les nouvelle valeurs.
-   * @return si la mise à jour a fonctionnée.
+   *          le paramï¿½tre avec les nouvelle valeurs.
+   * @return si la mise ï¿½ jour a fonctionnï¿½e.
    */
   public static Parametre update(Parametre parametre) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -177,11 +180,11 @@ public class ParametreDao {
   }
 
   /**
-   * Méthode pour supprimer un paramètre
+   * Mï¿½thode pour supprimer un paramï¿½tre
    * 
    * @param parametreId
-   *          le id du paramètre à supprimer.
-   * @return si la suppression à fonctionnée.
+   *          le id du paramï¿½tre ï¿½ supprimer.
+   * @return si la suppression ï¿½ fonctionnï¿½e.
    */
   public static boolean delete(int parametreId) {
     try (Connection connection = DataAccess.getConnection()) {

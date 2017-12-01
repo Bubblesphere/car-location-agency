@@ -3,13 +3,10 @@ package ui.business.tab;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
-import dao.ClientDao;
 import dao.ReservationDao;
-import data.Client;
 import data.Reservation;
 import ui.business.form.WFormReservation;
 import ui.events.Event;
@@ -22,11 +19,11 @@ import ui.widgets.WSplitPaneTab;
 public class WTabReservation extends WSplitPaneTab {
 
   public WTabReservation(JTabbedPane tabbedPane, ArrayList<Reservation> reservations) {
-    super(tabbedPane, "Réservation");
+    super(tabbedPane, "Rï¿½servation");
 
     WListAdd addListReservation = new WListAdd(reservations);
 
-    WForm form = new WForm("Information sur la réservation", new WFormReservation());
+    WForm form = new WForm("Information sur la rï¿½servation", new WFormReservation());
     form.events().addListener(new ui.events.EventListener() {
       @Override
       public void handleEvent(Event evt) {
@@ -68,7 +65,7 @@ public class WTabReservation extends WSplitPaneTab {
 
             if (form.getHasUnsavedContent()) {
               int dialogResult = JOptionPane.showConfirmDialog(null,
-                  "Vous êtes en train de changer de réservation, voulez vous-l'enregistrer avant de quitter ?",
+                  "Vous ï¿½tes en train de changer de rï¿½servation, voulez vous-l'enregistrer avant de quitter ?",
                   "Attention", JOptionPane.YES_NO_CANCEL_OPTION);
 
               if (dialogResult == JOptionPane.YES_OPTION) {

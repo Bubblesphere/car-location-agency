@@ -2,7 +2,6 @@ package ui.business.tab;
 
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
 import dao.ParametreDao;
@@ -18,11 +17,11 @@ import ui.widgets.WSplitPaneTab;
 public class WTabParametre extends WSplitPaneTab {
 
   public WTabParametre(JTabbedPane tabbedPane, ArrayList<Parametre> parametres) {
-    super(tabbedPane, "Paramètre");
+    super(tabbedPane, "Paramï¿½tre");
 
     WList listParametre = new WList(parametres);
 
-    WForm form = new WForm("Information sur le paramètre", new WFormParametre());
+    WForm form = new WForm("Information sur le paramï¿½tre", new WFormParametre());
     form.events().addListener(new ui.events.EventListener() {
       @Override
       public void handleEvent(Event evt) {
@@ -38,7 +37,7 @@ public class WTabParametre extends WSplitPaneTab {
             parametres.set(parameterId, newValues);
 
             ParametreDao.updateValue(currentParametre.getId(), newValues);
-            listParametre.setModel(ArrayListHelper.toDefaultListModel(parametres)); //Pourquoi est-ce que ça refresh avec NULL comme valeur dans la liste? Parce que le form ne contient pas de type?
+            listParametre.setModel(ArrayListHelper.toDefaultListModel(parametres)); //Pourquoi est-ce que ï¿½a refresh avec NULL comme valeur dans la liste? Parce que le form ne contient pas de type?
             break;
 
           default:

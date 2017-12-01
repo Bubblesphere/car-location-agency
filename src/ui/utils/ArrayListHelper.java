@@ -1,12 +1,9 @@
 package ui.utils;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-
-import data.IListable;
 
 public class ArrayListHelper {
 	

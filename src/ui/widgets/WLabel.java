@@ -1,6 +1,7 @@
 package ui.widgets;
 
 import java.awt.Font;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
