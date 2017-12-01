@@ -23,15 +23,18 @@ import ui.widgets.WSplitPaneTab;
 
 public class WTabReservation extends WSplitPaneTab {
 
-  public WTabReservation(JTabbedPane tabbedPane, ArrayList<Reservation> reservations) {
+	private static final long serialVersionUID = 1L;
+
+public WTabReservation(JTabbedPane tabbedPane, ArrayList<Reservation> reservations) {
     super(tabbedPane, "R�servation");
 
-    WListAdd addListReservation = new WListAdd(reservations);
+    WListAdd<Reservation> addListReservation = new WListAdd<Reservation>(reservations);
     
     WFormReservation formReservation = new WFormReservation();
 
-    WForm form = new WForm("Information sur la r�servation", formReservation);
+    WForm<Reservation> form = new WForm<Reservation>("Information sur la r�servation", formReservation);
     form.events().addListener(new ui.events.EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
@@ -55,7 +58,7 @@ public class WTabReservation extends WSplitPaneTab {
     });
     
     formReservation.getComboBoxClasse().events().addListener(new EventListener() {
-		
+    	@SuppressWarnings("rawtypes") 
 		@Override
 		public void handleEvent(Event evt) {
 			switch ((WFormComboBox.Events) evt.getEventName()) {
@@ -69,7 +72,7 @@ public class WTabReservation extends WSplitPaneTab {
 	});
     
 formReservation.getComboBoxClient().events().addListener(new EventListener() {
-		
+	@SuppressWarnings("rawtypes") 
 		@Override
 		public void handleEvent(Event evt) {
 			switch ((WFormComboBox.Events) evt.getEventName()) {
@@ -83,6 +86,7 @@ formReservation.getComboBoxClient().events().addListener(new EventListener() {
 	});
 
     addListReservation.events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WListAdd.Events) evt.getEventName()) {
@@ -96,7 +100,7 @@ formReservation.getComboBoxClient().events().addListener(new EventListener() {
             } 
             break;
           case LIST_VALUE_CHANGED:
-            Reservation selectedReservations = reservations.get(addListReservation.getSelectedIndex());
+            //Reservation selectedReservations = reservations.get(addListReservation.getSelectedIndex());
 
             if (form.getHasUnsavedContent()) {
               int dialogResult = JOptionPane.showConfirmDialog(null,

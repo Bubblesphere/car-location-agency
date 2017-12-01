@@ -14,21 +14,23 @@ import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabRetour extends WSplitPaneTab {
+	private static final long serialVersionUID = 1L;
 
-  public WTabRetour(JTabbedPane tabbedPane, ArrayList<Location> locations) {
+public WTabRetour(JTabbedPane tabbedPane, ArrayList<Location> locations) {
     super(tabbedPane, "Retour");
 
-    WListAdd addListLocation = new WListAdd(locations);
+    WListAdd<Location> addListLocation = new WListAdd<Location>(locations);
 
-    WForm form = new WForm("Information sur le retour", new WFormRetour());
+    WForm<Location> form = new WForm<Location>("Information sur le retour", new WFormRetour());
     form.events().addListener(new ui.events.EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
           case BUTTON_SAVE_CLICK:
             int locationId = addListLocation.getSelectedIndex();
             locations.set(locationId, (Location) form.get());
-            Location currentLocation = locations.get(locationId);
+            //Location currentLocation = locations.get(locationId);
             // TODO: Update db
             addListLocation.setModel(ArrayListHelper.toDefaultListModel(locations));
             break;
@@ -39,6 +41,7 @@ public class WTabRetour extends WSplitPaneTab {
     });
 
     addListLocation.events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WListAdd.Events) evt.getEventName()) {
