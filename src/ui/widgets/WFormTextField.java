@@ -1,9 +1,9 @@
 package ui.widgets;
 
+import java.awt.Component;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -36,7 +36,7 @@ public class WFormTextField extends JPanel {
 
     this.textField = new JTextField();
     this.textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-    this.textField.setAlignmentX(this.LEFT_ALIGNMENT);
+    this.textField.setAlignmentX(Component.LEFT_ALIGNMENT);
     DocumentListener dl = new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {

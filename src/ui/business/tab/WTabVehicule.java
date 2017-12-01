@@ -3,11 +3,9 @@ package ui.business.tab;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
-import dao.ClientDao;
 import dao.VehiculeDao;
 import data.Vehicule;
 import ui.business.form.WFormVehicule;

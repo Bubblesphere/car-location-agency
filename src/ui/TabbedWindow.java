@@ -4,10 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -15,21 +13,17 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import dao.ClasseDao;
-import dao.ClientDao;
 import dao.LocationDao;
 import dao.ParametreDao;
 import dao.ReservationDao;
 import dao.UtilisateurDao;
 import dao.VehiculeDao;
 import data.Classe;
-import data.Client;
 import data.Location;
 import data.Parametre;
 import data.Reservation;
-import data.TypeParametre;
 import data.Utilisateur;
 import data.Vehicule;
-import sun.util.resources.LocaleData;
 import ui.business.tab.WTabClient;
 import ui.business.tab.WTabParametre;
 import ui.business.tab.WTabReservation;
@@ -78,7 +72,7 @@ public class TabbedWindow extends JFrame {
     contentPane.add(tabbedPane, BorderLayout.CENTER);
 
     ArrayList<Utilisateur> users1 = (ArrayList<Utilisateur>) UtilisateurDao.retrieveAll();
-    ArrayList<Utilisateur> users = (ArrayList<Utilisateur>) users1;
+    ArrayList<Utilisateur> users = users1;
    
     ArrayList<Classe> classes = (ArrayList<Classe>)ClasseDao.retrieveAll();
     ArrayList<Vehicule> vehicules = (ArrayList<Vehicule>)VehiculeDao.retrieveAll();

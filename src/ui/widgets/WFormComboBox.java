@@ -1,13 +1,11 @@
 package ui.widgets;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
@@ -19,7 +17,6 @@ import ui.events.EventBubbler;
 import ui.events.IEventName;
 import ui.utils.ArrayListHelper;
 import ui.utils.ListableCellRenderer;
-import ui.widgets.WFormTextField.Events;
 
 public class WFormComboBox extends JPanel {
 	private EventBubbler events;
@@ -43,7 +40,7 @@ public class WFormComboBox extends JPanel {
 	
 	  this.comboBox = new JComboBox<>(ArrayListHelper.toDefaultComboBoxListModel(list));
 	  this.comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-	  this.comboBox.setAlignmentX(this.LEFT_ALIGNMENT);
+	  this.comboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 	  this.comboBox.setRenderer(new ListableCellRenderer());
 	  this.comboBox.addPopupMenuListener(new PopupMenuListener() {
 

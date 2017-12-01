@@ -76,7 +76,7 @@ public class WListAdd extends JPanel {
   }
   
   public void setModel(JList<? extends IListable> list) {
-	  this.widgetList.setModel((DefaultComboBoxModel<? extends IListable>) list.getModel());
+	  this.widgetList.setModel(list.getModel());
   }
 
   public int getSelectedIndex() {

@@ -2,7 +2,6 @@ package ui.business.tab;
 
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JTabbedPane;
 
 import dao.ParametreDao;

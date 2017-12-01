@@ -1,22 +1,14 @@
 package ui.business.tab;
 
 import data.Client;
-import data.Utilisateur;
-
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import dao.ClientDao;
-import dao.UtilisateurDao;
 import ui.business.form.WFormClient;
 import ui.events.Event;
 import ui.events.EventListener;
