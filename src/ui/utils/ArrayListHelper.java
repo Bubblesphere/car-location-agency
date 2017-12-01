@@ -14,7 +14,10 @@ public class ArrayListHelper {
 		return returnList;
 	}
 	
-	public static <T> DefaultComboBoxModel toDefaultComboBoxListModel(ArrayList<T> list) {
-		return new DefaultComboBoxModel(list.toArray());
+	public static <T> DefaultComboBoxModel<T> toDefaultComboBoxListModel(ArrayList<T> list) {
+		DefaultComboBoxModel<T> returnList = new DefaultComboBoxModel<T>();
+		for(int i = 0; i < list.size(); i++)
+			returnList.addElement((T)list.get(i));
+		return returnList;
 	}
 }

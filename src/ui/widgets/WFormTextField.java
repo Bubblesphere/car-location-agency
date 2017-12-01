@@ -1,5 +1,6 @@
 package ui.widgets;
 
+import java.awt.Component;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
@@ -14,7 +15,8 @@ import ui.events.EventBubbler;
 import ui.events.IEventName;
 
 public class WFormTextField extends JPanel {
-  private EventBubbler events;
+	private static final long serialVersionUID = 1L;
+private EventBubbler events;
   private BoxLayout layout;
   private WLabel label;
   private JTextField textField;
@@ -35,7 +37,7 @@ public class WFormTextField extends JPanel {
 
     this.textField = new JTextField();
     this.textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-    this.textField.setAlignmentX(this.LEFT_ALIGNMENT);
+    this.textField.setAlignmentX(Component.LEFT_ALIGNMENT);
     DocumentListener dl = new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
@@ -68,7 +70,7 @@ public class WFormTextField extends JPanel {
     return this.events;
   }
 
-  private void eventHandler(Enum eventName) {
-    this.events.fireEvent(new Event(this, eventName));
+  private void eventHandler(Events eventName) {
+    this.events.fireEvent(new Event<Events>(this, eventName));
   }
 }

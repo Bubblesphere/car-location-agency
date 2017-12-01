@@ -17,15 +17,17 @@ import ui.events.IEventName;
 import ui.utils.ArrayListHelper;
 import ui.utils.ListableCellRenderer;
 
-public class WList extends JList {
-  private EventBubbler events;
+public class WList<T extends IListable> extends JList<T> {
+	private static final long serialVersionUID = 1L;
+private EventBubbler events;
   protected int lastSelectedIndex;
 
   public static enum Events implements IEventName {
     LIST_VALUE_CHANGED
   }
 
-  public WList(ArrayList<? extends IListable> list) {
+ 
+public WList(ArrayList<T> list) {
     super(ArrayListHelper.toDefaultListModel(list));
 
     this.setCellRenderer(new ListableCellRenderer());
@@ -39,7 +41,8 @@ public class WList extends JList {
       public void valueChanged(ListSelectionEvent listSelectionEvent) {
         boolean isAdjusting = listSelectionEvent.getValueIsAdjusting();
         if (!isAdjusting) {
-          JList tempList = (JList) listSelectionEvent.getSource();
+          @SuppressWarnings("unchecked")
+          JList<T> tempList = (JList<T>) listSelectionEvent.getSource();
           if (tempList.getSelectedIndices().length > 0) {
             updateLastSelected();
             eventHandler(Events.LIST_VALUE_CHANGED);
@@ -49,8 +52,8 @@ public class WList extends JList {
     });
   }
 
-  public void addElement(IListable element) {
-    DefaultListModel model = (DefaultListModel) this.getModel();
+  public void addElement(T element) {
+    DefaultListModel<T> model = (DefaultListModel<T>) this.getModel();
     model.addElement(element);
   }
 
@@ -67,6 +70,6 @@ public class WList extends JList {
   }
 
   private void eventHandler(Events eventName) {
-    this.events.fireEvent(new Event(this, eventName));
+    this.events.fireEvent(new Event<Events>(this, eventName));
   }
 }

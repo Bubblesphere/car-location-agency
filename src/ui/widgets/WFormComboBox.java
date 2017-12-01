@@ -1,5 +1,6 @@
 package ui.widgets;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -17,7 +18,9 @@ import ui.events.IEventName;
 import ui.utils.ArrayListHelper;
 import ui.utils.ListableCellRenderer;
 
+
 public class WFormComboBox<T extends IListable> extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private EventBubbler events;
 	private BoxLayout layout;
 	private WLabel label;
@@ -39,7 +42,7 @@ public class WFormComboBox<T extends IListable> extends JPanel {
 	
 	  this.comboBox = new JComboBox<T>(ArrayListHelper.toDefaultComboBoxListModel(list));
 	  this.comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-	  this.comboBox.setAlignmentX(this.LEFT_ALIGNMENT);
+	  this.comboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 	  this.comboBox.setRenderer(new ListableCellRenderer());
 	  this.comboBox.addPopupMenuListener(new PopupMenuListener() {
 
@@ -62,12 +65,14 @@ public class WFormComboBox<T extends IListable> extends JPanel {
 	  this.add(this.comboBox);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void set(ArrayList<T> list) {
 		T previouslySelected = (T)this.comboBox.getSelectedItem();
 		this.comboBox.setModel(ArrayListHelper.toDefaultComboBoxListModel(list));
 		setSelected(previouslySelected);
 	}
 
+	@SuppressWarnings("unchecked")
 	public T getSelected() {
 		return (T)this.comboBox.getSelectedItem();
 	}
@@ -80,7 +85,7 @@ public class WFormComboBox<T extends IListable> extends JPanel {
 	    return this.events;
 	  }
 	
-	  private void eventHandler(Enum eventName) {
-	    this.events.fireEvent(new Event(this, eventName));
+	  private void eventHandler(Events eventName) {
+	    this.events.fireEvent(new Event<Events>(this, eventName));
 	  }
 }
