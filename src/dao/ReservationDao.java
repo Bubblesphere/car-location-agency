@@ -146,6 +146,37 @@ public class ReservationDao {
 	    }
 	    return result;
   }
+  
+  public static int countVehiculeFree(int classeId, LocalDate start, LocalDate end) {
+	    try (Connection connection = DataAccess.getConnection()) {
+
+	      String query = "SELECT (SELECT COUNT() as reservationsCount " + 
+	      		"FROM Reservations " + 
+	      		"WHERE classe_id = ? " + 
+	      		"AND date(end_date) < date(?) " + 
+	      		"AND date(start_date) < date(?) " + 
+	      		") as vehiculesReserves, ( " + 
+	      		"SELECT COUNT()" + 
+	      		"FROM " + 
+	      		"Vehicules v " + 
+	      		"WHERE v.classe_id = ? " + 
+	      		"AND v.etat = 1) as VehiculesTotal";
+	      PreparedStatement statement = connection.prepareStatement(query);
+	      statement.setInt(1, classeId);
+	      statement.setObject(2, end);
+	      statement.setObject(3, start);
+	      statement.setInt(4, classeId);
+	      
+	      ResultSet resultSet = statement.executeQuery();
+
+	      if (resultSet.next()) {
+	        return resultSet.getInt("VehiculesTotal") - resultSet.getInt("vehiculesReserves"); 	 
+	        		}
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	    return 0;
+	  }
 
   /**
    * M�thode pour mettre � jour une r�servation
@@ -175,6 +206,8 @@ public class ReservationDao {
     }
     return true;
   }
+  
+  
 
   /**
    * M�thode pour supprimer une r�servation
