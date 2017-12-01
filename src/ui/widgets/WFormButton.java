@@ -1,6 +1,5 @@
 package ui.widgets;
 
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -32,7 +31,7 @@ public class WFormButton extends JPanel {
 
     this.button = new JButton(buttonText);
     this.button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-    this.button.setAlignmentX(Component.RIGHT_ALIGNMENT);
+    this.button.setAlignmentX(this.RIGHT_ALIGNMENT);
     this.button.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {

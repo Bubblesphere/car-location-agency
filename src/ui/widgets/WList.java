@@ -36,7 +36,6 @@ public class WList extends JList {
     this.events = new EventBubbler(this.listenerList);
 
     this.addListSelectionListener(new ListSelectionListener() {
-      @Override
       public void valueChanged(ListSelectionEvent listSelectionEvent) {
         boolean isAdjusting = listSelectionEvent.getValueIsAdjusting();
         if (!isAdjusting) {

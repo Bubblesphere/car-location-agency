@@ -5,6 +5,8 @@ import java.awt.GridBagLayout;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import com.sun.java.swing.plaf.windows.WindowsComboBoxUI.WindowsComboBoxEditor;
+
 import dao.ClientDao;
 import data.Client;
 import data.IListable;
@@ -14,6 +16,7 @@ import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
+import ui.widgets.WListAdd;
 
 public class WFormClient extends WAbstractFormPanel {
   private int formClientID;

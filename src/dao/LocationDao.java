@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.Classe;
+import data.Client;
 import data.Location;
 import data.Reservation;
 import data.Utilisateur;
