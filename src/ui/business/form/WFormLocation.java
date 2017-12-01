@@ -3,24 +3,19 @@ package ui.business.form;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-import dao.ClasseDao;
-import dao.ClientDao;
 import data.Classe;
 import data.Client;
 import data.IListable;
 import data.Reservation;
 import data.Utilisateur;
-import sun.java2d.xr.GrowableByteArray;
 import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
-public class WFormReservation extends WAbstractFormPanel {
+public class WFormLocation extends WAbstractFormPanel {
   private int formReservationID;
 
   private GridBagLayout layout;
@@ -33,14 +28,9 @@ public class WFormReservation extends WAbstractFormPanel {
 
   private WFormTextField textFieldNote;
   private GridBagConstraints gbcNote;
-  
-  private WFormComboBox comboBoxClient;
-  private GridBagConstraints gbcClient;
-  
-  private WFormComboBox comboBoxClasse;
-  private GridBagConstraints gbcClasse;
+  // TODO: Client, Classe
 
-  public WFormReservation() {
+  public WFormLocation() {
     this.layout = FormBuilder.getLayout();
     this.setLayout(this.layout);
 
@@ -61,18 +51,7 @@ public class WFormReservation extends WAbstractFormPanel {
     this.gbcNote.gridx = 0;
     this.gbcNote.gridy = 2;
     this.add(this.textFieldNote, this.gbcNote);
-    
-    this.comboBoxClient = new WFormComboBox("Client",  (ArrayList<? extends IListable>) ClientDao.retrieveAll());
-    this.gbcClient = FormBuilder.getGBCPartialRow();
-    this.gbcClient.gridx = 0;
-    this.gbcClient.gridy = 3;
-    this.add(this.comboBoxClient, this.gbcClient);
-    
-    this.comboBoxClasse = new WFormComboBox("Classe",  (ArrayList<? extends IListable>) ClasseDao.retrieveAll());
-    this.gbcClasse = FormBuilder.getGBCPartialRow();
-    this.gbcClasse.gridx = 1;
-    this.gbcClasse.gridy = 3;
-    this.add(this.comboBoxClasse, this.gbcClasse);
+    // TODO: Client, Classe
 
     EventListener textBoxValueChangedListener = new EventListener() {
       @Override
@@ -94,9 +73,9 @@ public class WFormReservation extends WAbstractFormPanel {
 
   @Override
   public IListable get() {
-    // TODO:currentUser
-    return new Reservation(this.formReservationID, (Client)this.comboBoxClient.getSelected(),
-       (Classe) this.comboBoxClasse.getSelected(), LocalDate.parse(this.textFieldStartDate.getText()),
+    // TODO: Client, Classe, currentUser
+    return new Reservation(this.formReservationID, new Client(1, "nom", "prenom"),
+        new Classe(1, "sedan", 10.0f), LocalDate.parse(this.textFieldStartDate.getText()),
         LocalDate.parse(this.textFieldEndDate.getText()), this.textFieldNote.getText(),
         new Utilisateur("nom", "prenom", 1, "blbalblab", "courriel", 123, 1, false));
   }
@@ -115,14 +94,4 @@ public class WFormReservation extends WAbstractFormPanel {
     this.textFieldStartDate.setText(reservation.getStartDate().toString());
     this.hasUnsavedContent = false;    
   }
-  
-  public WFormComboBox getComboBoxClasse() {
-	  return this.comboBoxClasse;
-  }
-  
-  public WFormComboBox getComboBoxClient() {
-	  return this.comboBoxClient;
-  }
-  
-  
 }

@@ -6,7 +6,9 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
+import dao.ClasseDao;
 import dao.VehiculeDao;
+import data.Classe;
 import data.Client;
 import data.Vehicule;
 import ui.business.form.WFormVehicule;
@@ -56,7 +58,7 @@ public class WTabVehicule extends WSplitPaneTab {
       public void handleEvent(Event evt) {
             switch ((WFormComboBox.Events) evt.getEventName()) {
               case COMBO_BOX_OPENED:
-                  
+            	  formVehicule.getComboBox().set((ArrayList<Classe>)ClasseDao.retrieveAll());
                   break;
               default:
                   break;

@@ -27,6 +27,7 @@ import data.Reservation;
 import data.Utilisateur;
 import data.Vehicule;
 import ui.business.tab.WTabClient;
+import ui.business.tab.WTabLocation;
 import ui.business.tab.WTabParametre;
 import ui.business.tab.WTabReservation;
 import ui.business.tab.WTabRetour;
@@ -82,11 +83,14 @@ public class TabbedWindow extends JFrame {
     ArrayList<Parametre> parametres = (ArrayList<Parametre>)ParametreDao.retrieveAll();
     
     ArrayList<Client> clients = (ArrayList<Client>)ClientDao.retrieveAll();
+    ArrayList<Location> locations = (ArrayList<Location>)LocationDao.retrieveAll();
 
     WTabClient tabClient = new WTabClient(tabbedPane, clients);
     WTabReservation tabReservation = new WTabReservation(tabbedPane, reservations);
+    WTabLocation tabLocation = new WTabLocation(tabbedPane, locations);
     WTabRetour tabRetour = new WTabRetour(tabbedPane, retours);
     WTabVehicule tabVehicule = new WTabVehicule(tabbedPane);
     WTabParametre tabParametre = new WTabParametre(tabbedPane, parametres);
+    
   }
 }
