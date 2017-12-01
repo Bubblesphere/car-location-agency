@@ -3,10 +3,8 @@ package ui.widgets;
 import java.awt.Component;
 import java.awt.Font;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -17,8 +15,6 @@ import ui.events.IEventName;
 public class WFormTextField extends JPanel {
 	private static final long serialVersionUID = 1L;
 private EventBubbler events;
-  private BoxLayout layout;
-  private WLabel label;
   private JTextField textField;
 
   public static enum Events implements IEventName {
@@ -27,14 +23,7 @@ private EventBubbler events;
   
   public WFormTextField(String labelText) {
   this.events = new EventBubbler(this.listenerList);
-	  
-    this.layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-    this.setBorder(new EmptyBorder(24, 0, 0, 16));
-    this.setLayout(this.layout);
-
-    this.label = new WLabel(labelText);
-    this.add(this.label);
-
+	 
     this.textField = new JTextField();
     this.textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
     this.textField.setAlignmentX(Component.LEFT_ALIGNMENT);

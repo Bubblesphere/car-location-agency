@@ -4,10 +4,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
@@ -22,8 +20,6 @@ import ui.utils.ListableCellRenderer;
 public class WFormComboBox<T extends IListable> extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private EventBubbler events;
-	private BoxLayout layout;
-	private WLabel label;
 	private JComboBox<T> comboBox;
 
 	public static enum Events implements IEventName {
@@ -33,13 +29,6 @@ public class WFormComboBox<T extends IListable> extends JPanel {
 	public WFormComboBox(String labelText, ArrayList<T> list) {
 	  this.events = new EventBubbler(this.listenerList);
 	  
-	  this.layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-	  this.setBorder(new EmptyBorder(24, 0, 0, 16));
-	  this.setLayout(this.layout);
-	
-	  this.label = new WLabel(labelText);
-	  this.add(this.label);
-	
 	  this.comboBox = new JComboBox<T>(ArrayListHelper.toDefaultComboBoxListModel(list));
 	  this.comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 	  this.comboBox.setAlignmentX(Component.LEFT_ALIGNMENT);

@@ -7,14 +7,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ui.events.Event;
 import ui.events.EventBubbler;
 import ui.events.IEventName;
 
-public class WFormButton extends JPanel {
+public class WFormButton extends WAbstractFormComponentLayout {
 	private static final long serialVersionUID = 1L;
 private EventBubbler events;
   private BoxLayout layout;
