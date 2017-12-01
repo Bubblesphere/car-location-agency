@@ -13,6 +13,7 @@ public class ListableCellRenderer extends DefaultListCellRenderer {
     super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
     IListable object = (IListable) value;
+    if (object != null)
     setText(object.getDisplayedText());
 
     return this;

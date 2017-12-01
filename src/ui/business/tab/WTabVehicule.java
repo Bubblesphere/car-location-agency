@@ -75,6 +75,7 @@ public class WTabVehicule extends WSplitPaneTab {
               Vehicule emptyVehicule = new Vehicule(-1, "Nouveau", "Nouveau");
               addListVehicule.addElement(emptyVehicule);
               form.set(emptyVehicule);
+              vehicules.add(emptyVehicule);
               addListVehicule.setSelectedIndex(vehicules.size() - 1);
               form.setHasUnsavedContent(true);
             }            

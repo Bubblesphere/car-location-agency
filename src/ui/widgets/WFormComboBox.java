@@ -17,17 +17,17 @@ import ui.events.IEventName;
 import ui.utils.ArrayListHelper;
 import ui.utils.ListableCellRenderer;
 
-public class WFormComboBox extends JPanel {
+public class WFormComboBox<T extends IListable> extends JPanel {
 	private EventBubbler events;
 	private BoxLayout layout;
 	private WLabel label;
-	private JComboBox<? extends IListable> comboBox;
+	private JComboBox<T> comboBox;
 
 	public static enum Events implements IEventName {
 		COMBO_BOX_OPENED, COMBO_BOX_CLOSED, COMBO_BOX_CANCELLED 
 	}
 	  
-	public WFormComboBox(String labelText, ArrayList<? extends IListable> list) {
+	public WFormComboBox(String labelText, ArrayList<T> list) {
 	  this.events = new EventBubbler(this.listenerList);
 	  
 	  this.layout = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -37,7 +37,7 @@ public class WFormComboBox extends JPanel {
 	  this.label = new WLabel(labelText);
 	  this.add(this.label);
 	
-	  this.comboBox = new JComboBox<>(ArrayListHelper.toDefaultComboBoxListModel(list));
+	  this.comboBox = new JComboBox<T>(ArrayListHelper.toDefaultComboBoxListModel(list));
 	  this.comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 	  this.comboBox.setAlignmentX(this.LEFT_ALIGNMENT);
 	  this.comboBox.setRenderer(new ListableCellRenderer());
@@ -62,16 +62,18 @@ public class WFormComboBox extends JPanel {
 	  this.add(this.comboBox);
 	}
 	
-	public void set(ArrayList<IListable> list) {
+	public void set(ArrayList<T> list) {
+		T previouslySelected = (T)this.comboBox.getSelectedItem();
 		this.comboBox.setModel(ArrayListHelper.toDefaultComboBoxListModel(list));
+		setSelected(previouslySelected);
 	}
 
-	public IListable getSelected() {
-		return (IListable)this.comboBox.getSelectedItem();
+	public T getSelected() {
+		return (T)this.comboBox.getSelectedItem();
 	}
 	
-	public void setSelected(IListable listable) {
-		this.comboBox.setSelectedItem(listable);
+	public void setSelected(T listable) {
+		this.comboBox.getModel().setSelectedItem(listable);
 	}
 	
 	  public EventBubbler events() {

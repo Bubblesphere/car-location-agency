@@ -95,7 +95,7 @@ public class WFormVehicule extends WAbstractFormPanel {
     this.gbcNote.gridy = 4;
     this.add(this.textFieldNote, this.gbcNote);
     
-    this.comboBoxClasse = new WFormComboBox("Classe", (ArrayList<? extends IListable>) ClasseDao.retrieveAll());
+    this.comboBoxClasse = new WFormComboBox<Classe>("Classe", (ArrayList<Classe>) ClasseDao.retrieveAll());
     this.gbcClasse = FormBuilder.getGBCPartialRow();
     this.gbcClasse.gridx = 1;
     this.gbcClasse.gridy = 4;
