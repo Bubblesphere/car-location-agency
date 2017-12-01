@@ -5,9 +5,7 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import dao.ClasseDao;
-import dao.ClientDao;
 import data.Classe;
-import data.IListable;
 import data.Vehicule;
 import ui.events.Event;
 import ui.events.EventListener;
@@ -16,8 +14,10 @@ import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
-public class WFormVehicule extends WAbstractFormPanel {
-  private int formvehiculeId;
+public class WFormVehicule extends WAbstractFormPanel<Vehicule> {
+	private static final long serialVersionUID = 1L;
+
+private int formvehiculeId;
   
   private GridBagLayout layout;
   
@@ -42,7 +42,7 @@ public class WFormVehicule extends WAbstractFormPanel {
   private WFormTextField textFieldNote;
   private GridBagConstraints gbcNote; 
   
-  private WFormComboBox comboBoxClasse;
+  private WFormComboBox<Classe> comboBoxClasse;
   private GridBagConstraints gbcClasse;
 
   
@@ -104,6 +104,7 @@ public class WFormVehicule extends WAbstractFormPanel {
   }
   
   EventListener textBoxValueChangedListener = new EventListener() {
+	  @SuppressWarnings("rawtypes") 
     @Override
     public void handleEvent(Event evt) {
       switch ((WFormTextField.Events) evt.getEventName()) {
@@ -117,7 +118,7 @@ public class WFormVehicule extends WAbstractFormPanel {
   };
 
   @Override
-  public IListable get() {   
+  public Vehicule get() {   
  // TODO: int etat, Boolean desactive
     return new Vehicule(this.formvehiculeId, (Classe)this.comboBoxClasse.getSelected(), this.textFieldFabricant.getText(), 
         this.textFieldMarque.getText(), Integer.parseInt(this.textFieldAnnee.getText()), 
@@ -127,30 +128,28 @@ public class WFormVehicule extends WAbstractFormPanel {
   }
   
   @Override
+  public void set(Vehicule listable) {
+	  Vehicule vehicule = (Vehicule) listable;
+	    this.formvehiculeId = vehicule.getId();
+	    textFieldFabricant.setText(vehicule.getFabricant());
+	    textFieldMarque.setText(vehicule.getMarque());
+	    textFieldAnnee.setText(Integer.toString(vehicule.getAnnee()));
+	    textFieldKilometrage.setText(Integer.toString(vehicule.getKilometrage()));
+	    textFieldPlaque.setText(vehicule.getPlaque());
+	    textFieldCapaciteEssence.setText(Integer.toString(vehicule.getCapaciteEssence()));
+	    textFieldNote.setText(vehicule.getNote());
+	    comboBoxClasse.setSelected(vehicule.getVClasse());
+	 // TODO: int etat, Boolean desactive
+  }
+  
+  @Override
   public void init() {
 	  
   }
   
-  public WFormComboBox getComboBox() {
+  public WFormComboBox<Classe> getComboBox() {
 	  return this.comboBoxClasse;
   }
 
-  @Override
-  public void set(IListable listable) {    
-    Vehicule vehicule = (Vehicule) listable;
-    this.formvehiculeId = vehicule.getId();
-    textFieldFabricant.setText(vehicule.getFabricant());
-    textFieldMarque.setText(vehicule.getMarque());
-    textFieldAnnee.setText(Integer.toString(vehicule.getAnnee()));
-    textFieldKilometrage.setText(Integer.toString(vehicule.getKilometrage()));
-    textFieldPlaque.setText(vehicule.getPlaque());
-    textFieldCapaciteEssence.setText(Integer.toString(vehicule.getCapaciteEssence()));
-    textFieldNote.setText(vehicule.getNote());
-    comboBoxClasse.setSelected(vehicule.getVClasse());
- // TODO: int etat, Boolean desactive
-  }
-  
-  public WFormComboBox getComboBoxClasse(){
-    return this.comboBoxClasse;
-  }
+
 }

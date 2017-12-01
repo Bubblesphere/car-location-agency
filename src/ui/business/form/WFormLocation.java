@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import dao.ReservationDao;
 import dao.VehiculeDao;
-import data.IListable;
 import data.Location;
 import data.Reservation;
 import data.Vehicule;
@@ -17,8 +16,10 @@ import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
-public class WFormLocation extends WAbstractFormPanel {
-  private int formLocationID;
+public class WFormLocation extends WAbstractFormPanel<Location> {
+	private static final long serialVersionUID = 1L;
+
+private int formLocationID;
 
   private GridBagLayout layout;
   
@@ -68,6 +69,7 @@ public class WFormLocation extends WAbstractFormPanel {
   //TODO assurance, usureJournalier
 
     EventListener textBoxValueChangedListener = new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WFormTextField.Events) evt.getEventName()) {
@@ -87,7 +89,7 @@ public class WFormLocation extends WAbstractFormPanel {
   }
 
   @Override
-  public IListable get() {
+  public Location get() {
    return new Location(this.comboBoxReservation.getSelected().getReservationId(), 
 		   this.comboBoxReservation.getSelected().getClientReservation(), 
 		   this.comboBoxReservation.getSelected().getClasseReservation(),
@@ -113,17 +115,6 @@ public class WFormLocation extends WAbstractFormPanel {
   public void init() {
 	  
   }
-
-  @Override
-  public void set(IListable listable) {
-	  Location location = (Location) listable;
-	  this.formLocationID = location.getLocationId();
-	  this.textFieldNote.setText(location.getNoteLocation());
-	  this.textFieldDepartKm.setText(Integer.toString(location.getDepartKm()));
-	  this.comboBoxReservation.setSelected(ReservationDao.retrieve(location.getReservationId()));
-	  this.comboBoxVehicule.setSelected(location.getVehicule());
-	//TODO assurance, usureJournalier
-  }
   
   public WFormComboBox<Reservation> getComboBoxReservation(){
 	  return this.comboBoxReservation;
@@ -132,4 +123,15 @@ public class WFormLocation extends WAbstractFormPanel {
   public WFormComboBox<Vehicule> getComboBoxVehicule(){
 	  return this.comboBoxVehicule;
   }
+
+@Override
+public void set(Location listable) {
+	  Location location = (Location) listable;
+	  this.formLocationID = location.getLocationId();
+	  this.textFieldNote.setText(location.getNoteLocation());
+	  this.textFieldDepartKm.setText(Integer.toString(location.getDepartKm()));
+	  this.comboBoxReservation.setSelected(ReservationDao.retrieve(location.getReservationId()));
+	  this.comboBoxVehicule.setSelected(location.getVehicule());
+	//TODO assurance, usureJournalier
+}
 }

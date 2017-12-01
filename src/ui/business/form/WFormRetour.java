@@ -2,12 +2,13 @@ package ui.business.form;
 
 import java.awt.GridBagLayout;
 
-import data.IListable;
+import data.Location;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 
-public class WFormRetour extends WAbstractFormPanel {
-  private GridBagLayout layout;
+public class WFormRetour extends WAbstractFormPanel<Location> {
+	private static final long serialVersionUID = 1L;
+private GridBagLayout layout;
 
   public WFormRetour() {
     this.layout = FormBuilder.getLayout();
@@ -16,19 +17,22 @@ public class WFormRetour extends WAbstractFormPanel {
     // TODO: Implement
   }
 
-  @Override
-  public IListable get() {
-    // TODO: Implement
-    return null;
-  }
-  
+
   @Override
   public void init() {
 	  
   }
 
-  @Override
-  public void set(IListable listable) {
-    // TODO: Implement
-  }
+	@Override
+	public void set(Location listable) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	@Override
+	public Location get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

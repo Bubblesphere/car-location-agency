@@ -14,21 +14,22 @@ import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
-import ui.widgets.WFormComboBox;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabClient extends WSplitPaneTab {
-	private WForm form;
+	private static final long serialVersionUID = 1L;
+	private WForm<Client> form;
 
   public WTabClient(JTabbedPane tabbedPane, ArrayList<Client> clients) {
     super(tabbedPane, "Client");
 
-    WListAdd addListClient = new WListAdd(clients);
+    WListAdd<Client> addListClient = new WListAdd<Client>(clients);
 
     WFormClient formClient = new WFormClient();
-    this.form = new WForm("Information sur le client", formClient);
+    this.form = new WForm<Client>("Information sur le client", formClient);
     this.form.events().addListener(new ui.events.EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
@@ -51,6 +52,7 @@ public class WTabClient extends WSplitPaneTab {
     }); 
     
     addListClient.events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
 
@@ -67,7 +69,7 @@ public class WTabClient extends WSplitPaneTab {
           }
           break;
         case LIST_VALUE_CHANGED:
-          Client selectedClient = clients.get(addListClient.getSelectedIndex());
+          //Client selectedClient = clients.get(addListClient.getSelectedIndex());
 
           if (form.getHasUnsavedContent()) {
             int dialogResult = JOptionPane.showConfirmDialog(null,
@@ -110,7 +112,7 @@ public class WTabClient extends WSplitPaneTab {
     this.setRightComponent(form);
   }
 
-  public WForm getForm() {
+  public WForm<Client> getForm() {
 	  return this.form;
   }
 }

@@ -9,7 +9,6 @@ import javax.swing.JTabbedPane;
 import dao.ClasseDao;
 import dao.VehiculeDao;
 import data.Classe;
-import data.Client;
 import data.Vehicule;
 import ui.business.form.WFormVehicule;
 import ui.events.Event;
@@ -21,17 +20,19 @@ import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabVehicule extends WSplitPaneTab {
+	private static final long serialVersionUID = 1L;
 
-  public WTabVehicule(JTabbedPane tabbedPane) {
+public WTabVehicule(JTabbedPane tabbedPane) {
     super(tabbedPane, "V�hicule");
     
     ArrayList<Vehicule> vehicules = (ArrayList<Vehicule>)VehiculeDao.retrieveAll();
 
-    WListAdd addListVehicule = new WListAdd(vehicules);
+    WListAdd<Vehicule> addListVehicule = new WListAdd<Vehicule>(vehicules);
 
     WFormVehicule formVehicule = new WFormVehicule();
-    WForm form = new WForm("Information sur le v�hicule", formVehicule);
+    WForm<Vehicule> form = new WForm<Vehicule>("Information sur le v�hicule", formVehicule);
     form.events().addListener(new ui.events.EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
@@ -53,7 +54,8 @@ public class WTabVehicule extends WSplitPaneTab {
       }
     });
     
-    formVehicule.getComboBoxClasse().events().addListener(new EventListener() {      
+    formVehicule.getComboBox().events().addListener(new EventListener() {      
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
             switch ((WFormComboBox.Events) evt.getEventName()) {
@@ -67,6 +69,7 @@ public class WTabVehicule extends WSplitPaneTab {
     });
 
     addListVehicule.events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WListAdd.Events) evt.getEventName()) {

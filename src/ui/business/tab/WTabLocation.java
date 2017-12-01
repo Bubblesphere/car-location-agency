@@ -1,32 +1,27 @@
 package ui.business.tab;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
-import dao.ReservationDao;
 import data.Location;
-import data.Reservation;
 import ui.business.form.WFormLocation;
-import ui.business.form.WFormReservation;
 import ui.events.Event;
 import ui.events.EventListener;
-import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabLocation extends WSplitPaneTab {
+	private static final long serialVersionUID = 1L;
 
-  public WTabLocation(JTabbedPane tabbedPane, ArrayList<Location> locations) {
+public WTabLocation(JTabbedPane tabbedPane, ArrayList<Location> locations) {
     super(tabbedPane, "Location");
 
-    WListAdd addListLocation = new WListAdd(locations);
+    WListAdd<Location> addListLocation = new WListAdd<Location>(locations);
 
-    WForm form = new WForm("Information sur la location", new WFormLocation());
+    WForm<Location> form = new WForm<Location>("Information sur la location", new WFormLocation());
     form.events().addListener(new ui.events.EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
@@ -40,6 +35,7 @@ public class WTabLocation extends WSplitPaneTab {
     });
 
     addListLocation.events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WListAdd.Events) evt.getEventName()) {

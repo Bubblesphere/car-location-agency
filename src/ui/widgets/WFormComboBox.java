@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
@@ -30,11 +29,8 @@ public class WFormComboBox<T extends IListable> extends WAbstractFormComponent {
 		super(labelText);
 	  this.events = new EventBubbler(this.listenerList);
 	  
-	  if (list.size() > 0) {
-		  this.comboBox = new JComboBox<T>(ArrayListHelper.toDefaultComboBoxListModel(list));
-	  } else {
-		  this.comboBox = new JComboBox<T>();
-	  }
+
+	  this.comboBox = new JComboBox<T>(ArrayListHelper.toDefaultComboBoxListModel(list));
 	  this.comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 	  this.comboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 	  this.comboBox.setRenderer(new ListableCellRenderer());

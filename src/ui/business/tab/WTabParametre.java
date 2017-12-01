@@ -15,14 +15,16 @@ import ui.widgets.WList;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabParametre extends WSplitPaneTab {
+	private static final long serialVersionUID = 1L;
 
-  public WTabParametre(JTabbedPane tabbedPane, ArrayList<Parametre> parametres) {
+public WTabParametre(JTabbedPane tabbedPane, ArrayList<Parametre> parametres) {
     super(tabbedPane, "Param�tre");
 
-    WList listParametre = new WList(parametres);
+    WList<Parametre> listParametre = new WList<Parametre>(parametres);
 
-    WForm form = new WForm("Information sur le param�tre", new WFormParametre());
+    WForm<Parametre> form = new WForm<Parametre>("Information sur le param�tre", new WFormParametre());
     form.events().addListener(new ui.events.EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
@@ -47,6 +49,7 @@ public class WTabParametre extends WSplitPaneTab {
     });
 
     listParametre.events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WList.Events) evt.getEventName()) {
