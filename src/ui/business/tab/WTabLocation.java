@@ -9,6 +9,7 @@ import javax.swing.JTabbedPane;
 import dao.ReservationDao;
 import data.Location;
 import data.Reservation;
+import ui.business.form.WFormLocation;
 import ui.business.form.WFormReservation;
 import ui.events.Event;
 import ui.events.EventListener;
@@ -24,7 +25,7 @@ public class WTabLocation extends WSplitPaneTab {
 
     WListAdd addListLocation = new WListAdd(locations);
 
-    WForm form = new WForm("Information sur la location", new WFormReservation());
+    WForm form = new WForm("Information sur la location", new WFormLocation());
     form.events().addListener(new ui.events.EventListener() {
       @Override
       public void handleEvent(Event evt) {

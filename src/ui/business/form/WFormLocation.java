@@ -2,56 +2,70 @@ package ui.business.form;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.time.LocalDate;
+import java.util.ArrayList;
 
-import data.Classe;
-import data.Client;
+import dao.ReservationDao;
+import dao.VehiculeDao;
 import data.IListable;
+import data.Location;
 import data.Reservation;
-import data.Utilisateur;
+import data.Vehicule;
 import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
+import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
 public class WFormLocation extends WAbstractFormPanel {
-  private int formReservationID;
+  private int formLocationID;
 
   private GridBagLayout layout;
-
-  private WFormTextField textFieldStartDate;
-  private GridBagConstraints gbcStartDate;
-
-  private WFormTextField textFieldEndDate;
-  private GridBagConstraints gbcEndDate;
-
+  
+  private WFormComboBox<Reservation> comboBoxReservation;
+  private GridBagConstraints gbcReservation;
+  
+  //TODO get only the ones from the reservation class
+  private WFormComboBox<Vehicule> comboBoxVehicule;
+  private GridBagConstraints gbcVehicule;
+  
+  private WFormTextField textFieldDepartKm;
+  private GridBagConstraints gbcDepartKm;
+  
   private WFormTextField textFieldNote;
   private GridBagConstraints gbcNote;
-  // TODO: Client, Classe
+  
+  //TODO assurance, usureJournalier   
 
   public WFormLocation() {
     this.layout = FormBuilder.getLayout();
     this.setLayout(this.layout);
-
-    this.textFieldStartDate = new WFormTextField("D�but");
-    this.gbcStartDate = FormBuilder.getGBCPartialRow();
-    this.gbcStartDate.gridx = 0;
-    this.gbcStartDate.gridy = 1;
-    this.add(this.textFieldStartDate, this.gbcStartDate);
-
-    this.textFieldEndDate = new WFormTextField("Fin");
-    this.gbcEndDate = FormBuilder.getGBCPartialRow();
-    this.gbcEndDate.gridx = 1;
-    this.gbcEndDate.gridy = 1;
-    this.add(this.textFieldEndDate, this.gbcEndDate);
-
+    
+    this.comboBoxReservation = new WFormComboBox("Réservation",  (ArrayList<? extends IListable>) ReservationDao.retrieveAll(true));
+    this.gbcVehicule = FormBuilder.getGBCFullRow();
+    this.gbcVehicule.gridx = 0;
+    this.gbcVehicule.gridy = 1;
+    this.add(this.comboBoxVehicule, this.gbcVehicule);
+    
+    this.textFieldDepartKm = new WFormTextField("Kilométrage avant le départ");
+    this.gbcDepartKm = FormBuilder.getGBCPartialRow();
+    this.gbcDepartKm.gridx = 0;
+    this.gbcDepartKm.gridy = 2;
+    this.add(this.textFieldDepartKm, this.gbcDepartKm);
+    
+    this.comboBoxVehicule = new WFormComboBox("Véhicule",  (ArrayList<? extends IListable>) VehiculeDao.retrieveAll());
+    this.gbcVehicule = FormBuilder.getGBCPartialRow();
+    this.gbcVehicule.gridx = 1;
+    this.gbcVehicule.gridy = 2;
+    this.add(this.comboBoxVehicule, this.gbcVehicule);
+    
     this.textFieldNote = new WFormTextField("Note");
     this.gbcNote = FormBuilder.getGBCFullRow();
     this.gbcNote.gridx = 0;
-    this.gbcNote.gridy = 2;
+    this.gbcNote.gridy = 4;
     this.add(this.textFieldNote, this.gbcNote);
-    // TODO: Client, Classe
+    
+  //TODO assurance, usureJournalier
 
     EventListener textBoxValueChangedListener = new EventListener() {
       @Override
@@ -65,19 +79,34 @@ public class WFormLocation extends WAbstractFormPanel {
         }
       }
     };
-
-    textFieldStartDate.events().addListener(textBoxValueChangedListener);
-    textFieldEndDate.events().addListener(textBoxValueChangedListener);
+    
+    textFieldDepartKm.events().addListener(textBoxValueChangedListener);
     textFieldNote.events().addListener(textBoxValueChangedListener);
+    
+  //TODO vehicule, assurance, usureJournalier, comboboxReservation
   }
 
   @Override
   public IListable get() {
-    // TODO: Client, Classe, currentUser
-    return new Reservation(this.formReservationID, new Client(1, "nom", "prenom"),
-        new Classe(1, "sedan", 10.0f), LocalDate.parse(this.textFieldStartDate.getText()),
-        LocalDate.parse(this.textFieldEndDate.getText()), this.textFieldNote.getText(),
-        new Utilisateur("nom", "prenom", 1, "blbalblab", "courriel", 123, 1, false));
+   return new Location(this.comboBoxReservation.getSelected().getReservationId(), 
+		   this.comboBoxReservation.getSelected().getClientReservation(), 
+		   this.comboBoxReservation.getSelected().getClasseReservation(),
+		   this.comboBoxReservation.getSelected().getStartDate(), 
+		   this.comboBoxReservation.getSelected().getFinDate(), 		  
+		   this.textFieldNote.getText(), 
+		   this.comboBoxReservation.getSelected().getUtilisateurReservation(), 
+		   this.formLocationID, 
+		   (Vehicule)this.comboBoxVehicule.getSelected(), 
+		   null, //currentUser 
+		   null, //dateDeRetour
+		   true, //assurance
+		   true, //usureJournalire
+		   0, //essenceManqu
+		   Integer.parseInt(textFieldDepartKm.getText()), 
+		   0, // retourKm
+		   this.comboBoxReservation.getSelected().getNoteReservation(), 
+		   0);//estimationReperation
+ //TODO assurance, usureJournalier
   }
   
   @Override
@@ -87,11 +116,20 @@ public class WFormLocation extends WAbstractFormPanel {
 
   @Override
   public void set(IListable listable) {
-    Reservation reservation = (Reservation) listable;
-    this.formReservationID = reservation.getReservationId();
-    this.textFieldNote.setText(reservation.getNoteReservation());
-    this.textFieldEndDate.setText(reservation.getFinDate().toString());
-    this.textFieldStartDate.setText(reservation.getStartDate().toString());
-    this.hasUnsavedContent = false;    
+	  Location location = (Location) listable;
+	  this.formLocationID = location.getLocationId();
+	  this.textFieldNote.setText(location.getNoteLocation());
+	  this.textFieldDepartKm.setText(Integer.toString(location.getDepartKm()));
+	  this.comboBoxReservation.setSelected(ReservationDao.retrieve(location.getReservationId()));
+	  this.comboBoxVehicule.setSelected(location.getVehicule());
+	//TODO assurance, usureJournalier
+  }
+  
+  public WFormComboBox<Reservation> getComboBoxReservation(){
+	  return this.comboBoxReservation;
+  }
+  
+  public WFormComboBox<Vehicule> getComboBoxVehicule(){
+	  return this.comboBoxVehicule;
   }
 }

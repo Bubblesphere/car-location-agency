@@ -33,10 +33,10 @@ public class WFormReservation extends WAbstractFormPanel {
   private WFormTextField textFieldNote;
   private GridBagConstraints gbcNote;
   
-  private WFormComboBox comboBoxClient;
+  private WFormComboBox<Client> comboBoxClient;
   private GridBagConstraints gbcClient;
   
-  private WFormComboBox comboBoxClasse;
+  private WFormComboBox<Classe> comboBoxClasse;
   private GridBagConstraints gbcClasse;
 
   public WFormReservation() {
