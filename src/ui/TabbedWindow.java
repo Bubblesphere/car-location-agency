@@ -13,12 +13,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import dao.ClasseDao;
+import dao.ClientDao;
 import dao.LocationDao;
 import dao.ParametreDao;
 import dao.ReservationDao;
 import dao.UtilisateurDao;
 import dao.VehiculeDao;
 import data.Classe;
+import data.Client;
 import data.Location;
 import data.Parametre;
 import data.Reservation;

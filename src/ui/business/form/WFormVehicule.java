@@ -132,7 +132,7 @@ public class WFormVehicule extends WAbstractFormPanel {
   }
   
   public WFormComboBox getComboBox() {
-	  return this.comboClasse;
+	  return this.comboBoxClasse;
   }
 
   @Override
