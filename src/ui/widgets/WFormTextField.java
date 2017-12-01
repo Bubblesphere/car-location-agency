@@ -12,7 +12,7 @@ import ui.events.Event;
 import ui.events.EventBubbler;
 import ui.events.IEventName;
 
-public class WFormTextField extends JPanel {
+public class WFormTextField extends WAbstractFormComponent {
 	private static final long serialVersionUID = 1L;
 private EventBubbler events;
   private JTextField textField;
@@ -22,6 +22,7 @@ private EventBubbler events;
   }
   
   public WFormTextField(String labelText) {
+	  super(labelText);
   this.events = new EventBubbler(this.listenerList);
 	 
     this.textField = new JTextField();

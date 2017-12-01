@@ -41,11 +41,11 @@ public class WFormLocation extends WAbstractFormPanel {
     this.layout = FormBuilder.getLayout();
     this.setLayout(this.layout);
     
-    this.comboBoxReservation = new WFormComboBox("Réservation",  (ArrayList<? extends IListable>) ReservationDao.retrieveAll(true));
-    this.gbcVehicule = FormBuilder.getGBCFullRow();
-    this.gbcVehicule.gridx = 0;
-    this.gbcVehicule.gridy = 1;
-    this.add(this.comboBoxVehicule, this.gbcVehicule);
+    this.comboBoxReservation = new WFormComboBox<Reservation>("Réservation",  (ArrayList<Reservation>) ReservationDao.retrieveAll(true));
+    this.gbcReservation = FormBuilder.getGBCFullRow();
+    this.gbcReservation.gridx = 0;
+    this.gbcReservation.gridy = 1;
+    this.add(this.comboBoxReservation, this.gbcReservation);
     
     this.textFieldDepartKm = new WFormTextField("Kilométrage avant le départ");
     this.gbcDepartKm = FormBuilder.getGBCPartialRow();
@@ -53,7 +53,7 @@ public class WFormLocation extends WAbstractFormPanel {
     this.gbcDepartKm.gridy = 2;
     this.add(this.textFieldDepartKm, this.gbcDepartKm);
     
-    this.comboBoxVehicule = new WFormComboBox("Véhicule",  (ArrayList<? extends IListable>) VehiculeDao.retrieveAll());
+    this.comboBoxVehicule = new WFormComboBox<Vehicule>("Véhicule",  (ArrayList<Vehicule>) VehiculeDao.retrieveAll());
     this.gbcVehicule = FormBuilder.getGBCPartialRow();
     this.gbcVehicule.gridx = 1;
     this.gbcVehicule.gridy = 2;

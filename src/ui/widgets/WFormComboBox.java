@@ -17,7 +17,7 @@ import ui.utils.ArrayListHelper;
 import ui.utils.ListableCellRenderer;
 
 
-public class WFormComboBox<T extends IListable> extends JPanel {
+public class WFormComboBox<T extends IListable> extends WAbstractFormComponent {
 	private static final long serialVersionUID = 1L;
 	private EventBubbler events;
 	private JComboBox<T> comboBox;
@@ -27,9 +27,14 @@ public class WFormComboBox<T extends IListable> extends JPanel {
 	}
 	  
 	public WFormComboBox(String labelText, ArrayList<T> list) {
+		super(labelText);
 	  this.events = new EventBubbler(this.listenerList);
 	  
-	  this.comboBox = new JComboBox<T>(ArrayListHelper.toDefaultComboBoxListModel(list));
+	  if (list.size() > 0) {
+		  this.comboBox = new JComboBox<T>(ArrayListHelper.toDefaultComboBoxListModel(list));
+	  } else {
+		  this.comboBox = new JComboBox<T>();
+	  }
 	  this.comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 	  this.comboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 	  this.comboBox.setRenderer(new ListableCellRenderer());
