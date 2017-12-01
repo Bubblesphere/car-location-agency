@@ -29,10 +29,8 @@ import ui.widgets.WSplitPaneTab;
 public class WTabClient extends WSplitPaneTab {
 	private WForm form;
 
-  public WTabClient(JTabbedPane tabbedPane) {
+  public WTabClient(JTabbedPane tabbedPane, ArrayList<Client> clients) {
     super(tabbedPane, "Client");
-    
-    ArrayList<Client> clients = (ArrayList<Client>)ClientDao.retrieveAll();
 
     WListAdd addListClient = new WListAdd(clients);
 
@@ -58,20 +56,7 @@ public class WTabClient extends WSplitPaneTab {
           break;
         }
       }
-    });     
-    
-    formClient.getComboBox().events().addListener(new EventListener() {
-        @Override
-        public void handleEvent(Event evt) {
-        	  switch ((WFormComboBox.Events) evt.getEventName()) {
-              	case COMBO_BOX_OPENED:
-              		System.out.println("Open");
-              		break;
-            	default:
-            		break;
-        	  }
-        }   
-     });
+    }); 
     
     addListClient.events().addListener(new EventListener() {
       @Override
@@ -84,6 +69,7 @@ public class WTabClient extends WSplitPaneTab {
             emptyClient.setDateDeNaissance(LocalDate.now());
             addListClient.addElement(emptyClient);
             form.set(emptyClient);            
+            clients.add(emptyClient);
             addListClient.setSelectedIndex(clients.size() - 1);
             form.setHasUnsavedContent(true);
           }

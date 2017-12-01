@@ -2,7 +2,10 @@ package ui.business.form;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 
+import dao.ClasseDao;
+import dao.ClientDao;
 import data.Classe;
 import data.IListable;
 import data.Vehicule;
@@ -10,6 +13,7 @@ import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
+import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
 public class WFormVehicule extends WAbstractFormPanel {
@@ -37,9 +41,12 @@ public class WFormVehicule extends WAbstractFormPanel {
   
   private WFormTextField textFieldNote;
   private GridBagConstraints gbcNote; 
+  
+  private WFormComboBox comboBoxClasse;
+  private GridBagConstraints gbcClasse;
 
   
-  // TODO: Classe classe, int etat, Boolean desactive
+  // TODO: int etat, Boolean desactive
   
   public WFormVehicule() {
    
@@ -83,14 +90,17 @@ public class WFormVehicule extends WAbstractFormPanel {
     this.add(this.textFieldCapaciteEssence, this.gbcCapaciteEssence);
     
     this.textFieldNote = new WFormTextField("Note");
-    this.gbcNote = FormBuilder.getGBCFullRow();
+    this.gbcNote = FormBuilder.getGBCPartialRow();
     this.gbcNote.gridx = 0;
     this.gbcNote.gridy = 4;
     this.add(this.textFieldNote, this.gbcNote);
     
-
-
-    // TODO: Classe classe, int etat, Boolean desactive
+    this.comboBoxClasse = new WFormComboBox("Classe", (ArrayList<? extends IListable>) ClasseDao.retrieveAll());
+    this.gbcClasse = FormBuilder.getGBCPartialRow();
+    this.gbcClasse.gridx = 1;
+    this.gbcClasse.gridy = 4;
+    this.add(this.comboBoxClasse, this.gbcClasse); 
+    // TODO: int etat, Boolean desactive
   }
   
   EventListener textBoxValueChangedListener = new EventListener() {
@@ -108,8 +118,8 @@ public class WFormVehicule extends WAbstractFormPanel {
 
   @Override
   public IListable get() {   
- // TODO: Classe classe, int etat, Boolean desactive
-    return new Vehicule(this.formvehiculeId, new Classe(1, "test", 10.0f), this.textFieldFabricant.getText(), 
+ // TODO: int etat, Boolean desactive
+    return new Vehicule(this.formvehiculeId, (Classe)this.comboBoxClasse.getSelected(), this.textFieldFabricant.getText(), 
         this.textFieldMarque.getText(), Integer.parseInt(this.textFieldAnnee.getText()), 
         Integer.parseInt(this.textFieldKilometrage.getText()), 1, 
         this.textFieldPlaque.getText(), false, 
@@ -132,6 +142,11 @@ public class WFormVehicule extends WAbstractFormPanel {
     textFieldPlaque.setText(vehicule.getPlaque());
     textFieldCapaciteEssence.setText(Integer.toString(vehicule.getCapaciteEssence()));
     textFieldNote.setText(vehicule.getNote());
- // TODO: Classe classe, int etat, Boolean desactive
+    comboBoxClasse.setSelected(vehicule.getVClasse());
+ // TODO: int etat, Boolean desactive
+  }
+  
+  public WFormComboBox getComboBoxClasse(){
+    return this.comboBoxClasse;
   }
 }

@@ -9,23 +9,28 @@ import javax.swing.JTabbedPane;
 
 import dao.ClientDao;
 import dao.VehiculeDao;
+import data.Client;
 import data.Vehicule;
 import ui.business.form.WFormVehicule;
 import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
+import ui.widgets.WFormComboBox;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabVehicule extends WSplitPaneTab {
 
-  public WTabVehicule(JTabbedPane tabbedPane, ArrayList<Vehicule> vehicules) {
+  public WTabVehicule(JTabbedPane tabbedPane) {
     super(tabbedPane, "Véhicule");
+    
+    ArrayList<Vehicule> vehicules = (ArrayList<Vehicule>)VehiculeDao.retrieveAll();
 
     WListAdd addListVehicule = new WListAdd(vehicules);
 
-    WForm form = new WForm("Information sur le véhicule", new WFormVehicule());
+    WFormVehicule formVehicule = new WFormVehicule();
+    WForm form = new WForm("Information sur le véhicule", formVehicule);
     form.events().addListener(new ui.events.EventListener() {
       @Override
       public void handleEvent(Event evt) {
@@ -46,6 +51,19 @@ public class WTabVehicule extends WSplitPaneTab {
             break;
         }
       }
+    });
+    
+    formVehicule.getComboBoxClasse().events().addListener(new EventListener() {      
+      @Override
+      public void handleEvent(Event evt) {
+            switch ((WFormComboBox.Events) evt.getEventName()) {
+              case COMBO_BOX_OPENED:
+                  
+                  break;
+              default:
+                  break;
+            }
+      }   
     });
 
     addListVehicule.events().addListener(new EventListener() {

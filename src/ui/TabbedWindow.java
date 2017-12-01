@@ -80,16 +80,17 @@ public class TabbedWindow extends JFrame {
     ArrayList<Utilisateur> users1 = (ArrayList<Utilisateur>) UtilisateurDao.retrieveAll();
     ArrayList<Utilisateur> users = (ArrayList<Utilisateur>) users1;
    
-    ArrayList<Classe> classes = (ArrayList<Classe>)ClasseDao.retrieveAll();
-    ArrayList<Vehicule> vehicules = (ArrayList<Vehicule>)VehiculeDao.retrieveAll();
+    ArrayList<Classe> classes = (ArrayList<Classe>)ClasseDao.retrieveAll();    
     ArrayList<Location> retours = (ArrayList<Location>)LocationDao.retrieveAll();
     ArrayList<Reservation> reservations = (ArrayList<Reservation>)ReservationDao.retrieveAll();
     ArrayList<Parametre> parametres = (ArrayList<Parametre>)ParametreDao.retrieveAll();
+    
+    ArrayList<Client> clients = (ArrayList<Client>)ClientDao.retrieveAll();
 
-    WTabClient tabClient = new WTabClient(tabbedPane);
+    WTabClient tabClient = new WTabClient(tabbedPane, clients);
     WTabReservation tabReservation = new WTabReservation(tabbedPane, reservations);
     WTabRetour tabRetour = new WTabRetour(tabbedPane, retours);
-    WTabVehicule tabVehicule = new WTabVehicule(tabbedPane, vehicules);
+    WTabVehicule tabVehicule = new WTabVehicule(tabbedPane);
     WTabParametre tabParametre = new WTabParametre(tabbedPane, parametres);
   }
 }

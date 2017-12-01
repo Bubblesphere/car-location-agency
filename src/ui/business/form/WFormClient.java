@@ -23,10 +23,6 @@ public class WFormClient extends WAbstractFormPanel {
 
   private GridBagLayout layout;
   
-  // TODO: Remove
-  private WFormComboBox comboBox;
-  private GridBagConstraints gbcComboBox;
-  
   private WFormTextField textFieldNom;
   private GridBagConstraints gbcNom;
   
@@ -55,18 +51,13 @@ public class WFormClient extends WAbstractFormPanel {
     this.layout = FormBuilder.getLayout();
     this.setLayout(this.layout);
     
-    // TODO: Remove
-    this.comboBox = new WFormComboBox("Exemple combobox", (ArrayList<? extends IListable>) ClientDao.retrieveAll());
-    this.gbcComboBox = FormBuilder.getGBCPartialRow();
-    this.gbcComboBox.gridx = 0;
-    this.gbcComboBox.gridy = 1;
-    this.add(this.comboBox, this.gbcComboBox);		
+   	
     
     this.textFieldNom = new WFormTextField("Nom");
     this.gbcNom = FormBuilder.getGBCPartialRow();
     this.gbcNom.gridx = 0;
     this.gbcNom.gridy = 1;
-    //this.add(this.textFieldNom, this.gbcNom);
+    this.add(this.textFieldNom, this.gbcNom);
 	
     this.textFieldPrenom = new WFormTextField("Prenom");
     this.gbcPrenom = FormBuilder.getGBCPartialRow();
@@ -172,11 +163,7 @@ public class WFormClient extends WAbstractFormPanel {
 	    this.textFieldCourriel.setText("");
 	    this.textFieldNote.setText("");
 	    this.textFieldDateDeNaissance.setText("");
-	    this.hasUnsavedContent = false;
-	    this.comboBox.set((ArrayList) ClientDao.retrieveAll());
-  }
-  
-  public WFormComboBox getComboBox() {
-	  return this.comboBox;
-  }
+	    this.hasUnsavedContent = false;	    
+  } 
+
 }
