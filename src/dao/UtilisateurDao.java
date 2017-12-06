@@ -74,6 +74,35 @@ public class UtilisateurDao {
   }
 
   /**
+   * Méthode pour vérifier une combinaison d'un numéro d'employé et un mot de
+   * passe pour un utilisateur
+   *
+   * @param employeeId
+   *          utilisateur à vérifier.
+   * @param password
+   *          password à valider
+   * @return l'utilisateur qui a été vérifier ou null.
+   */
+  public static Utilisateur checkAndRetrieve(int employeeId, String password) {
+    try (Connection connection = DataAccess.getConnection()) {
+
+      String query = "SELECT id FROM Utilisateurs WHERE num_employe = ? "
+              + "AND mot_de_passe = ? AND NOT desactive";
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setInt(1, employeeId);
+      statement.setString(2, password);
+      ResultSet resultSet = statement.executeQuery();
+
+      if (resultSet.next()) {
+        return retrieve(resultSet.getInt(1));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  /**
    * Méthode pour récupérer un utilisateur
    * 
    * @param utilisateurId

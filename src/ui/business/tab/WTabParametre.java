@@ -17,11 +17,11 @@ import ui.widgets.WSplitPaneTab;
 public class WTabParametre extends WSplitPaneTab {
 
   public WTabParametre(JTabbedPane tabbedPane, ArrayList<Parametre> parametres) {
-    super(tabbedPane, "Param�tre");
+    super(tabbedPane, "Paramètre");
 
     WList listParametre = new WList(parametres);
 
-    WForm form = new WForm("Information sur le param�tre", new WFormParametre());
+    WForm form = new WForm("Information sur le paramètre", new WFormParametre());
     form.events().addListener(new ui.events.EventListener() {
       @Override
       public void handleEvent(Event evt) {
