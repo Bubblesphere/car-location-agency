@@ -2,6 +2,8 @@ package data;
 
 import java.time.LocalDate;
 
+import ui.utils.IListable;
+
 public class Reservation implements IListable {
   private int reservationId;
   private Client clientReservation;
@@ -125,6 +127,11 @@ public class Reservation implements IListable {
           + this.getStartDate().toString();
     }
     
+  }
+  
+  @Override
+  public int getId() {
+	  return this.reservationId;
   }
 
 }

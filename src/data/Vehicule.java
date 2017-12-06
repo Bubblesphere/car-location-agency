@@ -1,5 +1,7 @@
 package data;
 
+import ui.utils.IListable;
+
 public class Vehicule implements IListable {
   private int id;
   private Classe classe;

@@ -13,11 +13,11 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import data.IListable;
 import ui.events.Event;
 import ui.events.EventBubbler;
 import ui.events.EventListener;
 import ui.events.IEventName;
+import ui.utils.IListable;
 
 public class WListAdd<T extends IListable> extends JPanel {
 
@@ -78,6 +78,10 @@ public class WListAdd<T extends IListable> extends JPanel {
         eventHandler(Events.BUTTON_ADD_CLICKED);
       }
     });
+  }
+  
+  public void setSelectedIndexLast() {
+	  this.widgetList.setSelectedIndexLast();
   }
   
   public void setModel(JList<T> list) {

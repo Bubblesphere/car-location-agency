@@ -1,6 +1,7 @@
 package data;
 
 import security.PasswordSecurity;
+import ui.utils.IListable;
 
 public class Utilisateur extends Personne implements IListable {
   private int id;

@@ -10,17 +10,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import data.IListable;
 import ui.events.Event;
 import ui.events.EventBubbler;
 import ui.events.IEventName;
 import ui.utils.ArrayListHelper;
+import ui.utils.IListable;
 import ui.utils.ListableCellRenderer;
 
 public class WList<T extends IListable> extends JList<T> {
 	private static final long serialVersionUID = 1L;
-private EventBubbler events;
-  protected int lastSelectedIndex;
+	private EventBubbler events;
+	protected int lastSelectedIndex;
 
   public static enum Events implements IEventName {
     LIST_VALUE_CHANGED
@@ -51,6 +51,10 @@ public WList(ArrayList<T> list) {
       }
     });
   }
+
+	public void setSelectedIndexLast() {
+		this.setSelectedIndex(this.lastSelectedIndex);
+	}
 
   public void addElement(T element) {
     DefaultListModel<T> model = (DefaultListModel<T>) this.getModel();

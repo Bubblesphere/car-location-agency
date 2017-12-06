@@ -2,7 +2,7 @@ package ui.widgets;
 
 import javax.swing.JPanel;
 
-import data.IListable;
+import ui.utils.IListable;
 
 public abstract class WAbstractFormPanel<T extends IListable> extends JPanel {
 	private static final long serialVersionUID = 1L;

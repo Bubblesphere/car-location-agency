@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -24,18 +25,49 @@ import data.Reservation;
 import data.Utilisateur;
 import data.Vehicule;
 import org.sqlite.util.StringUtils;
-import security.Login;
-import ui.business.tab.WTabClient;
-import ui.business.tab.WTabLocation;
-import ui.business.tab.WTabParametre;
-import ui.business.tab.WTabReservation;
-import ui.business.tab.WTabRetour;
-import ui.business.tab.WTabVehicule;
+
+import ui.business.form.WFormClient;
+import ui.business.form.WFormLocation;
+import ui.business.form.WFormParametre;
+import ui.business.form.WFormReservation;
+import ui.business.form.WFormRetour;
+import ui.business.form.WFormVehicule;
+//import security.Login;
+import ui.events.Event;
+import ui.events.EventListener;
+import ui.utils.ArrayListHelper;
+import ui.widgets.WForm;
+import ui.widgets.WFormComboBox;
+import ui.widgets.WTabFormListAdd;
+import ui.widgets.WTabFormListAdd.Events;
 
 public class TabbedWindow extends JFrame {
 
   private static final long serialVersionUID = 1L;
   private JPanel contentPane;
+  
+  private WTabFormListAdd<Client> tabClient;
+  private WTabFormListAdd<Reservation> tabReservation;
+  private WTabFormListAdd<Location> tabLocation;
+  private WTabFormListAdd<Location> tabRetour;
+  private WTabFormListAdd<Vehicule> tabVehicule;
+  private WTabFormListAdd<Parametre> tabParametre;
+  
+  private WFormClient formClient;
+  private WFormReservation formReservation;
+  private WFormLocation formLocation;
+  private WFormRetour formRetour;
+  private WFormVehicule formVehicule;
+  private WFormParametre formParametre;
+  
+  
+  ArrayList<Classe> classes;
+  ArrayList<Location> retours;
+  ArrayList<Reservation> reservations;
+  ArrayList<Parametre> parametres;
+  ArrayList<Client> clients;
+  ArrayList<Location> locations;
+  ArrayList<Vehicule> vehicules;
 
   /**
    * Launch the application.
@@ -61,8 +93,8 @@ public class TabbedWindow extends JFrame {
   public TabbedWindow() {
     setIconImage(Toolkit.getDefaultToolkit().getImage(TabbedWindow.class
         .getResource("/com/sun/javafx/scene/control/skin/modena/dialog-more-details@2x.png")));
-    Login login = new Login();
-    Utilisateur user1 = login.authenticate(this);
+    //Login login = new Login();
+    //Utilisateur user1 = login.authenticate(this);
 
     setTitle("Syst\u00E8me de gestion de location");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,20 +117,194 @@ public class TabbedWindow extends JFrame {
     
     ArrayList<Client> clients = (ArrayList<Client>)ClientDao.retrieveAll();
     ArrayList<Location> locations = (ArrayList<Location>)LocationDao.retrieveAll();
-
-    WTabClient tabClient = new WTabClient(tabbedPane, clients);
-    WTabReservation tabReservation = new WTabReservation(tabbedPane, reservations);
-    WTabLocation tabLocation = new WTabLocation(tabbedPane, locations);
-    WTabRetour tabRetour = new WTabRetour(tabbedPane, retours);
-
-
-    if(user1.getRole() == 0){
-      WTabVehicule tabVehicule = new WTabVehicule(tabbedPane);
-      WTabParametre tabParametre = new WTabParametre(tabbedPane, parametres);
-    }
-
+    ArrayList<Vehicule> vehicules = (ArrayList<Vehicule>)VehiculeDao.retrieveAll();
     
+    
+    this.formClient = new WFormClient();
+    this.formReservation = new WFormReservation();
+    handleFormReservationEvents();
+    this.formLocation = new WFormLocation();
+    handleFormLocationEvents();
+    this.formRetour = new WFormRetour();
+    this.formVehicule = new WFormVehicule();
+    handleFormVehiculeEvents();
+    this.formParametre = new WFormParametre();
+    
+    this.tabClient = new WTabFormListAdd<Client>(tabbedPane, clients, this.formClient, "Client");
+    handleTabClientEvents();
+    this.tabReservation = new WTabFormListAdd<Reservation>(tabbedPane, reservations, this.formReservation, "Réservation");
+    handleTabReservationEvents();
+    this.tabLocation = new WTabFormListAdd<Location>(tabbedPane, locations, this.formLocation, "Location");
+    // TODO: handleTabLocationEvents();
+    this.tabRetour = new WTabFormListAdd<Location>(tabbedPane, retours, this.formRetour, "Retour");
+    // TODO: handleTabRetourEvents();
+    
+    //if(user1.getRole() == 0){
+      this.tabVehicule = new WTabFormListAdd<Vehicule>(tabbedPane, vehicules, this.formVehicule, "Véhicule");
+      handleTabVehiculeEvents();
+      // TODO: this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Paramètre");
+      // TODO: handleTabParametreEvents();
+      //}
+  }
+  
+  private void handleFormReservationEvents() {
+	  this.formReservation.getComboBoxClasse().events().addListener(new ui.events.EventListener() {
+	      	@SuppressWarnings("rawtypes") 
+        @Override
+        public void handleEvent(Event evt) {
+      		switch((WFormComboBox.Events) evt.getEventName()) {
+	      		case COMBO_BOX_OPENED:
+	      			formReservation.getComboBoxClasse().set((ArrayList<Classe>)ClasseDao.retrieveAll());
+	      			break;
+	      		default:
+	      			break;
+	      	}
+      	}
+  });
+  this.formReservation.getComboBoxClient().events().addListener(new ui.events.EventListener() {
+      	@SuppressWarnings("rawtypes") 
+        @Override
+        public void handleEvent(Event evt) {
+      		switch((WFormComboBox.Events) evt.getEventName()) {
+	      		case COMBO_BOX_OPENED:
+	      			formReservation.getComboBoxClient().set((ArrayList<Client>)ClientDao.retrieveAll());
+	      			break;
+	      		default:
+	      			break;
+	      	}
+      	}
+  });
+}
+  
+  private void handleFormLocationEvents() {
+	  	this.formLocation.getComboBoxReservation().events().addListener(new EventListener() {      
+		    	@SuppressWarnings("rawtypes") 
+		      @Override
+		      public void handleEvent(Event evt) {
+		            switch ((WFormComboBox.Events) evt.getEventName()) {
+		              case COMBO_BOX_OPENED:
+		            	  formLocation.getComboBoxReservation().set((ArrayList<Reservation>)ReservationDao.retrieveAll());
+		                  break;
+		              default:
+		                  break;
+		            }
+		      }   
+		    });
+	  	
+	  	this.formLocation.getComboBoxVehicule().events().addListener(new EventListener() {      
+	    	@SuppressWarnings("rawtypes") 
+	      @Override
+	      public void handleEvent(Event evt) {
+	            switch ((WFormComboBox.Events) evt.getEventName()) {
+	              case COMBO_BOX_OPENED:
+	            	  formLocation.getComboBoxVehicule().set((ArrayList<Vehicule>)VehiculeDao.retrieveAll());
+	                  break;
+	              default:
+	                  break;
+	            }
+	      }   
+	    });
+	}
+  
+  private void handleFormVehiculeEvents() {
+  	this.formVehicule.getComboBox().events().addListener(new EventListener() {      
+	    	@SuppressWarnings("rawtypes") 
+	      @Override
+	      public void handleEvent(Event evt) {
+	            switch ((WFormComboBox.Events) evt.getEventName()) {
+	              case COMBO_BOX_OPENED:
+	            	  formVehicule.getComboBox().set((ArrayList<Classe>)ClasseDao.retrieveAll());
+	                  break;
+	              default:
+	                  break;
+	            }
+	      }   
+	    });
+}
+  
+  private void handleTabClientEvents() {
+	  this.tabClient.events().addListener(new ui.events.EventListener() {
+	      	@SuppressWarnings("rawtypes") 
+	        @Override
+	        public void handleEvent(Event evt) {
+	      		switch((WTabFormListAdd.Events) evt.getEventName()) {
+		      		case BUTTON_ADD_CLICKED:
+		      			tabClient.add(new Client(-1, "Nouveau", "Nouveau"));
+		      			break;
+		      		case BUTTON_SAVE_CLICKED_NEW:
+		      			tabClient.add(ClientDao.create(tabClient.getCurrentListable()));
+		      			break;
+		      		case BUTTON_SAVE_CLICKED_MODIFY:
+		                 ClientDao.update(tabClient.getCurrentListable());
+		      			break;
+		      		case LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_NEW:
+		      			tabClient.add(ClientDao.create(tabClient.getCurrentListable()));
+		      			break;
+		      		case LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_MODIFY:
+		      			ClientDao.update(tabClient.getCurrentListable());
+		      			break;
+		      		default:
+		      			break;
+		      	}
+	      	}
+	  });
   }
 
+  private void handleTabReservationEvents() {
+	  this.tabReservation.events().addListener(new ui.events.EventListener() {
+	      	@SuppressWarnings("rawtypes") 
+	        @Override
+	        public void handleEvent(Event evt) {
+	      		switch((WTabFormListAdd.Events) evt.getEventName()) {
+		      		case BUTTON_ADD_CLICKED:
+		      			tabReservation.add(new Reservation(-1));
+		      			break;
+		      		case BUTTON_SAVE_CLICKED_NEW:
+		      			tabReservation.add(ReservationDao.create(tabReservation.getCurrentListable()));
+		      			break;
+		      		case BUTTON_SAVE_CLICKED_MODIFY:
+		                 ClientDao.update(tabClient.getCurrentListable());
+		      			break;
+		      		case LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_NEW:
+		      			tabReservation.add(ReservationDao.create(tabReservation.getCurrentListable()));
+		      			break;
+		      		case LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_MODIFY:
+		      			ReservationDao.update(tabReservation.getCurrentListable());
+		      			break;
+		      		default:
+		      			break;
+		      	}
+	      	}
+	  });
+}
+
+  private void handleTabVehiculeEvents() {
+	  this.tabVehicule.events().addListener(new ui.events.EventListener() {
+	      	@SuppressWarnings("rawtypes") 
+	        @Override
+	        public void handleEvent(Event evt) {
+	      		switch((WTabFormListAdd.Events) evt.getEventName()) {
+		      		case BUTTON_ADD_CLICKED:
+		      			tabVehicule.add(new Vehicule(-1, "Nouveau", "Nouveau"));
+		      			break;
+		      		case BUTTON_SAVE_CLICKED_NEW:
+		      			tabVehicule.add(VehiculeDao.create(tabVehicule.getCurrentListable()));
+		      			break;
+		      		case BUTTON_SAVE_CLICKED_MODIFY:
+		      			VehiculeDao.update(tabVehicule.getCurrentListable());
+		      			break;
+		      		case LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_NEW:
+		      			tabVehicule.add(VehiculeDao.create(tabVehicule.getCurrentListable()));
+		      			break;
+		      		case LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_MODIFY:
+		      			VehiculeDao.update(tabVehicule.getCurrentListable());
+		      			break;
+		      		default:
+		      			break;
+		      	}
+	      	}
+	  });
+  }
+  
 
 }

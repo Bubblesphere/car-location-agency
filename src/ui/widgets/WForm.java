@@ -8,12 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import data.IListable;
 import ui.events.Event;
 import ui.events.EventBubbler;
 import ui.events.EventListener;
 import ui.events.IEventName;
 import ui.utils.FormBuilder;
+import ui.utils.IListable;
 
 public class WForm<T extends IListable> extends JPanel {
 

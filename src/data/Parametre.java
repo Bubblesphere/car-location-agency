@@ -3,6 +3,8 @@ package data;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 
+import ui.utils.IListable;
+
 public class Parametre extends TypeParametre implements IListable {
   private int id;
   private float valeur;

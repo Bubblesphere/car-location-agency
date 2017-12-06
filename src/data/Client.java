@@ -2,6 +2,8 @@ package data;
 
 import java.time.LocalDate;
 
+import ui.utils.IListable;
+
 public class Client extends Personne implements IListable {
   private int id;
   private String adresse;
@@ -167,6 +169,7 @@ public class Client extends Personne implements IListable {
   public Client(int id, String nom, String prenom) {
     super(nom, prenom);
     this.id = id;
+    this.dateDeNaissance = LocalDate.now();
   }
 
   @Override
@@ -176,5 +179,9 @@ public class Client extends Personne implements IListable {
       display = this.getId() + "-" + display;
     }
     return display;
+  }
+  
+  public static Client createDefault() {
+	  return new Client(-1, "Nouveau", "Nouveau");
   }
 }

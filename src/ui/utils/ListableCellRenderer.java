@@ -5,8 +5,6 @@ import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
-import data.IListable;
-
 public class ListableCellRenderer extends DefaultListCellRenderer {
 
 	private static final long serialVersionUID = 1L;

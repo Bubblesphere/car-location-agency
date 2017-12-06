@@ -1,5 +1,7 @@
 package data;
 
+import ui.utils.IListable;
+
 public class Classe implements IListable {
   private int id;
   private String nom;

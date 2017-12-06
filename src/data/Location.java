@@ -2,6 +2,8 @@ package data;
 
 import java.time.LocalDate;
 
+import ui.utils.IListable;
+
 public class Location extends Reservation implements IListable {
   private int locationId;
   private Vehicule vehicule;
