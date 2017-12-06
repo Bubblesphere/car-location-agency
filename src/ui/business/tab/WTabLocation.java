@@ -1,38 +1,32 @@
 package ui.business.tab;
 
 import java.util.ArrayList;
-
 import javax.swing.JTabbedPane;
 
 import data.Location;
-import ui.business.form.WFormRetour;
+import ui.business.form.WFormLocation;
 import ui.events.Event;
 import ui.events.EventListener;
-import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
-public class WTabRetour extends WSplitPaneTab {
+public class WTabLocation extends WSplitPaneTab {
 	private static final long serialVersionUID = 1L;
 
-public WTabRetour(JTabbedPane tabbedPane, ArrayList<Location> locations) {
-    super(tabbedPane, "Retour");
+public WTabLocation(JTabbedPane tabbedPane, ArrayList<Location> locations) {
+    super(tabbedPane, "Location");
 
     WListAdd<Location> addListLocation = new WListAdd<Location>(locations);
 
-    WForm<Location> form = new WForm<Location>("Information sur le retour", new WFormRetour());
+    WForm<Location> form = new WForm<Location>("Information sur la location", new WFormLocation());
     form.events().addListener(new ui.events.EventListener() {
     	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
           case BUTTON_SAVE_CLICK:
-            int locationId = addListLocation.getSelectedIndex();
-            locations.set(locationId, (Location) form.get());
-            //Location currentLocation = locations.get(locationId);
-            // TODO: Update db
-            addListLocation.setModel(ArrayListHelper.toDefaultListModel(locations));
+           //TODO
             break;
           default:
             break;
@@ -46,12 +40,10 @@ public WTabRetour(JTabbedPane tabbedPane, ArrayList<Location> locations) {
       public void handleEvent(Event evt) {
         switch ((WListAdd.Events) evt.getEventName()) {
           case BUTTON_ADD_CLICKED:
-            // TODO: Add Empty to db and return the new location
-            // TODO: Implement
-            // addListClient.addElement(LOCATION_FROM_PREVIOUS_STEP));
+        	//TODO
             break;
           case LIST_VALUE_CHANGED:
-            form.set(locations.get(addListLocation.getSelectedIndex()));
+        	//TODO
             break;
           default:
             break;

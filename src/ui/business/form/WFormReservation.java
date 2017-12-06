@@ -3,20 +3,25 @@ package ui.business.form;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import dao.ClasseDao;
+import dao.ClientDao;
 import data.Classe;
 import data.Client;
-import data.IListable;
 import data.Reservation;
 import data.Utilisateur;
 import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
+import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
-public class WFormReservation extends WAbstractFormPanel {
-  private int formReservationID;
+public class WFormReservation extends WAbstractFormPanel<Reservation> {
+	private static final long serialVersionUID = 1L;
+
+private int formReservationID;
 
   private GridBagLayout layout;
 
@@ -28,7 +33,12 @@ public class WFormReservation extends WAbstractFormPanel {
 
   private WFormTextField textFieldNote;
   private GridBagConstraints gbcNote;
-  // TODO: Client, Classe
+  
+  private WFormComboBox<Client> comboBoxClient;
+  private GridBagConstraints gbcClient;
+  
+  private WFormComboBox<Classe> comboBoxClasse;
+  private GridBagConstraints gbcClasse;
 
   public WFormReservation() {
     this.layout = FormBuilder.getLayout();
@@ -51,9 +61,21 @@ public class WFormReservation extends WAbstractFormPanel {
     this.gbcNote.gridx = 0;
     this.gbcNote.gridy = 2;
     this.add(this.textFieldNote, this.gbcNote);
-    // TODO: Client, Classe
+    
+    this.comboBoxClient = new WFormComboBox<Client>("Client",  (ArrayList<Client>) ClientDao.retrieveAll());
+    this.gbcClient = FormBuilder.getGBCPartialRow();
+    this.gbcClient.gridx = 0;
+    this.gbcClient.gridy = 3;
+    this.add(this.comboBoxClient, this.gbcClient);
+    
+    this.comboBoxClasse = new WFormComboBox<Classe>("Classe",  (ArrayList<Classe>) ClasseDao.retrieveAll());
+    this.gbcClasse = FormBuilder.getGBCPartialRow();
+    this.gbcClasse.gridx = 1;
+    this.gbcClasse.gridy = 3;
+    this.add(this.comboBoxClasse, this.gbcClasse);
 
     EventListener textBoxValueChangedListener = new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WFormTextField.Events) evt.getEventName()) {
@@ -72,10 +94,10 @@ public class WFormReservation extends WAbstractFormPanel {
   }
 
   @Override
-  public IListable get() {
-    // TODO: Client, Classe, currentUser
-    return new Reservation(this.formReservationID, new Client(1, "nom", "prenom"),
-        new Classe(1, "sedan", 10.0f), LocalDate.parse(this.textFieldStartDate.getText()),
+  public Reservation get() {
+    // TODO:currentUser
+    return new Reservation(this.formReservationID, (Client)this.comboBoxClient.getSelected(),
+       (Classe) this.comboBoxClasse.getSelected(), LocalDate.parse(this.textFieldStartDate.getText()),
         LocalDate.parse(this.textFieldEndDate.getText()), this.textFieldNote.getText(),
         new Utilisateur("nom", "prenom", 1, "blbalblab", "courriel", 123, 1, false));
   }
@@ -84,14 +106,25 @@ public class WFormReservation extends WAbstractFormPanel {
   public void init() {
 	  
   }
-
-  @Override
-  public void set(IListable listable) {
-    Reservation reservation = (Reservation) listable;
-    this.formReservationID = reservation.getReservationId();
-    this.textFieldNote.setText(reservation.getNoteReservation());
-    this.textFieldEndDate.setText(reservation.getFinDate().toString());
-    this.textFieldStartDate.setText(reservation.getStartDate().toString());
-    this.hasUnsavedContent = false;    
+  
+  public WFormComboBox<Classe> getComboBoxClasse() {
+	  return this.comboBoxClasse;
   }
+  
+  public WFormComboBox<Client> getComboBoxClient() {
+	  return this.comboBoxClient;
+  }
+
+@Override
+public void set(Reservation listable) {
+	 Reservation reservation = (Reservation) listable;
+	    this.formReservationID = reservation.getReservationId();
+	    this.textFieldNote.setText(reservation.getNoteReservation());
+	    this.textFieldEndDate.setText(reservation.getFinDate().toString());
+	    this.textFieldStartDate.setText(reservation.getStartDate().toString());
+	    this.hasUnsavedContent = false;   
+	
+}
+  
+  
 }

@@ -16,13 +16,17 @@ import javax.swing.JScrollPane;
 import data.IListable;
 import ui.events.Event;
 import ui.events.EventBubbler;
+import ui.events.EventListener;
 import ui.events.IEventName;
 
-public class WListAdd extends JPanel {
-  private EventBubbler events;
+public class WListAdd<T extends IListable> extends JPanel {
+
+	private static final long serialVersionUID = 1L;
+
+	private EventBubbler events;
 
   private GridBagLayout layout;
-  private WList widgetList;
+  private WList<T> widgetList;
   private JButton addButton;
   private GridBagConstraints gbcAddButton;
   private JScrollPane scrollPane;
@@ -32,7 +36,7 @@ public class WListAdd extends JPanel {
     LIST_VALUE_CHANGED, BUTTON_ADD_CLICKED
   }
 
-  public WListAdd(ArrayList<? extends IListable> list) {
+  public WListAdd(ArrayList<T> list) {
     this.events = new EventBubbler(this.listenerList);
 
     this.layout = new GridBagLayout();
@@ -42,8 +46,9 @@ public class WListAdd extends JPanel {
     this.layout.rowWeights = new double[] { 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
     this.setLayout(this.layout);
 
-    widgetList = new WList(list);
-    widgetList.events().addListener(new ui.events.EventListener() {
+    widgetList = new WList<T>(list);
+    widgetList.events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes")
       @Override
       public void handleEvent(Event evt) {
         eventHandler(Events.LIST_VALUE_CHANGED);
@@ -75,8 +80,8 @@ public class WListAdd extends JPanel {
     });
   }
   
-  public void setModel(JList<? extends IListable> list) {
-	  this.widgetList.setModel((DefaultComboBoxModel<? extends IListable>) list.getModel());
+  public void setModel(JList<T> list) {
+	  this.widgetList.setModel((DefaultComboBoxModel<T>) list.getModel());
   }
 
   public int getSelectedIndex() {
@@ -91,15 +96,15 @@ public class WListAdd extends JPanel {
     return this.events;
   }
 
-  public void setModel(DefaultListModel<? extends IListable> list) {
+  public void setModel(DefaultListModel<T> list) {
     this.widgetList.setModel(list);
   }
 
-  public void addElement(IListable listable) {
+  public void addElement(T listable) {
     this.widgetList.addElement(listable);
   }
 
   private void eventHandler(Events eventName) {
-    this.events.fireEvent(new Event(this, eventName));
+    this.events.fireEvent(new Event<Events>(this, eventName));
   }
 }

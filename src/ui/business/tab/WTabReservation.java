@@ -6,25 +6,35 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
+import dao.ClasseDao;
+import dao.ClientDao;
 import dao.ReservationDao;
+import data.Classe;
+import data.Client;
 import data.Reservation;
 import ui.business.form.WFormReservation;
 import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
+import ui.widgets.WFormComboBox;
 import ui.widgets.WListAdd;
 import ui.widgets.WSplitPaneTab;
 
 public class WTabReservation extends WSplitPaneTab {
 
-  public WTabReservation(JTabbedPane tabbedPane, ArrayList<Reservation> reservations) {
+	private static final long serialVersionUID = 1L;
+
+public WTabReservation(JTabbedPane tabbedPane, ArrayList<Reservation> reservations) {
     super(tabbedPane, "R�servation");
 
-    WListAdd addListReservation = new WListAdd(reservations);
+    WListAdd<Reservation> addListReservation = new WListAdd<Reservation>(reservations);
+    
+    WFormReservation formReservation = new WFormReservation();
 
-    WForm form = new WForm("Information sur la r�servation", new WFormReservation());
+    WForm<Reservation> form = new WForm<Reservation>("Information sur la r�servation", formReservation);
     form.events().addListener(new ui.events.EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WForm.Events) evt.getEventName()) {
@@ -46,8 +56,37 @@ public class WTabReservation extends WSplitPaneTab {
         }
       }
     });
+    
+    formReservation.getComboBoxClasse().events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes") 
+		@Override
+		public void handleEvent(Event evt) {
+			switch ((WFormComboBox.Events) evt.getEventName()) {
+            case COMBO_BOX_OPENED:
+            	formReservation.getComboBoxClasse().set((ArrayList<Classe>)ClasseDao.retrieveAll());
+                break;
+            default:
+                break;
+          }			
+		}
+	});
+    
+formReservation.getComboBoxClient().events().addListener(new EventListener() {
+	@SuppressWarnings("rawtypes") 
+		@Override
+		public void handleEvent(Event evt) {
+			switch ((WFormComboBox.Events) evt.getEventName()) {
+            case COMBO_BOX_OPENED:
+                formReservation.getComboBoxClient().set((ArrayList<Client>)ClientDao.retrieveAll());
+                break;
+            default:
+                break;
+          }			
+		}
+	});
 
     addListReservation.events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
         switch ((WListAdd.Events) evt.getEventName()) {
@@ -61,7 +100,7 @@ public class WTabReservation extends WSplitPaneTab {
             } 
             break;
           case LIST_VALUE_CHANGED:
-            Reservation selectedReservations = reservations.get(addListReservation.getSelectedIndex());
+            //Reservation selectedReservations = reservations.get(addListReservation.getSelectedIndex());
 
             if (form.getHasUnsavedContent()) {
               int dialogResult = JOptionPane.showConfirmDialog(null,

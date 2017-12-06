@@ -131,6 +131,45 @@ public class LocationDao {
     }
     return result;
   }
+  
+  public static List<Location> retrieveAll(Boolean withReturns) {
+	    List<Location> result = new ArrayList<Location>();
+	    try (Connection connection = DataAccess.getConnection()) {
+
+	      String query = "SELECT id, vehicule_id, reservation_id, date_de_retour, essence_manquant, "
+	          + "retour_km, note, utilisateur_id, assurance, usure_journalier, depart_km, "
+	          + "estimation_reparation FROM Locations ";
+	      if(withReturns) {
+	    	  query += "WHERE date_de_retour IS NULL";
+	      }else {
+	    	  query += "WHERE date_de_retour IS NOT NULL";
+	      }
+	      Statement statement = connection.createStatement();
+	      ResultSet resultSet = statement.executeQuery(query);
+
+	      while (resultSet.next()) {
+	        Reservation reservation = ReservationDao.retrieve(resultSet.getInt("reservation_id"));
+	        Utilisateur utilisateur = UtilisateurDao.retrieve(resultSet.getInt("utilisateur_id"));
+	        Vehicule vehicule = VehiculeDao.retrieve(resultSet.getInt("vehicule_id"));
+	        Location location =  new Location(reservation.getReservationId(), reservation.getClientReservation(),
+	            reservation.getClasseReservation(), reservation.getStartDate(),
+	            reservation.getFinDate(), resultSet.getString("note"),
+	            reservation.getUtilisateurReservation(), resultSet.getInt("id"), vehicule, utilisateur,
+	            resultSet.getString("date_de_retour") != null
+	                ? LocalDate.parse(resultSet.getString("date_de_retour")) : null,
+	            resultSet.getBoolean("assurance"), resultSet.getBoolean("usure_journalier"),
+	            resultSet.getInt("essence_manquant"), resultSet.getInt("depart_km"),
+	            resultSet.getInt("retour_km"), reservation.getNoteReservation(),
+	            resultSet.getFloat("estimation_reparation"));
+
+	        result.add(location);
+	      }
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	      return null;
+	    }
+	    return result;
+	  }
 
   /**
    * M�thode pour mettre � jour une location

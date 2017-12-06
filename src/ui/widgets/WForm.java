@@ -15,13 +15,16 @@ import ui.events.EventListener;
 import ui.events.IEventName;
 import ui.utils.FormBuilder;
 
-public class WForm extends JPanel {
-  private EventBubbler events;
+public class WForm<T extends IListable> extends JPanel {
+
+	private static final long serialVersionUID = 1L;
+
+private EventBubbler events;
 
   private GridBagLayout layout;
   private JLabel lblTitle;
   private GridBagConstraints gbcTitle;
-  private WAbstractFormPanel form;
+  private WAbstractFormPanel<T> form;
   private GridBagConstraints gbcForm;
   private WFormButton saveButton;
   private GridBagConstraints gbcSaveButton;
@@ -30,7 +33,7 @@ public class WForm extends JPanel {
     BUTTON_SAVE_CLICK
   }
 
-  public WForm(String title, WAbstractFormPanel form) {
+  public WForm(String title, WAbstractFormPanel<T> form) {
     this.events = new EventBubbler(this.listenerList);
 
     this.setBorder(new EmptyBorder(32, 32, 32, 32));
@@ -53,6 +56,7 @@ public class WForm extends JPanel {
 
     this.saveButton = new WFormButton("Sauvegarder");
     this.saveButton.events().addListener(new EventListener() {
+    	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
     	  save();
@@ -79,11 +83,11 @@ public class WForm extends JPanel {
 	  this.form.setHasUnsavedContent(false);
   }
   
-  public IListable get() {
+  public T get() {
     return this.form.get();
   }
 
-  public void set(IListable listable) {
+  public void set(T listable) {
     this.form.set(listable);
   }
   
@@ -96,6 +100,6 @@ public class WForm extends JPanel {
   }
 
   private void eventHandler(Events event) {
-    this.events.fireEvent(new Event(this, event));
+    this.events.fireEvent(new Event<Events>(this, event));
   }
 }

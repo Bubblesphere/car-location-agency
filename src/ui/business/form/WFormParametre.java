@@ -2,16 +2,17 @@ package ui.business.form;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeFormatter;
 
-import data.IListable;
 import data.Parametre;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormTextField;
 
-public class WFormParametre extends WAbstractFormPanel {
-  private int formParamID;
+public class WFormParametre extends WAbstractFormPanel<Parametre> {
+	private static final long serialVersionUID = 1L;
+
+private int formParamID;
 
   private GridBagLayout layout;
 
@@ -31,7 +32,7 @@ public class WFormParametre extends WAbstractFormPanel {
   }
 
   @Override
-  public IListable get() {
+  public Parametre get() {
     // TODO: Implement
 
     return new Parametre(
@@ -40,17 +41,18 @@ public class WFormParametre extends WAbstractFormPanel {
     );
   }
 
-  @Override
-  public void set(IListable listable) {
-    final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    Parametre param = (Parametre) listable;
-
-    this.textFieldValue.setText(Float.toString(param.getValeur()));
-  }
   
   @Override
   public void init() {
 	  
   }
+
+@Override
+public void set(Parametre listable) {
+    //final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    Parametre param = (Parametre) listable;
+
+    this.textFieldValue.setText(Float.toString(param.getValeur()));
+}
 }

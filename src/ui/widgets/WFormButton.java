@@ -1,20 +1,21 @@
 package ui.widgets;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ui.events.Event;
 import ui.events.EventBubbler;
 import ui.events.IEventName;
 
-public class WFormButton extends JPanel {
-  private EventBubbler events;
+public class WFormButton extends WAbstractFormComponentLayout {
+	private static final long serialVersionUID = 1L;
+private EventBubbler events;
   private BoxLayout layout;
   private JButton button;
 
@@ -31,7 +32,7 @@ public class WFormButton extends JPanel {
 
     this.button = new JButton(buttonText);
     this.button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-    this.button.setAlignmentX(this.RIGHT_ALIGNMENT);
+    this.button.setAlignmentX(Component.RIGHT_ALIGNMENT);
     this.button.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
@@ -46,7 +47,7 @@ public class WFormButton extends JPanel {
     return this.events;
   }
 
-  private void eventHandler(Enum eventName) {
-    this.events.fireEvent(new Event(this, eventName));
+  private void eventHandler(Events eventName) {
+    this.events.fireEvent(new Event<Events>(this, eventName));
   }
 }

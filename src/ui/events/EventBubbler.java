@@ -17,6 +17,7 @@ public class EventBubbler {
     listenerList.remove(EventListener.class, listener);
   }
 
+  @SuppressWarnings("rawtypes")
   public void fireEvent(Event evt) {
     Object[] listeners = listenerList.getListeners(EventListener.class);
     for (int i = 0, n = listeners.length; i < n; i++) {

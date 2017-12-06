@@ -3,7 +3,8 @@ package ui.events;
 import java.util.EventObject;
 
 public class Event<T extends Enum<T> & IEventName> extends EventObject {
-  private final Enum<T> eventName;
+	private static final long serialVersionUID = 1L;
+	private final Enum<T> eventName;
 
   public Event(Object source, Enum<T> eventName) {
     super(source);

@@ -8,11 +8,15 @@ import javax.swing.JList;
 import data.IListable;
 
 public class ListableCellRenderer extends DefaultListCellRenderer {
-  public Component getListCellRendererComponent(JList list, Object value, int index,
+
+	private static final long serialVersionUID = 1L;
+
+public Component getListCellRendererComponent(JList<?> list, Object value, int index,
       boolean isSelected, boolean cellHasFocus) {
     super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 
     IListable object = (IListable) value;
+    if (object != null)
     setText(object.getDisplayedText());
 
     return this;

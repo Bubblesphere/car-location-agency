@@ -1,12 +1,10 @@
 package ui.widgets;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
@@ -17,29 +15,24 @@ import ui.events.IEventName;
 import ui.utils.ArrayListHelper;
 import ui.utils.ListableCellRenderer;
 
-public class WFormComboBox extends JPanel {
+
+public class WFormComboBox<T extends IListable> extends WAbstractFormComponent {
+	private static final long serialVersionUID = 1L;
 	private EventBubbler events;
-	private BoxLayout layout;
-	private WLabel label;
-	private JComboBox<? extends IListable> comboBox;
+	private JComboBox<T> comboBox;
 
 	public static enum Events implements IEventName {
 		COMBO_BOX_OPENED, COMBO_BOX_CLOSED, COMBO_BOX_CANCELLED 
 	}
 	  
-	public WFormComboBox(String labelText, ArrayList<? extends IListable> list) {
+	public WFormComboBox(String labelText, ArrayList<T> list) {
+		super(labelText);
 	  this.events = new EventBubbler(this.listenerList);
 	  
-	  this.layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-	  this.setBorder(new EmptyBorder(24, 0, 0, 16));
-	  this.setLayout(this.layout);
-	
-	  this.label = new WLabel(labelText);
-	  this.add(this.label);
-	
-	  this.comboBox = new JComboBox<>(ArrayListHelper.toDefaultComboBoxListModel(list));
+
+	  this.comboBox = new JComboBox<T>(ArrayListHelper.toDefaultComboBoxListModel(list));
 	  this.comboBox.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-	  this.comboBox.setAlignmentX(this.LEFT_ALIGNMENT);
+	  this.comboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 	  this.comboBox.setRenderer(new ListableCellRenderer());
 	  this.comboBox.addPopupMenuListener(new PopupMenuListener() {
 
@@ -62,23 +55,27 @@ public class WFormComboBox extends JPanel {
 	  this.add(this.comboBox);
 	}
 	
-	public void set(ArrayList<IListable> list) {
+	@SuppressWarnings("unchecked")
+	public void set(ArrayList<T> list) {
+		T previouslySelected = (T)this.comboBox.getSelectedItem();
 		this.comboBox.setModel(ArrayListHelper.toDefaultComboBoxListModel(list));
+		setSelected(previouslySelected);
 	}
 
-	public IListable getSelected() {
-		return (IListable)this.comboBox.getSelectedItem();
+	@SuppressWarnings("unchecked")
+	public T getSelected() {
+		return (T)this.comboBox.getSelectedItem();
 	}
 	
-	public void setSelected(IListable listable) {
-		this.comboBox.setSelectedItem(listable);
+	public void setSelected(T listable) {
+		this.comboBox.getModel().setSelectedItem(listable);
 	}
 	
 	  public EventBubbler events() {
 	    return this.events;
 	  }
 	
-	  private void eventHandler(Enum eventName) {
-	    this.events.fireEvent(new Event(this, eventName));
+	  private void eventHandler(Events eventName) {
+	    this.events.fireEvent(new Event<Events>(this, eventName));
 	  }
 }

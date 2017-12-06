@@ -3,20 +3,18 @@ package ui.business.form;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
-import java.util.ArrayList;
-
-import dao.ClientDao;
 import data.Client;
-import data.IListable;
 import ui.events.Event;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
-public class WFormClient extends WAbstractFormPanel {
-  private int formClientID;
+public class WFormClient extends WAbstractFormPanel<Client> {
+ 
+	private static final long serialVersionUID = 1L;
+
+private int formClientID;
 
   private GridBagLayout layout;
   
@@ -47,8 +45,6 @@ public class WFormClient extends WAbstractFormPanel {
   public WFormClient() {
     this.layout = FormBuilder.getLayout();
     this.setLayout(this.layout);
-    
-   	
     
     this.textFieldNom = new WFormTextField("Nom");
     this.gbcNom = FormBuilder.getGBCPartialRow();
@@ -99,6 +95,7 @@ public class WFormClient extends WAbstractFormPanel {
     this.add(this.textFieldNote, this.gbcNote);
 
     EventListener textBoxValueChangedListener = new EventListener() {
+    	@SuppressWarnings("rawtypes") 
         @Override
         public void handleEvent(Event evt) {
           switch ((WFormTextField.Events) evt.getEventName()) {
@@ -122,7 +119,7 @@ public class WFormClient extends WAbstractFormPanel {
   }
   
   @Override
-  public IListable get() {
+  public Client get() {
     return new Client(this.textFieldNom.getText(),
         this.textFieldPrenom.getText(),
         this.formClientID, 
@@ -135,21 +132,6 @@ public class WFormClient extends WAbstractFormPanel {
   }
 
   @Override
-  public void set(IListable listable) {
-    Client client = (Client) listable;
-    this.formClientID = client.getId();
-    this.textFieldNom.setText(client.getNom());
-    this.textFieldPrenom.setText(client.getPrenom());
-    this.textFieldPermis.setText(client.getNumeroPermis());
-    this.textFieldAdresse.setText(client.getAdresse());
-    this.textFieldNumeroTelephone.setText(client.getNumeoTelphone());
-    this.textFieldCourriel.setText(client.getCourriel());
-    this.textFieldNote.setText(client.getNote());
-    this.textFieldDateDeNaissance.setText(client.getDateDeNaissance().toString());
-    this.hasUnsavedContent = false;
-  }
-  
-  @Override
   public void init() {
 	  this.formClientID = -1;
 	    this.textFieldNom.setText("");
@@ -161,6 +143,20 @@ public class WFormClient extends WAbstractFormPanel {
 	    this.textFieldNote.setText("");
 	    this.textFieldDateDeNaissance.setText("");
 	    this.hasUnsavedContent = false;	    
-  } 
+  }
+
+@Override
+public void set(Client listable) {
+    this.formClientID = listable.getId();
+    this.textFieldNom.setText(listable.getNom());
+    this.textFieldPrenom.setText(listable.getPrenom());
+    this.textFieldPermis.setText(listable.getNumeroPermis());
+    this.textFieldAdresse.setText(listable.getAdresse());
+    this.textFieldNumeroTelephone.setText(listable.getNumeoTelphone());
+    this.textFieldCourriel.setText(listable.getCourriel());
+    this.textFieldNote.setText(listable.getNote());
+    this.textFieldDateDeNaissance.setText(listable.getDateDeNaissance().toString());
+    this.hasUnsavedContent = false;
+} 
 
 }
