@@ -24,6 +24,7 @@ import data.Reservation;
 import data.Utilisateur;
 import data.Vehicule;
 import org.sqlite.util.StringUtils;
+import security.Login;
 import ui.business.tab.WTabClient;
 import ui.business.tab.WTabLocation;
 import ui.business.tab.WTabParametre;
@@ -46,7 +47,6 @@ public class TabbedWindow extends JFrame {
         try {
           TabbedWindow frame = new TabbedWindow();
           frame.setMinimumSize(new Dimension(860, 680));
-
           frame.setVisible(true);
         } catch (Exception e) {
           e.printStackTrace();
@@ -59,8 +59,11 @@ public class TabbedWindow extends JFrame {
    * Create the frame.
    */
   public TabbedWindow() {
-    //setIconImage(Toolkit.getDefaultToolkit().getImage(TabbedWindow.class
-    //    .getResource("/com/sun/javafx/scene/control/skin/modena/dialog-more-details@2x.png")));
+    setIconImage(Toolkit.getDefaultToolkit().getImage(TabbedWindow.class
+        .getResource("/com/sun/javafx/scene/control/skin/modena/dialog-more-details@2x.png")));
+    Login login = new Login();
+    Utilisateur user1 = login.authenticate(this);
+
     setTitle("Syst\u00E8me de gestion de location");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(100, 100, 674, 670);
@@ -71,10 +74,6 @@ public class TabbedWindow extends JFrame {
 
     JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
     contentPane.add(tabbedPane, BorderLayout.CENTER);
-
-
-
-
 
     ArrayList<Utilisateur> users1 = (ArrayList<Utilisateur>) UtilisateurDao.retrieveAll();
     ArrayList<Utilisateur> users = (ArrayList<Utilisateur>) users1;
@@ -91,8 +90,13 @@ public class TabbedWindow extends JFrame {
     WTabReservation tabReservation = new WTabReservation(tabbedPane, reservations);
     WTabLocation tabLocation = new WTabLocation(tabbedPane, locations);
     WTabRetour tabRetour = new WTabRetour(tabbedPane, retours);
-    WTabVehicule tabVehicule = new WTabVehicule(tabbedPane);
-    WTabParametre tabParametre = new WTabParametre(tabbedPane, parametres);
+
+
+    if(user1.getRole() == 0){
+      WTabVehicule tabVehicule = new WTabVehicule(tabbedPane);
+      WTabParametre tabParametre = new WTabParametre(tabbedPane, parametres);
+    }
+
     
   }
 

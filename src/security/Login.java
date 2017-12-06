@@ -1,29 +1,33 @@
 package security;
 
 import dao.UtilisateurDao;
+import data.Utilisateur;
 
 import javax.swing.*;
 
 public class Login {
-    public Login() {
-
-        String employeeInput;
+    public Utilisateur authenticate(java.awt.Component context ) {
+        Utilisateur attempt;
         do{
-            employeeInput = JOptionPane.showInputDialog(this, "Entrez votre numero d'employé", "Identification", JOptionPane.PLAIN_MESSAGE);
-        }
-        while(employeeInput.length() < 1 || !isInteger(employeeInput));
+            String employeeInput;
+            do{
+                employeeInput = JOptionPane.showInputDialog(context, "Entrez votre numero d'employé", "Identification", JOptionPane.PLAIN_MESSAGE);
+            }
+            while(employeeInput.length() < 1 || !isInteger(employeeInput));
 
-        int employeeId = Integer.parseInt(employeeInput);
+            int employeeId = Integer.parseInt(employeeInput);
 
-        String password;
-        do{
-            password = JOptionPane.showInputDialog(this, "Entrez votre mot de passe", "Authentification", JOptionPane.PLAIN_MESSAGE);
-        }
-        while(password.length() < 4);
-//TODO VALIDER ET ASSIGNER LE USER RENVOYÉ PAR UTILISATEURDAO
-        if (UtilisateurDao.checkAndRetrieve(employeeId, password) != null){
+            String password;
+            do{
+                password = JOptionPane.showInputDialog(context, "Entrez votre mot de passe", "Authentification", JOptionPane.PLAIN_MESSAGE);
+            }
+            while(password.length() < 4);
 
-        }
+            String passwordAttempt = PasswordSecurity.hashPassword(password);
+            attempt = UtilisateurDao.checkAndRetrieve(employeeId, passwordAttempt);
+        } while(attempt == null);
+        return attempt;
+
     }
 
     public static boolean isInteger(String s) {
