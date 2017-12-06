@@ -1,9 +1,12 @@
 package ui.business.tab;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JTabbedPane;
 
+import dao.LocationDao;
 import data.Location;
+import data.Paiement;
 import ui.business.form.WFormLocation;
 import ui.events.Event;
 import ui.events.EventListener;
@@ -20,6 +23,8 @@ public WTabLocation(JTabbedPane tabbedPane, ArrayList<Location> locations) {
     WListAdd<Location> addListLocation = new WListAdd<Location>(locations);
 
     WForm<Location> form = new WForm<Location>("Information sur la location", new WFormLocation());
+    List<Paiement> paiements = LocationDao.retrievePaiements(1); //TODO rendre cette valeur dynamique selon la location sélectionnée
+
     form.events().addListener(new ui.events.EventListener() {
     	@SuppressWarnings("rawtypes") 
       @Override

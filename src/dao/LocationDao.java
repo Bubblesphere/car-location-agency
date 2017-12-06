@@ -9,10 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.Location;
-import data.Reservation;
-import data.Utilisateur;
-import data.Vehicule;
+import data.*;
 
 public class LocationDao {
   /**
@@ -170,6 +167,39 @@ public class LocationDao {
 	    }
 	    return result;
 	  }
+
+    /**
+     * @param locationId
+     * @return Liste des paiements effectués pour la location passée en argument
+     */
+    public static List<Paiement> retrievePaiements(int locationId){
+        List<Paiement> result = new ArrayList<Paiement>();
+        try (Connection connection = DataAccess.getConnection()) {
+
+            String query = "SELECT P.id, P.location_id, P.montant, P.methode, P.note "
+                    + "FROM Paiements P "
+                    + "WHERE P.location_id IS ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, locationId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Paiement reservation = new Paiement(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("location_id"),
+                        resultSet.getInt("montant"),
+                        resultSet.getInt("methode"),
+                        resultSet.getString("note"));
+
+                result.add(reservation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return result;
+    }
 
   /**
    * M�thode pour mettre � jour une location
