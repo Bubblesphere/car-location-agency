@@ -112,9 +112,9 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
             	  WLabel lblAmount = new WLabel("99$");
             	  ArrayList<TypePaiement> list = new ArrayList<TypePaiement>();
             	  list.add(new TypePaiement(type.COMPTANT));
-            	  list.add(new TypePaiement(type.DÉBIT));
-            	  list.add(new TypePaiement(type.CRÉDIT));
-            	  WFormComboBox<TypePaiement> comboPaiement = new WFormComboBox<>("Méthode de paiement", list);
+            	  list.add(new TypePaiement(type.DEBIT));
+            	  list.add(new TypePaiement(type.CREDIT));
+            	  WFormComboBox<TypePaiement> comboPaiement = new WFormComboBox<>("Mï¿½thode de paiement", list);
             	  final JComponent[] inputs = new JComponent[] {
         			  lblTotal,
         			  lblAmount,

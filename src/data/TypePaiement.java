@@ -13,19 +13,19 @@ public class TypePaiement implements IListable {
 			this.id = 0;
 			this.name = "Comptant";
 			break;
-		case DÉBIT:
+		case DEBIT:
 			this.id = 1;
-			this.name = "Débit";
+			this.name = "Dï¿½bit";
 			break;
-		case CRÉDIT:
+		case CREDIT:
 			this.id = 2;
-			this.name = "Crédit";
+			this.name = "Crï¿½dit";
 			break;
 		}
 	}
 	
 	public static enum type {
-		COMPTANT, DÉBIT, CRÉDIT
+		COMPTANT, DEBIT, CREDIT
 	}
 	
 	
