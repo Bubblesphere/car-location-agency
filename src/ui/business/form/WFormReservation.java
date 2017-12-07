@@ -12,6 +12,7 @@ import data.Client;
 import data.Reservation;
 import data.Utilisateur;
 import ui.events.Event;
+import ui.events.EventEnum.FormTextFieldEvents;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
@@ -78,7 +79,7 @@ private int formReservationID;
     	@SuppressWarnings("rawtypes") 
       @Override
       public void handleEvent(Event evt) {
-        switch ((WFormTextField.Events) evt.getEventName()) {
+        switch ((FormTextFieldEvents) evt.getEventName()) {
         case TEXTFIELD_TEXT_CHANGED:
           setHasUnsavedContent(true);
           break;

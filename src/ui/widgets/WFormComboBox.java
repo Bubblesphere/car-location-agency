@@ -10,7 +10,7 @@ import javax.swing.event.PopupMenuListener;
 
 import ui.events.Event;
 import ui.events.EventBubbler;
-import ui.events.IEventName;
+import ui.events.EventEnum.FormComboBoxEvents;
 import ui.utils.ArrayListHelper;
 import ui.utils.IListable;
 import ui.utils.ListableCellRenderer;
@@ -20,12 +20,9 @@ public class WFormComboBox<T extends IListable> extends WAbstractFormComponent {
 	private static final long serialVersionUID = 1L;
 	private EventBubbler events;
 	private JComboBox<T> comboBox;
+	@SuppressWarnings("unused")
 	private IListable currentListable;
 
-	public static enum Events implements IEventName {
-		COMBO_BOX_OPENED, COMBO_BOX_CLOSED, COMBO_BOX_CANCELLED 
-	}
-	  
 	public WFormComboBox(String labelText, ArrayList<T> list) {
 		super(labelText);
 	  this.events = new EventBubbler(this.listenerList);
@@ -39,17 +36,17 @@ public class WFormComboBox<T extends IListable> extends WAbstractFormComponent {
 
 		@Override
 		public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-			eventHandler(Events.COMBO_BOX_OPENED);
+			eventHandler(FormComboBoxEvents.COMBO_BOX_OPENED);
 		}
 
 		@Override
 		public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-			eventHandler(Events.COMBO_BOX_CLOSED);
+			eventHandler(FormComboBoxEvents.COMBO_BOX_CLOSED);
 		}
 
 		@Override
 		public void popupMenuCanceled(PopupMenuEvent e) {
-			eventHandler(Events.COMBO_BOX_CANCELLED);
+			eventHandler(FormComboBoxEvents.COMBO_BOX_CANCELLED);
 		}
 		  
 	  });
@@ -76,7 +73,7 @@ public class WFormComboBox<T extends IListable> extends WAbstractFormComponent {
 	    return this.events;
 	  }
 	
-	  private void eventHandler(Events eventName) {
-	    this.events.fireEvent(new Event<Events>(this, eventName));
+	  private void eventHandler(FormComboBoxEvents eventName) {
+	    this.events.fireEvent(new Event<FormComboBoxEvents>(this, eventName));
 	  }
 }

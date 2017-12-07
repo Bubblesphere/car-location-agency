@@ -6,20 +6,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import ui.events.Event;
 import ui.events.EventBubbler;
+import ui.events.EventEnum;
 import ui.events.EventListener;
-import ui.events.IEventName;
 import ui.utils.IListable;
 
-public class WListAdd<T extends IListable> extends JPanel {
+public class WListAdd<T extends IListable> extends JPanel implements IPanelList<T> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,10 +29,6 @@ public class WListAdd<T extends IListable> extends JPanel {
   private GridBagConstraints gbcAddButton;
   private JScrollPane scrollPane;
   private GridBagConstraints gbcScrollPane;
-
-  public static enum Events implements IEventName {
-    LIST_VALUE_CHANGED, BUTTON_ADD_CLICKED
-  }
 
   public WListAdd(ArrayList<T> list) {
     this.events = new EventBubbler(this.listenerList);
@@ -51,7 +45,7 @@ public class WListAdd<T extends IListable> extends JPanel {
     	@SuppressWarnings("rawtypes")
       @Override
       public void handleEvent(Event evt) {
-        eventHandler(Events.LIST_VALUE_CHANGED);
+        eventHandler(EventEnum.ListEvents.LIST_VALUE_CHANGED);
       }
     });
 
@@ -75,7 +69,7 @@ public class WListAdd<T extends IListable> extends JPanel {
     this.addButton.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        eventHandler(Events.BUTTON_ADD_CLICKED);
+        eventHandler(EventEnum.ListEvents.BUTTON_ADD_CLICKED);
       }
     });
   }
@@ -83,24 +77,20 @@ public class WListAdd<T extends IListable> extends JPanel {
   public void setSelectedIndexLast() {
 	  this.widgetList.setSelectedIndexLast();
   }
-  
-  public void setModel(JList<T> list) {
-	  this.widgetList.setModel((DefaultComboBoxModel<T>) list.getModel());
-  }
 
   public int getSelectedIndex() {
-    return this.widgetList.getLastSelectedIndex();
+    return this.widgetList.getSelectedIndex();
   }
   
-  public void setSelectedIndex(int index){
-    this.widgetList.setSelectedIndex(index);
+  public int getLastSelectedIndex(){
+    return this.widgetList.getLastSelectedIndex();
   }
 
   public EventBubbler events() {
     return this.events;
   }
 
-  public void setModel(DefaultListModel<T> list) {
+  public void setModelList(DefaultListModel<T> list) {
     this.widgetList.setModel(list);
   }
 
@@ -108,7 +98,12 @@ public class WListAdd<T extends IListable> extends JPanel {
     this.widgetList.addElement(listable);
   }
 
-  private void eventHandler(Events eventName) {
-    this.events.fireEvent(new Event<Events>(this, eventName));
+  private void eventHandler(EventEnum.ListEvents eventName) {
+    this.events.fireEvent(new Event<EventEnum.ListEvents>(this, eventName));
   }
+
+	@Override
+	public void setSelectedIndex(int index) {
+	    this.widgetList.setSelectedIndex(index);
+	}
 }

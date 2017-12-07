@@ -34,12 +34,13 @@ import ui.business.form.WFormRetour;
 import ui.business.form.WFormVehicule;
 //import security.Login;
 import ui.events.Event;
+import ui.events.EventEnum;
 import ui.events.EventListener;
 import ui.utils.ArrayListHelper;
 import ui.widgets.WForm;
 import ui.widgets.WFormComboBox;
+import ui.widgets.WTabFormList;
 import ui.widgets.WTabFormListAdd;
-import ui.widgets.WTabFormListAdd.Events;
 
 public class TabbedWindow extends JFrame {
 
@@ -51,7 +52,7 @@ public class TabbedWindow extends JFrame {
   private WTabFormListAdd<Location> tabLocation;
   private WTabFormListAdd<Location> tabRetour;
   private WTabFormListAdd<Vehicule> tabVehicule;
-  private WTabFormListAdd<Parametre> tabParametre;
+  private WTabFormList<Parametre> tabParametre;
   
   private WFormClient formClient;
   private WFormReservation formReservation;
@@ -142,8 +143,7 @@ public class TabbedWindow extends JFrame {
     //if(user1.getRole() == 0){
       this.tabVehicule = new WTabFormListAdd<Vehicule>(tabbedPane, vehicules, this.formVehicule, "Véhicule");
       handleTabVehiculeEvents();
-      // TODO: this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Paramètre");
-      // TODO: handleTabParametreEvents();
+      this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Paramètre");
       //}
   }
   
@@ -152,7 +152,7 @@ public class TabbedWindow extends JFrame {
 	      	@SuppressWarnings("rawtypes") 
         @Override
         public void handleEvent(Event evt) {
-      		switch((WFormComboBox.Events) evt.getEventName()) {
+      		switch((EventEnum.FormComboBoxEvents) evt.getEventName()) {
 	      		case COMBO_BOX_OPENED:
 	      			formReservation.getComboBoxClasse().set((ArrayList<Classe>)ClasseDao.retrieveAll());
 	      			break;
@@ -165,7 +165,7 @@ public class TabbedWindow extends JFrame {
       	@SuppressWarnings("rawtypes") 
         @Override
         public void handleEvent(Event evt) {
-      		switch((WFormComboBox.Events) evt.getEventName()) {
+      		switch((EventEnum.FormComboBoxEvents) evt.getEventName()) {
 	      		case COMBO_BOX_OPENED:
 	      			formReservation.getComboBoxClient().set((ArrayList<Client>)ClientDao.retrieveAll());
 	      			break;
@@ -181,7 +181,7 @@ public class TabbedWindow extends JFrame {
 		    	@SuppressWarnings("rawtypes") 
 		      @Override
 		      public void handleEvent(Event evt) {
-		            switch ((WFormComboBox.Events) evt.getEventName()) {
+		            switch ((EventEnum.FormComboBoxEvents) evt.getEventName()) {
 		              case COMBO_BOX_OPENED:
 		            	  formLocation.getComboBoxReservation().set((ArrayList<Reservation>)ReservationDao.retrieveAll());
 		                  break;
@@ -195,7 +195,7 @@ public class TabbedWindow extends JFrame {
 	    	@SuppressWarnings("rawtypes") 
 	      @Override
 	      public void handleEvent(Event evt) {
-	            switch ((WFormComboBox.Events) evt.getEventName()) {
+	            switch ((EventEnum.FormComboBoxEvents) evt.getEventName()) {
 	              case COMBO_BOX_OPENED:
 	            	  formLocation.getComboBoxVehicule().set((ArrayList<Vehicule>)VehiculeDao.retrieveAll());
 	                  break;
@@ -211,7 +211,7 @@ public class TabbedWindow extends JFrame {
 	    	@SuppressWarnings("rawtypes") 
 	      @Override
 	      public void handleEvent(Event evt) {
-	            switch ((WFormComboBox.Events) evt.getEventName()) {
+	            switch ((EventEnum.FormComboBoxEvents) evt.getEventName()) {
 	              case COMBO_BOX_OPENED:
 	            	  formVehicule.getComboBox().set((ArrayList<Classe>)ClasseDao.retrieveAll());
 	                  break;
@@ -227,7 +227,7 @@ public class TabbedWindow extends JFrame {
 	      	@SuppressWarnings("rawtypes") 
 	        @Override
 	        public void handleEvent(Event evt) {
-	      		switch((WTabFormListAdd.Events) evt.getEventName()) {
+	      		switch((EventEnum.TabFormListEvents) evt.getEventName()) {
 		      		case BUTTON_ADD_CLICKED:
 		      			tabClient.add(new Client(-1, "Nouveau", "Nouveau"));
 		      			break;
@@ -255,7 +255,7 @@ public class TabbedWindow extends JFrame {
 	      	@SuppressWarnings("rawtypes") 
 	        @Override
 	        public void handleEvent(Event evt) {
-	      		switch((WTabFormListAdd.Events) evt.getEventName()) {
+	      		switch((EventEnum.TabFormListEvents) evt.getEventName()) {
 		      		case BUTTON_ADD_CLICKED:
 		      			tabReservation.add(new Reservation(-1));
 		      			break;
@@ -283,7 +283,7 @@ public class TabbedWindow extends JFrame {
 	      	@SuppressWarnings("rawtypes") 
 	        @Override
 	        public void handleEvent(Event evt) {
-	      		switch((WTabFormListAdd.Events) evt.getEventName()) {
+	      		switch((EventEnum.TabFormListEvents) evt.getEventName()) {
 		      		case BUTTON_ADD_CLICKED:
 		      			tabVehicule.add(new Vehicule(-1, "Nouveau", "Nouveau"));
 		      			break;

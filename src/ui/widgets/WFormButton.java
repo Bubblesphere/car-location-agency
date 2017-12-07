@@ -11,17 +11,13 @@ import javax.swing.border.EmptyBorder;
 
 import ui.events.Event;
 import ui.events.EventBubbler;
-import ui.events.IEventName;
+import ui.events.EventEnum.FormButtonEvents;
 
 public class WFormButton extends WAbstractFormComponentLayout {
 	private static final long serialVersionUID = 1L;
 private EventBubbler events;
   private BoxLayout layout;
   private JButton button;
-
-  public static enum Events implements IEventName {
-    BUTTON_SAVE_CLICK
-  }
 
   public WFormButton(String buttonText) {
     this.events = new EventBubbler(this.listenerList);
@@ -36,7 +32,7 @@ private EventBubbler events;
     this.button.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        eventHandler(Events.BUTTON_SAVE_CLICK);
+        eventHandler(FormButtonEvents.BUTTON_SAVE_CLICKED);
       }
     });
     this.add(this.button);
@@ -47,7 +43,7 @@ private EventBubbler events;
     return this.events;
   }
 
-  private void eventHandler(Events eventName) {
-    this.events.fireEvent(new Event<Events>(this, eventName));
+  private void eventHandler(FormButtonEvents eventName) {
+    this.events.fireEvent(new Event<FormButtonEvents>(this, eventName));
   }
 }

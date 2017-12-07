@@ -10,8 +10,8 @@ import javax.swing.border.EmptyBorder;
 
 import ui.events.Event;
 import ui.events.EventBubbler;
+import ui.events.EventEnum;
 import ui.events.EventListener;
-import ui.events.IEventName;
 import ui.utils.FormBuilder;
 import ui.utils.IListable;
 
@@ -28,11 +28,7 @@ private EventBubbler events;
   private GridBagConstraints gbcForm;
   private WFormButton saveButton;
   private GridBagConstraints gbcSaveButton;
-
-  public enum Events implements IEventName {
-    BUTTON_SAVE_CLICK
-  }
-
+  
   public WForm(String title, WAbstractFormPanel<T> form) {
     this.events = new EventBubbler(this.listenerList);
 
@@ -60,7 +56,7 @@ private EventBubbler events;
       @Override
       public void handleEvent(Event evt) {
     	  save();
-    	  eventHandler(WForm.Events.BUTTON_SAVE_CLICK);
+    	  eventHandler(EventEnum.FormEvents.BUTTON_SAVE_CLICKED);
       }
     });
     this.gbcSaveButton = FormBuilder.getGBCPartialRow();
@@ -99,7 +95,7 @@ private EventBubbler events;
     return this.events;
   }
 
-  private void eventHandler(Events event) {
-    this.events.fireEvent(new Event<Events>(this, event));
+  private void eventHandler(EventEnum.FormEvents event) {
+    this.events.fireEvent(new Event<EventEnum.FormEvents>(this, event));
   }
 }

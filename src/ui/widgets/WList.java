@@ -12,20 +12,15 @@ import javax.swing.event.ListSelectionListener;
 
 import ui.events.Event;
 import ui.events.EventBubbler;
-import ui.events.IEventName;
+import ui.events.EventEnum;
 import ui.utils.ArrayListHelper;
 import ui.utils.IListable;
 import ui.utils.ListableCellRenderer;
 
-public class WList<T extends IListable> extends JList<T> {
+public class WList<T extends IListable> extends JList<T> implements IPanelList<T> {
 	private static final long serialVersionUID = 1L;
 	private EventBubbler events;
 	protected int lastSelectedIndex;
-
-  public static enum Events implements IEventName {
-    LIST_VALUE_CHANGED
-  }
-
  
 public WList(ArrayList<T> list) {
     super(ArrayListHelper.toDefaultListModel(list));
@@ -45,12 +40,13 @@ public WList(ArrayList<T> list) {
           JList<T> tempList = (JList<T>) listSelectionEvent.getSource();
           if (tempList.getSelectedIndices().length > 0) {
             updateLastSelected();
-            eventHandler(Events.LIST_VALUE_CHANGED);
+            eventHandler(EventEnum.ListEvents.LIST_VALUE_CHANGED);
           }
         }
       }
     });
   }
+
 
 	public void setSelectedIndexLast() {
 		this.setSelectedIndex(this.lastSelectedIndex);
@@ -61,10 +57,6 @@ public WList(ArrayList<T> list) {
     model.addElement(element);
   }
 
-  public int getLastSelectedIndex() {
-    return this.lastSelectedIndex;
-  }
-
   private void updateLastSelected() {
     this.lastSelectedIndex = this.getSelectedIndex();
   }
@@ -73,7 +65,18 @@ public WList(ArrayList<T> list) {
     return this.events;
   }
 
-  private void eventHandler(Events eventName) {
-    this.events.fireEvent(new Event<Events>(this, eventName));
+  private void eventHandler(EventEnum.ListEvents eventName) {
+    this.events.fireEvent(new Event<EventEnum.ListEvents>(this, eventName));
   }
+
+	@Override
+	public void setModelList(DefaultListModel<T> list) {
+		this.setModel(list);
+	}
+
+	@Override
+	public int getLastSelectedIndex() {
+		return this.lastSelectedIndex;
+	}
+
 }

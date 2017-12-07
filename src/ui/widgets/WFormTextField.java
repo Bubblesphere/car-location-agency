@@ -9,16 +9,12 @@ import javax.swing.event.DocumentListener;
 
 import ui.events.Event;
 import ui.events.EventBubbler;
-import ui.events.IEventName;
+import ui.events.EventEnum.FormTextFieldEvents;
 
 public class WFormTextField extends WAbstractFormComponent {
 	private static final long serialVersionUID = 1L;
 private EventBubbler events;
   private JTextField textField;
-
-  public static enum Events implements IEventName {
-    TEXTFIELD_TEXT_CHANGED
-  }
   
   public WFormTextField(String labelText) {
 	  super(labelText);
@@ -30,17 +26,17 @@ private EventBubbler events;
     DocumentListener dl = new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
-        	eventHandler(Events.TEXTFIELD_TEXT_CHANGED);
+        	eventHandler(FormTextFieldEvents.TEXTFIELD_TEXT_CHANGED);
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
-        	eventHandler(Events.TEXTFIELD_TEXT_CHANGED);
+        	eventHandler(FormTextFieldEvents.TEXTFIELD_TEXT_CHANGED);
         }
 
         @Override
         public void changedUpdate(DocumentEvent e) {
-            eventHandler(Events.TEXTFIELD_TEXT_CHANGED);
+            eventHandler(FormTextFieldEvents.TEXTFIELD_TEXT_CHANGED);
         }
     };
     this.textField.getDocument().addDocumentListener(dl);
@@ -59,7 +55,7 @@ private EventBubbler events;
     return this.events;
   }
 
-  private void eventHandler(Events eventName) {
-    this.events.fireEvent(new Event<Events>(this, eventName));
+  private void eventHandler(FormTextFieldEvents eventName) {
+    this.events.fireEvent(new Event<FormTextFieldEvents>(this, eventName));
   }
 }
