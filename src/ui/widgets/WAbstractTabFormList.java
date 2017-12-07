@@ -39,7 +39,7 @@ public abstract class WAbstractTabFormList<T extends IListable> extends WSplitPa
 		switch ((FormEvents) evt.getEventName()) {
       	case BUTTON_SAVE_CLICKED:        
             currentListable = (T) form.get();
-            if(currentListable.getId() > 0){
+            if(currentListable != null && currentListable.getId() > 0){
                 eventHandler(EventEnum.TabFormListEvents.BUTTON_SAVE_CLICKED_MODIFY);
                 listable.set(listPanel.getLastSelectedIndex(),(T)currentListable);
             }else{

@@ -15,6 +15,7 @@ public class Location extends Reservation implements IListable {
 	private int departKm;
 	private int retourKm;
 	private String noteLocation;
+	private String noteRetour;
 	private float estimationReparation;
 
 	/**
@@ -43,10 +44,23 @@ public class Location extends Reservation implements IListable {
 	 * @param estimationReparation
 	 *            estimation de r�paration � faire au v�hicule au retour.
 	 */
-	public Location(int reservationId, Client clientReservation, Classe classeReservation, LocalDate startDate,
-			LocalDate finDate, String noteLocation, Utilisateur utilisateurReservation, int locationId,
-			Vehicule vehicule, Utilisateur utilisateurLocation, LocalDate dateDeRetour, boolean assurance,
-			boolean usureJournalier, int essenceManquant, int departKm, int retourKm, String noteReservation,
+	public Location(int reservationId,
+					Client clientReservation,
+					Classe classeReservation,
+					LocalDate startDate,
+					LocalDate finDate,
+					String noteLocation,
+					Utilisateur utilisateurReservation,
+					int locationId,
+					Vehicule vehicule,
+					Utilisateur utilisateurLocation,
+					LocalDate dateDeRetour,
+					boolean assurance,
+					boolean usureJournalier,
+					int essenceManquant,
+					int departKm,
+					int retourKm,
+					String noteReservation,
 			float estimationReparation) {
 		super(reservationId, clientReservation, classeReservation, startDate, finDate, noteReservation,
 				utilisateurReservation);
@@ -74,8 +88,8 @@ public class Location extends Reservation implements IListable {
 	    this.classeReservation = reservation.getClasseReservation();
 	    this.startDate = reservation.getStartDate();
 	    this.finDate = reservation.getFinDate();
-	    this.noteReservation = reservation.getNoteReservation();    
-	    this.utilisateurReservation = reservation.getUtilisateurReservation();
+	    this.noteReservation = reservation.getNoteReservation();
+		this.utilisateurReservation = reservation.getUtilisateurReservation();
 	}
 
 	public Vehicule getVehicule() {
@@ -148,6 +162,14 @@ public class Location extends Reservation implements IListable {
 
 	public void setNoteLocation(String noteLocation) {
 		this.noteLocation = noteLocation;
+	}
+
+	public String getNoteRetour() {
+		return noteRetour;
+	}
+
+	public void setNoteRetour(String noteRetour) {
+		this.noteRetour = noteRetour;
 	}
 
 	public float getEstimationReparation() {
