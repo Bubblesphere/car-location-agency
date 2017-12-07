@@ -133,17 +133,17 @@ public class TabbedWindow extends JFrame {
     
     this.tabClient = new WTabFormListAdd<Client>(tabbedPane, clients, this.formClient, "Client");
     handleTabClientEvents();
-    this.tabReservation = new WTabFormListAdd<Reservation>(tabbedPane, reservations, this.formReservation, "Réservation");
+    this.tabReservation = new WTabFormListAdd<Reservation>(tabbedPane, reservations, this.formReservation, "Rï¿½servation");
     handleTabReservationEvents();
     this.tabLocation = new WTabFormListAdd<Location>(tabbedPane, locations, this.formLocation, "Location");
-    // TODO: handleTabLocationEvents();
+    handleTabLocationEvents();
     this.tabRetour = new WTabFormListAdd<Location>(tabbedPane, retours, this.formRetour, "Retour");
     // TODO: handleTabRetourEvents();
     
     //if(user1.getRole() == 0){
-      this.tabVehicule = new WTabFormListAdd<Vehicule>(tabbedPane, vehicules, this.formVehicule, "Véhicule");
+      this.tabVehicule = new WTabFormListAdd<Vehicule>(tabbedPane, vehicules, this.formVehicule, "Vï¿½hicule");
       handleTabVehiculeEvents();
-      this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Paramètre");
+      this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Paramï¿½tre");
       //}
   }
   
@@ -183,7 +183,7 @@ public class TabbedWindow extends JFrame {
 		      public void handleEvent(Event evt) {
 		            switch ((EventEnum.FormComboBoxEvents) evt.getEventName()) {
 		              case COMBO_BOX_OPENED:
-		            	  formLocation.getComboBoxReservation().set((ArrayList<Reservation>)ReservationDao.retrieveAll());
+		            	  formLocation.getComboBoxReservation().set((ArrayList<Reservation>)ReservationDao.retrieveAll(false));
 		                  break;
 		              default:
 		                  break;
@@ -197,7 +197,10 @@ public class TabbedWindow extends JFrame {
 	      public void handleEvent(Event evt) {
 	            switch ((EventEnum.FormComboBoxEvents) evt.getEventName()) {
 	              case COMBO_BOX_OPENED:
-	            	  formLocation.getComboBoxVehicule().set((ArrayList<Vehicule>)VehiculeDao.retrieveAll());
+	            	  Reservation reservation = (Reservation)formLocation.getComboBoxReservation().getSelected();
+	            	  System.out.println(reservation.getClasseReservation().getNom());
+	            	  formLocation.getComboBoxVehicule().set((ArrayList<Vehicule>)VehiculeDao
+	            			  .retrieveWhereClasse(reservation.getClasseReservation()));
 	                  break;
 	              default:
 	                  break;
@@ -249,7 +252,36 @@ public class TabbedWindow extends JFrame {
 	      	}
 	  });
   }
-
+  
+  
+  private void handleTabLocationEvents() {
+	  this.tabLocation.events().addListener(new ui.events.EventListener() {
+	      	@SuppressWarnings("rawtypes") 
+	        @Override
+	        public void handleEvent(Event evt) {
+	      		switch((EventEnum.TabFormListEvents) evt.getEventName()) {
+		      		case BUTTON_ADD_CLICKED:
+		      			tabLocation.add(new Location(-1));
+		      			break;
+		      		case BUTTON_SAVE_CLICKED_NEW:
+		      			tabLocation.add(LocationDao.create(tabLocation.getCurrentListable()));
+		      			break;
+		      		case BUTTON_SAVE_CLICKED_MODIFY:
+		                 LocationDao.update(tabLocation.getCurrentListable());		                 
+		      			break;
+		      		case LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_NEW:
+		      			tabLocation.add(LocationDao.create(tabLocation.getCurrentListable()));
+		      			break;
+		      		case LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_MODIFY:
+		      			LocationDao.update(tabLocation.getCurrentListable());
+		      			break;
+		      		default:
+		      			break;
+		      	}
+	      	}
+	  });
+  }
+  
   private void handleTabReservationEvents() {
 	  this.tabReservation.events().addListener(new ui.events.EventListener() {
 	      	@SuppressWarnings("rawtypes") 
@@ -263,7 +295,7 @@ public class TabbedWindow extends JFrame {
 		      			tabReservation.add(ReservationDao.create(tabReservation.getCurrentListable()));
 		      			break;
 		      		case BUTTON_SAVE_CLICKED_MODIFY:
-		                 ClientDao.update(tabClient.getCurrentListable());
+		                 ReservationDao.update(tabReservation.getCurrentListable());		                 
 		      			break;
 		      		case LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_NEW:
 		      			tabReservation.add(ReservationDao.create(tabReservation.getCurrentListable()));

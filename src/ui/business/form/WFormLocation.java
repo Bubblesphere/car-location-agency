@@ -14,11 +14,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dao.ReservationDao;
+import dao.UtilisateurDao;
 import dao.VehiculeDao;
 import data.Location;
 import data.Reservation;
 import data.TypePaiement;
 import data.TypePaiement.type;
+import data.Utilisateur;
 import data.Vehicule;
 import ui.events.Event;
 import ui.events.EventEnum.FormButtonEvents;
@@ -166,7 +168,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
                 this.comboBoxReservation.getSelected().getUtilisateurReservation(),
                 this.formLocationID,
                 (Vehicule) this.comboBoxVehicule.getSelected(),
-                null, //currentUser
+                UtilisateurDao.retrieve(1), //currentUser
                 null, //dateDeRetour
                 true, //assurance
                 true, //usureJournalire

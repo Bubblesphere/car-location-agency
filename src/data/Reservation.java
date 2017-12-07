@@ -5,13 +5,13 @@ import java.time.LocalDate;
 import ui.utils.IListable;
 
 public class Reservation implements IListable {
-  private int reservationId;
-  private Client clientReservation;
-  private Classe classeReservation;
-  private LocalDate startDate;
-  private LocalDate finDate;
-  private String noteReservation;
-  private Utilisateur utilisateurReservation;
+  protected int reservationId;
+  protected Client clientReservation;
+  protected Classe classeReservation;
+  protected LocalDate startDate;
+  protected LocalDate finDate;
+  protected String noteReservation;
+  protected Utilisateur utilisateurReservation;
 
 
 
@@ -75,7 +75,7 @@ public class Reservation implements IListable {
    * Constructeur pour Reservation
    * 
    * @param reservationId
-   *          id de la réservation.
+   *          id de la rï¿½servation.
    */
   public Reservation(int reservationId) {
     super();
@@ -87,24 +87,35 @@ public class Reservation implements IListable {
     this.noteReservation = "";    
     this.utilisateurReservation = null;
   }
+  
+  public Reservation() {
+	    super();
+	    this.reservationId = -1;    
+	    this.clientReservation = null;    
+	    this.classeReservation = null;
+	    this.startDate = LocalDate.now();
+	    this.finDate = LocalDate.now();;
+	    this.noteReservation = "";    
+	    this.utilisateurReservation = null;
+	  }
 
   /**
    * Constructeur pour Reservation
    * 
    * @param reservationId
-   *          id de la réservation.
+   *          id de la rï¿½servation.
    * @param clientReservation
-   *          id du client de la la réservation.
+   *          id du client de la la rï¿½servation.
    * @param classeReservation
-   *          la classe de véhicule désiré.
+   *          la classe de vï¿½hicule dï¿½sirï¿½.
    * @param startDate
-   *          la date de début de la location.
+   *          la date de dï¿½but de la location.
    * @param finDate
    *          la date de fin de la location.
    * @param noteReservation
    *          commentaire.   
    * @param utilisateurReservation
-   *          id de l'utilisateur qui a créé la réservation..
+   *          id de l'utilisateur qui a crï¿½ï¿½ la rï¿½servation..
    */
   public Reservation(int reservationId, Client clientReservation, Classe classeReservation,
       LocalDate startDate, LocalDate finDate, String noteReservation, Utilisateur utilisateurReservation) {

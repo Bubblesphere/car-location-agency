@@ -14,11 +14,11 @@ import data.Vehicule;
 public class VehiculeDao {
 
   /**
-   * Méthode pour créé un véhicule
+   * Mï¿½thode pour crï¿½ï¿½ un vï¿½hicule
    * 
    * @param vehicule
-   *          véhicule à créé.
-   * @return le véhicule qui a été créé avec son id de mis à jour.
+   *          vï¿½hicule ï¿½ crï¿½ï¿½.
+   * @return le vï¿½hicule qui a ï¿½tï¿½ crï¿½ï¿½ avec son id de mis ï¿½ jour.
    */
   public static Vehicule create(Vehicule vehicule) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -51,11 +51,11 @@ public class VehiculeDao {
   }
 
   /**
-   * Méthode pour récupérer un véhicule
+   * Mï¿½thode pour rï¿½cupï¿½rer un vï¿½hicule
    * 
    * @param vehiculeId
-   *          id du véhicule à récupérer.
-   * @return le véhicule récupérer.
+   *          id du vï¿½hicule ï¿½ rï¿½cupï¿½rer.
+   * @return le vï¿½hicule rï¿½cupï¿½rer.
    */
   public static Vehicule retrieve(int vehiculeId) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -83,11 +83,42 @@ public class VehiculeDao {
     }
     return null;
   }
+  
+  public static List<Vehicule> retrieveWhereClasse(Classe classe) {
+	  List<Vehicule> result = new ArrayList<Vehicule>();
+	    try (Connection connection = DataAccess.getConnection()) {
+
+	      String query = "SELECT V.id, V.classe_id, V.fabriquant, V.marque, "
+	          + "V.annee, V.kilometrage, V.etat, V.plaque, V.desactive, "
+	          + "V.capacite_essence, V.note , C.nom AS nom_classe, "
+	          + "C.prix_journalier AS prix_classe FROM Vehicules V "
+	          + "LEFT JOIN Classes C ON V.classe_id = C.id WHERE c.id = ?";
+	      
+	      PreparedStatement statement = connection.prepareStatement(query);
+	      statement.setInt(1, classe.getId());
+	      ResultSet resultSet = statement.executeQuery();
+
+	      while (resultSet.next()) {
+	          Vehicule vehicule = new Vehicule(resultSet.getInt("id"), classe.getId(), classe,
+	              resultSet.getString("fabriquant"), resultSet.getString("marque"),
+	              resultSet.getInt("annee"), resultSet.getInt("kilometrage"), resultSet.getInt("etat"),
+	              resultSet.getString("plaque"), resultSet.getBoolean("desactive"),
+	              resultSet.getInt("capacite_essence"), resultSet.getString("note"));
+
+	          result.add(vehicule);
+	        }
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	      return null;
+	    }
+	    
+	    return result;
+	  }
 
   /**
-   * Méthode pour récupérer toutes les véhicules
+   * Mï¿½thode pour rï¿½cupï¿½rer toutes les vï¿½hicules
    * 
-   * @return liste de toutes les véhicules.
+   * @return liste de toutes les vï¿½hicules.
    */
   public static List<Vehicule> retrieveAll() {
     List<Vehicule> result = new ArrayList<Vehicule>();
@@ -119,11 +150,11 @@ public class VehiculeDao {
   }
 
   /**
-   * Méthode pour mettre à jour un véhicule
+   * Mï¿½thode pour mettre ï¿½ jour un vï¿½hicule
    * 
    * @param vehicule
-   *          le véhicule avec les nouvelle valeurs.
-   * @return si la mise à jour a fonctionnée.
+   *          le vï¿½hicule avec les nouvelle valeurs.
+   * @return si la mise ï¿½ jour a fonctionnï¿½e.
    */
   public static boolean update(Vehicule vehicule) {
     try (Connection connection = DataAccess.getConnection()) {
@@ -153,11 +184,11 @@ public class VehiculeDao {
   }
 
   /**
-   * Méthode pour supprimer un véhicule
+   * Mï¿½thode pour supprimer un vï¿½hicule
    * 
    * @param vehiculeId
-   *          le id du véhicule à supprimer.
-   * @return si la suppression à fonctionnée.
+   *          le id du vï¿½hicule ï¿½ supprimer.
+   * @return si la suppression ï¿½ fonctionnï¿½e.
    */
   public static boolean delete(int vehiculeId) {
     try (Connection connection = DataAccess.getConnection()) {

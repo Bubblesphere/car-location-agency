@@ -123,6 +123,8 @@ public void set(Reservation listable) {
 	    this.textFieldNote.setText(reservation.getNoteReservation());
 	    this.textFieldEndDate.setText(reservation.getFinDate().toString());
 	    this.textFieldStartDate.setText(reservation.getStartDate().toString());
+	    this.comboBoxClasse.setSelected(reservation.getClasseReservation());
+	    this.comboBoxClient.setSelected(reservation.getClientReservation());
 	    this.hasUnsavedContent = false;   
 	
 }
