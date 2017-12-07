@@ -2,21 +2,36 @@ package ui.business.form;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.List;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import dao.ReservationDao;
 import dao.VehiculeDao;
 import data.Location;
 import data.Reservation;
+import data.TypePaiement;
+import data.TypePaiement.type;
 import data.Vehicule;
 import ui.events.Event;
+import ui.events.EventEnum.FormButtonEvents;
 import ui.events.EventEnum.FormTextFieldEvents;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
+import ui.widgets.WForm;
+import ui.widgets.WFormButton;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 import ui.widgets.WLabel;
+import ui.widgets.WPay;
 
 public class WFormLocation extends WAbstractFormPanel<Location> {
     private static final long serialVersionUID = 1L;
@@ -40,6 +55,9 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
 
     private WLabel paiementsListField;
     private GridBagConstraints gbcPaiements;
+    
+    private WFormButton buttonPay;
+    private GridBagConstraints gbcPay;
 
 
     //TODO assurance, usureJournalier
@@ -78,6 +96,43 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
         this.gbcPaiements.gridy = 5;
         this.add(this.paiementsListField, this.gbcPaiements);
 
+        this.buttonPay = new WFormButton("Payer");
+        this.gbcPaiements = FormBuilder.getGBCFullRow();
+        this.gbcPaiements.gridx = 0;
+        this.gbcPaiements.gridy = 6;
+        this.add(this.buttonPay, this.gbcPaiements);
+        
+        this.buttonPay.events().addListener(new EventListener() {
+        	@SuppressWarnings("rawtypes") 
+            @Override
+            public void handleEvent(Event evt) {
+              switch ((FormButtonEvents) evt.getEventName()) {
+              case BUTTON_CLICKED:
+            	  WLabel lblTotal = new WLabel("Total:");
+            	  WLabel lblAmount = new WLabel("99$");
+            	  ArrayList<TypePaiement> list = new ArrayList<TypePaiement>();
+            	  list.add(new TypePaiement(type.COMPTANT));
+            	  list.add(new TypePaiement(type.DÉBIT));
+            	  list.add(new TypePaiement(type.CRÉDIT));
+            	  WFormComboBox<TypePaiement> comboPaiement = new WFormComboBox<>("Méthode de paiement", list);
+            	  final JComponent[] inputs = new JComponent[] {
+        			  lblTotal,
+        			  lblAmount,
+        			  comboPaiement
+            	  };
+            	  int result = JOptionPane.showConfirmDialog(null, inputs, "Gestionnaire de paiement", JOptionPane.PLAIN_MESSAGE);
+            	  if (result == JOptionPane.OK_OPTION) {
+            	      System.out.println("Vous avez payez " + lblAmount);
+            	  } else {
+            	      System.out.println("User canceled / closed the dialog, result = " + result);
+            	  }
+                break;
+              default:
+                break;
+              }
+            }
+		});
+        
         //TODO assurance, usureJournalier
 
         EventListener textBoxValueChangedListener = new EventListener() {

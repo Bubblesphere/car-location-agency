@@ -29,6 +29,6 @@ public class EventEnum {
 	}
 	
   	public static enum FormButtonEvents implements IEventName {
-	    BUTTON_SAVE_CLICKED
+  		BUTTON_CLICKED
   	}
 }

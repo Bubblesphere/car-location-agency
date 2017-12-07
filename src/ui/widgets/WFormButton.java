@@ -32,7 +32,7 @@ private EventBubbler events;
     this.button.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        eventHandler(FormButtonEvents.BUTTON_SAVE_CLICKED);
+        eventHandler(FormButtonEvents.BUTTON_CLICKED);
       }
     });
     this.add(this.button);
