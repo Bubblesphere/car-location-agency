@@ -4,24 +4,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-
 import dao.ReservationDao;
 import dao.UtilisateurDao;
 import dao.VehiculeDao;
 import data.Location;
 import data.Reservation;
-import data.TypePaiement;
-import data.TypePaiement.type;
 import data.Vehicule;
 import ui.events.Event;
-import ui.events.EventEnum.FormButtonEvents;
 import ui.events.EventEnum.FormTextFieldEvents;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WFormButton;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormPayButton;
 import ui.widgets.WFormTextField;
@@ -91,10 +84,10 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
         this.add(this.paiementsListField, this.gbcPaiements);
 
         this.buttonPay = new WFormPayButton("Payer");
-        this.gbcPaiements = FormBuilder.getGBCFullRow();
-        this.gbcPaiements.gridx = 0;
-        this.gbcPaiements.gridy = 6;
-        this.add(this.buttonPay, this.gbcPaiements);
+        this.gbcPay = FormBuilder.getGBCFullRow();
+        this.gbcPay.gridx = 0;
+        this.gbcPay.gridy = 6;
+        this.add(this.buttonPay, this.gbcPay);
         
         //TODO assurance, usureJournalier
 

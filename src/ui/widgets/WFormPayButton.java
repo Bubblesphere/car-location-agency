@@ -11,8 +11,6 @@ import data.TypePaiement;
 import data.TypePaiement.type;
 import ui.events.Event;
 import ui.events.EventBubbler;
-import ui.events.EventListener;
-import ui.events.EventEnum.FormButtonEvents;
 import ui.events.EventEnum.FormPayButtonEvents;
 
 public class WFormPayButton extends WFormButton {
