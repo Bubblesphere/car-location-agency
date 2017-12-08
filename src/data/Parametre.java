@@ -11,10 +11,6 @@ public class Parametre extends TypeParametre implements IListable {
   private LocalDate dateDebut;
   private LocalDate dateFin;
 
-  public int getId() {
-    return id;
-  }
-
   public void setId(int id) {
     this.id = id;
   }
@@ -76,8 +72,8 @@ public class Parametre extends TypeParametre implements IListable {
    * @param valeur
    *          valeur du paramètre.
    */
-  public Parametre(int typeId, float valeur) {
-    super(typeId);    
+  public Parametre(int typeId, float valeur, String description) {
+    super(typeId, description);    
     this.valeur = valeur;
     this.dateDebut = LocalDate.now();
     this.dateFin = null;
@@ -88,5 +84,10 @@ public class Parametre extends TypeParametre implements IListable {
 	  NumberFormat formatter = NumberFormat.getCurrencyInstance();
 	  return this.getDescription() + " (" + formatter.format(this.getValeur()) + ")";
   }
+
+	@Override
+	public int getId() {
+		return this.getTypeId();
+	}
 
 }

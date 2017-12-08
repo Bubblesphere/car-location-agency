@@ -12,7 +12,8 @@ import ui.widgets.WFormTextField;
 public class WFormParametre extends WAbstractFormPanel<Parametre> {
 	private static final long serialVersionUID = 1L;
 
-private int formParamID;
+	private int formParamID;
+	private String formDescription;
 
   private GridBagLayout layout;
 
@@ -33,26 +34,25 @@ private int formParamID;
 
   @Override
   public Parametre get() {
-    // TODO: Implement
-
     return new Parametre(
             this.formParamID,
-            Float.parseFloat(this.textFieldValue.getText())
+            Float.parseFloat(this.textFieldValue.getText()),
+            this.formDescription
     );
   }
 
   
   @Override
   public void init() {
-	  
+	  this.formParamID = -1;
+	  this.formDescription = "";
+	  this.textFieldValue.setText("");
   }
 
 @Override
 public void set(Parametre listable) {
-    //final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    Parametre param = (Parametre) listable;
-
-    this.textFieldValue.setText(Float.toString(param.getValeur()));
+    this.formParamID = listable.getId();
+    this.formDescription = listable.getDescription();
+    this.textFieldValue.setText(Float.toString(listable.getValeur()));
 }
 }
