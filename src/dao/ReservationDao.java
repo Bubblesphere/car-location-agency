@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,8 +71,8 @@ public class ReservationDao {
         Client client = ClientDao.retrieve(resultSet.getInt("client_id"));
         Utilisateur utilisateur = UtilisateurDao.retrieve(resultSet.getInt("utilisateur_id"));
         return new Reservation(resultSet.getInt("id"), client,
-           classe, LocalDate.parse(resultSet.getString("start_date")),
-            LocalDate.parse(resultSet.getString("end_date")),
+           classe, LocalDateTime.parse(resultSet.getString("start_date")),
+           LocalDateTime.parse(resultSet.getString("end_date")),
             resultSet.getString("reservation_note"), utilisateur);
       }
     } catch (SQLException e) {
@@ -99,8 +100,8 @@ public class ReservationDao {
         Client client = ClientDao.retrieve(resultSet.getInt("client_id"));
         Utilisateur utilisateur = UtilisateurDao.retrieve(resultSet.getInt("utilisateur_id"));
         Reservation reservation = new Reservation(resultSet.getInt("id"), client,
-           classe, LocalDate.parse(resultSet.getString("start_date")),
-            LocalDate.parse(resultSet.getString("end_date")),
+           classe, LocalDateTime.parse(resultSet.getString("start_date")),
+           LocalDateTime.parse(resultSet.getString("end_date")),
             resultSet.getString("reservation_note"), utilisateur);
 
         result.add(reservation);
@@ -134,8 +135,8 @@ public class ReservationDao {
 	        Client client = ClientDao.retrieve(resultSet.getInt("client_id"));
 	        Utilisateur utilisateur = UtilisateurDao.retrieve(resultSet.getInt("utilisateur_id"));
 	        Reservation reservation = new Reservation(resultSet.getInt("id"), client,
-	           classe, LocalDate.parse(resultSet.getString("start_date")),
-	            LocalDate.parse(resultSet.getString("end_date")),
+	           classe, LocalDateTime.parse(resultSet.getString("start_date")),
+	           LocalDateTime.parse(resultSet.getString("end_date")),
 	            resultSet.getString("reservation_note"), utilisateur);
 
 	        result.add(reservation);
@@ -147,7 +148,7 @@ public class ReservationDao {
 	    return result;
   }
   
-  public static int countVehiculeFree(int classeId, LocalDate start, LocalDate end) {
+  public static int countVehiculeFree(int classeId, LocalDateTime start, LocalDateTime end) {
 	    try (Connection connection = DataAccess.getConnection()) {
 
 	      String query = "SELECT (SELECT COUNT() as reservationsCount " + 

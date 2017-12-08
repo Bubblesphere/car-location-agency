@@ -4,6 +4,7 @@ public class Paiement {
   private int id;
   private int locationId;
   private float montant;
+//1 = credit, 2 = debit, 3 = comptant
   private int methode;
   private String note;
 
@@ -13,11 +14,11 @@ public class Paiement {
    * @param id
    *          id du paiement.
    * @param locationId
-   *          location sur laquel ce paiement est attaché.
+   *          location sur laquel ce paiement est attachï¿½.
    * @param montant
    *          montant du paiement.
    * @param methode
-   *          méthode de paiement.
+   *          mï¿½thode de paiement.
    * @param note
    *          commentaire.
    */

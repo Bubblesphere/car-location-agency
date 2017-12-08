@@ -196,11 +196,12 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
     @Override
     public void set(Location listable) {
         Location location = (Location) listable;
-        this.formLocationID = location.getLocationId();
+        this.formLocationID = location.getId();
         this.textFieldNote.setText(location.getNoteLocation());
         this.textFieldDepartKm.setText(Integer.toString(location.getDepartKm()));
         this.comboBoxReservation.setSelected(ReservationDao.retrieve(location.getReservationId()));
         this.comboBoxVehicule.setSelected(location.getVehicule());
+        this.hasUnsavedContent = false;
         //TODO assurance, usureJournalier
     }
 }

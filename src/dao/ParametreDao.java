@@ -71,6 +71,35 @@ public class ParametreDao {
     }
     return null;
   }
+  
+  /**
+   * M�thode pour r�cup�rer une param�tre
+   * 
+   * @param parametreId
+   *          id du param�tre � r�cup�rer.
+   * @return le param�tre r�cup�rer.
+   */
+  public static Parametre retrieveByType(int typeId) {
+    try (Connection connection = DataAccess.getConnection()) {
+
+      String query = "SELECT P.id, P.valeur, P.type_id, P.date_debut, P.date_fin, T.description "
+          + "FROM Parametres P LEFT JOIN TypesParametre T ON T.id = P.type_id WHERE t.id = ? AND P.date_fin IS NULL";
+      PreparedStatement statement = connection.prepareStatement(query);
+      statement.setInt(1, typeId);
+      ResultSet resultSet = statement.executeQuery();
+
+      if (resultSet.next()) {
+        return new Parametre(resultSet.getInt("type_id"), resultSet.getString("description"),
+            resultSet.getInt("id"), resultSet.getFloat("valeur"),
+            LocalDate.parse(resultSet.getString("date_debut")),
+            resultSet.getString("date_fin") != null
+                ? LocalDate.parse(resultSet.getString("date_fin")) : null);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
   /**
    * M�thode pour r�cup�rer touts les param�tres
