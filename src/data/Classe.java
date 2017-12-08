@@ -7,7 +7,8 @@ public class Classe implements IListable {
   private String nom;
   private float prixJournalier;
 
-  public int getId() {
+  @Override
+public int getId() {
     return this.id;
   }
 
@@ -32,7 +33,7 @@ public class Classe implements IListable {
   }
 
   /**
-   * Constructeur pour Classe à la selection
+   * Constructeur pour Classe ï¿½ la selection
    * 
    * @param id
    *          id de la classe.

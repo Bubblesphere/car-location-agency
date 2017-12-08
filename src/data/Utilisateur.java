@@ -112,7 +112,8 @@ public class Utilisateur extends Personne implements IListable {
     this.desactive = desactive;
   }
 
-  public int getId() {
+  @Override
+public int getId() {
     return id;
   }
 

@@ -1,6 +1,5 @@
 package data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -224,6 +223,7 @@ public class Location extends Reservation implements IListable {
 		this.estimationReparation = estimationReparation;
 	}
 
+	@Override
 	public int getId() {
 		return locationId;
 	}

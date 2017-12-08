@@ -53,7 +53,8 @@ public class Client extends Personne implements IListable {
     this.note = note;
   }
 
-  public int getId() {
+  @Override
+public int getId() {
     return this.id;
   }
 

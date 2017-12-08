@@ -1,6 +1,7 @@
 package ui.widgets;
 
 import javax.swing.DefaultListModel;
+
 import ui.events.EventBubbler;
 import ui.utils.IListable;
 

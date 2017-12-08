@@ -1,13 +1,13 @@
 package ui.business.form;
 
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import dao.LocationDao;
-
-import data.*;
+import data.Location;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
@@ -43,7 +43,7 @@ public class WFormRetour extends WAbstractFormPanel<Location> {
         this.layout = FormBuilder.getLayout();
         this.setLayout(this.layout);
 
-        //TODO Ajouter les champs des valeurs initiales à la location
+        //TODO Ajouter les champs des valeurs initiales ï¿½ la location
 
         this.comboBoxLocation = new WFormComboBox<Location>("Choisir location", (ArrayList<Location>) LocationDao.retrieveAll(true));
         this.gbcLocation = FormBuilder.getGBCPartialRow();
@@ -58,7 +58,7 @@ public class WFormRetour extends WAbstractFormPanel<Location> {
         this.gbcEndDate.gridy = 0;
         this.add(this.textFieldEndDate, this.gbcEndDate);
 
-        this.textFieldKMRetour = new WFormTextField("Kilométrage de retour");
+        this.textFieldKMRetour = new WFormTextField("Kilomï¿½trage de retour");
         this.gbcKMRetour = FormBuilder.getGBCPartialRow();
         this.gbcKMRetour.gridx = 0;
         this.gbcKMRetour.gridy = 1;
@@ -98,7 +98,7 @@ public class WFormRetour extends WAbstractFormPanel<Location> {
     @Override
     public void set(Location listable) {
         // TODO Auto-generated method stub
-        Location location = (Location) listable;
+        Location location = listable;
         if(location != null){
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             String dtStr = formatter.format(location.getDateDeRetour());

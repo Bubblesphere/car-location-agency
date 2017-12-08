@@ -2,6 +2,7 @@ package ui.widgets;
 
 import java.awt.Component;
 import java.awt.Font;
+
 import javax.swing.JCheckBox;
 
 public class WFormCheckBox extends WAbstractFormComponent {

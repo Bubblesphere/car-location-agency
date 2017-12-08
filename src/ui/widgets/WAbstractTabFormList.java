@@ -38,13 +38,13 @@ public abstract class WAbstractTabFormList<T extends IListable> extends WSplitPa
       public void handleEvent(Event evt) {    
 		switch ((FormEvents) evt.getEventName()) {
       	case BUTTON_SAVE_CLICKED:        
-            currentListable = (T) form.get();
+            currentListable = form.get();
             if(currentListable != null && currentListable.getId() > 0){
                 eventHandler(EventEnum.TabFormListEvents.BUTTON_SAVE_CLICKED_MODIFY);
-                listable.set(listPanel.getLastSelectedIndex(),(T)currentListable);
+                listable.set(listPanel.getLastSelectedIndex(),currentListable);
             }else{
                 eventHandler(EventEnum.TabFormListEvents.BUTTON_SAVE_CLICKED_NEW);
-                listable.add((T)currentListable);
+                listable.add(currentListable);
             }       
             listPanel.setModelList(ArrayListHelper.toDefaultListModel(listable));
             form.setHasUnsavedContent(false);  
@@ -64,12 +64,12 @@ public abstract class WAbstractTabFormList<T extends IListable> extends WSplitPa
         case LIST_VALUE_CHANGED:
 	          if (form.getHasUnsavedContent()) {
 	            int dialogResult = JOptionPane.showConfirmDialog(null,
-	                "Voulez vous sauvegarder les informations non sauvegardées avant de quitter?",
+	                "Voulez vous sauvegarder les informations non sauvegardï¿½es avant de quitter?",
 	                "Attention", JOptionPane.YES_NO_CANCEL_OPTION);
 	
 	            if (dialogResult == JOptionPane.YES_OPTION) {
 	            	
-	            	currentListable = (T) form.get();
+	            	currentListable = form.get();
 	                if(currentListable.getId() == -1){
 	                	eventHandler(EventEnum.TabFormListEvents.LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_NEW); 
 	                    listable.add(currentListable);
@@ -77,7 +77,7 @@ public abstract class WAbstractTabFormList<T extends IListable> extends WSplitPa
                 	  	eventHandler(EventEnum.TabFormListEvents.LIST_VALUE_CHANGED_W_UNSAVED_CONTENT_YES_MODIFY); 
 	                    @SuppressWarnings("unchecked")
 						T preUpdateClient = (T) Arrays.asList(listable.toArray())
-	                        .stream().filter(c->((T) c).getId() == ((T) form.get()).getId())
+	                        .stream().filter(c->((T) c).getId() == form.get().getId())
 	                        .findFirst().orElse(null); 
 	                    listable.set(listable.indexOf(preUpdateClient), currentListable);
 	                  }              

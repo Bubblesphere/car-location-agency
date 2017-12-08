@@ -3,11 +3,12 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Toolkit;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import dao.ClasseDao;
@@ -24,8 +25,6 @@ import data.Parametre;
 import data.Reservation;
 import data.Utilisateur;
 import data.Vehicule;
-import org.sqlite.util.StringUtils;
-
 import ui.business.form.WFormClient;
 import ui.business.form.WFormLocation;
 import ui.business.form.WFormParametre;
@@ -36,9 +35,6 @@ import ui.business.form.WFormVehicule;
 import ui.events.Event;
 import ui.events.EventEnum;
 import ui.events.EventListener;
-import ui.utils.ArrayListHelper;
-import ui.widgets.WForm;
-import ui.widgets.WFormComboBox;
 import ui.widgets.WTabFormList;
 import ui.widgets.WTabFormListAdd;
 
@@ -109,7 +105,7 @@ public class TabbedWindow extends JFrame {
     contentPane.add(tabbedPane, BorderLayout.CENTER);
 
     ArrayList<Utilisateur> users1 = (ArrayList<Utilisateur>) UtilisateurDao.retrieveAll();
-    ArrayList<Utilisateur> users = (ArrayList<Utilisateur>) users1;
+    ArrayList<Utilisateur> users = users1;
    
     ArrayList<Classe> classes = (ArrayList<Classe>)ClasseDao.retrieveAll();    
     ArrayList<Location> retours = (ArrayList<Location>)LocationDao.retrieveAll(false);
@@ -197,7 +193,7 @@ public class TabbedWindow extends JFrame {
 	      public void handleEvent(Event evt) {
 	            switch ((EventEnum.FormComboBoxEvents) evt.getEventName()) {
 	              case COMBO_BOX_OPENED:
-	            	  Reservation reservation = (Reservation)formLocation.getComboBoxReservation().getSelected();
+	            	  Reservation reservation = formLocation.getComboBoxReservation().getSelected();
 	            	  System.out.println(reservation.getClasseReservation().getNom());
 	            	  formLocation.getComboBoxVehicule().set((ArrayList<Vehicule>)VehiculeDao
 	            			  .retrieveWhereClasse(reservation.getClasseReservation()));

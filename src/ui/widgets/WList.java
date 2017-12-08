@@ -33,7 +33,8 @@ public WList(ArrayList<T> list) {
     this.events = new EventBubbler(this.listenerList);
 
     this.addListSelectionListener(new ListSelectionListener() {
-      public void valueChanged(ListSelectionEvent listSelectionEvent) {
+      @Override
+	public void valueChanged(ListSelectionEvent listSelectionEvent) {
         boolean isAdjusting = listSelectionEvent.getValueIsAdjusting();
         if (!isAdjusting) {
           @SuppressWarnings("unchecked")
@@ -48,11 +49,13 @@ public WList(ArrayList<T> list) {
   }
 
 
+	@Override
 	public void setSelectedIndexLast() {
 		this.setSelectedIndex(this.lastSelectedIndex);
 	}
 
-  public void addElement(T element) {
+  @Override
+public void addElement(T element) {
     DefaultListModel<T> model = (DefaultListModel<T>) this.getModel();
     model.addElement(element);
   }
@@ -61,7 +64,8 @@ public WList(ArrayList<T> list) {
     this.lastSelectedIndex = this.getSelectedIndex();
   }
 
-  public EventBubbler events() {
+  @Override
+public EventBubbler events() {
     return this.events;
   }
 

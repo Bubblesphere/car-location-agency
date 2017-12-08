@@ -2,7 +2,6 @@ package ui.business.form;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -98,8 +97,8 @@ private int formReservationID;
   @Override
   public Reservation get() {
     // TODO:currentUser
-    return new Reservation(this.formReservationID, (Client)this.comboBoxClient.getSelected(),
-       (Classe) this.comboBoxClasse.getSelected(), LocalDateTime.parse(this.textFieldStartDate.getText()),
+    return new Reservation(this.formReservationID, this.comboBoxClient.getSelected(),
+       this.comboBoxClasse.getSelected(), LocalDateTime.parse(this.textFieldStartDate.getText()),
        LocalDateTime.parse(this.textFieldEndDate.getText()), this.textFieldNote.getText(),
         new Utilisateur("nom", "prenom", 1, "blbalblab", "courriel", 123, 1, false));
   }
@@ -119,7 +118,7 @@ private int formReservationID;
 
 @Override
 public void set(Reservation listable) {
-	 Reservation reservation = (Reservation) listable;
+	 Reservation reservation = listable;
 	    this.formReservationID = reservation.getReservationId();
 	    this.textFieldNote.setText(reservation.getNoteReservation());
 	    this.textFieldEndDate.setText(reservation.getFinDate().toString());

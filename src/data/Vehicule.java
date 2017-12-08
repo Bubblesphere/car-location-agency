@@ -16,28 +16,28 @@ public class Vehicule implements IListable {
   private String note;
 
   /**
-   * Constructeur pour Véhicule
+   * Constructeur pour Vï¿½hicule
    * 
    * @param Id
-   *          id du véhicule.
+   *          id du vï¿½hicule.
    * @param classe
-   *          classe du véhicule.
+   *          classe du vï¿½hicule.
    * @param fabricant
-   *          fabricant du véhicule.
+   *          fabricant du vï¿½hicule.
    * @param marque
-   *          marque du véhicule.
+   *          marque du vï¿½hicule.
    * @param annee
-   *          année de construction du véhicule.
+   *          annï¿½e de construction du vï¿½hicule.
    * @param kilometrage
-   *          kilométrage du véhicule.
+   *          kilomï¿½trage du vï¿½hicule.
    * @param etat
-   *          état du véhicule[Fonctionnel, En réparation, Retraité].
+   *          ï¿½tat du vï¿½hicule[Fonctionnel, En rï¿½paration, Retraitï¿½].
    * @param plaque
-   *          plaque du véhicule.
+   *          plaque du vï¿½hicule.
    * @param desactive
-   *          si le véhicule est désactivé.
+   *          si le vï¿½hicule est dï¿½sactivï¿½.
    * @param capaciteEssence
-   *          capacité d'essence du véhicule.
+   *          capacitï¿½ d'essence du vï¿½hicule.
    * @param note
    *          commentaire.
    */
@@ -59,26 +59,26 @@ public class Vehicule implements IListable {
   }
 
   /**
-   * Constructeur pour Véhicule sans object de classe
+   * Constructeur pour Vï¿½hicule sans object de classe
    * 
    * @param Id
-   *          id du véhicule.
+   *          id du vï¿½hicule.
    * @param fabricant
-   *          fabricant du véhicule.
+   *          fabricant du vï¿½hicule.
    * @param marque
-   *          marque du véhicule.
+   *          marque du vï¿½hicule.
    * @param annee
-   *          année de construction du véhicule.
+   *          annï¿½e de construction du vï¿½hicule.
    * @param kilometrage
-   *          kilométrage du véhicule.
+   *          kilomï¿½trage du vï¿½hicule.
    * @param etat
-   *          état du véhicule[Fonctionnel, En réparation, Retraité].
+   *          ï¿½tat du vï¿½hicule[Fonctionnel, En rï¿½paration, Retraitï¿½].
    * @param plaque
-   *          plaque du véhicule.
+   *          plaque du vï¿½hicule.
    * @param desactive
-   *          si le véhicule est désactivé.
+   *          si le vï¿½hicule est dï¿½sactivï¿½.
    * @param capaciteEssence
-   *          capacité d'essence du véhicule.
+   *          capacitï¿½ d'essence du vï¿½hicule.
    * @param note
    *          commentaire.
    */
@@ -101,24 +101,24 @@ public class Vehicule implements IListable {
   }
 
   /**
-   * Constructeur pour Véhicule avant insertion
+   * Constructeur pour Vï¿½hicule avant insertion
    *
    * @param fabricant
-   *          fabricant du véhicule.
+   *          fabricant du vï¿½hicule.
    * @param marque
-   *          marque du véhicule.
+   *          marque du vï¿½hicule.
    * @param annee
-   *          année de construction du véhicule.
+   *          annï¿½e de construction du vï¿½hicule.
    * @param kilometrage
-   *          kilométrage du véhicule.
+   *          kilomï¿½trage du vï¿½hicule.
    * @param etat
-   *          état du véhicule[Fonctionnel, En réparation, Retraité].
+   *          ï¿½tat du vï¿½hicule[Fonctionnel, En rï¿½paration, Retraitï¿½].
    * @param plaque
-   *          plaque du véhicule.
+   *          plaque du vï¿½hicule.
    * @param desactive
-   *          si le véhicule est désactivé.
+   *          si le vï¿½hicule est dï¿½sactivï¿½.
    * @param capaciteEssence
-   *          capacité d'essence du véhicule.
+   *          capacitï¿½ d'essence du vï¿½hicule.
    * @param note
    *          commentaire.
    */
@@ -137,17 +137,17 @@ public class Vehicule implements IListable {
   }
   
   /**
-   * Constructeur pour Véhicule avant insertion
+   * Constructeur pour Vï¿½hicule avant insertion
    *
    * @param fabricant
-   *          fabricant du véhicule.
+   *          fabricant du vï¿½hicule.
    * @param marque
-   *          marque du véhicule.
+   *          marque du vï¿½hicule.
  
    * @param desactive
-   *          si le véhicule est désactivé.
+   *          si le vï¿½hicule est dï¿½sactivï¿½.
    * @param capaciteEssence
-   *          capacité d'essence du véhicule.
+   *          capacitï¿½ d'essence du vï¿½hicule.
    * @param note
    *          commentaire.
    */
@@ -244,7 +244,8 @@ public class Vehicule implements IListable {
     this.note = note;
   }
 
-  public int getId() {
+  @Override
+public int getId() {
     return this.id;
   }
 

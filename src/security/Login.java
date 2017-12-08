@@ -1,9 +1,9 @@
 package security;
 
+import javax.swing.JOptionPane;
+
 import dao.UtilisateurDao;
 import data.Utilisateur;
-
-import javax.swing.*;
 
 public class Login {
     public Utilisateur authenticate(java.awt.Component context ) {
@@ -11,7 +11,7 @@ public class Login {
         do{
             String employeeInput;
             do{
-                employeeInput = JOptionPane.showInputDialog(context, "Entrez votre numero d'employé", "Identification", JOptionPane.PLAIN_MESSAGE);
+                employeeInput = JOptionPane.showInputDialog(context, "Entrez votre numero d'employï¿½", "Identification", JOptionPane.PLAIN_MESSAGE);
             }
             while(employeeInput.length() < 1 || !isInteger(employeeInput));
 

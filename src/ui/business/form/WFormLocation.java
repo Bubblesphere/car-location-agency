@@ -2,16 +2,10 @@ package ui.business.form;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.List;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 import dao.ReservationDao;
 import dao.UtilisateurDao;
@@ -20,7 +14,6 @@ import data.Location;
 import data.Reservation;
 import data.TypePaiement;
 import data.TypePaiement.type;
-import data.Utilisateur;
 import data.Vehicule;
 import ui.events.Event;
 import ui.events.EventEnum.FormButtonEvents;
@@ -28,12 +21,10 @@ import ui.events.EventEnum.FormTextFieldEvents;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WForm;
 import ui.widgets.WFormButton;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 import ui.widgets.WLabel;
-import ui.widgets.WPay;
 
 public class WFormLocation extends WAbstractFormPanel<Location> {
     private static final long serialVersionUID = 1L;
@@ -167,7 +158,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
                 this.textFieldNote.getText(),
                 this.comboBoxReservation.getSelected().getUtilisateurReservation(),
                 this.formLocationID,
-                (Vehicule) this.comboBoxVehicule.getSelected(),
+                this.comboBoxVehicule.getSelected(),
                 UtilisateurDao.retrieve(1), //currentUser
                 null, //dateDeRetour
                 true, //assurance
@@ -195,7 +186,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
 
     @Override
     public void set(Location listable) {
-        Location location = (Location) listable;
+        Location location = listable;
         this.formLocationID = location.getId();
         this.textFieldNote.setText(location.getNoteLocation());
         this.textFieldDepartKm.setText(Integer.toString(location.getDepartKm()));

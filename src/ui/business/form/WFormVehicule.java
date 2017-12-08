@@ -121,7 +121,7 @@ private int formvehiculeId;
   @Override
   public Vehicule get() {   
  // TODO: int etat, Boolean desactive
-    return new Vehicule(this.formvehiculeId, (Classe)this.comboBoxClasse.getSelected(), this.textFieldFabricant.getText(), 
+    return new Vehicule(this.formvehiculeId, this.comboBoxClasse.getSelected(), this.textFieldFabricant.getText(), 
         this.textFieldMarque.getText(), Integer.parseInt(this.textFieldAnnee.getText()), 
         Integer.parseInt(this.textFieldKilometrage.getText()), 1, 
         this.textFieldPlaque.getText(), false, 
@@ -130,7 +130,7 @@ private int formvehiculeId;
   
   @Override
   public void set(Vehicule listable) {
-	  Vehicule vehicule = (Vehicule) listable;
+	  Vehicule vehicule = listable;
 	    this.formvehiculeId = vehicule.getId();
 	    textFieldFabricant.setText(vehicule.getFabricant());
 	    textFieldMarque.setText(vehicule.getMarque());

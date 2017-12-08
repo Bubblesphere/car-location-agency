@@ -74,7 +74,8 @@ public class WListAdd<T extends IListable> extends JPanel implements IPanelList<
     });
   }
   
-  public void setSelectedIndexLast() {
+  @Override
+public void setSelectedIndexLast() {
 	  this.widgetList.setSelectedIndexLast();
   }
 
@@ -82,19 +83,23 @@ public class WListAdd<T extends IListable> extends JPanel implements IPanelList<
     return this.widgetList.getSelectedIndex();
   }
   
-  public int getLastSelectedIndex(){
+  @Override
+public int getLastSelectedIndex(){
     return this.widgetList.getLastSelectedIndex();
   }
 
-  public EventBubbler events() {
+  @Override
+public EventBubbler events() {
     return this.events;
   }
 
-  public void setModelList(DefaultListModel<T> list) {
+  @Override
+public void setModelList(DefaultListModel<T> list) {
     this.widgetList.setModel(list);
   }
 
-  public void addElement(T listable) {
+  @Override
+public void addElement(T listable) {
     this.widgetList.addElement(listable);
   }
 

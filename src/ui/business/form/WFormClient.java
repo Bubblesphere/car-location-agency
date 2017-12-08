@@ -3,10 +3,11 @@ package ui.business.form;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.time.LocalDate;
+
 import data.Client;
 import ui.events.Event;
-import ui.events.EventListener;
 import ui.events.EventEnum.FormTextFieldEvents;
+import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormTextField;
