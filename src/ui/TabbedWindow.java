@@ -205,7 +205,7 @@ public class TabbedWindow extends JFrame {
 	      }   
 	    });
 	  	this.formLocation.getButtonPay().events().addListener(new EventListener() {
-			
+			@SuppressWarnings("rawtypes")
 			@Override
 			public void handleEvent(Event evt) {
 				 switch ((EventEnum.FormPayButtonEvents) evt.getEventName()) {
