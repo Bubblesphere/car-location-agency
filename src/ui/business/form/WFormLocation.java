@@ -101,7 +101,9 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
             public void handleEvent(Event evt) {
               switch ((FormButtonEvents) evt.getEventName()) {
               case BUTTON_CLICKED:
+            	  // TODO: Make a component
             	  WLabel lblTotal = new WLabel("Total:");
+            	  // TODO: fetch total price from TabbedWindow
             	  WLabel lblAmount = new WLabel("99$");
             	  ArrayList<TypePaiement> list = new ArrayList<TypePaiement>();
             	  list.add(new TypePaiement(type.COMPTANT));
@@ -115,6 +117,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
             	  };
             	  int result = JOptionPane.showConfirmDialog(null, inputs, "Gestionnaire de paiement", JOptionPane.PLAIN_MESSAGE);
             	  if (result == JOptionPane.OK_OPTION) {
+            		  // TODO: Dispatch payment to TabbedWindow
             	      System.out.println("Vous avez payez " + lblAmount);
             	  } else {
             	      System.out.println("User canceled / closed the dialog, result = " + result);
