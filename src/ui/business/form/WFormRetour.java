@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import dao.LocationDao;
 import data.Location;
-import data.Reservation;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
@@ -96,7 +95,6 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
 
     @Override
     public void set(Location listable) {
-        // TODO Auto-generated method stub
         Location location = listable;
         if(location != null){
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -113,7 +111,6 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
 
     @Override
     public Location get() {
-        // TODO Auto-generated method stub
 		/*return new Location(
                 this.formLocationID,
 				Float.parseFloat(this.textFieldValue.getText())

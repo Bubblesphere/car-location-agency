@@ -9,7 +9,6 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import data.Paiement;
-import data.Reservation;
 import data.TypePaiement;
 import data.TypePaiement.type;
 import ui.events.Event;
@@ -25,7 +24,6 @@ public class WFormPayButton extends WFormButton implements IBusinessForm<Paiemen
 	private WLabel lblTotal;
 	private WLabel lblAmount;
 	private WFormComboBox<TypePaiement> comboPaiement;
-	private JComponent[] inputs;
 	
 	private int payId;
 	

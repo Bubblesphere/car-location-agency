@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import dao.ClasseDao;
 import data.Classe;
-import data.Reservation;
 import data.Vehicule;
 import ui.events.Event;
 import ui.events.EventEnum.FormTextFieldEvents;

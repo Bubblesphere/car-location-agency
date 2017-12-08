@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import dao.ReservationDao;
 import dao.UtilisateurDao;
 import dao.VehiculeDao;
-import data.Client;
 import data.Location;
 import data.Reservation;
 import data.Vehicule;

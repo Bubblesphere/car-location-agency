@@ -30,7 +30,7 @@ public class WLabel extends JPanel {
 	}
 	
 	public void setText(Float number) {
-		setText(Float.valueOf(number));
+		setText(String.valueOf(number));
 	}
 	
 	public String getText() {

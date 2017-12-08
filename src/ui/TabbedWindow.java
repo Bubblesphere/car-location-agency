@@ -211,8 +211,9 @@ public class TabbedWindow extends JFrame {
 				 switch ((EventEnum.FormPayButtonEvents) evt.getEventName()) {
 				 case DIALOG_OPENED:
 					 formLocation.getButtonPay().set(new Paiement(formLocation.get().getId(), formLocation.get().getTotalPrice(), 0, ""));
+					 break;
 	              case PAYED:
-	            	  Location location = tabLocation.getCurrentListable();
+	            	  Location location = formLocation.get();
 	            	  location.addPaiement(formLocation.getButtonPay().get());
 	            	  LocationDao.update(location);	
 	                  break;

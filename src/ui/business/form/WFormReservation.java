@@ -96,7 +96,7 @@ private int formReservationID;
 
   @Override
   public Reservation get() {
-    // TODO:currentUser
+    // TODO: currentUser
     return new Reservation(this.formReservationID, this.comboBoxClient.getSelected(),
        this.comboBoxClasse.getSelected(), LocalDateTime.parse(this.textFieldStartDate.getText()),
        LocalDateTime.parse(this.textFieldEndDate.getText()), this.textFieldNote.getText(),
