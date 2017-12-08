@@ -23,6 +23,7 @@ import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormButton;
 import ui.widgets.WFormComboBox;
+import ui.widgets.WFormPayButton;
 import ui.widgets.WFormTextField;
 import ui.widgets.WLabel;
 
@@ -49,7 +50,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
     private WLabel paiementsListField;
     private GridBagConstraints gbcPaiements;
     
-    private WFormButton buttonPay;
+    private WFormPayButton buttonPay;
     private GridBagConstraints gbcPay;
 
 
@@ -89,45 +90,11 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
         this.gbcPaiements.gridy = 5;
         this.add(this.paiementsListField, this.gbcPaiements);
 
-        this.buttonPay = new WFormButton("Payer");
+        this.buttonPay = new WFormPayButton("Payer");
         this.gbcPaiements = FormBuilder.getGBCFullRow();
         this.gbcPaiements.gridx = 0;
         this.gbcPaiements.gridy = 6;
         this.add(this.buttonPay, this.gbcPaiements);
-        
-        this.buttonPay.events().addListener(new EventListener() {
-        	@SuppressWarnings("rawtypes") 
-            @Override
-            public void handleEvent(Event evt) {
-              switch ((FormButtonEvents) evt.getEventName()) {
-              case BUTTON_CLICKED:
-            	  // TODO: Make a component
-            	  WLabel lblTotal = new WLabel("Total:");
-            	  // TODO: fetch total price from TabbedWindow
-            	  WLabel lblAmount = new WLabel("99$");
-            	  ArrayList<TypePaiement> list = new ArrayList<TypePaiement>();
-            	  list.add(new TypePaiement(type.COMPTANT));
-            	  list.add(new TypePaiement(type.DEBIT));
-            	  list.add(new TypePaiement(type.CREDIT));
-            	  WFormComboBox<TypePaiement> comboPaiement = new WFormComboBox<>("M�thode de paiement", list);
-            	  final JComponent[] inputs = new JComponent[] {
-        			  lblTotal,
-        			  lblAmount,
-        			  comboPaiement
-            	  };
-            	  int result = JOptionPane.showConfirmDialog(null, inputs, "Gestionnaire de paiement", JOptionPane.PLAIN_MESSAGE);
-            	  if (result == JOptionPane.OK_OPTION) {
-            		  // TODO: Dispatch payment to TabbedWindow
-            	      System.out.println("Vous avez payez " + lblAmount);
-            	  } else {
-            	      System.out.println("User canceled / closed the dialog, result = " + result);
-            	  }
-                break;
-              default:
-                break;
-              }
-            }
-		});
         
         //TODO assurance, usureJournalier
 

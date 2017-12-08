@@ -12,7 +12,7 @@ public class WLabel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private BoxLayout layout;
 	private JLabel label;
-
+	
 	public WLabel(String labelText) {
 		this.layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		this.setBorder(new EmptyBorder(24, 0, 0, 16));
@@ -23,5 +23,13 @@ public class WLabel extends JPanel {
 		this.label.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		this.label.setAlignmentX(Component.LEFT_ALIGNMENT);
 		this.add(this.label);
+	}
+	
+	public void setText(String text) {
+		this.label.setText(text);
+	}
+	
+	public void setText(Float number) {
+		setText(Float.valueOf(number));
 	}
 }

@@ -31,4 +31,10 @@ public class EventEnum {
   	public static enum FormButtonEvents implements IEventName {
   		BUTTON_CLICKED
   	}
+  	
+  	public static enum FormPayButtonEvents implements IEventName {
+  		DIALOG_OPENED,
+  		DIALOG_CLOSED,
+  		PAYED
+  	}
 }
