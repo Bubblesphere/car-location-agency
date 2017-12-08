@@ -92,9 +92,9 @@ public class TabbedWindow extends JFrame {
    * Create the frame.
    */
   public TabbedWindow() {
-    setIconImage(Toolkit.getDefaultToolkit().getImage(TabbedWindow.class
-        .getResource("/com/sun/javafx/scene/control/skin/modena/dialog-more-details@2x.png")));
-    //Login login = new Login();
+//    setIconImage(Toolkit.getDefaultToolkit().getImage(TabbedWindow.class
+  //      .getResource("/com/sun/javafx/scene/control/skin/modena/dialog-more-details@2x.png")));
+    //Login login = new Login(); //TODO remettre avant la remise
     //Utilisateur user1 = login.authenticate(this);
 
     setTitle("Syst\u00E8me de gestion de location");
@@ -112,7 +112,7 @@ public class TabbedWindow extends JFrame {
     ArrayList<Utilisateur> users = (ArrayList<Utilisateur>) users1;
    
     ArrayList<Classe> classes = (ArrayList<Classe>)ClasseDao.retrieveAll();    
-    ArrayList<Location> retours = (ArrayList<Location>)LocationDao.retrieveAll();
+    ArrayList<Location> retours = (ArrayList<Location>)LocationDao.retrieveAll(false);
     ArrayList<Reservation> reservations = (ArrayList<Reservation>)ReservationDao.retrieveAll();
     ArrayList<Parametre> parametres = (ArrayList<Parametre>)ParametreDao.retrieveAll();
     
@@ -138,9 +138,9 @@ public class TabbedWindow extends JFrame {
     this.tabLocation = new WTabFormListAdd<Location>(tabbedPane, locations, this.formLocation, "Location");
     handleTabLocationEvents();
     this.tabRetour = new WTabFormListAdd<Location>(tabbedPane, retours, this.formRetour, "Retour");
-    // TODO: handleTabRetourEvents();
+    handleTabRetourEvents();
     
-    //if(user1.getRole() == 0){
+    //if(user1.getRole() == 0){ //TODO add back avant la fin
       this.tabVehicule = new WTabFormListAdd<Vehicule>(tabbedPane, vehicules, this.formVehicule, "V�hicule");
       handleTabVehiculeEvents();
       this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Param�tre");
@@ -309,6 +309,29 @@ public class TabbedWindow extends JFrame {
 	      	}
 	  });
 }
+
+	private void handleTabRetourEvents() {
+		this.tabRetour.events().addListener(new ui.events.EventListener() {
+			@SuppressWarnings("rawtypes")
+			@Override
+			public void handleEvent(Event evt) {
+				switch((EventEnum.TabFormListEvents) evt.getEventName()) {
+					case BUTTON_ADD_CLICKED:
+						//tabRetour.add(new Vehicule(-1, "Nouveau", "Nouveau"));
+						break;
+					case BUTTON_SAVE_CLICKED_NEW: //Nouveau entièrement
+						//tabRetour.
+						//tabRetour.add(LocationDao.create(tabVehicule.getCurrentListable()));
+						break;
+					case BUTTON_SAVE_CLICKED_MODIFY:
+						//VehiculeDao.update(tabVehicule.getCurrentListable());
+						break;
+					default:
+						break;
+				}
+			}
+		});
+	}
 
   private void handleTabVehiculeEvents() {
 	  this.tabVehicule.events().addListener(new ui.events.EventListener() {

@@ -19,6 +19,7 @@ public class Location extends Reservation implements IListable {
 	private int departKm;
 	private int retourKm;
 	private String noteLocation;
+	private String noteRetour;
 	private float estimationReparation;
 	private List<Paiement> paiements;
 
@@ -205,6 +206,14 @@ public class Location extends Reservation implements IListable {
 
 	public void setNoteLocation(String noteLocation) {
 		this.noteLocation = noteLocation;
+	}
+
+	public String getNoteRetour() {
+		return noteRetour;
+	}
+
+	public void setNoteRetour(String noteRetour) {
+		this.noteRetour = noteRetour;
 	}
 
 	public float getEstimationReparation() {
