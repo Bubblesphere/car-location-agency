@@ -8,16 +8,15 @@ import java.util.ArrayList;
 
 import dao.LocationDao;
 import data.Location;
+import data.Reservation;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
-public class WFormRetour extends WAbstractFormPanel<Location> {
+public class WFormRetour extends WAbstractFormPanel<Location> implements IBusinessForm<Location> {
     private static final long serialVersionUID = 1L;
     private int formLocationID;
-
-
 
     private GridBagLayout layout;
 

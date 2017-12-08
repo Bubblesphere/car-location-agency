@@ -4,12 +4,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 //import java.time.format.DateTimeFormatter;
 
+import data.Client;
 import data.Parametre;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormTextField;
 
-public class WFormParametre extends WAbstractFormPanel<Parametre> {
+public class WFormParametre extends WAbstractFormPanel<Parametre> implements IBusinessForm<Parametre> {
 	private static final long serialVersionUID = 1L;
 
 	private int formParamID;

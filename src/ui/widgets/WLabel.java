@@ -32,4 +32,8 @@ public class WLabel extends JPanel {
 	public void setText(Float number) {
 		setText(Float.valueOf(number));
 	}
+	
+	public String getText() {
+		return this.label.getText();
+	}
 }

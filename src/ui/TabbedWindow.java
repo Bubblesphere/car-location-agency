@@ -21,6 +21,7 @@ import dao.VehiculeDao;
 import data.Classe;
 import data.Client;
 import data.Location;
+import data.Paiement;
 import data.Parametre;
 import data.Reservation;
 import data.Utilisateur;
@@ -203,6 +204,23 @@ public class TabbedWindow extends JFrame {
 	            }
 	      }   
 	    });
+	  	this.formLocation.getButtonPay().events().addListener(new EventListener() {
+			
+			@Override
+			public void handleEvent(Event evt) {
+				 switch ((EventEnum.FormPayButtonEvents) evt.getEventName()) {
+				 case DIALOG_OPENED:
+					 formLocation.getButtonPay().set(new Paiement(formLocation.get().getId(), formLocation.get().getTotalPrice(), 0, ""));
+	              case PAYED:
+	            	  Location location = tabLocation.getCurrentListable();
+	            	  location.addPaiement(formLocation.getButtonPay().get());
+	            	  LocationDao.update(location);	
+	                  break;
+	              default:
+	                  break;
+	            }
+			}
+		});
 	}
   
   private void handleFormVehiculeEvents() {

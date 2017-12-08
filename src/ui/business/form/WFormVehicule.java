@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import dao.ClasseDao;
 import data.Classe;
+import data.Reservation;
 import data.Vehicule;
 import ui.events.Event;
 import ui.events.EventEnum.FormTextFieldEvents;
@@ -15,7 +16,7 @@ import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
-public class WFormVehicule extends WAbstractFormPanel<Vehicule> {
+public class WFormVehicule extends WAbstractFormPanel<Vehicule> implements IBusinessForm<Vehicule> {
 	private static final long serialVersionUID = 1L;
 
 private int formvehiculeId;

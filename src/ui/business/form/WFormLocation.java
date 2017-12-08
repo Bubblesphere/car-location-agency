@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import dao.ReservationDao;
 import dao.UtilisateurDao;
 import dao.VehiculeDao;
+import data.Client;
 import data.Location;
 import data.Reservation;
 import data.Vehicule;
@@ -16,11 +17,10 @@ import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
-import ui.widgets.WFormPayButton;
 import ui.widgets.WFormTextField;
 import ui.widgets.WLabel;
 
-public class WFormLocation extends WAbstractFormPanel<Location> {
+public class WFormLocation extends WAbstractFormPanel<Location> implements IBusinessForm<Location> {
     private static final long serialVersionUID = 1L;
 
     private int formLocationID;
@@ -83,10 +83,11 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
         this.gbcPaiements.gridy = 5;
         this.add(this.paiementsListField, this.gbcPaiements);
 
-        this.buttonPay = new WFormPayButton("Payer");
+        this.buttonPay = new WFormPayButton("Payer"); 
         this.gbcPay = FormBuilder.getGBCFullRow();
         this.gbcPay.gridx = 0;
         this.gbcPay.gridy = 6;
+        this.buttonPay.setDisabled(true);
         this.add(this.buttonPay, this.gbcPay);
         
         //TODO assurance, usureJournalier
@@ -113,6 +114,12 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
 
     @Override
     public Location get() {
+    	int km = 0;
+        try {  
+            km = Integer.parseInt(textFieldDepartKm.getText());  
+         } catch (NumberFormatException e) {  
+         }  
+    	
         return new Location(this.comboBoxReservation.getSelected().getReservationId(),
                 this.comboBoxReservation.getSelected().getClientReservation(),
                 this.comboBoxReservation.getSelected().getClasseReservation(),
@@ -127,7 +134,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
                 true, //assurance
                 true, //usureJournalire
                 0, //essenceManqu
-                Integer.parseInt(textFieldDepartKm.getText()),
+                km,
                 0, // retourKm
                 this.comboBoxReservation.getSelected().getNoteReservation(),
                 0);//estimationReperation
@@ -139,12 +146,20 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
 
     }
 
+    public WFormPayButton getButtonPay() {
+    	return this.buttonPay;
+    }
+    
     public WFormComboBox<Reservation> getComboBoxReservation() {
         return this.comboBoxReservation;
     }
 
     public WFormComboBox<Vehicule> getComboBoxVehicule() {
         return this.comboBoxVehicule;
+    }
+    
+    public int getFormId() {
+    	return this.formLocationID;
     }
 
     @Override
@@ -156,6 +171,11 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
         this.comboBoxReservation.setSelected(ReservationDao.retrieve(location.getReservationId()));
         this.comboBoxVehicule.setSelected(location.getVehicule());
         this.hasUnsavedContent = false;
+        if(this.formLocationID == -1) {
+            this.buttonPay.setDisabled(true);
+        } else {
+        	this.buttonPay.setDisabled(false);
+        }
         //TODO assurance, usureJournalier
     }
 }

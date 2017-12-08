@@ -19,7 +19,7 @@ import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
-public class WFormReservation extends WAbstractFormPanel<Reservation> {
+public class WFormReservation extends WAbstractFormPanel<Reservation> implements IBusinessForm<Reservation> {
 	private static final long serialVersionUID = 1L;
 
 private int formReservationID;

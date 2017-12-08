@@ -1,6 +1,8 @@
 package data;
 
-public class Paiement {
+import ui.utils.IListable;
+
+public class Paiement implements IListable {
   private int id;
   private int locationId;
   private float montant;
@@ -8,6 +10,26 @@ public class Paiement {
   private int methode;
   private String note;
 
+  /**
+   * Constructeur pour Paiement
+   * 
+   * @param locationId
+   *          location sur laquel ce paiement est attach�.
+   * @param montant
+   *          montant du paiement.
+   * @param methode
+   *          m�thode de paiement.
+   * @param note
+   *          commentaire.
+   */
+  public Paiement(int locationId, float montant, int methode, String note) {
+    super();
+    this.locationId = locationId;
+    this.montant = montant;
+    this.methode = methode;
+    this.note = note;
+  }
+  
   /**
    * Constructeur pour Paiement
    * 
@@ -70,5 +92,10 @@ public class Paiement {
   public void setNote(String note) {
     this.note = note;
   }
+
+@Override
+public String getDisplayedText() {
+	return String.valueOf(this.montant);
+}
 
 }

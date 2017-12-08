@@ -46,4 +46,8 @@ private EventBubbler events;
   private void eventHandler(FormButtonEvents eventName) {
     this.events.fireEvent(new Event<FormButtonEvents>(this, eventName));
   }
+  
+  public void setDisabled(boolean b) {
+	  this.button.setEnabled(!b);
+  }
 }

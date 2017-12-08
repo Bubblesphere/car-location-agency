@@ -12,7 +12,7 @@ import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormTextField;
 
-public class WFormClient extends WAbstractFormPanel<Client> {
+public class WFormClient extends WAbstractFormPanel<Client> implements IBusinessForm<Client> {
  
 	private static final long serialVersionUID = 1L;
 
