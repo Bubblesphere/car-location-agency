@@ -41,7 +41,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
 
     private WLabel paiementsListField;
     private GridBagConstraints gbcPaiements;
-    
+
     private WFormPayButton buttonPay;
     private GridBagConstraints gbcPay;
 
@@ -52,19 +52,19 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
         this.layout = FormBuilder.getLayout();
         this.setLayout(this.layout);
 
-        this.comboBoxReservation = new WFormComboBox<Reservation>("Réservation", (ArrayList<Reservation>) ReservationDao.retrieveAll(true));
+        this.comboBoxReservation = new WFormComboBox<Reservation>("R\u00E9servation", (ArrayList<Reservation>) ReservationDao.retrieveAll(true));
         this.gbcReservation = FormBuilder.getGBCFullRow();
         this.gbcReservation.gridx = 0;
         this.gbcReservation.gridy = 1;
         this.add(this.comboBoxReservation, this.gbcReservation);
 
-        this.textFieldDepartKm = new WFormTextField("Kilométrage avant le départ");
+        this.textFieldDepartKm = new WFormTextField("Kilom\u00E9trage avant le d\u00E9part");
         this.gbcDepartKm = FormBuilder.getGBCPartialRow();
         this.gbcDepartKm.gridx = 0;
         this.gbcDepartKm.gridy = 2;
         this.add(this.textFieldDepartKm, this.gbcDepartKm);
 
-        this.comboBoxVehicule = new WFormComboBox<Vehicule>("Véhicule", (ArrayList<Vehicule>) VehiculeDao.retrieveAll());
+        this.comboBoxVehicule = new WFormComboBox<Vehicule>("V\u00E9hicule", (ArrayList<Vehicule>) VehiculeDao.retrieveAll());
         this.gbcVehicule = FormBuilder.getGBCPartialRow();
         this.gbcVehicule.gridx = 1;
         this.gbcVehicule.gridy = 2;
@@ -82,13 +82,13 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
         this.gbcPaiements.gridy = 5;
         this.add(this.paiementsListField, this.gbcPaiements);
 
-        this.buttonPay = new WFormPayButton("Payer"); 
+        this.buttonPay = new WFormPayButton("Payer");
         this.gbcPay = FormBuilder.getGBCFullRow();
         this.gbcPay.gridx = 0;
         this.gbcPay.gridy = 6;
         this.buttonPay.setDisabled(true);
         this.add(this.buttonPay, this.gbcPay);
-        
+
         //TODO assurance, usureJournalier
 
         EventListener textBoxValueChangedListener = new EventListener() {
@@ -113,12 +113,12 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
 
     @Override
     public Location get() {
-    	int km = 0;
-        try {  
-            km = Integer.parseInt(textFieldDepartKm.getText());  
-         } catch (NumberFormatException e) {  
-         }  
-    	
+        int km = 0;
+        try {
+            km = Integer.parseInt(textFieldDepartKm.getText());
+        } catch (NumberFormatException e) {
+        }
+
         return new Location(this.comboBoxReservation.getSelected().getReservationId(),
                 this.comboBoxReservation.getSelected().getClientReservation(),
                 this.comboBoxReservation.getSelected().getClasseReservation(),
@@ -147,9 +147,9 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
     }
 
     public WFormPayButton getButtonPay() {
-    	return this.buttonPay;
+        return this.buttonPay;
     }
-    
+
     public WFormComboBox<Reservation> getComboBoxReservation() {
         return this.comboBoxReservation;
     }
@@ -157,9 +157,9 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
     public WFormComboBox<Vehicule> getComboBoxVehicule() {
         return this.comboBoxVehicule;
     }
-    
+
     public int getFormId() {
-    	return this.formLocationID;
+        return this.formLocationID;
     }
 
     @Override
@@ -171,10 +171,10 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
         this.comboBoxReservation.setSelected(ReservationDao.retrieve(location.getReservationId()));
         this.comboBoxVehicule.setSelected(location.getVehicule());
         this.hasUnsavedContent = false;
-        if(this.formLocationID == -1) {
+        if (this.formLocationID == -1) {
             this.buttonPay.setDisabled(true);
         } else {
-        	this.buttonPay.setDisabled(false);
+            this.buttonPay.setDisabled(false);
         }
         //TODO assurance, usureJournalier
     }

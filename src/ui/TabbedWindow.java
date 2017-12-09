@@ -332,6 +332,7 @@ public class TabbedWindow extends JFrame {
 			public void handleEvent(Event evt) {
 				switch((EventEnum.TabFormListEvents) evt.getEventName()) {
 					case BUTTON_ADD_CLICKED:
+						formRetour.init();
 						//tabRetour.add(new Vehicule(-1, "Nouveau", "Nouveau"));
 						break;
 					case BUTTON_SAVE_CLICKED_NEW: //Nouveau entièrement

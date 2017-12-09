@@ -56,6 +56,18 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
     private WLabel locationReadOnly;
     private GridBagConstraints gbcLocationReadOnly;
 
+    private WLabel departKMReadOnly;
+    private GridBagConstraints gbcDepartKMReadOnly;
+
+    private WLabel locationClientReadOnly;
+    private GridBagConstraints gbcLocationClientReadOnly;
+
+    private WLabel reservationDebutReadOnly;
+    private GridBagConstraints gbcReservationDebutReadOnly;
+
+    private WLabel vehiculeReadOnly;
+    private GridBagConstraints gbcVehiculeReadOnly;
+
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -113,40 +125,73 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         this.gbcLocationReadOnly.gridy = 0;
         this.add(this.locationReadOnly, this.gbcLocationReadOnly);
 
-        this.EndDateReadOnly = new WLabel("End date");
+        this.EndDateReadOnly = new WLabel("Date de retour");
         this.gbcEndDateReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcEndDateReadOnly.gridx = 1;
         this.gbcEndDateReadOnly.gridy = 0;
         this.add(this.EndDateReadOnly, this.gbcEndDateReadOnly);
 
+        this.reservationDebutReadOnly = new WLabel("Date de Debut");
+        this.gbcReservationDebutReadOnly = FormBuilder.getGBCPartialRow();
+        this.gbcReservationDebutReadOnly.gridx = 0;
+        this.gbcReservationDebutReadOnly.gridy = 1;
+        this.add(this.reservationDebutReadOnly, this.gbcReservationDebutReadOnly);
+
         this.retourKMReadOnly = new WLabel("Kilom\u00E9trage de retour");
         this.gbcRetourKMReadOnly = FormBuilder.getGBCPartialRow();
-        this.gbcRetourKMReadOnly.gridx = 0;
+        this.gbcRetourKMReadOnly.gridx = 1;
         this.gbcRetourKMReadOnly.gridy = 1;
         this.add(this.retourKMReadOnly, this.gbcRetourKMReadOnly);
 
         this.retourEssenceReadOnly = new WLabel("Essence restante");
         this.gbcRetourEssenceReadOnly = FormBuilder.getGBCPartialRow();
-        this.gbcRetourEssenceReadOnly.gridx = 1;
-        this.gbcRetourEssenceReadOnly.gridy = 1;
+        this.gbcRetourEssenceReadOnly.gridx = 0;
+        this.gbcRetourEssenceReadOnly.gridy = 2;
         this.add(this.retourEssenceReadOnly, this.gbcRetourEssenceReadOnly);
 
         this.dommagesReadOnly = new WLabel("Dommages");
         this.gbcDommagesRO = FormBuilder.getGBCPartialRow();
-        this.gbcDommagesRO.gridx = 0;
+        this.gbcDommagesRO.gridx = 1;
         this.gbcDommagesRO.gridy = 2;
         this.add(this.dommagesReadOnly, this.gbcDommagesRO);
 
         this.retourNoteReadOnly = new WLabel("Note");
         this.gbcRetourNoteReadOnly = FormBuilder.getGBCPartialRow();
-        this.gbcRetourNoteReadOnly.gridx = 1;
-        this.gbcRetourNoteReadOnly.gridy = 2;
+        this.gbcRetourNoteReadOnly.gridx = 0;
+        this.gbcRetourNoteReadOnly.gridy = 3;
         this.add(this.retourNoteReadOnly, this.gbcRetourNoteReadOnly);
+
+        this.departKMReadOnly = new WLabel("D\u00E9but");
+        this.gbcDepartKMReadOnly = FormBuilder.getGBCPartialRow();
+        this.gbcDepartKMReadOnly.gridx = 1;
+        this.gbcDepartKMReadOnly.gridy = 3;
+        this.add(this.departKMReadOnly, this.gbcDepartKMReadOnly);
+
+        this.locationClientReadOnly = new WLabel("Client");
+        this.gbcLocationClientReadOnly = FormBuilder.getGBCPartialRow();
+        this.gbcLocationClientReadOnly.gridx = 0;
+        this.gbcLocationClientReadOnly.gridy = 4;
+        this.add(this.locationClientReadOnly, this.gbcLocationClientReadOnly);
+
+
+        this.vehiculeReadOnly = new WLabel("V\u00E9hicule");
+        this.gbcVehiculeReadOnly = FormBuilder.getGBCPartialRow();
+        this.gbcVehiculeReadOnly.gridx = 1;
+        this.gbcVehiculeReadOnly.gridy = 4;
+        this.add(this.vehiculeReadOnly, this.gbcVehiculeReadOnly);
+
     }
 
 
     @Override
     public void init() {
+        LocalDateTime now = LocalDateTime.now();
+
+        this.textFieldEndDate.setText(now.format(dateFormatter).toString());
+        this.textFieldKMRetour.setText("");
+        this.textFieldNote.setText("");
+        this.textFieldEssence.setText("");
+        this.textFieldDommages.setText("");
 
     }
 
@@ -157,26 +202,21 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
     @Override
     public void set(Location listable) {
         Location location = listable;
-        if(location != null){
+        if (location != null) {
             String dtStr = dateFormatter.format(location.getDateDeRetour());
             updateReadOnlyValues(location);
             showReadOnlyForm(false);
-        }else{
-            showReadOnlyForm(false);
+        } else {
+            showReadOnlyForm(true);
         }
     }
 
     @Override
     public Location get() {
-		/*return new Location(
-                this.formLocationID,
-				Float.parseFloat(this.textFieldValue.getText())
-		);*/
-
         return null;
     }
 
-    public void saveNew(){
+    public void saveNew() {
         LocalDateTime dateRetour = LocalDateTime.parse(textFieldEndDate.getText(), dateFormatter);
 
         int locationId = getComboBoxLocation().getSelected().getId();
@@ -190,7 +230,7 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         LocationDao.update(location);
     }
 
-    public void showReadOnlyForm(Boolean hide){
+    public void showReadOnlyForm(Boolean hide) {
 
         comboBoxLocation.setVisible(hide);
         textFieldEndDate.setVisible(hide);
@@ -206,18 +246,29 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         retourNoteReadOnly.setVisible(!hide);
         retourEssenceReadOnly.setVisible(!hide);
         locationReadOnly.setVisible(!hide);
+        departKMReadOnly.setVisible(!hide);
+        locationClientReadOnly.setVisible(!hide);
+        reservationDebutReadOnly.setVisible(!hide);
+        vehiculeReadOnly.setVisible(!hide);
     }
 
-    public void updateReadOnlyValues(Location location){
-        String dtStr = dateFormatter.format(location.getDateDeRetour());
+    public void updateReadOnlyValues(Location location) {
+        String dateEndtStr = dateFormatter.format(location.getDateDeRetour());
 
         this.locationReadOnly.setText("Location #" + location.getId());
 
-        this.textFieldEndDate.setText("Date de retour: " + dtStr);
+        this.textFieldEndDate.setText("Date de retour: " + dateEndtStr);
         this.dommagesReadOnly.setText("Estim\u00E9 des dommages: " + location.getEstimationReparation());
         this.retourKMReadOnly.setText("Km au retour: " + location.getRetourKm());
         this.retourNoteReadOnly.setText("Note: " + location.getNoteRetour());
         this.retourEssenceReadOnly.setText("Essence restante: " + location.getEssenceManquant());
+
+        String dateStartStr = dateFormatter.format(location.getStartDate());
+
+        this.departKMReadOnly.setText(String.valueOf("KM d\u00E9part: " + location.getDepartKm()));
+        this.locationClientReadOnly.setText("Client: " + location.getClientReservation().getPrenom() + location.getClientReservation().getNom());
+        this.reservationDebutReadOnly.setText("Date de d\u00E9but " + dateStartStr);
+        this.vehiculeReadOnly.setText("V\u00E9hicule: " + location.getVehicule().getDisplayedText());
 
     }
 }
