@@ -5,11 +5,9 @@ import java.awt.GridBagLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 import dao.LocationDao;
 import data.Location;
-import data.Paiement;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
@@ -81,8 +79,6 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
     public WFormRetour() {
         this.layout = FormBuilder.getLayout();
         this.setLayout(this.layout);
-
-        //TODO Ajouter les champs des valeurs initiales au moment de la location
 
         this.comboBoxLocation = new WFormComboBox<Location>("Choisir location", (ArrayList<Location>) LocationDao.retrieveAll(true));
         this.gbcLocation = FormBuilder.getGBCPartialRow();
@@ -186,15 +182,13 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         this.gbcLocationClientReadOnly.gridy = 4;
         this.add(this.locationClientReadOnly, this.gbcLocationClientReadOnly);
 
-
         this.vehiculeReadOnly = new WLabel("V\u00E9hicule");
         this.gbcVehiculeReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcVehiculeReadOnly.gridx = 1;
         this.gbcVehiculeReadOnly.gridy = 4;
         this.add(this.vehiculeReadOnly, this.gbcVehiculeReadOnly);
 
-
-        this.listePaiements = new WLabel("Paiements effectués");
+        this.listePaiements = new WLabel("Paiements effectu\u00E9s");
         this.gbcListePaiements = FormBuilder.getGBCPartialRow();
         this.gbcListePaiements.gridx = 0;
         this.gbcListePaiements.gridy = 5;
@@ -240,6 +234,9 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         return this.buttonPay;
     }
 
+    /**
+     * Enregistre un nouveau retour selon les informations du formulaire
+     */
     public void saveNew() {
         LocalDateTime dateRetour = LocalDateTime.parse(textFieldEndDate.getText(), dateFormatter);
 
@@ -254,6 +251,10 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         LocationDao.update(location);
     }
 
+    /**
+     * Affiche ou masque le formulaire et la page de description d'une Location
+     * @param hide
+     */
     public void showReadOnlyForm(Boolean hide) {
 
         comboBoxLocation.setVisible(hide);

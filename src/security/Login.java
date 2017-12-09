@@ -11,7 +11,7 @@ public class Login {
         do{
             String employeeInput;
             do{
-                employeeInput = JOptionPane.showInputDialog(context, "Entrez votre numero d'employ�", "Identification", JOptionPane.PLAIN_MESSAGE);
+                employeeInput = JOptionPane.showInputDialog(context, "Entrez votre numero d'employ\u00E9", "Identification", JOptionPane.PLAIN_MESSAGE);
             }
             while(employeeInput.length() < 1 || !isInteger(employeeInput));
 

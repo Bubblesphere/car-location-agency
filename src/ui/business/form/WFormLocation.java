@@ -29,7 +29,6 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
     private WFormComboBox<Reservation> comboBoxReservation;
     private GridBagConstraints gbcReservation;
 
-    //TODO get only the ones from the reservation class
     private WFormComboBox<Vehicule> comboBoxVehicule;
     private GridBagConstraints gbcVehicule;
 
@@ -44,9 +43,6 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
 
     private WFormPayButton buttonPay;
     private GridBagConstraints gbcPay;
-
-
-    //TODO assurance, usureJournalier
 
     public WFormLocation() {
         this.layout = FormBuilder.getLayout();
@@ -76,7 +72,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
         this.gbcNote.gridy = 4;
         this.add(this.textFieldNote, this.gbcNote);
 
-        this.paiementsListField = new WLabel("<html>Paiements<br />FILL ME WITH REAL DATA</html>"); //TODO mettre en read-only tous les paiements?
+        this.paiementsListField = new WLabel("<html>Paiements<br /></html>");
         this.gbcPaiements = FormBuilder.getGBCPartialRow();
         this.gbcPaiements.gridx = 0;
         this.gbcPaiements.gridy = 5;
@@ -88,8 +84,6 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
         this.gbcPay.gridy = 6;
         this.buttonPay.setDisabled(true);
         this.add(this.buttonPay, this.gbcPay);
-
-        //TODO assurance, usureJournalier
 
         EventListener textBoxValueChangedListener = new EventListener() {
             @SuppressWarnings("rawtypes")
@@ -107,8 +101,6 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
 
         textFieldDepartKm.events().addListener(textBoxValueChangedListener);
         textFieldNote.events().addListener(textBoxValueChangedListener);
-
-        //TODO vehicule, assurance, usureJournalier, comboboxReservation
     }
 
     @Override
@@ -138,7 +130,6 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
                 this.comboBoxReservation.getSelected().getNoteReservation(),
                 0,
                 "");//estimationReperation
-        //TODO assurance, usureJournalier
     }
 
     @Override
@@ -177,6 +168,5 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
         } else {
             this.buttonPay.setDisabled(false);
         }
-        //TODO assurance, usureJournalier
     }
 }
