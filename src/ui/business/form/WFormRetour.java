@@ -14,7 +14,7 @@ import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 import ui.widgets.WLabel;
 
-public class WFormRetour extends WAbstractFormPanel<Location> {
+public class WFormRetour extends WAbstractFormPanel<Location> implements IBusinessForm<Location> {
     private static final long serialVersionUID = 1L;
 
     private GridBagLayout layout;
@@ -156,7 +156,6 @@ public class WFormRetour extends WAbstractFormPanel<Location> {
 
     @Override
     public void set(Location listable) {
-        // TODO Auto-generated method stub
         Location location = listable;
         if(location != null){
             String dtStr = dateFormatter.format(location.getDateDeRetour());
@@ -169,8 +168,6 @@ public class WFormRetour extends WAbstractFormPanel<Location> {
 
     @Override
     public Location get() {
-
-        // TODO Auto-generated method stub
 		/*return new Location(
                 this.formLocationID,
 				Float.parseFloat(this.textFieldValue.getText())

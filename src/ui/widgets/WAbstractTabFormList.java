@@ -45,6 +45,7 @@ public abstract class WAbstractTabFormList<T extends IListable> extends WSplitPa
             }else{
                 eventHandler(EventEnum.TabFormListEvents.BUTTON_SAVE_CLICKED_NEW);
                 listable.add(currentListable);
+                listable.set(listPanel.getLastSelectedIndex(),currentListable);
             }       
             listPanel.setModelList(ArrayListHelper.toDefaultListModel(listable));
             form.setHasUnsavedContent(false);  

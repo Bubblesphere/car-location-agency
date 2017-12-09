@@ -17,7 +17,7 @@ public class WFormButton extends WAbstractFormComponentLayout {
 	private static final long serialVersionUID = 1L;
 private EventBubbler events;
   private BoxLayout layout;
-  private JButton button;
+  protected JButton button;
 
   public WFormButton(String buttonText) {
     this.events = new EventBubbler(this.listenerList);
@@ -45,5 +45,9 @@ private EventBubbler events;
 
   private void eventHandler(FormButtonEvents eventName) {
     this.events.fireEvent(new Event<FormButtonEvents>(this, eventName));
+  }
+  
+  public void setDisabled(boolean b) {
+	  this.button.setEnabled(!b);
   }
 }

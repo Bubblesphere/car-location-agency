@@ -19,7 +19,7 @@ import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 
-public class WFormReservation extends WAbstractFormPanel<Reservation> {
+public class WFormReservation extends WAbstractFormPanel<Reservation> implements IBusinessForm<Reservation> {
 	private static final long serialVersionUID = 1L;
 
 private int formReservationID;
@@ -96,7 +96,7 @@ private int formReservationID;
 
   @Override
   public Reservation get() {
-    // TODO:currentUser
+    // TODO: currentUser
     return new Reservation(this.formReservationID, this.comboBoxClient.getSelected(),
        this.comboBoxClasse.getSelected(), LocalDateTime.parse(this.textFieldStartDate.getText()),
        LocalDateTime.parse(this.textFieldEndDate.getText()), this.textFieldNote.getText(),

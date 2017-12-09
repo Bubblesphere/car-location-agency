@@ -59,6 +59,8 @@ private EventBubbler events;
     	  eventHandler(EventEnum.FormEvents.BUTTON_SAVE_CLICKED);
       }
     });
+    this.saveButton.setDisabled(true);
+    
     this.gbcSaveButton = FormBuilder.getGBCPartialRow();
     this.gbcSaveButton.gridx = 1;
     this.gbcSaveButton.gridy = 3;
@@ -85,10 +87,12 @@ private EventBubbler events;
 
   public void set(T listable) {
     this.form.set(listable);
+    this.saveButton.setDisabled(false);
   }
   
   public void init() {
-	  this.form.init();
+	  this.form.init();    
+	  this.saveButton.setDisabled(true);
   }
 
   public EventBubbler events() {

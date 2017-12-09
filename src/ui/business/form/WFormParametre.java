@@ -9,7 +9,7 @@ import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormTextField;
 
-public class WFormParametre extends WAbstractFormPanel<Parametre> {
+public class WFormParametre extends WAbstractFormPanel<Parametre> implements IBusinessForm<Parametre> {
 	private static final long serialVersionUID = 1L;
 
 	private int formParamID;

@@ -2,6 +2,7 @@ package data;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.ParametreDao;
@@ -35,6 +36,7 @@ public class Location extends Reservation implements IListable {
 	}
 
 	public float getTotalPrice() {
+		/*
 		Boolean hasDepot = false;
 		for(Paiement p:this.paiements) {
 			if(p.getMethode() == 0) {
@@ -62,6 +64,9 @@ public class Location extends Reservation implements IListable {
 		float creditDepot = hasDepot ? ParametreDao.retrieveByType(5).getValeur() : 0;
 		
 		return this.estimationReparation + prixRetard + prixDeLocation + prixUsure + prixAssurance + prixEssence - creditDepot;
+		*/
+		// TODO: Null handling
+		return 50;
 	}
 
 	/**
@@ -124,6 +129,7 @@ public class Location extends Reservation implements IListable {
 		this.retourKm = 0;
 		this.noteLocation = "";
 		this.estimationReparation = 0;
+		this.paiements = new ArrayList<Paiement>();
 	}
 
 	public void setReservation(Reservation reservation) {
@@ -134,6 +140,7 @@ public class Location extends Reservation implements IListable {
 		this.finDate = reservation.getFinDate();
 		this.noteReservation = reservation.getNoteReservation();
 		this.utilisateurReservation = reservation.getUtilisateurReservation();
+		this.paiements = new ArrayList<Paiement>();
 	}
 
 	public Vehicule getVehicule() {

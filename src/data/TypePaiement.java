@@ -6,6 +6,22 @@ public class TypePaiement implements IListable {
 	private int id;
 	private String name;
 	
+	public TypePaiement(int id) {
+		switch(id) {
+		case 0:
+			this.id = 0;
+			this.name = "Comptant";
+			break;
+		case 1:
+			this.id = 1;
+			this.name = "D�bit";
+			break;
+		case 2:
+			this.id = 2;
+			this.name = "Cr�dit";
+			break;
+		}
+	}
 	
 	public TypePaiement(type type) {
 		switch(type) {

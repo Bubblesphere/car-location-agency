@@ -4,29 +4,22 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-
 import dao.ReservationDao;
 import dao.UtilisateurDao;
 import dao.VehiculeDao;
 import data.Location;
 import data.Reservation;
-import data.TypePaiement;
-import data.TypePaiement.type;
 import data.Vehicule;
 import ui.events.Event;
-import ui.events.EventEnum.FormButtonEvents;
 import ui.events.EventEnum.FormTextFieldEvents;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WFormButton;
 import ui.widgets.WFormComboBox;
 import ui.widgets.WFormTextField;
 import ui.widgets.WLabel;
 
-public class WFormLocation extends WAbstractFormPanel<Location> {
+public class WFormLocation extends WAbstractFormPanel<Location> implements IBusinessForm<Location> {
     private static final long serialVersionUID = 1L;
 
     private int formLocationID;
@@ -49,7 +42,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
     private WLabel paiementsListField;
     private GridBagConstraints gbcPaiements;
     
-    private WFormButton buttonPay;
+    private WFormPayButton buttonPay;
     private GridBagConstraints gbcPay;
 
 
@@ -89,45 +82,12 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
         this.gbcPaiements.gridy = 5;
         this.add(this.paiementsListField, this.gbcPaiements);
 
-        this.buttonPay = new WFormButton("Payer");
-        this.gbcPaiements = FormBuilder.getGBCFullRow();
-        this.gbcPaiements.gridx = 0;
-        this.gbcPaiements.gridy = 6;
-        this.add(this.buttonPay, this.gbcPaiements);
-        
-        this.buttonPay.events().addListener(new EventListener() {
-        	@SuppressWarnings("rawtypes") 
-            @Override
-            public void handleEvent(Event evt) {
-              switch ((FormButtonEvents) evt.getEventName()) {
-              case BUTTON_CLICKED:
-            	  // TODO: Make a component
-            	  WLabel lblTotal = new WLabel("Total:");
-            	  // TODO: fetch total price from TabbedWindow
-            	  WLabel lblAmount = new WLabel("99$");
-            	  ArrayList<TypePaiement> list = new ArrayList<TypePaiement>();
-            	  list.add(new TypePaiement(type.COMPTANT));
-            	  list.add(new TypePaiement(type.DEBIT));
-            	  list.add(new TypePaiement(type.CREDIT));
-            	  WFormComboBox<TypePaiement> comboPaiement = new WFormComboBox<>("M�thode de paiement", list);
-            	  final JComponent[] inputs = new JComponent[] {
-        			  lblTotal,
-        			  lblAmount,
-        			  comboPaiement
-            	  };
-            	  int result = JOptionPane.showConfirmDialog(null, inputs, "Gestionnaire de paiement", JOptionPane.PLAIN_MESSAGE);
-            	  if (result == JOptionPane.OK_OPTION) {
-            		  // TODO: Dispatch payment to TabbedWindow
-            	      System.out.println("Vous avez payez " + lblAmount);
-            	  } else {
-            	      System.out.println("User canceled / closed the dialog, result = " + result);
-            	  }
-                break;
-              default:
-                break;
-              }
-            }
-		});
+        this.buttonPay = new WFormPayButton("Payer"); 
+        this.gbcPay = FormBuilder.getGBCFullRow();
+        this.gbcPay.gridx = 0;
+        this.gbcPay.gridy = 6;
+        this.buttonPay.setDisabled(true);
+        this.add(this.buttonPay, this.gbcPay);
         
         //TODO assurance, usureJournalier
 
@@ -153,6 +113,12 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
 
     @Override
     public Location get() {
+    	int km = 0;
+        try {  
+            km = Integer.parseInt(textFieldDepartKm.getText());  
+         } catch (NumberFormatException e) {  
+         }  
+    	
         return new Location(this.comboBoxReservation.getSelected().getReservationId(),
                 this.comboBoxReservation.getSelected().getClientReservation(),
                 this.comboBoxReservation.getSelected().getClasseReservation(),
@@ -167,7 +133,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
                 true, //assurance
                 true, //usureJournalire
                 0, //essenceManqu
-                Integer.parseInt(textFieldDepartKm.getText()),
+                km,
                 0, // retourKm
                 this.comboBoxReservation.getSelected().getNoteReservation(),
                 0,
@@ -180,12 +146,20 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
 
     }
 
+    public WFormPayButton getButtonPay() {
+    	return this.buttonPay;
+    }
+    
     public WFormComboBox<Reservation> getComboBoxReservation() {
         return this.comboBoxReservation;
     }
 
     public WFormComboBox<Vehicule> getComboBoxVehicule() {
         return this.comboBoxVehicule;
+    }
+    
+    public int getFormId() {
+    	return this.formLocationID;
     }
 
     @Override
@@ -197,6 +171,11 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
         this.comboBoxReservation.setSelected(ReservationDao.retrieve(location.getReservationId()));
         this.comboBoxVehicule.setSelected(location.getVehicule());
         this.hasUnsavedContent = false;
+        if(this.formLocationID == -1) {
+            this.buttonPay.setDisabled(true);
+        } else {
+        	this.buttonPay.setDisabled(false);
+        }
         //TODO assurance, usureJournalier
     }
 }
