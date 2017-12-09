@@ -127,19 +127,19 @@ public class TabbedWindow extends JFrame {
         handleFormVehiculeEvents();
         this.formParametre = new WFormParametre();
 
-        this.tabClient = new WTabFormListAdd<Client>(tabbedPane, clients, this.formClient, "Client");
+        this.tabClient = new WTabFormListAdd<Client>(tabbedPane, clients, this.formClient, "Clients");
         handleTabClientEvents();
-        this.tabReservation = new WTabFormListAdd<Reservation>(tabbedPane, reservations, this.formReservation, "R\u00E9servation");
+        this.tabReservation = new WTabFormListAdd<Reservation>(tabbedPane, reservations, this.formReservation, "R\u00E9servations");
         handleTabReservationEvents();
-        this.tabLocation = new WTabFormListAdd<Location>(tabbedPane, locations, this.formLocation, "Location");
+        this.tabLocation = new WTabFormListAdd<Location>(tabbedPane, locations, this.formLocation, "Locations");
         handleTabLocationEvents();
         this.tabRetour = new WTabFormListAdd<Location>(tabbedPane, retours, this.formRetour, "Retour");
         handleTabRetourEvents();
 
         if (user1.getRole() == 0) {
-            this.tabVehicule = new WTabFormListAdd<Vehicule>(tabbedPane, vehicules, this.formVehicule, "V\u00E9hicule");
+            this.tabVehicule = new WTabFormListAdd<Vehicule>(tabbedPane, vehicules, this.formVehicule, "V\u00E9hicules");
             handleTabVehiculeEvents();
-            this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Param\u00EAtre");
+            this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Param\u00EAtres");
         }
     }
 

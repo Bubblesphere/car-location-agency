@@ -45,7 +45,7 @@ public class WFormReservation extends WAbstractFormPanel<Reservation> implements
         this.layout = FormBuilder.getLayout();
         this.setLayout(this.layout);
 
-        this.textFieldStartDate = new WFormTextField("D�but");
+        this.textFieldStartDate = new WFormTextField("DD\u00E9but");
         this.gbcStartDate = FormBuilder.getGBCPartialRow();
         this.gbcStartDate.gridx = 0;
         this.gbcStartDate.gridy = 1;
