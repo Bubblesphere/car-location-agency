@@ -333,9 +333,8 @@ public class TabbedWindow extends JFrame {
 				switch((EventEnum.TabFormListEvents) evt.getEventName()) {
 					case BUTTON_ADD_CLICKED:
 						formRetour.init();
-						//tabRetour.add(new Vehicule(-1, "Nouveau", "Nouveau"));
 						break;
-					case BUTTON_SAVE_CLICKED_NEW: //Nouveau entièrement
+					case BUTTON_SAVE_CLICKED_NEW:
 						formRetour.saveNew();
 						//tabRetour.add(LocationDao.create(tabVehicule.getCurrentListable()));
 						break;

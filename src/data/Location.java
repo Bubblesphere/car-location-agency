@@ -246,6 +246,21 @@ public class Location extends Reservation implements IListable {
 				+ this.getStartDate().toString();
 	}
 
+	public String getPaiementsDisplay(){
+		List<Paiement> paiementsEffectues = this.getPaiements();
+
+		String paiementsString = "";
+
+		if(paiementsEffectues != null && paiementsEffectues.size() > 0){
+			for(Paiement paiement : paiementsEffectues){
+				paiementsString += paiement.getDisplayedText() + "<br />";
+			}
+			return "<html>Paiements<br />" + paiementsString + "</html>";
+		} else {
+			return "Aucun paiement enregistr\u00E9.";
+		}
+	}
+
 	public List<Paiement> getPaiements() {
 		return paiements;
 	}

@@ -5,9 +5,11 @@ import java.awt.GridBagLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import dao.LocationDao;
 import data.Location;
+import data.Paiement;
 import ui.utils.FormBuilder;
 import ui.widgets.WAbstractFormPanel;
 import ui.widgets.WFormComboBox;
@@ -71,6 +73,8 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
     private WLabel vehiculeReadOnly;
     private GridBagConstraints gbcVehiculeReadOnly;
 
+    private WLabel listePaiements;
+    private GridBagConstraints gbcListePaiements;
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -189,6 +193,13 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         this.gbcVehiculeReadOnly.gridy = 4;
         this.add(this.vehiculeReadOnly, this.gbcVehiculeReadOnly);
 
+
+        this.listePaiements = new WLabel("Paiements effectués");
+        this.gbcListePaiements = FormBuilder.getGBCPartialRow();
+        this.gbcListePaiements.gridx = 0;
+        this.gbcListePaiements.gridy = 5;
+        this.add(this.listePaiements, this.gbcListePaiements);
+
     }
 
 
@@ -264,6 +275,7 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         locationClientReadOnly.setVisible(!hide);
         reservationDebutReadOnly.setVisible(!hide);
         vehiculeReadOnly.setVisible(!hide);
+        listePaiements.setVisible(!hide);
     }
 
     public void updateReadOnlyValues(Location location) {
@@ -283,6 +295,7 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         this.locationClientReadOnly.setText("Client: " + location.getClientReservation().getPrenom() + location.getClientReservation().getNom());
         this.reservationDebutReadOnly.setText("Date de d\u00E9but " + dateStartStr);
         this.vehiculeReadOnly.setText("V\u00E9hicule: " + location.getVehicule().getDisplayedText());
+        this.listePaiements.setText(location.getPaiementsDisplay());
 
     }
 }

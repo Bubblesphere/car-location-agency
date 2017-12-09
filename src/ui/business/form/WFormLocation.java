@@ -171,6 +171,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
         this.comboBoxReservation.setSelected(ReservationDao.retrieve(location.getReservationId()));
         this.comboBoxVehicule.setSelected(location.getVehicule());
         this.hasUnsavedContent = false;
+        this.paiementsListField.setText(listable.getPaiementsDisplay());
         if (this.formLocationID == -1) {
             this.buttonPay.setDisabled(true);
         } else {
