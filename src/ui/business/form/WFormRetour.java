@@ -37,6 +37,9 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
     private WFormTextField textFieldDommages;
     private GridBagConstraints gbcDommages;
 
+    private WFormPayButton buttonPay;
+    private GridBagConstraints gbcPay;
+
     //READ-ONLY
     private WLabel dommagesReadOnly;
     private GridBagConstraints gbcDommagesRO;
@@ -117,6 +120,12 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         this.gbcNote.gridy = 2;
         this.add(this.textFieldNote, this.gbcNote);
 
+        this.buttonPay = new WFormPayButton("Payer");
+        this.gbcPay = FormBuilder.getGBCFullRow();
+        this.gbcPay.gridx = 0;
+        this.gbcPay.gridy = 3;
+        this.buttonPay.setDisabled(true);
+        this.add(this.buttonPay, this.gbcPay);
 
         // READ-ONLY LABELS
         this.locationReadOnly = new WLabel("Location");
@@ -213,7 +222,11 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
 
     @Override
     public Location get() {
-        return null;
+        return LocationDao.retrieve(getComboBoxLocation().getSelected().getId());
+    }
+
+    public WFormPayButton getButtonPay() {
+        return this.buttonPay;
     }
 
     public void saveNew() {
@@ -238,6 +251,7 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         textFieldNote.setVisible(hide);
         textFieldEssence.setVisible(hide);
         textFieldDommages.setVisible(hide);
+        buttonPay.setVisible(hide);
 
         //READ-ONLY labels
         dommagesReadOnly.setVisible(!hide);

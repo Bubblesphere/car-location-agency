@@ -65,9 +65,7 @@ public class LocationDao {
 	public static Location retrieve(int locationId) {
 		try (Connection connection = DataAccess.getConnection()) {
 
-			String query = "SELECT vehicule_id, reservation_id, date_de_retour, essence_manquant, "
-					+ "retour_km, note, utilisateur_id, assurance, usure_journalier, depart_km, note_retour "
-					+ "estimation_reparation FROM Locations WHERE id = ?";
+			String query = "SELECT * FROM Locations WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, locationId);
 			ResultSet resultSet = statement.executeQuery();
@@ -269,12 +267,13 @@ public class LocationDao {
 			if (!savedPaiements.contains(paiement)) {
 				try (Connection connection = DataAccess.getConnection()) {
 
-					String query = "INSERT INTO Paiement (montant, methode, node) values (?, ?, ?)";
+					String query = "INSERT INTO Paiements (location_id, montant, methode, note) values (?, ?, ?, ?)";
 					PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-					statement.setFloat(1, paiement.getMontant());
-					statement.setInt(2, paiement.getMethode());
-					statement.setString(3, paiement.getNote());
+					statement.setFloat(1, location.getId());
+					statement.setFloat(2, paiement.getMontant());
+					statement.setInt(3, paiement.getMethode());
+					statement.setString(4, paiement.getNote());
 
 					statement.execute();
 

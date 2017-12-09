@@ -347,6 +347,30 @@ public class TabbedWindow extends JFrame {
 				}
 			}
 		});
+
+		this.formRetour.getButtonPay().events().addListener(new EventListener() {
+			@SuppressWarnings("rawtypes")
+			@Override
+			public void handleEvent(Event evt) {
+				switch ((EventEnum.FormPayButtonEvents) evt.getEventName()) {
+					case DIALOG_OPENED:
+						formRetour.getButtonPay().set(
+								new Paiement(
+										formRetour.get().getId(),
+										formRetour.get().getTotalPrice(),
+										0,
+										""));
+						break;
+					case PAYED:
+						Location location = formRetour.get();
+						location.addPaiement(formRetour.getButtonPay().get());
+						LocationDao.update(location);
+						break;
+					default:
+						break;
+				}
+			}
+		});
 	}
 
   private void handleTabVehiculeEvents() {
