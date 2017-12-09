@@ -24,4 +24,8 @@ public class WLabel extends JPanel {
 		this.label.setAlignmentX(Component.LEFT_ALIGNMENT);
 		this.add(this.label);
 	}
+
+	public void setText(String labelText){
+		this.label.setText(labelText);
+	}
 }

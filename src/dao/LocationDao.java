@@ -66,7 +66,7 @@ public class LocationDao {
 		try (Connection connection = DataAccess.getConnection()) {
 
 			String query = "SELECT vehicule_id, reservation_id, date_de_retour, essence_manquant, "
-					+ "retour_km, note, utilisateur_id, assurance, usure_journalier, depart_km, "
+					+ "retour_km, note, utilisateur_id, assurance, usure_journalier, depart_km, note_retour "
 					+ "estimation_reparation FROM Locations WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, locationId);
@@ -86,7 +86,8 @@ public class LocationDao {
 						resultSet.getBoolean("assurance"), resultSet.getBoolean("usure_journalier"),
 						resultSet.getInt("essence_manquant"), resultSet.getInt("depart_km"),
 						resultSet.getInt("retour_km"), reservation.getNoteReservation(),
-						resultSet.getFloat("estimation_reparation"));
+						resultSet.getFloat("estimation_reparation"),
+						resultSet.getString("note_retour") != null  ? resultSet.getString("note_retour"): "");
 				location.setPaiements(retrievePaiement(locationId));
 				return location;
 			}
@@ -127,9 +128,7 @@ public class LocationDao {
 		List<Location> result = new ArrayList<Location>();
 		try (Connection connection = DataAccess.getConnection()) {
 
-			String query = "SELECT id, vehicule_id, reservation_id, date_de_retour, essence_manquant, "
-					+ "retour_km, note, utilisateur_id, assurance, usure_journalier, depart_km, "
-					+ "estimation_reparation FROM Locations";
+			String query = "SELECT * FROM Locations";
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(query);
 
@@ -147,7 +146,8 @@ public class LocationDao {
 						resultSet.getBoolean("assurance"), resultSet.getBoolean("usure_journalier"),
 						resultSet.getInt("essence_manquant"), resultSet.getInt("depart_km"),
 						resultSet.getInt("retour_km"), reservation.getNoteReservation(),
-						resultSet.getFloat("estimation_reparation"));
+						resultSet.getFloat("estimation_reparation"),
+						resultSet.getString("note_retour") != null  ? resultSet.getString("note_retour"): "");
 				location.setPaiements(retrievePaiement(location.getId()));
 				result.add(location);
 			}
@@ -162,9 +162,7 @@ public class LocationDao {
 		List<Location> result = new ArrayList<Location>();
 		try (Connection connection = DataAccess.getConnection()) {
 
-			String query = "SELECT id, vehicule_id, reservation_id, date_de_retour, essence_manquant, "
-					+ "retour_km, note, utilisateur_id, assurance, usure_journalier, depart_km, "
-					+ "estimation_reparation FROM Locations ";
+			String query = "SELECT * FROM Locations ";
 			if (withReturns) {
 				query += "WHERE date_de_retour IS NULL";
 			} else {
@@ -187,7 +185,8 @@ public class LocationDao {
 						resultSet.getBoolean("assurance"), resultSet.getBoolean("usure_journalier"),
 						resultSet.getInt("essence_manquant"), resultSet.getInt("depart_km"),
 						resultSet.getInt("retour_km"), reservation.getNoteReservation(),
-						resultSet.getFloat("estimation_reparation"));
+						resultSet.getFloat("estimation_reparation"),
+						resultSet.getString("note_retour") != null  ? resultSet.getString("note_retour"): "");
 
 				result.add(location);
 			}

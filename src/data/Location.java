@@ -94,7 +94,7 @@ public class Location extends Reservation implements IListable {
 			LocalDateTime finDate, String noteLocation, Utilisateur utilisateurReservation, int locationId,
 			Vehicule vehicule, Utilisateur utilisateurLocation, LocalDateTime dateDeRetour, boolean assurance,
 			boolean usureJournalier, int essenceManquant, int departKm, int retourKm, String noteReservation,
-			float estimationReparation) {
+			float estimationReparation, String noteRetour) {
 		super(reservationId, clientReservation, classeReservation, startDate, finDate, noteReservation,
 				utilisateurReservation);
 		this.locationId = locationId;
@@ -108,6 +108,7 @@ public class Location extends Reservation implements IListable {
 		this.retourKm = retourKm;
 		this.noteLocation = noteLocation;
 		this.estimationReparation = estimationReparation;
+		this.noteRetour = noteRetour;
 	}
 
 	public Location(int locationId) {

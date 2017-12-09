@@ -170,7 +170,8 @@ public class WFormLocation extends WAbstractFormPanel<Location> {
                 Integer.parseInt(textFieldDepartKm.getText()),
                 0, // retourKm
                 this.comboBoxReservation.getSelected().getNoteReservation(),
-                0);//estimationReperation
+                0,
+                "");//estimationReperation
         //TODO assurance, usureJournalier
     }
 

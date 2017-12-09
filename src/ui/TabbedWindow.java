@@ -129,7 +129,7 @@ public class TabbedWindow extends JFrame {
     
     this.tabClient = new WTabFormListAdd<Client>(tabbedPane, clients, this.formClient, "Client");
     handleTabClientEvents();
-    this.tabReservation = new WTabFormListAdd<Reservation>(tabbedPane, reservations, this.formReservation, "R�servation");
+    this.tabReservation = new WTabFormListAdd<Reservation>(tabbedPane, reservations, this.formReservation, "R\u00E9servation");
     handleTabReservationEvents();
     this.tabLocation = new WTabFormListAdd<Location>(tabbedPane, locations, this.formLocation, "Location");
     handleTabLocationEvents();
@@ -137,9 +137,9 @@ public class TabbedWindow extends JFrame {
     handleTabRetourEvents();
     
     //if(user1.getRole() == 0){ //TODO add back avant la fin
-      this.tabVehicule = new WTabFormListAdd<Vehicule>(tabbedPane, vehicules, this.formVehicule, "V�hicule");
+      this.tabVehicule = new WTabFormListAdd<Vehicule>(tabbedPane, vehicules, this.formVehicule, "V\u00E9hicule");
       handleTabVehiculeEvents();
-      this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Param�tre");
+      this.tabParametre = new WTabFormList<Parametre>(tabbedPane, parametres, this.formParametre, "Param\u00EAtre");
       //}
   }
   
@@ -316,7 +316,7 @@ public class TabbedWindow extends JFrame {
 						//tabRetour.add(new Vehicule(-1, "Nouveau", "Nouveau"));
 						break;
 					case BUTTON_SAVE_CLICKED_NEW: //Nouveau entièrement
-						//tabRetour.
+						formRetour.saveNew();
 						//tabRetour.add(LocationDao.create(tabVehicule.getCurrentListable()));
 						break;
 					case BUTTON_SAVE_CLICKED_MODIFY:
