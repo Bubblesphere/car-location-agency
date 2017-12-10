@@ -36,7 +36,6 @@ public class Location extends Reservation implements IListable {
     }
 
     public float getTotalPrice() {
-        /*
 		Boolean hasDepot = false;
 		for(Paiement p:this.paiements) {
 			if(p.getMethode() == 0) {
@@ -45,28 +44,31 @@ public class Location extends Reservation implements IListable {
 			}
 		}
 		int distanceTotal = this.departKm - this.retourKm;
+		 float prixRetard = 0;
+		 float prixDeLocation = 0;
+		 float prixUsure = 0;
+		 float prixAssurance = 0;
+		 float prixEssence = 0;
 		
-		int numberOfDays = (int) ChronoUnit.DAYS.between(this.startDate, this.dateDeRetour);
-		int hoursOver = Math.min((int) ChronoUnit.HOURS.between(this.finDate, this.dateDeRetour), 10);
+		if (this.dateDeRetour != null){
+		    int numberOfDays = (int) ChronoUnit.DAYS.between(this.startDate, this.dateDeRetour);
+	        int hoursOver = Math.min((int) ChronoUnit.HOURS.between(this.finDate, this.dateDeRetour), 10);
+	        
+	        prixAssurance = this.assurance ? ParametreDao.retrieveByType(1).getValeur() : 0;	        
+	        
+	        if(this.usureJournalier) {
+	            prixUsure = numberOfDays * ParametreDao.retrieveByType(3).getValeur();
+	        }else {
+	            prixUsure = Math.max(0, distanceTotal - 400) * ParametreDao.retrieveByType(2).getValeur();
+	        }               
+	        prixDeLocation = numberOfDays * this.vehicule.getVClasse().getPrixJournalier();
+	        prixRetard = hoursOver * (this.vehicule.getVClasse().getPrixJournalier() / 10); 
+	        prixEssence = this.essenceManquant * ParametreDao.retrieveByType(4).getValeur();
+		}
 		
-		float prixAssurance = this.assurance ? ParametreDao.retrieveByType(1).getValeur() : 0;
-		
-		float prixUsure;
-		if(this.usureJournalier) {
-			prixUsure = numberOfDays * ParametreDao.retrieveByType(3).getValeur();
-		}else {
-			prixUsure = Math.max(0, distanceTotal - 400) * ParametreDao.retrieveByType(2).getValeur();
-		}				
-		
-		float prixEssence = this.essenceManquant * ParametreDao.retrieveByType(4).getValeur();
-		float prixDeLocation = numberOfDays * this.vehicule.getVClasse().getPrixJournalier();
-		float prixRetard = hoursOver * (this.vehicule.getVClasse().getPrixJournalier() / 10); 
 		float creditDepot = hasDepot ? ParametreDao.retrieveByType(5).getValeur() : 0;
 		
-		return this.estimationReparation + prixRetard + prixDeLocation + prixUsure + prixAssurance + prixEssence - creditDepot;
-		*/
-        // TODO: Null handling
-        return 50;
+		return this.estimationReparation + prixRetard + prixDeLocation + prixUsure + prixAssurance + prixEssence - creditDepot;	
     }
 
     /**
@@ -110,6 +112,7 @@ public class Location extends Reservation implements IListable {
         this.noteLocation = noteLocation;
         this.estimationReparation = estimationReparation;
         this.noteRetour = noteRetour;
+        this.paiements = new ArrayList<Paiement>();
     }
 
     public Location(int locationId) {
