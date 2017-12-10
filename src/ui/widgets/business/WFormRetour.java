@@ -1,4 +1,4 @@
-package ui.business.form;
+package ui.widgets.business;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import dao.LocationDao;
 import data.Location;
 import ui.utils.FormBuilder;
-import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WFormComboBox;
-import ui.widgets.WFormTextField;
-import ui.widgets.WLabel;
+import ui.widgets.forms.WAbstractFormPanel;
+import ui.widgets.forms.components.WFormComboBox;
+import ui.widgets.forms.components.WFormLabel;
+import ui.widgets.forms.components.WFormTextField;
 
 public class WFormRetour extends WAbstractFormPanel<Location> implements IBusinessForm<Location> {
     private static final long serialVersionUID = 1L;
@@ -41,37 +41,37 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
     private GridBagConstraints gbcPay;
 
     //READ-ONLY
-    private WLabel dommagesReadOnly;
+    private WFormLabel dommagesReadOnly;
     private GridBagConstraints gbcDommagesRO;
 
-    private WLabel retourKMReadOnly;
+    private WFormLabel retourKMReadOnly;
     private GridBagConstraints gbcRetourKMReadOnly;
 
-    private WLabel EndDateReadOnly;
+    private WFormLabel EndDateReadOnly;
     private GridBagConstraints gbcEndDateReadOnly;
 
-    private WLabel retourNoteReadOnly;
+    private WFormLabel retourNoteReadOnly;
     private GridBagConstraints gbcRetourNoteReadOnly;
 
-    private WLabel retourEssenceReadOnly;
+    private WFormLabel retourEssenceReadOnly;
     private GridBagConstraints gbcRetourEssenceReadOnly;
 
-    private WLabel locationReadOnly;
+    private WFormLabel locationReadOnly;
     private GridBagConstraints gbcLocationReadOnly;
 
-    private WLabel departKMReadOnly;
+    private WFormLabel departKMReadOnly;
     private GridBagConstraints gbcDepartKMReadOnly;
 
-    private WLabel locationClientReadOnly;
+    private WFormLabel locationClientReadOnly;
     private GridBagConstraints gbcLocationClientReadOnly;
 
-    private WLabel reservationDebutReadOnly;
+    private WFormLabel reservationDebutReadOnly;
     private GridBagConstraints gbcReservationDebutReadOnly;
 
-    private WLabel vehiculeReadOnly;
+    private WFormLabel vehiculeReadOnly;
     private GridBagConstraints gbcVehiculeReadOnly;
 
-    private WLabel listePaiements;
+    private WFormLabel listePaiements;
     private GridBagConstraints gbcListePaiements;
 
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -128,67 +128,67 @@ public class WFormRetour extends WAbstractFormPanel<Location> implements IBusine
         this.add(this.buttonPay, this.gbcPay);
 
         // READ-ONLY LABELS
-        this.locationReadOnly = new WLabel("Location");
+        this.locationReadOnly = new WFormLabel("Location");
         this.gbcLocationReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcLocationReadOnly.gridx = 0;
         this.gbcLocationReadOnly.gridy = 0;
         this.add(this.locationReadOnly, this.gbcLocationReadOnly);
 
-        this.EndDateReadOnly = new WLabel("Date de retour");
+        this.EndDateReadOnly = new WFormLabel("Date de retour");
         this.gbcEndDateReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcEndDateReadOnly.gridx = 1;
         this.gbcEndDateReadOnly.gridy = 0;
         this.add(this.EndDateReadOnly, this.gbcEndDateReadOnly);
 
-        this.reservationDebutReadOnly = new WLabel("Date de Debut");
+        this.reservationDebutReadOnly = new WFormLabel("Date de Debut");
         this.gbcReservationDebutReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcReservationDebutReadOnly.gridx = 0;
         this.gbcReservationDebutReadOnly.gridy = 1;
         this.add(this.reservationDebutReadOnly, this.gbcReservationDebutReadOnly);
 
-        this.retourKMReadOnly = new WLabel("Kilom\u00E9trage de retour");
+        this.retourKMReadOnly = new WFormLabel("Kilom\u00E9trage de retour");
         this.gbcRetourKMReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcRetourKMReadOnly.gridx = 1;
         this.gbcRetourKMReadOnly.gridy = 1;
         this.add(this.retourKMReadOnly, this.gbcRetourKMReadOnly);
 
-        this.retourEssenceReadOnly = new WLabel("Essence restante");
+        this.retourEssenceReadOnly = new WFormLabel("Essence restante");
         this.gbcRetourEssenceReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcRetourEssenceReadOnly.gridx = 0;
         this.gbcRetourEssenceReadOnly.gridy = 2;
         this.add(this.retourEssenceReadOnly, this.gbcRetourEssenceReadOnly);
 
-        this.dommagesReadOnly = new WLabel("Dommages");
+        this.dommagesReadOnly = new WFormLabel("Dommages");
         this.gbcDommagesRO = FormBuilder.getGBCPartialRow();
         this.gbcDommagesRO.gridx = 1;
         this.gbcDommagesRO.gridy = 2;
         this.add(this.dommagesReadOnly, this.gbcDommagesRO);
 
-        this.retourNoteReadOnly = new WLabel("Note");
+        this.retourNoteReadOnly = new WFormLabel("Note");
         this.gbcRetourNoteReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcRetourNoteReadOnly.gridx = 0;
         this.gbcRetourNoteReadOnly.gridy = 3;
         this.add(this.retourNoteReadOnly, this.gbcRetourNoteReadOnly);
 
-        this.departKMReadOnly = new WLabel("D\u00E9but");
+        this.departKMReadOnly = new WFormLabel("D\u00E9but");
         this.gbcDepartKMReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcDepartKMReadOnly.gridx = 1;
         this.gbcDepartKMReadOnly.gridy = 3;
         this.add(this.departKMReadOnly, this.gbcDepartKMReadOnly);
 
-        this.locationClientReadOnly = new WLabel("Client");
+        this.locationClientReadOnly = new WFormLabel("Client");
         this.gbcLocationClientReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcLocationClientReadOnly.gridx = 0;
         this.gbcLocationClientReadOnly.gridy = 4;
         this.add(this.locationClientReadOnly, this.gbcLocationClientReadOnly);
 
-        this.vehiculeReadOnly = new WLabel("V\u00E9hicule");
+        this.vehiculeReadOnly = new WFormLabel("V\u00E9hicule");
         this.gbcVehiculeReadOnly = FormBuilder.getGBCPartialRow();
         this.gbcVehiculeReadOnly.gridx = 1;
         this.gbcVehiculeReadOnly.gridy = 4;
         this.add(this.vehiculeReadOnly, this.gbcVehiculeReadOnly);
 
-        this.listePaiements = new WLabel("Paiements effectu\u00E9s");
+        this.listePaiements = new WFormLabel("Paiements effectu\u00E9s");
         this.gbcListePaiements = FormBuilder.getGBCPartialRow();
         this.gbcListePaiements.gridx = 0;
         this.gbcListePaiements.gridy = 5;

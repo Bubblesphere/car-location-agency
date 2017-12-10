@@ -1,9 +1,9 @@
-package ui.widgets;
+package ui.widgets.forms;
 
 import javax.swing.JPanel;
 
-import ui.business.form.IBusinessForm;
 import ui.utils.IListable;
+import ui.widgets.business.IBusinessForm;
 
 public abstract class WAbstractFormPanel<T extends IListable> extends JPanel implements IBusinessForm<T> {
 	private static final long serialVersionUID = 1L;

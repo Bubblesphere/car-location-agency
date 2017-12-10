@@ -1,4 +1,4 @@
-package ui.business.form;
+package ui.widgets.business;
 
 import ui.utils.IListable;
 

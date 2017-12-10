@@ -1,4 +1,4 @@
-package ui.widgets;
+package ui.widgets.list;
 
 import java.awt.Component;
 import java.awt.Font;

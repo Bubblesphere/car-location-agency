@@ -1,4 +1,4 @@
-package ui.widgets;
+package ui.widgets.tabs;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,9 @@ import ui.events.EventEnum.ListEvents;
 import ui.events.EventEnum.TabFormListEvents;
 import ui.events.EventListener;
 import ui.utils.IListable;
+import ui.widgets.forms.WAbstractFormPanel;
+import ui.widgets.list.IPanelList;
+import ui.widgets.list.WListAdd;
 
 public class WTabFormListAdd<T extends IListable> extends WAbstractTabFormList<T>  {
 	private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package ui.widgets;
+package ui.widgets.forms.components;
 
 import java.awt.Component;
 import java.awt.Font;
@@ -8,12 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class WLabel extends JPanel {
+public class WFormLabel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private BoxLayout layout;
 	private JLabel label;
 	
-	public WLabel(String labelText) {
+	public WFormLabel(String labelText) {
 		this.layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		this.setBorder(new EmptyBorder(24, 0, 0, 16));
 		this.setLayout(this.layout);

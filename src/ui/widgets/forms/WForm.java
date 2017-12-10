@@ -1,4 +1,4 @@
-package ui.widgets;
+package ui.widgets.forms;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -14,6 +14,7 @@ import ui.events.EventEnum;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
 import ui.utils.IListable;
+import ui.widgets.forms.components.WFormButton;
 
 public class WForm<T extends IListable> extends JPanel {
 

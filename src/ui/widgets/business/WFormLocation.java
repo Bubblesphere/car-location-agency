@@ -1,4 +1,4 @@
-package ui.business.form;
+package ui.widgets.business;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,10 +14,10 @@ import ui.events.Event;
 import ui.events.EventEnum.FormTextFieldEvents;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
-import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WFormComboBox;
-import ui.widgets.WFormTextField;
-import ui.widgets.WLabel;
+import ui.widgets.forms.WAbstractFormPanel;
+import ui.widgets.forms.components.WFormComboBox;
+import ui.widgets.forms.components.WFormLabel;
+import ui.widgets.forms.components.WFormTextField;
 
 public class WFormLocation extends WAbstractFormPanel<Location> implements IBusinessForm<Location> {
     private static final long serialVersionUID = 1L;
@@ -38,7 +38,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
     private WFormTextField textFieldNote;
     private GridBagConstraints gbcNote;
 
-    private WLabel paiementsListField;
+    private WFormLabel paiementsListField;
     private GridBagConstraints gbcPaiements;
 
     private WFormPayButton buttonPay;
@@ -72,7 +72,7 @@ public class WFormLocation extends WAbstractFormPanel<Location> implements IBusi
         this.gbcNote.gridy = 4;
         this.add(this.textFieldNote, this.gbcNote);
 
-        this.paiementsListField = new WLabel("<html>Paiements<br /></html>");
+        this.paiementsListField = new WFormLabel("<html>Paiements<br /></html>");
         this.gbcPaiements = FormBuilder.getGBCPartialRow();
         this.gbcPaiements.gridx = 0;
         this.gbcPaiements.gridy = 5;

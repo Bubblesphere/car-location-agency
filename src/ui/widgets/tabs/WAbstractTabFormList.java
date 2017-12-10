@@ -1,4 +1,4 @@
-package ui.widgets;
+package ui.widgets.tabs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +14,9 @@ import ui.events.EventEnum.ListEvents;
 import ui.events.EventListener;
 import ui.utils.ArrayListHelper;
 import ui.utils.IListable;
+import ui.widgets.forms.WAbstractFormPanel;
+import ui.widgets.forms.WForm;
+import ui.widgets.list.IPanelList;
 
 public abstract class WAbstractTabFormList<T extends IListable> extends WSplitPaneTab {
 	private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package ui.business.form;
+package ui.widgets.business;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -6,8 +6,8 @@ import java.awt.GridBagLayout;
 
 import data.Parametre;
 import ui.utils.FormBuilder;
-import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WFormTextField;
+import ui.widgets.forms.WAbstractFormPanel;
+import ui.widgets.forms.components.WFormTextField;
 
 public class WFormParametre extends WAbstractFormPanel<Parametre> implements IBusinessForm<Parametre> {
     private static final long serialVersionUID = 1L;

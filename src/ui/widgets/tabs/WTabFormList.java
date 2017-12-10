@@ -1,10 +1,13 @@
-package ui.widgets;
+package ui.widgets.tabs;
 
 import java.util.ArrayList;
 
 import javax.swing.JTabbedPane;
 
 import ui.utils.IListable;
+import ui.widgets.forms.WAbstractFormPanel;
+import ui.widgets.list.IPanelList;
+import ui.widgets.list.WList;
 
 public class WTabFormList<T extends IListable> extends WAbstractTabFormList<T> {
 	private static final long serialVersionUID = 1L;

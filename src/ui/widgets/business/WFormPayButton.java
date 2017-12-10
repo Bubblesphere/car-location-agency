@@ -1,4 +1,4 @@
-package ui.business.form;
+package ui.widgets.business;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,15 +14,15 @@ import data.TypePaiement.type;
 import ui.events.Event;
 import ui.events.EventBubbler;
 import ui.events.EventEnum.FormPayButtonEvents;
-import ui.widgets.WFormButton;
-import ui.widgets.WFormComboBox;
-import ui.widgets.WLabel;
+import ui.widgets.forms.components.WFormButton;
+import ui.widgets.forms.components.WFormComboBox;
+import ui.widgets.forms.components.WFormLabel;
 
 public class WFormPayButton extends WFormButton implements IBusinessForm<Paiement> {
     private static final long serialVersionUID = 1L;
     private EventBubbler events;
-    private WLabel lblTotal;
-    private WLabel lblAmount;
+    private WFormLabel lblTotal;
+    private WFormLabel lblAmount;
     private WFormComboBox<TypePaiement> comboPaiement;
 
     private int payId;
@@ -33,8 +33,8 @@ public class WFormPayButton extends WFormButton implements IBusinessForm<Paiemen
 
         this.events = new EventBubbler(this.listenerList);
 
-        this.lblTotal = new WLabel("Total:");
-        this.lblAmount = new WLabel("");
+        this.lblTotal = new WFormLabel("Total:");
+        this.lblAmount = new WFormLabel("");
         ArrayList<TypePaiement> list = new ArrayList<TypePaiement>();
         list.add(new TypePaiement(type.COMPTANT));
         list.add(new TypePaiement(type.DEBIT));

@@ -1,4 +1,4 @@
-package ui.widgets;
+package ui.widgets.tabs;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;

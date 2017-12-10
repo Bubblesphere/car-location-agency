@@ -1,4 +1,4 @@
-package ui.widgets;
+package ui.widgets.list;
 
 import javax.swing.DefaultListModel;
 

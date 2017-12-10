@@ -1,4 +1,4 @@
-package ui.widgets;
+package ui.widgets.forms.components;
 
 import java.awt.Component;
 import java.awt.Font;

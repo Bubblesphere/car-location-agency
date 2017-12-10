@@ -27,17 +27,17 @@ import data.Reservation;
 import data.Utilisateur;
 import data.Vehicule;
 import security.Login;
-import ui.business.form.WFormClient;
-import ui.business.form.WFormLocation;
-import ui.business.form.WFormParametre;
-import ui.business.form.WFormReservation;
-import ui.business.form.WFormRetour;
-import ui.business.form.WFormVehicule;
 import ui.events.Event;
 import ui.events.EventEnum;
 import ui.events.EventListener;
-import ui.widgets.WTabFormList;
-import ui.widgets.WTabFormListAdd;
+import ui.widgets.business.WFormClient;
+import ui.widgets.business.WFormLocation;
+import ui.widgets.business.WFormParametre;
+import ui.widgets.business.WFormReservation;
+import ui.widgets.business.WFormRetour;
+import ui.widgets.business.WFormVehicule;
+import ui.widgets.tabs.WTabFormList;
+import ui.widgets.tabs.WTabFormListAdd;
 
 public class TabbedWindow extends JFrame {
 

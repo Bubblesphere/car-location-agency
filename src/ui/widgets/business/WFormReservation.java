@@ -1,4 +1,4 @@
-package ui.business.form;
+package ui.widgets.business;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,9 +15,9 @@ import ui.events.Event;
 import ui.events.EventEnum.FormTextFieldEvents;
 import ui.events.EventListener;
 import ui.utils.FormBuilder;
-import ui.widgets.WAbstractFormPanel;
-import ui.widgets.WFormComboBox;
-import ui.widgets.WFormTextField;
+import ui.widgets.forms.WAbstractFormPanel;
+import ui.widgets.forms.components.WFormComboBox;
+import ui.widgets.forms.components.WFormTextField;
 
 public class WFormReservation extends WAbstractFormPanel<Reservation> implements IBusinessForm<Reservation> {
     private static final long serialVersionUID = 1L;
