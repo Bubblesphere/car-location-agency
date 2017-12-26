@@ -2,7 +2,6 @@
 
 ## Requirements
 * Eclipse
-* Download [WindowBuilder](https://www.eclipse.org/windowbuilder/download.php)
 ## Description
 Une agence de location de véhicules vous engage avec le mandat de développer un logiciel pour la gestion de ses opérations quotidiennes. Le système informatique doit avoir une interface utilisateur intuitive et être facilement portable sur différentes plateformes d’exécution.
 
